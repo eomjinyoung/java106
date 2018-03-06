@@ -1,6 +1,6 @@
 package step02.assignment;
 
-// 6단계: 형식을 갖춘 문자열 출력하기
+// 5단계: 반복문을 사용하여 입력과 출력 코드를 간단히 하라!
 public class Test02 {
     public static void main(String[] args) {
 
@@ -28,8 +28,18 @@ public class Test02 {
 
         System.out.println("------------------------------");
         for (int i = 0; i < 5; i++) {
-            System.out.printf("%s %d %d %d %d %f\n", 
-                name[i], kor[i], eng[i], math[i], sum[i], average[i]);
+            System.out.print(name[i]);
+            System.out.print(" ");
+            System.out.print(kor[i]);
+            System.out.print(" ");
+            System.out.print(eng[i]);
+            System.out.print(" ");
+            System.out.print(math[i]);
+            System.out.print(" ");
+            System.out.print(sum[i]);
+            System.out.print(" ");
+            System.out.print(average[i]);
+            System.out.println();
         }
     }
 }
