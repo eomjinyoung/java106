@@ -1,7 +1,7 @@
 // 클래스 - 사용 전 
 package step03;
 
-public class Exam01 {
+public class Exam01_1 {
     public static void main(String[] args) {
         // 낱개의 변수를 사용하여 한 사람의 성적 정보를 저장하라!
         // => 식탁에 밥, 국, 반찬1, 반찬2, 반찬3 을 각각 따로 가져오는 상황.
