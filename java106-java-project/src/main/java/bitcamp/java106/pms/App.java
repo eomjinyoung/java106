@@ -1,38 +1,39 @@
 package bitcamp.java106.pms;
 
+// 컴파일러에게 클래스의 위치 정보를 알려준다.
+// => 컴파일한 후 import 명령은 제거된다.
+//    즉 .class 파일에 포함되지 않는다.
+// => 그러니 import 문장이 많으면 .class 파일이 커지지 않을까 걱정말라!
+import bitcamp.java106.pms.domain.Team;
+import java.util.Scanner;
+
 public class App {
     public static void main(String[] args) {
-        java.io.InputStream keyboard = System.in;
-        java.util.Scanner keyScan = new java.util.Scanner(keyboard);
+        Scanner keyScan = new Scanner(System.in);
+
+        // 팀 정보를 받을 메모리 준비
+        Team team = new Team();
 
         System.out.print("팀명? ");
-        String teamName = keyScan.nextLine();
+        team.name = keyScan.nextLine();
 
         System.out.print("설명? ");
-        String description = keyScan.nextLine();
+        team.description = keyScan.nextLine();
 
         System.out.print("최대인원? ");
-        int maxQty = keyScan.nextInt();
+        team.maxQty = keyScan.nextInt();
         keyScan.nextLine(); // 숫자 뒤에 줄바꿈 코드를 읽는다.
                             // 읽고 난 뒤에 아무것도 안하기 때문에 
                             // 일종의 줄바꿈 코드를 제거하는 효과가 있다.
 
         System.out.print("시작일? ");
-        String startDate = keyScan.nextLine();
+        team.startDate = keyScan.nextLine();
 
         System.out.print("종료일? ");
-        String endDate = keyScan.nextLine();
+        team.endDate = keyScan.nextLine();
 
         System.out.println("-----------------------------");
-        System.out.print("팀명: ");
-        System.out.println(teamName);
-        System.out.println("설명: ");
-        System.out.println(description);
-        System.out.print("최대인원: ");
-        System.out.println(maxQty);
-        System.out.print("일자: ");
-        System.out.print(startDate);
-        System.out.print(" ~ ");
-        System.out.println(endDate);
+        System.out.printf("%s, %d명, %s ~ %s\n", 
+            team.name, team.maxQty, team.startDate, team.endDate);
     }
 }
