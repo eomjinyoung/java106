@@ -13,7 +13,7 @@ public class App {
         Scanner keyScan = new Scanner(System.in);
 
         // 팀 정보를 받을 메모리 준비
-        Team[] teams = new Team[100];
+        Team[] teams = new Team[5];
         
         int count = 0;
         for (int i = 0; i < teams.length; i++) {
@@ -35,6 +35,10 @@ public class App {
 
             System.out.print("종료일? ");
             teams[i].endDate = keyScan.nextLine();
+
+            if (count == teams.length) { // if (i == teams.length - 1)
+                break;
+            }
 
             System.out.print("계속하시겠습니까?(Y/n) ");
             String str = keyScan.nextLine();
