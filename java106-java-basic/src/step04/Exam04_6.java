@@ -16,15 +16,15 @@ public class Exam04_6 {
         // => 실행 결과
         //    c cpp java html css 
 
-        if (/*여기에 조건문 작성*/) System.out.print("c ");
-        if (/*여기에 조건문 작성*/) System.out.print("cpp ");
-        if (/*여기에 조건문 작성*/) System.out.print("java ");
-        if (/*여기에 조건문 작성*/) System.out.print("js ");
-        if (/*여기에 조건문 작성*/) System.out.print("python ");
-        if (/*여기에 조건문 작성*/) System.out.print("php ");
-        if (/*여기에 조건문 작성*/) System.out.print("html ");
-        if (/*여기에 조건문 작성*/) System.out.print("css ");
-
+        if ((lang & 0x80) == 0x80) System.out.print("c ");
+        if ((lang & 0x40) > 0) System.out.print("cpp ");
+        if ((lang & 0x20) > 0) System.out.print("java ");
+        if ((lang & 0x10) > 0) System.out.print("js ");
+        if ((lang & 8) > 0) System.out.print("python ");
+        if ((lang & 4) > 0) System.out.print("php ");
+        if ((lang & 2) > 0) System.out.print("html ");
+        if ((lang & 1) > 0) System.out.print("css ");
+        System.out.println(); // 줄바꿈
 
 
     }
