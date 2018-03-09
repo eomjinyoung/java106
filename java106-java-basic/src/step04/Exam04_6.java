@@ -8,7 +8,7 @@ public class Exam04_6 {
         // => 각 비트의 해당하는 프로그래밍 언어는 다음 순서를 따른다.
         //    c, cpp, java, js, python, php, html, css
         //    
-        int lang = 0x1110_0011;
+        int lang = 0b1110_0011;
         
         // lang 변수에 들어 있는 각 비트 값을 조사하여 
         // 1이면 그 변수에 해당하는 프로그래밍 이름을 출력한다.
@@ -16,7 +16,16 @@ public class Exam04_6 {
         // => 실행 결과
         //    c cpp java html css 
 
-        // 여기에 코드를 작성!
+        if (/*여기에 조건문 작성*/) System.out.print("c ");
+        if (/*여기에 조건문 작성*/) System.out.print("cpp ");
+        if (/*여기에 조건문 작성*/) System.out.print("java ");
+        if (/*여기에 조건문 작성*/) System.out.print("js ");
+        if (/*여기에 조건문 작성*/) System.out.print("python ");
+        if (/*여기에 조건문 작성*/) System.out.print("php ");
+        if (/*여기에 조건문 작성*/) System.out.print("html ");
+        if (/*여기에 조건문 작성*/) System.out.print("css ");
+
+
 
     }
 }
