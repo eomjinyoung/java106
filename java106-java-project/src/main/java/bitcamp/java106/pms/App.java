@@ -109,7 +109,7 @@ public class App {
             } else if (menu.equals("member/add")) {
                 System.out.println("[회원 정보 입력]");
                 Member member = new Member();
-
+                
                 System.out.print("아이디? ");
                 member.id = keyScan.nextLine();
 
