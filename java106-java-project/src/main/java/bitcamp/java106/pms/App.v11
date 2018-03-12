@@ -5,7 +5,6 @@ import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.domain.Member;
 import java.util.Scanner;
 
-// ver 1.2 - 명령어를 잘못 입력했을 때 안내 문구를 출력한다. 
 // ver 1.1 - member/view 명령을 구현한다.
 // ver 1.0 - member/list 명령을 구현한다.
 // ver 0.9 - member/add 명령을 구현한다.
@@ -153,8 +152,6 @@ public class App {
                     System.out.printf("암호: %s\n", member.password);
                 }
                 
-            } else {
-                System.out.println("명령어가 올바르지 않습니다.");
             }
 
             System.out.println();

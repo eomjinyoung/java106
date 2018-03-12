@@ -5,10 +5,9 @@ import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.domain.Member;
 import java.util.Scanner;
 
-// ver 1.2 - 명령어를 잘못 입력했을 때 안내 문구를 출력한다. 
-// ver 1.1 - member/view 명령을 구현한다.
-// ver 1.0 - member/list 명령을 구현한다.
 // ver 0.9 - member/add 명령을 구현한다.
+    // 회원 정보를 담을 새로운 데이터 타입을 정의한다. => Member.java
+    // 여러 회원 정보를 저장할 레퍼런스 배열을 준비한다.
 // ver 0.8 - team/view 명령을 구현한다.
 // ver 0.7 - team/list 명령을 구현한다.
 // ver 0.6 - team/add 명령을 구현한다.
@@ -121,40 +120,6 @@ public class App {
 
                 // 회원 정보가 담겨있는 객체의 주소를 배열에 보관한다.
                 members[memberIndex++] = member;
-
-            } else if (menu.equals("member/list")) {
-                System.out.println("[회원 목록]");
-                for (int i = 0; i < memberIndex; i++) {
-                    System.out.printf("%s, %s, %s\n", 
-                        members[i].id, members[i].email, members[i].password);
-                }
-
-            } else if (menu.equals("member/view")) {
-                System.out.println("[회원 정보 조회]");
-                if (option == null) {
-                    System.out.println("아이디를 입력하시기 바랍니다.");
-                    System.out.println();
-                    continue;
-                }
-                
-                Member member = null;
-                for (int i = 0; i < memberIndex; i++) {
-                    if (option.equals(members[i].id.toLowerCase())) {
-                        member = members[i];
-                        break;
-                    }
-                }
-
-                if (member == null) {
-                    System.out.println("해당 아이디의 회원이 없습니다.");
-                } else {
-                    System.out.printf("아이디: %s\n", member.id);
-                    System.out.printf("이메일: %s\n", member.email);
-                    System.out.printf("암호: %s\n", member.password);
-                }
-                
-            } else {
-                System.out.println("명령어가 올바르지 않습니다.");
             }
 
             System.out.println();
