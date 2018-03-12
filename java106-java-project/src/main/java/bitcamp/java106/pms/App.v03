@@ -1,21 +1,29 @@
 package bitcamp.java106.pms;
 
-// 컴파일러에게 클래스의 위치 정보를 알려준다.
-// => 컴파일한 후 import 명령은 제거된다.
-//    즉 .class 파일에 포함되지 않는다.
-// => 그러니 import 문장이 많으면 .class 파일이 커지지 않을까 걱정말라!
+
 import bitcamp.java106.pms.domain.Team;
 import java.util.Scanner;
 
-// 3단계: 반복문 적용
+// ver 0.3 - 사용자로부터 입력 받는 것을 무한 반복한다.
+// ver 0.2 - 사용자로부터 입력을 받아 출력한다.
+// ver 0.1 - 명령 입력 프롬프트를 출력한다. 
 public class App {
     public static void main(String[] args) {
         Scanner keyScan = new Scanner(System.in);
 
-        // 팀 정보를 받을 메모리 준비
-        Team[] teams = new Team[100];
+        while (true) {
+            System.out.print("명령> ");
+            String input = keyScan.nextLine();
 
-        for (int i = 0; i < 3; i++) {
+            System.out.println(input);
+        }
+        /*
+        // 팀 정보를 받을 메모리 준비
+        Team[] teams = new Team[5];
+        
+        int count = 0;
+        for (int i = 0; i < teams.length; i++) {
+            count++;
             teams[i] = new Team();
 
             System.out.print("팀명? ");
@@ -33,13 +41,24 @@ public class App {
 
             System.out.print("종료일? ");
             teams[i].endDate = keyScan.nextLine();
+
+            if (count == teams.length) { // if (i == teams.length - 1)
+                break;
+            }
+
+            System.out.print("계속하시겠습니까?(Y/n) ");
+            String str = keyScan.nextLine();
+            if (str.toLowerCase().equals("n")) {
+                break;
+            } 
         }
 
         System.out.println("-----------------------------");
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < count; i++) {
             System.out.printf("%s, %d명, %s ~ %s\n", 
                 teams[i].name, teams[i].maxQty, 
                 teams[i].startDate, teams[i].endDate);
         }
+        */
     }
 }
