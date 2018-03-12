@@ -66,34 +66,6 @@ public class App {
 
             System.out.println(input);
         }
-        /*
-        // 팀 정보를 받을 메모리 준비
-        Team[] teams = new Team[5];
-        
-        int count = 0;
-        for (int i = 0; i < teams.length; i++) {
-            count++;
-            teams[i] = new Team();
 
-            
-
-            if (count == teams.length) { // if (i == teams.length - 1)
-                break;
-            }
-
-            System.out.print("계속하시겠습니까?(Y/n) ");
-            String str = keyScan.nextLine();
-            if (str.toLowerCase().equals("n")) {
-                break;
-            } 
-        }
-
-        System.out.println("-----------------------------");
-        for (int i = 0; i < count; i++) {
-            System.out.printf("%s, %d명, %s ~ %s\n", 
-                teams[i].name, teams[i].maxQty, 
-                teams[i].startDate, teams[i].endDate);
-        }
-        */
     }
 }

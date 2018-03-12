@@ -10,7 +10,6 @@ import java.util.Scanner;
     // 3단계: 입력 값에서 검색어를 별도의 변수에 저장한다.
     // 4단계: 팀명이 없으면 안내문구를 출력한다.
     // 5단계: 팀명으로 배열을 뒤져 팀 정보를 찾는다.
-    // 6단계: 팀명으로 검색할 때 대소문자를 구분하지 않는다.
 // ver 0.7 - team/list 명령을 구현한다.
 // ver 0.6 - team/add 명령을 구현한다.
 // ver 0.5 - help 명령을 구현한다.
@@ -87,7 +86,7 @@ public class App {
                 }
                 
                 for (int i = 0; i < teamIndex; i++) {
-                    if (option.equals(teams[i].name.toLowerCase())) {
+                    if (option.equals(teams[i].name)) {
                         System.out.printf("팀명: %s\n", teams[i].name);
                         System.out.printf("설명: %s\n", teams[i].description);
                         System.out.printf("최대인원: %d\n", teams[i].maxQty);
