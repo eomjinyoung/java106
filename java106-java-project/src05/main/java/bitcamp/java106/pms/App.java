@@ -161,6 +161,8 @@ public class App {
             String menu = arr[0];
             if (arr.length == 2) {
                 option = arr[1];
+            } else {
+                option = null;
             }
 
             if (menu.equals("quit")) {
