@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Exam02_2 {
 
-    // 2) 함수1 : 리턴값(X), 파라미터(O)
+    // 2) 메서드 : 리턴값(X), 파라미터(O)
     // => 메서드 블록을 실행할 때 값이 필요하다면 파라미터 변수를 선언하라! 
     // => "여기 돈 줄테니 밥먹고 와!", "여기 등록금이다. 학비 내라."
     static void hello(String name, int age) {
