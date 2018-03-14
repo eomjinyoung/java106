@@ -5,21 +5,23 @@ import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.domain.Member;
 import java.util.Scanner;
 
-// ver 1.1 - member/view 명령을 구현한다.
-// ver 1.0 - member/list 명령을 구현한다.
-// ver 0.9 - member/add 명령을 구현한다.
-// ver 0.8 - team/view 명령을 구현한다.
-// ver 0.7 - team/list 명령을 구현한다.
-// ver 0.6 - team/add 명령을 구현한다.
-// ver 0.5 - help 명령을 구현한다.
-// ver 0.4 - quit 명령어 입력 시 반복문을 종료한다.
-// ver 0.3 - 사용자로부터 입력 받는 것을 무한 반복한다.
-// ver 0.2 - 사용자로부터 입력을 받아 출력한다.
-// ver 0.1 - 명령 입력 프롬프트를 출력한다. 
+// ver 0.2 - quit 명령어를 처리하는 코드를 메서드로 분리한다.
+// ver 0.1 - 명령어를 입력 받는 코드를 메서드로 분리한다.
 public class App {
-    public static void main(String[] args) {
-        Scanner keyScan = new Scanner(System.in);
+    // 클래스 변수 = 스태틱 변수
+    // => 클래스 안에서 어디에서나 사용할 수 있는 변수이다.
+    static Scanner keyScan = new Scanner(System.in);
 
+    static String[] prompt() {
+        System.out.print("명령> ");
+        return keyScan.nextLine().toLowerCase().split(" ");
+    }
+
+    static void onQuit() {
+        System.out.println("안녕히 가세요!");
+    }
+
+    public static void main(String[] args) {
         Team[] teams = new Team[1000];
         int teamIndex = 0;
 
@@ -27,8 +29,8 @@ public class App {
         int memberIndex = 0;
 
         while (true) {
-            System.out.print("명령> ");
-            String[] arr = keyScan.nextLine().toLowerCase().split(" ");
+            String[] arr = prompt();
+
             String menu = arr[0];
             String option = null; // 문자열 없음!
             if (arr.length == 2) {
@@ -36,7 +38,7 @@ public class App {
             }
 
             if (menu.equals("quit")) {
-                System.out.println("안녕히 가세요!");
+                onQuit();
                 break;
             } else if (menu.equals("help")) {
                 System.out.println("[도움말]");
@@ -108,7 +110,7 @@ public class App {
             } else if (menu.equals("member/add")) {
                 System.out.println("[회원 정보 입력]");
                 Member member = new Member();
-
+                
                 System.out.print("아이디? ");
                 member.id = keyScan.nextLine();
 
@@ -152,6 +154,8 @@ public class App {
                     System.out.printf("암호: %s\n", member.password);
                 }
                 
+            } else {
+                System.out.println("명령어가 올바르지 않습니다.");
             }
 
             System.out.println();
