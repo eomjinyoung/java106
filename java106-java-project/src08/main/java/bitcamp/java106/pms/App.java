@@ -5,7 +5,12 @@ import bitcamp.java106.pms.controller.MemberController;
 import bitcamp.java106.pms.util.Console;
 import java.util.Scanner;
 
-// ver 0.1 - team 메뉴를 처리하는 코드를 TeamController로 옮긴다.
+// ver 0.2 - 회원 관리 기능을 별도의 클래스로 옮긴다.
+//           => controller.MemberController 클래스 추가
+// ver 0.1 - 팀 관리 기능(메서드)을 별도의 클래스로 옮긴다.
+//           => controller.TeamController 클래스 추가
+//           사용자 입력 기능을 별도의 클래스로 옮긴다.
+//           => util.Console 클래스 추가
 public class App {
     static Scanner keyScan = new Scanner(System.in);
     public static String option = null; 
@@ -46,8 +51,16 @@ public class App {
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
-            } else if (menu.startsWith("team/")) {
-                TeamController.service(menu, option);
+            } else if (menu.equals("team/add")) {
+                TeamController.onTeamAdd();
+            } else if (menu.equals("team/list")) {
+                TeamController.onTeamList();
+            } else if (menu.equals("team/view")) {
+                TeamController.onTeamView(option);
+            } else if (menu.equals("team/update")) {
+                TeamController.onTeamUpdate(option);
+            } else if (menu.equals("team/delete")) {
+                TeamController.onTeamDelete(option);
             } else if (menu.equals("member/add")) {
                 MemberController.onMemberAdd();
             } else if (menu.equals("member/list")) {

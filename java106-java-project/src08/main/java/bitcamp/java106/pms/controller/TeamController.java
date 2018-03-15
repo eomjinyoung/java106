@@ -13,22 +13,6 @@ public class TeamController {
     static Team[] teams = new Team[1000];
     static int teamIndex = 0;
 
-    public static void service(String menu, String option) {
-        if (menu.equals("team/add")) {
-            onTeamAdd();
-        } else if (menu.equals("team/list")) {
-            onTeamList();
-        } else if (menu.equals("team/view")) {
-            onTeamView(option);
-        } else if (menu.equals("team/update")) {
-            onTeamUpdate(option);
-        } else if (menu.equals("team/delete")) {
-            onTeamDelete(option);
-        } else {
-            System.out.println("명령어가 올바르지 않습니다.");
-        }
-    }
-
     static int getTeamIndex(String name) {
         for (int i = 0; i < teamIndex; i++) {
             if (teams[i] == null) continue;
@@ -39,7 +23,7 @@ public class TeamController {
         return -1;
     }
 
-    static void onTeamAdd() {
+    public static void onTeamAdd() {
         System.out.println("[팀 정보 입력]");
         Team team = new Team();
 
@@ -63,7 +47,7 @@ public class TeamController {
         teams[teamIndex++] = team;
     }
 
-    static void onTeamList() {
+    public static void onTeamList() {
         System.out.println("[팀 목록]");
         for (int i = 0; i < teamIndex; i++) {
             if (teams[i] == null) continue;
@@ -73,7 +57,7 @@ public class TeamController {
         }
     }
 
-    static void onTeamView(String name) {
+    public static void onTeamView(String name) {
         System.out.println("[팀 정보 조회]");
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
@@ -95,7 +79,7 @@ public class TeamController {
         }
     }
 
-    static void onTeamUpdate(String name) {
+    public static void onTeamUpdate(String name) {
         System.out.println("[팀 정보 변경]");
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
@@ -125,7 +109,7 @@ public class TeamController {
         }
     }
 
-    static void onTeamDelete(String name) {
+    public static void onTeamDelete(String name) {
         System.out.println("[팀 정보 삭제]");
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
