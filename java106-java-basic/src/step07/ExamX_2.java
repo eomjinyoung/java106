@@ -1,7 +1,7 @@
-// 사용자 정의 데이터 타입 - 인스턴스 메서드 
+// 사용자 정의 데이터 타입 - 메서드 = 연산자 
 package step07;
 
-public class Exam03_1 {
+public class ExamX_2 {
     public static void main(String[] args) {
         // 사용자 정의 데이터 타입의 값을 연산자를 사용하여 다뤄보자!
         Score2 score = new Score2();
