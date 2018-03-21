@@ -8,15 +8,10 @@ import java.util.Scanner;
 public class TeamController {
     // 이 클래스를 사용하기 전에 App 클래스에서 준비한 Scanner 객체를
     // keyScan 변수에 저장하라!
-    Scanner keyScan;
+    public Scanner keyScan;
 
     Team[] teams = new Team[1000];
     int teamIndex = 0;
-    
-    public TeamController(Scanner scanner) {
-        this.keyScan = scanner;
-    }
-    
 
     public void service(String menu, String option) {
         if (menu.equals("team/add")) {

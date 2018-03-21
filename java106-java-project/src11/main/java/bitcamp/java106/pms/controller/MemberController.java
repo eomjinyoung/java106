@@ -8,14 +8,10 @@ import java.util.Scanner;
 public class MemberController {
     // 이 클래스를 사용하려면 keyboard 스캐너가 있어야 한다.
     // 이 클래스를 사용하기 전에 스캐너를 설정하라!
-    Scanner keyScan;
+    public Scanner keyScan;
 
     Member[] members = new Member[1000];
     int memberIndex = 0;
-    
-    public MemberController(Scanner scanner) {
-        this.keyScan = scanner;
-    }
 
     public void service(String menu, String option) {
         if (menu.equals("member/add")) {

@@ -1,7 +1,4 @@
-// 컨트롤러가 작업하는데 필요한 객체를 반드시 준비하도록 생성자를 추가한다.
-// => 생성자를 통해 필수 입력 값을 반드시 설정하도록 강제시킬 수 있다.
-// => 즉 생성자란, 객체를 사용하기 전에 유효한 값으로 설정하게 만드는 문법이다.
-// 
+// 스태틱 멤버(변수 및 메서드)를 인스턴스 멤버로 변경한다. 
 package bitcamp.java106.pms.controller;
 
 import java.util.Scanner;
@@ -10,22 +7,11 @@ import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.util.Console;
 
 public class BoardController {
-    Scanner keyScan;
+    public Scanner keyScan;
 
     Board[] boards = new Board[1000];
     int boardIndex = 0;
 
-    public BoardController(Scanner scanner) {
-        // BoardController의 메서드를 이용하려면 반드시 설정해야 하는 값이 있다.
-        // Board[] 배열이나 boardIndex 처럼 내부에서 생성하는 값이 있고,
-        // Scanner 처럼 외부에서 받아야 하는 값이 있다.
-        // 외부에서 반드시 받아야 하는 값은 생성자를 통해 입력 받도록 하면 된다.
-        // 이것이 생성자가 필요한 이유이다.
-        // 즉 객체가 작업하는데 필수적으로 요구되는 값을 준비시키는 역할을 수행하는 게 
-        // 바로 "생성자"이다.
-        this.keyScan = scanner;
-    }
-    
     public void service(String menu, String option) {
         if (menu.equals("board/add")) {
             this.onBoardAdd();

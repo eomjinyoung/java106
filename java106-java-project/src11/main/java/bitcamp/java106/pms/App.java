@@ -29,10 +29,15 @@ public class App {
     public static void main(String[] args) {
         // 클래스를 사용하기 전에 필수 값을 설정한다.
         
-        TeamController teamController = new TeamController(keyScan);
-        MemberController memberController = new MemberController(keyScan);
-        BoardController boardController = new BoardController(keyScan);
+        TeamController teamController = new TeamController();
+        teamController.keyScan = keyScan;
+        
+        MemberController memberController = new MemberController();
+        memberController.keyScan = keyScan;
 
+        BoardController boardController = new BoardController();
+        boardController.keyScan = keyScan;
+        
         Console.keyScan = keyScan;
 
         while (true) {
