@@ -1,38 +1,39 @@
 // 인스턴스 메서드와 클래스 메서드의 활용 - Calendar 클래스
 package step09;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class Exam02_5 {
     public static void main(String[] args) throws Exception {
-        Date d1 = new Date();
+        // Calendar 클래스의 생성자는 protected로 접근이 제한되어 있기 때문에
+        // 다른 패키지에서 직접 생성자를 호출할 수 없다.
+        //Calendar c = new Calendar(); // 컴파일 오류!
+        
+        // 오늘 날짜 및 시간 정보를 저장한 객체를 만들어 리턴한다.
+        // 달력은 그레고리안 달력을 사용한다.
+        Calendar c = Calendar.getInstance();
         
         // 인스턴스 메서드 활용
-        System.out.println(d1.getYear() + 1900);
-        System.out.println(d1.getMonth() + 1);
-        System.out.println(d1.getDate());
+        System.out.println(c.get(1)); // 년도
+        System.out.println(c.get(2) + 1); // 월(0 ~ 11)
+        System.out.println(c.get(5)); // 일
+        System.out.println(c.get(7)); // 요일(1 ~ 7)
+        System.out.println(c.get(4)); // 그 달의 몇 번째 주
+        System.out.println(c.get(10)); // 시(0 ~ 11)
+        System.out.println(c.get(11)); // 시(24시)
+        System.out.println(c.get(12)); // 분
+        System.out.println(c.get(13)); // 초
         
-        // 스태틱 메서드 활용
-        long millis = Date.parse("Sat, 12 Aug 1995 13:30:00 GMT");
-        System.out.println(millis);
-        
-        // 실무에서는 java.util.Date 대신 이 클래스의 자식 클래스인
-        // java.sql.Date을 쓰기도 한다.
-        // 이 클래스는 날짜 데이터를 문자열로 다룰 때 yyyy-MM-dd 형식으로 다룬다.
-        
-        // 스태틱 메서드 활용
-        long currMillis = System.currentTimeMillis();
-        
-        // 생성자 활용
-        java.sql.Date today = new java.sql.Date(currMillis);
-        
-        // 인스턴스 메서드 활용 
-        String str = today.toString();
-        System.out.println(str);
-        
-        // 스태틱 메서드 활용
-        java.sql.Date d = java.sql.Date.valueOf("2018-03-21");
-        
+        // 상수의 활용
+        System.out.println(c.get(Calendar.YEAR)); // 년도
+        System.out.println(c.get(Calendar.MONTH) + 1); // 월(0 ~ 11)
+        System.out.println(c.get(Calendar.DATE)); // 일
+        System.out.println(c.get(Calendar.DAY_OF_WEEK)); // 요일(1 ~ 7)
+        System.out.println(c.get(Calendar.WEEK_OF_MONTH)); // 그 달의 몇 번째 주
+        System.out.println(c.get(Calendar.HOUR)); // 시(0 ~ 11)
+        System.out.println(c.get(Calendar.HOUR_OF_DAY)); // 시(24시)
+        System.out.println(c.get(Calendar.MINUTE)); // 분
+        System.out.println(c.get(Calendar.SECOND)); // 초
     }
 }
 
