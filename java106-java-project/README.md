@@ -1,5 +1,57 @@
 # 자바 프로젝트 
 
+## src15 - 팀 멤버 관리 기능 추가
+- 학습목표 
+    - 자바 문법을 활용하는 것을 연습한다.
+    - 기존 시스템을 유지보수하는 것을 연습힌다.
+- 작업내용
+    - 팀 멤버를 관리하는 기능을 추가한다.
+```
+> java -classpath bin bitcamp.java106.pms.App
+명령> team/add
+팀명? 비트비트
+...
+
+명령> team/add
+팀명? 바이트바이트
+...
+
+명령> member/add
+아이디? hong
+...
+
+명령> member/add
+아이디? kim
+...
+
+명령> team/member/add 오호라
+오호라 팀은 존재하지 않습니다.
+
+명령> team/member/add 비트비트
+추가할 멤버의 아이디는? hong
+추가하였습니다.
+
+명령> team/member/add 비트비트
+추가할 멤버의 아이디는? kim
+추가하였습니다.
+
+명령> team/member/add 비트비트
+추가할 멤버의 아이디는? lee
+lee 회원은 없습니다.
+
+명령> team/member/list 비트비트
+회원들: hong, kim
+
+명령> team/member/delete 비트비트
+삭제할 팀원은? hong
+삭제하였습니다.
+
+명령> team/member/delete 비트비트
+삭제할 팀원은? hong
+이 팀의 회원이 아닙니다.
+
+```
+
 ## src14 - DAO 클래스 분리(리팩토링)
 - 학습목표
     - 기존 클래스의 역할 중에 일부를 분리하는 방법을 익힌다.
