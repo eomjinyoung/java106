@@ -1,3 +1,4 @@
+// 상속 - 사용 전
 package step11.ex1;
 
 public class Exam01 {

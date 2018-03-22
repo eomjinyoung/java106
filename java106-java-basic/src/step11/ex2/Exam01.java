@@ -1,3 +1,4 @@
+// 상속 - 상속하지 않고 기능 추가 I
 package step11.ex2;
 
 public class Exam01 {

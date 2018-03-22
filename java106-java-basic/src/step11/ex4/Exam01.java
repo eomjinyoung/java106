@@ -1,3 +1,4 @@
+// 상속 - 상속 문법을 이용한 기능 추가
 package step11.ex4;
 
 public class Exam01 {
