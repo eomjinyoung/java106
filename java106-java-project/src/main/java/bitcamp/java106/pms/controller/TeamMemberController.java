@@ -52,27 +52,30 @@ public class TeamMemberController {
             System.out.printf("%s 회원은 없습니다.", memberId);
             return;
         }
-        /*
-        Team team = new Team();
-
-        System.out.print("팀명? ");
-        team.name = this.keyScan.nextLine();
-
-        System.out.print("설명? ");
-        team.description = this.keyScan.nextLine();
-
-        System.out.print("최대인원? ");
-        team.maxQty = this.keyScan.nextInt();
-        this.keyScan.nextLine(); 
-
-        System.out.print("시작일? ");
-        team.startDate = Date.valueOf(this.keyScan.nextLine());
-
-        System.out.print("종료일? ");
-        team.endDate = Date.valueOf(this.keyScan.nextLine());
-
-        teamDao.insert(team);
-        */
+        
+        // 기존에 등록된 회원인지 검사
+        boolean exist = false;
+        for (int i = 0; i < team.members.length; i++) {
+            if (team.members[i] == null) continue;
+            if (team.members[i].id.equals(memberId)) {
+                exist = true;
+                break;
+            }
+        }
+        
+        if (exist) {
+            System.out.println("이미 등록된 회원입니다.");
+            return;
+        }
+        
+        // 팀 멤버 배열에서 빈 방을 찾아 그 방에 멤버 객체(의 주소)를 넣는다.
+        for (int i = 0; i < team.members.length; i++) {
+            if (team.members[i] == null) {
+                team.members[i] = member;
+                System.out.println("추가하였습니다.");
+                break;
+            }
+        }
     }
 
     void onTeamMemberList() {
