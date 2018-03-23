@@ -15,9 +15,6 @@ public class TeamController {
 
     TeamDao teamDao = new TeamDao();
     
-    Team[] teams = new Team[1000];
-    int teamIndex = 0;
-    
     public TeamController(Scanner scanner) {
         this.keyScan = scanner;
     }
@@ -37,16 +34,6 @@ public class TeamController {
         } else {
             System.out.println("명령어가 올바르지 않습니다.");
         }
-    }
-
-    int getTeamIndex(String name) {
-        for (int i = 0; i < this.teamIndex; i++) {
-            if (this.teams[i] == null) continue;
-            if (name.equals(this.teams[i].name.toLowerCase())) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     void onTeamAdd() {

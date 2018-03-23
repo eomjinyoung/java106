@@ -9,19 +9,14 @@ import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
 
 public class TeamController {
-    // 이 클래스를 사용하기 전에 App 클래스에서 준비한 Scanner 객체를
-    // keyScan 변수에 저장하라!
-    Scanner keyScan;
 
-    TeamDao teamDao = new TeamDao();
+    Scanner keyScan;
+    TeamDao teamDao;
     
-    Team[] teams = new Team[1000];
-    int teamIndex = 0;
-    
-    public TeamController(Scanner scanner) {
+    public TeamController(Scanner scanner, TeamDao teamDao) {
         this.keyScan = scanner;
+        this.teamDao = teamDao;
     }
-    
 
     public void service(String menu, String option) {
         if (menu.equals("team/add")) {
@@ -37,16 +32,6 @@ public class TeamController {
         } else {
             System.out.println("명령어가 올바르지 않습니다.");
         }
-    }
-
-    int getTeamIndex(String name) {
-        for (int i = 0; i < this.teamIndex; i++) {
-            if (this.teams[i] == null) continue;
-            if (name.equals(this.teams[i].name.toLowerCase())) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     void onTeamAdd() {

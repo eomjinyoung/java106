@@ -5,6 +5,9 @@ import java.util.Scanner;
 import bitcamp.java106.pms.controller.BoardController;
 import bitcamp.java106.pms.controller.MemberController;
 import bitcamp.java106.pms.controller.TeamController;
+import bitcamp.java106.pms.controller.TeamMemberController;
+import bitcamp.java106.pms.dao.MemberDao;
+import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.util.Console;
 
 public class App {
@@ -29,10 +32,14 @@ public class App {
     public static void main(String[] args) {
         // 클래스를 사용하기 전에 필수 값을 설정한다.
         
-        TeamController teamController = new TeamController(keyScan);
-        MemberController memberController = new MemberController(keyScan);
+        TeamDao teamDao = new TeamDao();
+        MemberDao memberDao = new MemberDao();
+        
+        TeamController teamController = new TeamController(keyScan, teamDao);
+        TeamMemberController teamMemberController = new TeamMemberController(keyScan, teamDao, memberDao);
+        MemberController memberController = new MemberController(keyScan, memberDao);
         BoardController boardController = new BoardController(keyScan);
-
+        
         Console.keyScan = keyScan;
 
         while (true) {
@@ -50,13 +57,15 @@ public class App {
                 break;
             } else if (menu.equals("help")) {
                 onHelp();
+            } else if (menu.startsWith("team/member/")) {
+                teamMemberController.service(menu, option);
             } else if (menu.startsWith("team/")) {
                 teamController.service(menu, option);
             } else if (menu.startsWith("member/")) {
                 memberController.service(menu, option);
             } else if (menu.startsWith("board/")) {
                 boardController.service(menu, option);
-            }else {
+            } else {
                 System.out.println("명령어가 올바르지 않습니다.");
             }
 
