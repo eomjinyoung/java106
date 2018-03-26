@@ -1,7 +1,7 @@
-// 오버라이딩(overriding) - 응용 예: equals()
-package step11.ex11;
+// Object 클래스의 메서드를 오버라이딩 하기 - equals()
+package step11.ex12;
 
-public class Exam09_2 {
+public class Exam03_2 {
     
     static class Member /*extends Object */{
         String name;
