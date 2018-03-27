@@ -33,10 +33,15 @@ public class TaskDao {
         return arr;
     }
     
-    public Task get(int i) {
-        if (i < 0 || i >= taskIndex)
-            return null;
-        return tasks[i];
+    public Task get(String teamName, int taskNo) {
+        for (int i = 0; i < taskIndex; i++) {
+            if (tasks[i] == null) continue;
+            if (tasks[i].getTeam().getName().toLowerCase().equals(teamName) && 
+                tasks[i].getNo() == taskNo) {
+                return tasks[i];
+            }
+        }
+        return null;
     }
     
     public void update(Task task) {

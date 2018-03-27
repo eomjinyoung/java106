@@ -28,9 +28,9 @@ public class TaskController {
         } else if (menu.equals("task/list")) {
             this.onTaskList(option);
         } else if (menu.equals("task/view")) {
-            //this.onTeamMemberList(option);
+            this.onTaskView(option);
         } else if (menu.equals("task/update")) {
-            //this.onTeamMemberList(option);
+            this.onTaskUpdate(option);
         } else if (menu.equals("task/delete")) {
             //this.onTeamMemberDelete(option);
         } else if (menu.equals("task/state")) {
@@ -122,6 +122,94 @@ public class TaskController {
                             "-" : task.getWorker().getId());
         }
         System.out.println();
+    }
+    
+    void onTaskView(String teamName) {
+        if (teamName == null) {
+            System.out.println("팀명을 입력하시기 바랍니다.");
+            return; 
+        }
+        
+        Team team = teamDao.get(teamName);
+        if (team == null) {
+            System.out.printf("'%s' 팀은 존재하지 않습니다.", teamName);
+            return;
+        }
+
+        System.out.println("[작업 정보]");
+        System.out.print("작업 번호? ");
+        int taskNo = Integer.parseInt(keyScan.nextLine());
+        
+        Task task = taskDao.get(teamName, taskNo);
+        
+        if (task == null) {
+            System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
+                    teamName, taskNo);
+            return;
+        }
+        
+        System.out.printf("작업명: %s\n", task.getTitle());
+        System.out.printf("시작일: %s\n", task.getStartDate());
+        System.out.printf("종료일: %s\n", task.getEndDate());
+        System.out.printf("작업자: %s\n", 
+                (task.getWorker() == null) ? "-" : task.getWorker().getId());
+    }
+    
+    void onTaskUpdate(String teamName) {
+        if (teamName == null) {
+            System.out.println("팀명을 입력하시기 바랍니다.");
+            return; 
+        }
+        
+        Team team = teamDao.get(teamName);
+        if (team == null) {
+            System.out.printf("'%s' 팀은 존재하지 않습니다.", teamName);
+            return;
+        }
+        
+        Task task = new Task(team);
+        
+        System.out.println("[팀 작업 추가]");
+        System.out.print("작업명? ");
+        task.setTitle(keyScan.nextLine());
+        
+        System.out.print("시작일? ");
+        String str = keyScan.nextLine();
+        if (str.length() == 0) {
+            task.setStartDate(team.getStartDate());
+        } else {
+            Date date = Date.valueOf(str);
+            if (date.getTime() < team.getStartDate().getTime()) {
+                task.setStartDate(team.getStartDate());
+            } else {
+                task.setStartDate(date);
+            }
+        }
+        System.out.print("종료일? ");
+        str = keyScan.nextLine();
+        if (str.length() == 0) {
+            task.setEndDate(team.getEndDate());
+        } else {
+            Date date = Date.valueOf(str);
+            if (date.getTime() > team.getEndDate().getTime()) {
+                task.setEndDate(team.getEndDate());
+            } else {
+                task.setEndDate(date);
+            }
+        }
+        
+        System.out.print("작업자 아이디? ");
+        String memberId = keyScan.nextLine();
+        if (memberId.length() != 0) {
+            Member member = team.getMember(memberId);
+            if (member == null) {
+                System.out.printf("'%s'는 이 팀의 회원이 아닙니다. 작업자는 비워두겠습니다.", memberId);
+            } else {
+                task.setWorker(member);
+            }
+        }
+        
+        taskDao.insert(task);
     }
 
     /*
