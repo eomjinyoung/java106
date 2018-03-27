@@ -9,6 +9,7 @@ import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.util.Console;
 
 public class TaskController {
     
@@ -141,7 +142,6 @@ public class TaskController {
         int taskNo = Integer.parseInt(keyScan.nextLine());
         
         Task task = taskDao.get(teamName, taskNo);
-        
         if (task == null) {
             System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
                     teamName, taskNo);
@@ -167,16 +167,32 @@ public class TaskController {
             return;
         }
         
+        System.out.println("[팀 작업 변경]");
+        System.out.print("변경할 작업의 번호? ");
+        int taskNo = Integer.parseInt(keyScan.nextLine());
+        
+        Task originTask = taskDao.get(teamName, taskNo);
+        if (originTask == null) {
+            System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
+                    teamName, taskNo);
+            return;
+        }
+        
         Task task = new Task(team);
+        task.setNo(originTask.getNo());
         
-        System.out.println("[팀 작업 추가]");
-        System.out.print("작업명? ");
-        task.setTitle(keyScan.nextLine());
-        
-        System.out.print("시작일? ");
+        System.out.printf("작업명(%s)? ", originTask.getTitle());
         String str = keyScan.nextLine();
         if (str.length() == 0) {
-            task.setStartDate(team.getStartDate());
+            task.setTitle(originTask.getTitle());
+        } else {
+            task.setTitle(str);
+        }
+        
+        System.out.printf("시작일(%s)? ", originTask.getStartDate());
+        str = keyScan.nextLine();
+        if (str.length() == 0) {
+            task.setStartDate(originTask.getStartDate());
         } else {
             Date date = Date.valueOf(str);
             if (date.getTime() < team.getStartDate().getTime()) {
@@ -185,10 +201,10 @@ public class TaskController {
                 task.setStartDate(date);
             }
         }
-        System.out.print("종료일? ");
+        System.out.printf("종료일(%s)? ", originTask.getEndDate());
         str = keyScan.nextLine();
         if (str.length() == 0) {
-            task.setEndDate(team.getEndDate());
+            task.setEndDate(originTask.getEndDate());
         } else {
             Date date = Date.valueOf(str);
             if (date.getTime() > team.getEndDate().getTime()) {
@@ -198,9 +214,13 @@ public class TaskController {
             }
         }
         
-        System.out.print("작업자 아이디? ");
+        System.out.printf("작업자 아이디(%s)? ", 
+                (originTask.getWorker() == null) ? 
+                        "-" : originTask.getWorker().getId());
         String memberId = keyScan.nextLine();
-        if (memberId.length() != 0) {
+        if (memberId.length() == 0) {
+            task.setWorker(originTask.getWorker());
+        } else {
             Member member = team.getMember(memberId);
             if (member == null) {
                 System.out.printf("'%s'는 이 팀의 회원이 아닙니다. 작업자는 비워두겠습니다.", memberId);
@@ -209,7 +229,12 @@ public class TaskController {
             }
         }
         
-        taskDao.insert(task);
+        if (Console.confirm("변경하시겠습니까?")) {
+            taskDao.update(task);
+            System.out.println("변경하였습니다.");
+        } else {
+            System.out.println("취소하였습니다.");
+        }
     }
 
     /*
