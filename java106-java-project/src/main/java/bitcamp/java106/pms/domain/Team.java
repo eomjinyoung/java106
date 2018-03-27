@@ -86,6 +86,16 @@ public class Team {
         return 0;
     }
     
+    public Member getMember(String memberId) {
+        for (int i = 0; i < this.members.length; i++) {
+            if (this.members[i] == null) continue;
+            if (this.members[i].getId().equals(memberId)) {
+                return this.members[i];
+            }
+        }
+        return null;
+    }
+    
     public boolean isExist(String memberId) {
         for (int i = 0; i < this.members.length; i++) {
             if (this.members[i] == null) continue;
@@ -95,8 +105,17 @@ public class Team {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Team [name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+    }
+    
+    
 }
 
+//ver 17 - getMember() 메서드 추가. 
+//         toString() 오버라이딩. 
 //ver 16 - 캡슐화 적용. 겟터, 셋터 추가.
 //ver 15 - 멤버를 저장할 인스턴스 변수를 추가한다.
 //          팀 멤버 배열에 멤버 객체를 추가하고 빼는 메서드를 새로 정의한다.

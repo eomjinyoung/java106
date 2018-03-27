@@ -1,21 +1,25 @@
 // 팀 작업 관리 기능을 모아 둔 클래스
 package bitcamp.java106.pms.controller;
 
+import java.sql.Date;
 import java.util.Scanner;
 
-import bitcamp.java106.pms.dao.MemberDao;
+import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Member;
+import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
 
 public class TaskController {
     
     Scanner keyScan;
     TeamDao teamDao;
+    TaskDao taskDao;
     
-    public TaskController(Scanner scanner, TeamDao teamDao) {
+    public TaskController(Scanner scanner, TeamDao teamDao, TaskDao taskDao) {
         this.keyScan = scanner;
         this.teamDao = teamDao;
+        this.taskDao = taskDao;
     }
     
     public void service(String menu, String option) {
@@ -37,8 +41,6 @@ public class TaskController {
     }
 
     void onTaskAdd(String teamName) {
-        System.out.println("작업등록...");
-        /*
         if (teamName == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 
@@ -50,23 +52,28 @@ public class TaskController {
             return;
         }
         
-        System.out.println("[팀 멤버 추가]");
-        System.out.print("추가할 멤버의 아이디는? ");
+        Task task = new Task(team);
+        
+        System.out.println("[팀 작업 추가]");
+        System.out.print("작업명? ");
+        task.setTitle(keyScan.nextLine());
+        
+        System.out.print("시작일? ");
+        task.setStartDate(Date.valueOf(keyScan.nextLine()));
+        
+        System.out.print("종료일? ");
+        task.setEndDate(Date.valueOf(keyScan.nextLine()));
+        
+        System.out.print("작업자 아이디? ");
         String memberId = keyScan.nextLine();
-        
-        Member member = memberDao.get(memberId);
+        Member member = team.getMember(memberId);
         if (member == null) {
-            System.out.printf("%s 회원은 없습니다.", memberId);
+            System.out.printf("'%s'는 이 팀의 회원이 아닙니다.", memberId);
             return;
         }
+        task.setWorker(member);
         
-        if (team.isExist(memberId)) {
-            System.out.println("이미 등록된 회원입니다.");
-            return;
-        }
-        
-        team.addMember(member);
-        */
+        taskDao.insert(task);
     }
 
     /*

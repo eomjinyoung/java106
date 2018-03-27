@@ -7,6 +7,7 @@ public class Task {
     public static final int WORKING = 1;
     public static final int COMPLETE = 9;
     
+    private int no;
     private String title;
     private Date startDate;
     private Date endDate;
@@ -14,7 +15,9 @@ public class Task {
     private Member worker;
     private Team team;
     
-    public Task() {}
+    public Task(Team team) {
+        this.team = team;
+    }
     
     public Task(Team team, String title, Date startDate, Date endDate) {
         this.team = team;
@@ -24,6 +27,12 @@ public class Task {
         this.state = READY;
     }
     
+    public int getNo() {
+        return no;
+    }
+    public void setNo(int no) {
+        this.no = no;
+    }
     public int getState() {
         return state;
     }
@@ -60,8 +69,16 @@ public class Task {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Task [title=" + title + ", startDate=" + startDate + ", endDate=" + endDate + ", state=" + state
+                + ", worker=" + worker + ", team=" + team + "]";
+    }
 }
 
 //ver 17 - 사용자 정의 데이터 타입 생성
+
+
+
+
