@@ -11,10 +11,25 @@ public class TaskDao {
         this.tasks[this.taskIndex++] = task;
     }
     
-    public Task[] list() {
-        Task[] arr = new Task[taskIndex];
-        for (int i = 0; i < taskIndex; i++) 
-            arr[i] = tasks[i];
+    private int count(String teamName) {
+        int cnt = 0;
+        for (int i = 0; i < taskIndex; i++) {
+            if (tasks[i] == null) continue;
+            if (tasks[i].getTeam().getName().toLowerCase().equals(teamName)) {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+    
+    public Task[] list(String teamName) {
+        Task[] arr = new Task[this.count(teamName)];
+        for (int i = 0, x = 0; i < taskIndex; i++) {
+            if (tasks[i] == null) continue;
+            if (tasks[i].getTeam().getName().toLowerCase().equals(teamName)) {
+                arr[x++] = tasks[i];
+            }
+        }
         return arr;
     }
     
