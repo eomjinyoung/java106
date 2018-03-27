@@ -1,4 +1,4 @@
-// 팀 멤버 관리 기능을 모아 둔 클래스
+// 팀 작업 관리 기능을 모아 둔 클래스
 package bitcamp.java106.pms.controller;
 
 import java.util.Scanner;
@@ -8,31 +8,37 @@ import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
 
-public class TeamMemberController {
+public class TaskController {
     
     Scanner keyScan;
     TeamDao teamDao;
-    MemberDao memberDao;
     
-    public TeamMemberController(Scanner scanner, TeamDao teamDao, MemberDao memberDao) {
+    public TaskController(Scanner scanner, TeamDao teamDao) {
         this.keyScan = scanner;
         this.teamDao = teamDao;
-        this.memberDao = memberDao;
     }
     
     public void service(String menu, String option) {
-        if (menu.equals("team/member/add")) {
-            this.onTeamMemberAdd(option);
-        } else if (menu.equals("team/member/list")) {
-            this.onTeamMemberList(option);
-        } else if (menu.equals("team/member/delete")) {
-            this.onTeamMemberDelete(option);
+        if (menu.equals("task/add")) {
+            this.onTaskAdd(option);
+        } else if (menu.equals("task/list")) {
+            //this.onTeamMemberList(option);
+        } else if (menu.equals("task/view")) {
+            //this.onTeamMemberList(option);
+        } else if (menu.equals("task/update")) {
+            //this.onTeamMemberList(option);
+        } else if (menu.equals("task/delete")) {
+            //this.onTeamMemberDelete(option);
+        } else if (menu.equals("task/state")) {
+            //this.onTeamMemberDelete(option);
         } else {
             System.out.println("명령어가 올바르지 않습니다.");
         }
     }
 
-    void onTeamMemberAdd(String teamName) {
+    void onTaskAdd(String teamName) {
+        System.out.println("작업등록...");
+        /*
         if (teamName == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 
@@ -54,31 +60,16 @@ public class TeamMemberController {
             return;
         }
         
-        // 기존에 등록된 회원인지 검사
-        boolean exist = false;
-        for (int i = 0; i < team.members.length; i++) {
-            if (team.members[i] == null) continue;
-            if (team.members[i].id.equals(memberId)) {
-                exist = true;
-                break;
-            }
-        }
-        
-        if (exist) {
+        if (team.isExist(memberId)) {
             System.out.println("이미 등록된 회원입니다.");
             return;
         }
         
-        // 팀 멤버 배열에서 빈 방을 찾아 그 방에 멤버 객체(의 주소)를 넣는다.
-        for (int i = 0; i < team.members.length; i++) {
-            if (team.members[i] == null) {
-                team.members[i] = member;
-                System.out.println("추가하였습니다.");
-                break;
-            }
-        }
+        team.addMember(member);
+        */
     }
 
+    /*
     void onTeamMemberList(String teamName) {
         if (teamName == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
@@ -93,9 +84,12 @@ public class TeamMemberController {
 
         System.out.println("[팀 멤버 목록]");
         System.out.print("회원들: ");
-        for (int i = 0; i < team.members.length; i++) {
-            if (team.members[i] == null) continue;
-            System.out.printf("%s, ", team.members[i].id);
+        
+        Member[] members = team.getMembers();
+        
+        for (int i = 0; i < members.length; i++) {
+            if (members[i] == null) continue;
+            System.out.printf("%s, ", members[i].getId());
         }
         System.out.println();
     }
@@ -115,20 +109,17 @@ public class TeamMemberController {
         System.out.print("삭제할 팀원은? ");
         String memberId = keyScan.nextLine();
         
-        // 팀 멤버 삭제
-        System.out.println("[팀 멤버 삭제]");
-        for (int i = 0; i < team.members.length; i++) {
-            if (team.members[i] == null) continue;
-            if (team.members[i].id.equals(memberId)) {
-                team.members[i] = null;
-                System.out.println("삭제하였습니다.");
-                return;
-            }
+        if (!team.isExist(memberId)) {
+            System.out.println("이 팀의 회원이 아닙니다.");
+            return;
         }
-        System.out.println("이 팀의 회원이 아닙니다.");
+
+        team.deleteMember(memberId);
+        
+        System.out.println("[팀 멤버 삭제]");
+        System.out.println("삭제하였습니다.");
     }
+    */
 }
 
-// ver 15 - 팀 멤버를 등록, 조회, 삭제할 수 있는 기능 추가. 
-// ver 14 - TeamDao를 사용하여 팀 데이터를 관리한다.
-// ver 13 - 시작일, 종료일을 문자열로 입력 받아 Date 객체로 변환하여 저장.
+//ver 17 - 클래스 생성
