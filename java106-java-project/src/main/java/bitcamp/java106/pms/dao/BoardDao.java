@@ -4,7 +4,7 @@ import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.util.ArrayList;
 
 public class BoardDao {
-    ArrayList collection = new ArrayList();
+    private ArrayList collection = new ArrayList();
     
     public void insert(Board board) {
         this.collection.add(board);
@@ -18,30 +18,34 @@ public class BoardDao {
     }
     
     public Board get(int no) {
-        for (int i = 0; i < collection.size(); i++) {
-            Board board = (Board)collection.get(i);
-            if (board.getNo() == no)
-                return board;
-        }
-        return null;
+        int index = this.getBoardIndex(no);
+        if (index < 0) 
+            return null;
+        return (Board) collection.get(index);
     }
     
     public void update(Board board) {
-        for (int i = 0; i < collection.size(); i++) {
-            Board originBoard = (Board)collection.get(i);
-            if (originBoard.getNo() == board.getNo()) {
-                collection.set(i, board);
-            }
-        }
+        int index = this.getBoardIndex(board.getNo());
+        if (index < 0) 
+            return;
+        collection.set(index, board);
     }
     
     public void delete(int no) {
+        int index = this.getBoardIndex(no);
+        if (index < 0) 
+            return;
+        collection.remove(index);
+    }
+    
+    private int getBoardIndex(int no) {
         for (int i = 0; i < collection.size(); i++) {
             Board originBoard = (Board)collection.get(i);
             if (originBoard.getNo() == no) {
-                collection.remove(i);
+                return i;
             }
         }
+        return -1;
     }
 }
 

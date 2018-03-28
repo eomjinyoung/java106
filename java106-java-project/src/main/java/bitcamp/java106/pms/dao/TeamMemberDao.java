@@ -1,6 +1,11 @@
 package bitcamp.java106.pms.dao;
 
+import bitcamp.java106.pms.util.ArrayList;
+
 public class TeamMemberDao {
+    
+    private ArrayList teamCollection = new ArrayList();
+    private ArrayList memberCollection = new ArrayList();
     
     private Object[][] teamMembers = new Object[1000][2];
     private int rowIndex;
