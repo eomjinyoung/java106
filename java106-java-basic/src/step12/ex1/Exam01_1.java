@@ -6,7 +6,7 @@ package step12.ex1;
 //         더 큰 새 배열을 만들고, 기존 값을 복사해야 한다.
 //         배열의 크기가 늘 때마다 가비지(garbage)가 생기는 문제가 있다.
 //         기본 배열의 값을 복사하기 때문에 속도가 느린 문제도 있다.
-public class Exam01 {
+public class Exam01_1 {
     public static void main(String[] args) {
         ArrayList list = new ArrayList();
         list.add("aaa"); // aaa,

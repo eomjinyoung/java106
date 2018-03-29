@@ -1,4 +1,4 @@
-package step12.ex1;
+package bitcamp.java106.pms.util;
 
 public class ArrayList {
     protected static final int DEFAULT_CAPACITY = 5;
@@ -56,7 +56,7 @@ public class ArrayList {
     }
     
     public void add(int index, Object value) {
-        if (index < 0 || index > cursor)
+        if (index < 0 || index >= cursor)
             return;
         
         if (cursor >= list.length) {
@@ -81,16 +81,10 @@ public class ArrayList {
     public int size() {
         return cursor;
     }
-    
-    public boolean contains(Object value) {
-        for (Object obj : list) {
-            if (obj.equals(value)) 
-                return true;
-        }
-        return false;
-    }
 }
 
+
+//ver 18 - 클래스 추가
 
 
 
