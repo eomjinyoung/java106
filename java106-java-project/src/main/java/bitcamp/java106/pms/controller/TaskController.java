@@ -270,4 +270,5 @@ public class TaskController {
     }
 }
 
+//ver 18 - ArrayList가 적용된 TaskDao를 사용한다.
 //ver 17 - 클래스 생성

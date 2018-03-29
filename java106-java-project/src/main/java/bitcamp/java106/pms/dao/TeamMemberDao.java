@@ -1,5 +1,7 @@
 package bitcamp.java106.pms.dao;
 
+import bitcamp.java106.pms.domain.Member;
+import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.ArrayList;
 
 public class TeamMemberDao {
@@ -7,17 +9,17 @@ public class TeamMemberDao {
     private ArrayList teamCollection = new ArrayList();
     private ArrayList memberCollection = new ArrayList();
     
-    private Object[][] teamMembers = new Object[1000][2];
-    private int rowIndex;
-    
     private int getIndex(String teamName, String memberId) {
         String ptn = teamName.toLowerCase();
         String pmi = memberId.toLowerCase();
-        for (int i = 0; i < this.rowIndex; i++) {
-            if (this.teamMembers[i][0] == null) continue;
+        for (int i = 0; i < teamCollection.size(); i++) {
+            String tn = teamCollection.get(i).toString().toLowerCase();
             
-            String tn = ((String)this.teamMembers[i][0]).toLowerCase();
-            String mi = ((String)this.teamMembers[i][1]).toLowerCase();
+            
+            
+            
+            
+            String mi = memberCollection.get(i).toString().toLowerCase();
             if (tn.equals(ptn) && mi.equals(pmi)) {
                 return i;
             }
@@ -29,7 +31,7 @@ public class TeamMemberDao {
         if (this.isExist(teamName, memberId)) { 
             return 0;
         }
-        this.teamMembers[rowIndex][0] = teamName;
+        co[rowIndex][0] = teamName;
         this.teamMembers[rowIndex][1] = memberId;
         rowIndex++;
         return 1;
