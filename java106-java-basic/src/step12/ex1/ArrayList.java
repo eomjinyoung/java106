@@ -84,10 +84,18 @@ public class ArrayList {
     
     public boolean contains(Object value) {
         for (Object obj : list) {
-            if (obj.equals(value)) 
-                return true;
+            if (obj.equals(value)) // 같은 객체가 들어 있는지 검사하는 것이 아니다.
+                return true;       // 같은 내용을 가진 객체가 들어 있는지 검사하는 것이다.
         }
         return false;
+    }
+    
+    public int indexOf(Object value) {
+        for (int i = 0; i < list.length; i++) {
+            if (list[i].equals(value)) // 같은 객체가 들어 있는지 검사하는 것이 아니다.
+                return i;          // 같은 내용을 가진 객체가 들어 있는지 검사하는 것이다.
+        }
+        return -1;
     }
 }
 

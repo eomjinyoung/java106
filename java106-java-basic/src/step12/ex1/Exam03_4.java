@@ -1,9 +1,9 @@
-// java.util.ArrayList의 contains()의 동작 원리 확인
+// indexOf()에서 객체를 찾을 때 equals()로 비교하여 찾는다.
 package step12.ex1;
 
 import java.util.ArrayList;
 
-public class Exam02_4 {
+public class Exam03_4 {
     // equals()를 오버라이딩 한다면?
     static class Member {
         String name;
@@ -54,9 +54,8 @@ public class Exam02_4 {
         
         // Member 클래스는 equals()를 오버라이딩 했다.
         // 따라서 인스턴스가 다르더라도 Member의 name과 age 값이 같다면 
-        // equals()의 검사 결과가 true이기 때문에,
-        // contains()는 같은 객체로 판단할 것이다.
-        System.out.println(list.contains(s4)); // true
+        // equals()의 검사 결과가 true이기 때문에 indexOf()로 객체를 찾을 수 있다.
+        System.out.println(list.indexOf(s4)); // 1
     }
     
     static void print(ArrayList list) {
