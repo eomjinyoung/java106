@@ -92,7 +92,32 @@ public class LinkedList {
         
     }
     
-    
+    public void add(int i, Object value) {
+        Bucket cursor = head;
+        int count = 0;
+        
+        while (cursor != tail) {
+            if (count == i) {
+                Bucket bucket = new Bucket();
+                bucket.value = value;
+                bucket.prev = cursor.prev;
+                cursor.prev = bucket;
+                bucket.next = cursor;
+                if (bucket.prev != null) {
+                    bucket.prev.next = bucket;
+                } else { // 이전에 다른 객차가 없다면 이 객체를 헤드로 만든다.
+                    head = bucket;
+                }
+                return;
+            }
+            count++;
+            cursor = cursor.next;
+        }
+        
+        if (count == i) { // 맨 끝에 값을 추가하는 것이다.
+            add(value);
+        }
+    }
     
 }
 
