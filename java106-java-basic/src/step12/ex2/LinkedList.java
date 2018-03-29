@@ -63,6 +63,34 @@ public class LinkedList {
         }
         return count;
     }
+
+    public Object remove(int i) {
+        Bucket cursor = head;
+        
+        if (i == 0) {
+            if (head == tail)
+                return null;
+            else {
+                head = head.next;
+                head.prev = null;
+                return cursor.value;
+            }
+        }
+        
+        int count = 0;
+        
+        while (cursor != tail) {
+            if (count == i) {
+                cursor.prev.next = cursor.next;
+                cursor.next.prev = cursor.prev;
+                return cursor.value;
+            }
+            count++;
+            cursor = cursor.next;
+        }
+        return null;
+        
+    }
     
     
     
