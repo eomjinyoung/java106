@@ -18,7 +18,7 @@ public class StudentSelector {
         }
         System.out.println();
         
-        System.out.printf("%s님이 당첨되셨습니다. 축하합니다!", students[selectedNo]);
+        System.out.printf("%s님이 당첨되셨습니다. 축하합니다!\n", students[selectedNo]);
 
     }
 
