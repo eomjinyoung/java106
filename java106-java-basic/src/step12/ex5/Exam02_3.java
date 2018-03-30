@@ -1,9 +1,9 @@
 package step12.ex5;
 
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.Stack;
 
-public class Exam02_2 {
+public class Exam02_3 {
     public static void main(String[] args) {
         String s1 = new String("aaa");
         String s2 = new String("bbb");
@@ -11,14 +11,14 @@ public class Exam02_2 {
         String s4 = new String("ddd");
         String s5 = new String("eee");
         
-        LinkedList list = new LinkedList();
-        list.add(s1);
-        list.add(s2);
-        list.add(s3);
-        list.add(s4);
-        list.add(s5);
+        Stack stack = new Stack();
+        stack.add(s1);
+        stack.add(s2);
+        stack.add(s3);
+        stack.add(s4);
+        stack.add(s5);
         
-        Iterator 컬렉션에서값을꺼내주는객체 = list.iterator();
+        Iterator 컬렉션에서값을꺼내주는객체 = stack.iterator();
         while (컬렉션에서값을꺼내주는객체.hasNext()) {
             System.out.print(컬렉션에서값을꺼내주는객체.next() + ", ");
         }

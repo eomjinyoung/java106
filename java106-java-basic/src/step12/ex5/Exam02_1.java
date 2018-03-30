@@ -46,6 +46,14 @@ public class Exam02_1 {
     
 }
 
+// Iterator 패턴
+// => 컬렉션에서 값을 꺼내는 기능을 객체화시키는 방법
+// => 즉 별도의 클래스로 정의하여 사용한다.
+// => 이점
+//    컬렉션의 타입에 상관없이 일관된 방식으로 값을 꺼낼 수 있다.
+//    예) ArrayList => get(), Stack => pop(), Queue => poll()
+//    Iterator를 사용하면 hasNext(), next()만 사용하면 된다.
+
 
 
 
