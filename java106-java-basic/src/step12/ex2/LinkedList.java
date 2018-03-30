@@ -8,15 +8,15 @@ public class LinkedList {
     // LinkedList 안에 정의한다. 
     // 이렇게 클래스 안에 정의된 클래스를 "중첩 클래스(nested class)" 또는
     // "내부 클래스(inner class)"라고 부른다.
-    class Bucket { 
+    protected class Bucket { 
         // 이 클래스의 역할은 기차에서 사람이나 물건을 싣는 객차의 역할을 수행한다.
-        Object value; // 이 변수에 값을 저장한다.
-        Bucket next; // 이 변수에는 다음 객차 주소를 저장한다.
-        Bucket prev; // 이 변수에는 이전 객체 주소를 저장한다.
+        public Object value; // 이 변수에 값을 저장한다.
+        public Bucket next; // 이 변수에는 다음 객차 주소를 저장한다.
+        public Bucket prev; // 이 변수에는 이전 객체 주소를 저장한다.
     }
     
-    Bucket head; // 리스트에서 맨 앞 객차의 주소를 저장하는 인스턴스 변수
-    Bucket tail; // 리스터에서 맨 뒤 객차의 주소를 저장하는 인스턴스 변수
+    protected Bucket head; // 리스트에서 맨 앞 객차의 주소를 저장하는 인스턴스 변수
+    protected Bucket tail; // 리스터에서 맨 뒤 객차의 주소를 저장하는 인스턴스 변수
     
     public LinkedList() {
         // LinkedList를 만들면 일단 맨 앞에 있는 빈 객차를 준비한다.

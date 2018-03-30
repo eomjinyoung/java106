@@ -1,3 +1,4 @@
+// LinkedList 구현과 사용
 package step12.ex2;
 
 public class Exam01_1 {
