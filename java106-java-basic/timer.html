@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="count" style="font-size: 120px;">120</div>
+
+<script>
+var div = document.getElementById("count");
+var audio = new Audio('alarm.mp3');
+
+setInterval(function() {
+	var count = parseInt(div.innerHTML);
+	if (count-- == 0) {
+		audio.play();
+		div.innerHTML = 120;
+	} else {
+		div.innerHTML = count;
+	}
+	
+}, 1000);
+
+</script>
+</body>
+</html>
