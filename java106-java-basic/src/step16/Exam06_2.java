@@ -8,6 +8,7 @@ public class Exam06_2 {
 
     static class JavaFilter implements FilenameFilter {
         public boolean accept(File dir, String name) {
+            System.out.println("===>" + name);
             if (name.endsWith(".java")) 
                 return true; // 조회 결과에 포함시켜라!
             return false; // 조회 결과에서 제외하라!
