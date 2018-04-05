@@ -1,5 +1,5 @@
 // 파일 생성
-package step16;
+package step16.ex1;
 
 import java.io.File;
 

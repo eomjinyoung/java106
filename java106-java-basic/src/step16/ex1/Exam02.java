@@ -1,5 +1,5 @@
 // 파일 정보 조회 - java.io.File 클래스
-package step16;
+package step16.ex1;
 
 import java.io.File;
 

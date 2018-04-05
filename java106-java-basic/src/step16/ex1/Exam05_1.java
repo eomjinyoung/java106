@@ -1,5 +1,5 @@
 // 디렉토리에 들어 있는 파일이나 하위 디렉토리 정보 알아내기
-package step16;
+package step16.ex1;
 
 import java.io.File;
 
