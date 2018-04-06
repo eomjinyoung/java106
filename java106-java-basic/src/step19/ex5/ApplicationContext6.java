@@ -17,10 +17,10 @@ public class ApplicationContext6 {
         File dir = new File(url.getPath());
         if (!dir.isDirectory())
             return;
-        findFiles(dir, packageName);
+        findClasses(dir, packageName);
     }
     
-    private void findFiles(File dir, String packageName) throws Exception {
+    private void findClasses(File dir, String packageName) throws Exception {
         File[] files = dir.listFiles(new FileFilter() {
             public boolean accept(File pathname) {
                 if (pathname.isDirectory() || // 디렉토리 이거나
@@ -33,7 +33,7 @@ public class ApplicationContext6 {
         });
         for (File f : files) {
             if (f.isDirectory()) {
-                findFiles(f, packageName + "." + f.getName());
+                findClasses(f, packageName + "." + f.getName());
             } else {
                 String classname = f.getName();                
                 this.list.add(Class.forName(packageName + "." + 
@@ -42,7 +42,7 @@ public class ApplicationContext6 {
         }
     }
     
-    public List<Class> getFiles() {
+    public List<Class> getClasses() {
         return this.list;
     }
 }

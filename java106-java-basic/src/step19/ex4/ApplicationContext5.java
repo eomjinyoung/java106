@@ -44,7 +44,7 @@ public class ApplicationContext5 {
         }
     }
     
-    public List<String> getFiles() {
+    public List<String> getClassname() {
         return this.list;
     }
 }

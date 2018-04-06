@@ -1,17 +1,17 @@
-// 해당 패키지의 클래스를 알아내 인스턴스를 생성한다.
-package step19.ex6;
+// 객체를 저장할 때 클래스 이름으로 저장하고 클래스 이름으로 꺼낼 수 있다.
+package step19.ex7;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.lang.reflect.Constructor;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class ApplicationContext7 {
-    private ArrayList<Object> list = new ArrayList<>();
+public class ApplicationContext8 {
+    // 클래스 이름으로 객체를 저장할 수 있도록 Map 을 사용한다.
+    private HashMap<String,Object> objPool = new HashMap<>();
     
-    public ApplicationContext7(String packageName) throws Exception {
+    public ApplicationContext8(String packageName) throws Exception {
         String path = packageName.replace(".", "/");
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         URL url = classLoader.getResource(path);
@@ -42,8 +42,9 @@ public class ApplicationContext7 {
             Class clazz = Class.forName(packageName + "." + 
                     classname.substring(0, classname.length() - 6));
             Object obj = createObject(clazz);
-            if (obj != null)
-                this.list.add(obj);
+            if (obj != null) {
+                this.objPool.put(clazz.getName(), obj);
+            }
         }
     }
     
@@ -57,8 +58,8 @@ public class ApplicationContext7 {
         }
     }
     
-    public List<Object> getObjects() {
-        return this.list;
+    public Object getBean(String name) {
+        return objPool.get(name);
     }
 }
 
