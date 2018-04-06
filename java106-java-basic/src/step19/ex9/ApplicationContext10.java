@@ -1,5 +1,5 @@
-// 객체 생성할 때 의존 객체가 필요하다면 의존 객체를 생성하여 자동 주입시킨다.
-package step19.ex8;
+// @Component 애노테이션이 붙은 클래스만 객체를 생성한다.
+package step19.ex9;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class ApplicationContext9 {
+public class ApplicationContext10 {
 
     private HashMap<String,Object> objPool = new HashMap<>();
     
-    public ApplicationContext9(String packageName) throws Exception {
+    public ApplicationContext10(String packageName) throws Exception {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 
         File dir = new File(classLoader.getResource(
@@ -50,12 +50,24 @@ public class ApplicationContext9 {
             
             Object obj = createObject(clazz);
             if (obj != null) {
-                this.objPool.put(clazz.getName(), obj);
+                this.objPool.put(getComponentName(clazz), obj);
             }
         }
     }
     
+    private String getComponentName(Class clazz) throws Exception {
+        Component anno = (Component) clazz.getAnnotation(Component.class);
+        String label = anno.value();
+        if (label.length() == 0)
+            return clazz.getName();
+        return label;
+    }
+    
     private Object createObject(Class clazz) throws Exception {
+        
+        if (!isComponent(clazz))
+            return null;
+        
         try {
             // 파라미터가 없는 기본 생성자를 찾는다.
             clazz.getConstructor();
@@ -69,6 +81,14 @@ public class ApplicationContext9 {
             }
             return null;
         }
+    }
+    
+    private boolean isComponent(Class clazz) throws Exception {
+        // 애노테이션의 타입을 지정하여 해당 클래스에서 @Component 애노테이션 정보를 추출한다.
+        Component anno = (Component) clazz.getAnnotation(Component.class);
+        if (anno == null)
+            return false;
+        return true;
     }
     
     private Object callConstructor(Constructor constructor) throws Exception {
