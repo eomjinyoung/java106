@@ -2,6 +2,11 @@
 package step19.ex8;
 
 public class Exam13 {
+    public Exam13() {
+        System.out.println("===> Exam13()");
+    }
+    
+    
     public static void main(String[] args) throws Exception {
         // 새 Engine을 준비한다.
         UltraEngine engine = new UltraEngine();

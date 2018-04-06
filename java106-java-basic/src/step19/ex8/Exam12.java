@@ -10,6 +10,10 @@ package step19.ex8;
 //    새로운 Engine의 서브 클래스가 만들어지더라도 사용할 수 없다.
 // 
 public class Exam12 {
+    public Exam12() {
+        System.out.println("===> Exam12()");
+    }
+    
     public static void main(String[] args) throws Exception {
         Engine engine = new Engine();
         Car2 car = new Car2(engine);

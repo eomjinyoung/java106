@@ -12,6 +12,10 @@ package step19.ex8;
 //    Car이 생성자에서 Engine 객체를 생성하였다.
 // 
 public class Exam11 {
+    public Exam11() {
+        System.out.println("===> Exam11()");
+    }
+    
     public static void main(String[] args) throws Exception {
         Car car = new Car();
         car.move();
