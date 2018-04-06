@@ -1,5 +1,5 @@
 // 응용 - 1) 자바 CLASSPATH에 있는 파일의 절대 경로를 알아내는 방법
-package step18.ex6;
+package step18.ex7;
 
 import java.io.File;
 import java.net.URL;
@@ -39,7 +39,20 @@ public class Exam01 {
         System.out.println(url.getPath());
         System.out.println(url.getFile()); // getPath() + query
         
+        // ClassLoader의 도움을 받지 않는다면,
+        // 우리는 코드에 직접 그 패키지가 있는 경로를 지정해야 한다.
+        URL globalPath = new URL("file:///Users/eomjinyoung/git/java106/java106-java-basic/bin/main/step18/ex6");
+        File localPath = new File("/Users/eomjinyoung/git/java106/java106-java-basic/bin/main/step18/ex6");
         
+        // 이렇게 소스 코드에 직접 전체 디렉토리 경로를 지정하게 되면,
+        // 만약 해당 폴더가 옮겨졌을 때 디렉토리를 찾지 못하는 문제가 있다.
+        // 찾으려면 소스 코드를 변경해야 한다.
+        // 소스 코드를 변경하지 않고 계속 step18/ex6 가 존재하는 디렉토리를 찾는 방법은?
+        // 1) step18/ex6를 자바 CLASSPATH 에 둔다.
+        //    즉 jvm을 실행할 때 -classpath로 클래스 파일이 있는 경로를 지정하는데
+        //    그 경로 안에 두는 것을 말한다.
+        // 2) classpath에 두면 ClassLoader를 이용하여 해당 폴더가 
+        //    실제 어느 디렉토리 밑에 있는지 쉽게 찾을 수 있다.
         
     }
 }

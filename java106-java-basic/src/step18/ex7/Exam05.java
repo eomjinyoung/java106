@@ -1,5 +1,5 @@
 // 응용 - 5) 파일 정보 대신 클래스 정보를 목록에 저장한다.
-package step18.ex6;
+package step18.ex7;
 
 import java.io.File;
 import java.io.FileFilter;

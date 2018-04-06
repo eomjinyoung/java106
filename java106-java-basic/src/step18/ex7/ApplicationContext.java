@@ -1,5 +1,5 @@
 // 지정한 패키지의 클래스 정보를 로딩하여 보관하는 역할을 수행한다. 
-package step18.ex6;
+package step18.ex7;
 
 import java.io.File;
 import java.io.FileFilter;

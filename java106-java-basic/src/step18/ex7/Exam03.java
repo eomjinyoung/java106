@@ -1,5 +1,5 @@
 // 응용 - 3) 특정 패키지의 .class 파일의 목록을 알아내기
-package step18.ex6;
+package step18.ex7;
 
 import java.io.File;
 import java.io.FilenameFilter;

@@ -1,5 +1,5 @@
 // 응용 - 2) 특정 패키지의 파일 목록을 알아내기
-package step18.ex6;
+package step18.ex7;
 
 import java.io.File;
 import java.net.URL;
