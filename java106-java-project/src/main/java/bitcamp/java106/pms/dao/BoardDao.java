@@ -34,6 +34,7 @@ public class BoardDao extends AbstractDao<Board> {
                 board.setCreatedDate(Date.valueOf(arr[3]));
                 this.insert(board);
             } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
+                //e.printStackTrace();
                 break; // 반복문을 나간다.
             }
         }
