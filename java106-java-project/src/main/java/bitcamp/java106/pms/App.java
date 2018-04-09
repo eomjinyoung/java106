@@ -10,6 +10,7 @@ import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
+import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.util.Console;
 
 public class App {
@@ -26,12 +27,14 @@ public class App {
         MemberDao memberDao = (MemberDao) iocContainer.getBean(MemberDao.class);
         TaskDao taskDao = (TaskDao) iocContainer.getBean(TaskDao.class);
         TeamDao teamDao = (TeamDao) iocContainer.getBean(TeamDao.class);
+        TeamMemberDao teamMemberDao = (TeamMemberDao) iocContainer.getBean(TeamMemberDao.class);
         try {
             boardDao.save();
             classroomDao.save();
             memberDao.save();
             taskDao.save();
             teamDao.save();
+            teamMemberDao.save();
         } catch (Exception e) {
             System.out.println("게시물 데이터 저장 중 오류 발생!");
         }
