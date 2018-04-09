@@ -1,7 +1,10 @@
 package bitcamp.java106.pms.dao;
 
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
@@ -38,7 +41,18 @@ public class BoardDao extends AbstractDao<Board> {
     }
     
     public void save() throws Exception {
+        PrintWriter out = new PrintWriter(new FileWriter("data/board.csv"));
         
+        Iterator<Board> boards = this.list();
+        
+        // List에 보관된 데이터를 board.csv 파일에 저장한다.
+        // 기존에 저장된 데이터를 덮어쓴다. 즉 처음부터 다시 저장한다.
+        while (boards.hasNext()) {
+            Board board = boards.next();
+            out.printf("%d,%s,%s,%s\n", board.getNo(), board.getTitle(),
+                    board.getContent(), board.getCreatedDate());
+        }
+        out.close();
     }
     
     public int indexOf(Object key) {
