@@ -19,6 +19,10 @@ public class Board {
         return no;
     }
     public void setNo(int no) {
+        // 외부에서 입력 받은 번호가 count 보다 클 때는 count의 값을 증가시켜야 한다.
+        if (no >= count) {
+            count = no + 1;
+        }
         this.no = no;
     }
     public String getTitle() {
