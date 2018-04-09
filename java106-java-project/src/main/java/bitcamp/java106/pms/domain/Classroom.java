@@ -58,3 +58,5 @@ public class Classroom {
     
     
 }
+
+//ver 24 - setNo() 변경 

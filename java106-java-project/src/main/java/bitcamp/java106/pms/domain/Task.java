@@ -84,6 +84,7 @@ public class Task {
     }
 }
 
+//ver 24 - setNo() 변경
 //ver 17 - 사용자 정의 데이터 타입 생성
 
 

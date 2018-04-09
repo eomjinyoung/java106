@@ -65,6 +65,7 @@ public class Team {
     }
 }
 
+//ver 24 - 생성자 추가
 //ver 17 - toString() 오버라이딩.
 //         팀 멤버 관련 메서드를 TeamMemberDao 클래스로 옮긴다.
 //ver 16 - 캡슐화 적용. 겟터, 셋터 추가.

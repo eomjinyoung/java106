@@ -82,6 +82,7 @@ public class TaskDao extends AbstractDao<Task> {
     }
 }
 
+//ver 24 - File I/O 적용
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 22 - 추상 클래스 AbstractDao를 상속 받는다.
 //ver 19 - 우리 만든 ArrayList 대신 java.util.LinkedList를 사용하여 목록을 다룬다. 
