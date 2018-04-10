@@ -14,17 +14,10 @@ public class HiController implements Controller {
     }
     
     public void service(String menu, String option) {
-        if (menu.equals("hi")) {
-            this.onHi(option);
-        } else {
-            System.out.println("명령어가 올바르지 않습니다.");
-        }
-    }
-
-    void onHi(String option) {
         System.out.printf("'%s'님 안녕하세요!", option);
     }
 
 }
 
+//ver 26 - HiController 클래스를 한 개의 명령을 처리하는 클래스로 변경.
 //ver 23 - 유지보수 테스트를 위해 임시로 만듦.
