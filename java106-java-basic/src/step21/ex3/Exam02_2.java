@@ -4,7 +4,7 @@ package step21.ex3;
 public class Exam02_2 {
 
     // RuntimeException은 클래스 이름을 보더라도 Exception의 서브클래스이다.
-    static void m() throws Throwable {
+    static void m() throws RuntimeException {
         throw new RuntimeException(); // OK!
     }
     
