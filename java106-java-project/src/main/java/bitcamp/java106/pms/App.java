@@ -90,11 +90,7 @@ public class App {
                 onHelp();
             } else {
                 try {
-                    int slashIndex = menu.lastIndexOf("/");
-                    String controllerKey = (slashIndex < 0) ? 
-                            menu : menu.substring(0, slashIndex);
-                    
-                    Controller controller = (Controller) iocContainer.getBean(controllerKey);
+                    Controller controller = (Controller) iocContainer.getBean(menu);
                     
                     if (controller != null) {
                         controller.service(menu, option);
