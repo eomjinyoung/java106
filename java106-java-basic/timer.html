@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div id="count" style="font-size: 120px;">120</div>
+<div id="count" style="font-size: 120px;">60</div>
 
 <script>
 var div = document.getElementById("count");
@@ -15,7 +15,7 @@ setInterval(function() {
 	var count = parseInt(div.innerHTML);
 	if (count-- == 0) {
 		audio.play();
-		div.innerHTML = 120;
+		div.innerHTML = 60;
 	} else {
 		div.innerHTML = count;
 	}
