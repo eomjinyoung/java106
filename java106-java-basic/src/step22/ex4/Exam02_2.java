@@ -1,9 +1,6 @@
 // DataInputStream으로 객체 읽기 - 파일이 데이터를 읽어 인스턴스로 만들기 
 package step22.ex4;
 
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-
 public class Exam02_2 {
 
     public static void main(String[] args) throws Exception {
