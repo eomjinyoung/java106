@@ -13,12 +13,13 @@ public class Exam01_2 {
         
         long startTime = System.currentTimeMillis(); // 밀리초
         
-        while ((count = in.read(buf)) != -1) ; // 파일을 끝까지 읽는다.
+        int callCount = 0;
+        while ((count = in.read(buf)) != -1) callCount++; // 파일을 끝까지 읽는다.
         
         long endTime = System.currentTimeMillis();
 
         System.out.println(endTime - startTime);
-        
+        System.out.println(callCount);
         in.close();
     }
 

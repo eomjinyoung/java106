@@ -14,13 +14,15 @@ public class Exam02_1 {
         
         long startTime = System.currentTimeMillis(); // 밀리초
         
-        while ((b = in.read()) != -1) ; // 파일을 끝까지 읽는다.
+        while ((b = in.read()) != -1) 
+            out.write(b);
         
         long endTime = System.currentTimeMillis();
 
         System.out.println(endTime - startTime);
         
         in.close();
+        out.close();
     }
 
 }
