@@ -44,6 +44,10 @@ public class DataOutputStream {
         else 
             out.write(0);
     }
+    
+    public void close() throws Exception {
+        out.close();
+    }
 }
 
 
