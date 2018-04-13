@@ -1,0 +1,12 @@
+# 변경 내역
+- Board.java 변경
+- Classroom.java 변경
+- Member.java 변경
+- Task.java 변경
+- Team.java 변경
+- BoardDao.java 변경
+- ClassroomDao.java 변경
+- MemberDao.java 변경
+- TaskDao.java 변경
+- TeamDao.java 변경
+- TeamMemberDao.java 변경
