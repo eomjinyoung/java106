@@ -1,8 +1,9 @@
 package bitcamp.java106.pms.dao;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -34,16 +35,17 @@ public class MemberDao extends AbstractDao<Member> {
     }
     
     public void save() throws Exception {
-        PrintWriter out = new PrintWriter(new FileWriter("data/member.csv"));
-        
-        Iterator<Member> members = this.list();
-        
-        while (members.hasNext()) {
-            Member member = members.next();
-            out.printf("%s,%s,%s\n", member.getId(), member.getEmail(),
-                    member.getPassword());
-        }
-        out.close();
+        try (
+                ObjectOutputStream out = new ObjectOutputStream(
+                                new BufferedOutputStream(
+                                new FileOutputStream("data/member.data")));
+            ) {
+            Iterator<Member> members = this.list();
+            
+            while (members.hasNext()) {
+                out.writeObject(members.next());
+            }
+        } 
     }
         
     public int indexOf(Object key) {

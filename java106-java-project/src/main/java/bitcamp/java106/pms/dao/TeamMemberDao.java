@@ -1,14 +1,13 @@
 package bitcamp.java106.pms.dao;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 import bitcamp.java106.pms.annotation.Component;
 
@@ -41,17 +40,14 @@ public class TeamMemberDao {
     }
     
     public void save() throws Exception {
-        PrintWriter out = new PrintWriter(new FileWriter("data/teammember.csv"));
-        Set<String> keyList = collection.keySet();
-        for (String key : keyList) {
-            List<String> idList = collection.get(key);
-            out.printf("%s:", key);
-            for (String id : idList) {
-                out.printf("%s,", id);
-            }
-            out.println();
-        }
-        out.close();
+        try (
+                ObjectOutputStream out = new ObjectOutputStream(
+                                new BufferedOutputStream(
+                                new FileOutputStream("data/teammember.data")));
+            ) {
+            
+            out.writeObject(collection);
+        } 
     }
     
     

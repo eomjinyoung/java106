@@ -1,8 +1,9 @@
 package bitcamp.java106.pms.dao;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,18 +44,17 @@ public class TaskDao extends AbstractDao<Task> {
     }
     
     public void save() throws Exception {
-        PrintWriter out = new PrintWriter(new FileWriter("data/task.csv"));
-        
-        Iterator<Task> tasks = this.list();
-        
-        while (tasks.hasNext()) {
-            Task task = tasks.next();
-            out.printf("%d,%s,%s,%s,%d,%s,%s\n", task.getNo(), task.getTitle(),
-                    task.getStartDate(), task.getEndDate(),
-                    task.getState(), task.getTeam().getName(), 
-                    task.getWorker().getId());
-        }
-        out.close();
+        try (
+                ObjectOutputStream out = new ObjectOutputStream(
+                                new BufferedOutputStream(
+                                new FileOutputStream("data/task.data")));
+            ) {
+            Iterator<Task> tasks = this.list();
+            
+            while (tasks.hasNext()) {
+                out.writeObject(tasks.next());
+            }
+        } 
     }
         
     // 기존의 list() 메서드로는 작업을 처리할 수 없기 때문에 
