@@ -1,18 +1,16 @@
 package bitcamp.java106.pms.dao;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
-import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
-import bitcamp.java106.pms.domain.Team;
 
 @Component
 public class TaskDao extends AbstractDao<Task> {
@@ -22,25 +20,21 @@ public class TaskDao extends AbstractDao<Task> {
     }
     
     public void load() throws Exception {
-        Scanner in = new Scanner(new FileReader("data/task.csv"));
-        while (true) {
-            try {
-                String[] arr = in.nextLine().split(",");
-                Task task = new Task(null);
-                task.setNo(Integer.parseInt(arr[0]));
-                task.setTitle(arr[1]);
-                task.setStartDate(Date.valueOf(arr[2]));
-                task.setEndDate(Date.valueOf(arr[3]));
-                task.setState(Integer.parseInt(arr[4]));
-                task.setTeam(new Team(arr[5]));
-                task.setWorker(new Member(arr[6]));
-                this.insert(task);
-            } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
-                //e.printStackTrace();
-                break; // 반복문을 나간다.
+        try (
+                ObjectInputStream in = new ObjectInputStream(
+                               new BufferedInputStream(
+                               new FileInputStream("data/task.data")));
+            ) {
+        
+            while (true) {
+                try {
+                    this.insert((Task) in.readObject());
+                } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
+                    //e.printStackTrace();
+                    break; // 반복문을 나간다.
+                }
             }
         }
-        in.close();
     }
     
     public void save() throws Exception {

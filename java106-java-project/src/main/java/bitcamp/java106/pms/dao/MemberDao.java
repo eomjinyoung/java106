@@ -1,11 +1,12 @@
 package bitcamp.java106.pms.dao;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Member;
@@ -17,21 +18,21 @@ public class MemberDao extends AbstractDao<Member> {
     }
     
     public void load() throws Exception {
-        Scanner in = new Scanner(new FileReader("data/member.csv"));
-        while (true) {
-            try {
-                String[] arr = in.nextLine().split(",");
-                Member member = new Member();
-                member.setId(arr[0]);
-                member.setEmail(arr[1]);
-                member.setPassword(arr[2]);
-                this.insert(member);
-            } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
-                //e.printStackTrace();
-                break; // 반복문을 나간다.
+        try (
+                ObjectInputStream in = new ObjectInputStream(
+                               new BufferedInputStream(
+                               new FileInputStream("data/member.data")));
+            ) {
+        
+            while (true) {
+                try {
+                    this.insert((Member) in.readObject());
+                } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
+                    //e.printStackTrace();
+                    break; // 반복문을 나간다.
+                }
             }
         }
-        in.close();
     }
     
     public void save() throws Exception {

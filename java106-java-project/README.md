@@ -1,6 +1,6 @@
 # 자바 프로젝트
 
-## src27 - Serializable을 적용하여 객체 데이터를 관리하라!
+## src27 - serialize/deserialize 기법을 사용하여 객체 데이터를 관리하라!
 학습목표
     - Serializable 객체를 다룰 수 있다.
     - Java I/O 스트림 클래스의 사용법을 익힌다.
