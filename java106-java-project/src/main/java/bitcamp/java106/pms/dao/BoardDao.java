@@ -1,8 +1,12 @@
 package bitcamp.java106.pms.dao;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Date;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -40,20 +44,42 @@ public class BoardDao extends AbstractDao<Board> {
         }
         in.close();
     }
+    /*
+    public void load() {
+        try (
+                ObjectInputStream in = new ObjectInputStream(
+                               new BufferedInputStream(
+                               new FileInputStream("data/board.data")));
+            ) {
+        
+            while (true) {
+                try {
+                    this.insert((Board) in.readObject());
+                } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
+                    //e.printStackTrace();
+                    break; // 반복문을 나간다.
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("게시물 데이터 로딩 오류!");
+        }
+    }
+    */
     
     public void save() throws Exception {
-        PrintWriter out = new PrintWriter(new FileWriter("data/board.csv"));
-        
-        Iterator<Board> boards = this.list();
-        
-        // List에 보관된 데이터를 board.csv 파일에 저장한다.
-        // 기존에 저장된 데이터를 덮어쓴다. 즉 처음부터 다시 저장한다.
-        while (boards.hasNext()) {
-            Board board = boards.next();
-            out.printf("%d,%s,%s,%s\n", board.getNo(), board.getTitle(),
-                    board.getContent(), board.getCreatedDate());
+        try (
+                ObjectOutputStream out = new ObjectOutputStream(
+                                new BufferedOutputStream(
+                                new FileOutputStream("data/board.data")));
+            ) {
+            Iterator<Board> boards = this.list();
+            
+            while (boards.hasNext()) {
+                out.writeObject(boards.next());
+            }
+        } catch (Exception e) {
+            System.out.println("게시물 데이터 출력 오류!");
         }
-        out.close();
     }
     
     public int indexOf(Object key) {
