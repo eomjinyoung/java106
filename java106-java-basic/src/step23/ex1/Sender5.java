@@ -1,25 +1,30 @@
-// 파일 보내기
+// 파일 보내기 + 버퍼
 package step23.ex1;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Sender4 {
+public class Sender5 {
 
     public static void main(String[] args) throws Exception {
         File file = new File("temp/jls8.pdf");
         
-        FileInputStream fileIn = new FileInputStream(file);
+        BufferedInputStream fileIn = new BufferedInputStream(
+                new FileInputStream(file));
         
         System.out.println("서버에 연결 중...");
         Socket socket = new Socket("localhost", 8888);
         System.out.println("서버에 연결 완료!");
         
-        DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-        Scanner in = new Scanner(socket.getInputStream());
+        DataOutputStream out = new DataOutputStream(
+                new BufferedOutputStream(socket.getOutputStream()));
+        Scanner in = new Scanner(
+                new BufferedInputStream(socket.getInputStream()));
         
         System.out.println("서버에 데이터 송신 중...");
         
@@ -36,6 +41,7 @@ public class Sender4 {
         while ((b = fileIn.read()) != -1) {
             out.write(b);
         } 
+        out.flush(); // 버퍼에 남아있는 데이터를 방출하기
         
         long endTime = System.currentTimeMillis();
         
