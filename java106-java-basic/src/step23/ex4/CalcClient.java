@@ -1,11 +1,11 @@
-// connectionless(stateless) 방식 - 계산기 클라이언트 만들기
+// stateless 방식 - 계산기 클라이언트 만들기
 package step23.ex4;
 
 import java.io.DataOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
-// connectionless
+// stateless
 // => 서버에 작업을 요청할 때 연결하고, 서버로부터 응답을 받으면 연결을 끊는다.
 // => 단점: 
 //    매번 요청할 때마다 서버에 연결해야 하기 때문에 실행 시간이 많이 걸린다. 
