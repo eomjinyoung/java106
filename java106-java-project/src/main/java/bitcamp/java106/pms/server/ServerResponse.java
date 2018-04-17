@@ -1,16 +1,16 @@
 // 역할: 응답에 관련된 도구를 다룬다.
 package bitcamp.java106.pms.server;
 
-import java.io.PrintStream;
+import java.io.PrintWriter;
 
 public class ServerResponse {
-    protected PrintStream out;
+    protected PrintWriter out;
     
-    public ServerResponse(PrintStream out) {
+    public ServerResponse(PrintWriter out) {
         this.out = out;
     }
     
-    public PrintStream getWriter() {
+    public PrintWriter getWriter() {
         return this.out;
     }
 }

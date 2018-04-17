@@ -2,6 +2,7 @@
 package bitcamp.java106.pms;
 
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
@@ -89,11 +90,11 @@ public class AppServer {
     
     void processRequest(Socket socket) {
         
-        PrintStream out = null;
+        PrintWriter out = null;
         Scanner in = null;
         
         try {
-            out = new PrintStream(socket.getOutputStream());
+            out = new PrintWriter(socket.getOutputStream());
             in = new Scanner(socket.getInputStream());
             
             // 클라이언트가 보낸 데이터에서 명령어와 데이터를 분리하여 객체를 준비한다.
@@ -111,7 +112,7 @@ public class AppServer {
             } else {
                 out.println("해당 명령을 처리할 수 없습니다.");
             }
-            out.println();
+            out.println(); // 응답의 끝을 표시하기 위해 빈줄을 클라이언트로 보낸다.
             
         } catch (Exception e) {
             out.println("서버 오류!");

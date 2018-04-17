@@ -1,6 +1,6 @@
 package bitcamp.java106.pms.controller.board;
 
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.sql.Date;
 
 import bitcamp.java106.pms.annotation.Component;
@@ -25,7 +25,7 @@ public class BoardAddController implements Controller {
         board.setCreatedDate(new Date(System.currentTimeMillis()));
         boardDao.insert(board);
         
-        PrintStream out = response.getWriter();
+        PrintWriter out = response.getWriter();
         out.println("등록 성공!");
     }
 
