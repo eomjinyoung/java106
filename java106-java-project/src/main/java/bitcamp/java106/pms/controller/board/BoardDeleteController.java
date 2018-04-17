@@ -8,7 +8,7 @@ import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.util.Console;
 
-@Component("board/delete")
+//@Component("board/delete")
 public class BoardDeleteController implements Controller {
     Scanner keyScan;
     BoardDao boardDao;

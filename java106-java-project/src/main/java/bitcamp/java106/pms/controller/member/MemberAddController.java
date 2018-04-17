@@ -8,7 +8,7 @@ import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.domain.Member;
 
-@Component("member/add")
+//@Component("member/add")
 public class MemberAddController implements Controller {
     Scanner keyScan;
 

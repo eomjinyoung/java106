@@ -9,7 +9,7 @@ import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
 import bitcamp.java106.pms.util.Console;
 
-@Component("classroom/delete")
+//@Component("classroom/delete")
 public class ClassroomDeleteController implements Controller {
     Scanner keyScan;
     ClassroomDao classroomDao;

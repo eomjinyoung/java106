@@ -7,7 +7,7 @@ import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.domain.Board;
 
-@Component("board/update")
+//@Component("board/update")
 public class BoardUpdateController implements Controller {
     Scanner keyScan;
     BoardDao boardDao;

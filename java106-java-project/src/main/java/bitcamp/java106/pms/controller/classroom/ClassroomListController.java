@@ -9,7 +9,7 @@ import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
 
-@Component("classroom/list")
+//@Component("classroom/list")
 public class ClassroomListController implements Controller {
     Scanner keyScan;
     ClassroomDao classroomDao;

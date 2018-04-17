@@ -10,7 +10,7 @@ import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
 import bitcamp.java106.pms.util.Console;
 
-@Component("classroom/update")
+//@Component("classroom/update")
 public class ClassroomUpdateController implements Controller {
     Scanner keyScan;
     ClassroomDao classroomDao;

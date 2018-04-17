@@ -76,6 +76,7 @@ public class AppServer {
     void service() throws Exception {
         // 서버 소켓 준비
         ServerSocket serverSocket = new ServerSocket(8888);
+        System.out.println("서버 실행 했음!");
         
         while (true) {
             // 대기열에서 기다리고 있는 클라이언트 중에서 먼저 연결된 클라이언트를 꺼낸다. 
@@ -109,8 +110,8 @@ public class AppServer {
                 controller.service(request, response);
             } else {
                 out.println("해당 명령을 처리할 수 없습니다.");
-                out.println();
             }
+            out.println();
             
         } catch (Exception e) {
             out.println("서버 오류!");

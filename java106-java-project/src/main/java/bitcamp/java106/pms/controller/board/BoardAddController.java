@@ -1,40 +1,35 @@
 package bitcamp.java106.pms.controller.board;
 
+import java.io.PrintStream;
 import java.sql.Date;
-import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.domain.Board;
+import bitcamp.java106.pms.server.ServerRequest;
+import bitcamp.java106.pms.server.ServerResponse;
 
-@Component("board/add")
+@Component("/board/add")
 public class BoardAddController implements Controller {
-    Scanner keyScan;
     BoardDao boardDao;
     
-    public BoardAddController(Scanner scanner, BoardDao boardDao) {
-        this.keyScan = scanner;
+    public BoardAddController(BoardDao boardDao) {
         this.boardDao = boardDao;
     }
-    
-    public void service(String menu, String option) {
-        // 이 컨트롤러는 오직 게시물 입력에 대해서만 작업을 수행한다.
-        System.out.println("[게시물 입력]");
+     
+    public void service(ServerRequest request, ServerResponse response) {
         Board board = new Board();
-
-        System.out.print("제목? ");
-        board.setTitle(this.keyScan.nextLine());
-
-        System.out.print("내용? ");
-        board.setContent(this.keyScan.nextLine());
-
-        System.out.print("등록일? ");
-        board.setCreatedDate(Date.valueOf(this.keyScan.nextLine()));
-
+        board.setTitle(request.getParameter("title"));
+        board.setContent(request.getParameter("content"));
+        board.setCreatedDate(new Date(System.currentTimeMillis()));
         boardDao.insert(board);
+        
+        PrintStream out = response.getWriter();
+        out.println("등록 성공!");
     }
 
 }
 
+//ver 28 - 네트워크 버전으로 변경
 //ver 26 - BoardController에서 add() 메서드를 추출하여 클래스로 정의. 
