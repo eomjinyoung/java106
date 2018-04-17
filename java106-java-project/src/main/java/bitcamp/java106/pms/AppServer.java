@@ -4,17 +4,18 @@ package bitcamp.java106.pms;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.context.ApplicationContext;
+import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
+import bitcamp.java106.pms.server.ServerRequest;
+import bitcamp.java106.pms.server.ServerResponse;
 
 public class AppServer {
     
@@ -86,94 +87,45 @@ public class AppServer {
     }
     
     void processRequest(Socket socket) {
-        try (
-            Socket socket2 = socket;
-            PrintStream out = new PrintStream(socket.getOutputStream());
-            Scanner in = new Scanner(socket.getInputStream())) {
+        
+        PrintStream out = null;
+        Scanner in = null;
+        
+        try {
+            out = new PrintStream(socket.getOutputStream());
+            in = new Scanner(socket.getInputStream());
             
-            // 클라이언트가 보낸 데이터에서 명령어와 데이터를 분리한다.
-            // 수신 데이터 예) /board/add?title=aaa&content=bbb
-            String[] arr = in.nextLine().split("\\?");
+            // 클라이언트가 보낸 데이터에서 명령어와 데이터를 분리하여 객체를 준비한다.
+            ServerRequest request = new ServerRequest(in.nextLine());
             
-            String path = arr[0]; // 예) /board/add
+            // 클라이언트 응답과 관련된 객체를 준비한다.
+            ServerResponse response = new ServerResponse(out);
             
+            // 클라이언트가 보낸 명령어를 처리할 컨트롤러를 찾는다.
+            String path = request.getServerPath();
+            Controller controller = (Controller) iocContainer.getBean(path);
             
-            
-            if (arr.length > 1) {
-                
+            if (controller != null) {
+                controller.service(request, response);
+            } else {
+                out.println("해당 명령을 처리할 수 없습니다.");
+                out.println();
             }
             
-            
         } catch (Exception e) {
-            
+            out.println("서버 오류!");
+            out.println();
+        } finally {
+            out.close();
+            in.close();
+            try {socket.close();} catch (Exception e) {}
         }
-    }
-    
-    private Map<String,String> toParamMap(String queryString) {
-        // 데이터는 key와 value로 분리하여 맵에 저장한다.
-        
-        // queryString 예) title=aaa&content=bbb
-        HashMap<String,String> paramMap = new HashMap<>();
-        String[] entryArr = queryString.split("&");
-        
-        for (String entry : entryArr) {
-            String[] keyValue = entry.split("=");
-            paramMap.put(keyValue[0], keyValue[1]);
-        }
-        return paramMap;
     }
 
     public static void main(String[] args) throws Exception {
         AppServer appServer = new AppServer();
         appServer.service();
-        
-        
-        
-        /*
-        
-        
-        Console.keyScan = keyScan;
-
-        while (true) {
-            String[] arr = Console.prompt();
-
-            String menu = arr[0];
-            if (arr.length == 2) {
-                option = arr[1];
-            } else {
-                option = null;
-            }
-            
-            if (menu.equals("quit")) {
-                onQuit();
-                break;
-            } else if (menu.equals("help")) {
-                onHelp();
-            } else {
-                try {
-                    Controller controller = (Controller) iocContainer.getBean(menu);
-                    
-                    if (controller != null) {
-                        controller.service(menu, option);
-                    } else {
-                        System.out.println("명령어가 올바르지 않습니다.");
-                    }
-                } catch (Exception e) {
-                    if (keyScan.hasNextLine()) { 
-                        // 키보드 입력으로 남은 잔여 데이터가 있다면 읽어서 버린다.
-                        keyScan.nextLine(); 
-                    }
-                    System.out.println("작업 실행 중에 오류가 발생하였습니다.");
-                    System.out.println("명령을 다시 실행해주세요!");
-                }
-            }
-
-            System.out.println(); 
-        }
-        */
     }
-    
-    
 }
 
 //ver 28 - 서버 만들기
