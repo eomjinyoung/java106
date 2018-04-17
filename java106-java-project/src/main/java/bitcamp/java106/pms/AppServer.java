@@ -116,6 +116,7 @@ public class AppServer {
             
         } catch (Exception e) {
             out.println("서버 오류!");
+            e.printStackTrace(out);
             out.println();
         } finally {
             out.close();
