@@ -15,6 +15,10 @@ public class ApplicationContext {
 
     private HashMap<String,Object> objPool = new HashMap<>();
     
+    public ApplicationContext(String packageName) throws Exception {
+        this(packageName, null);
+    }
+    
     public ApplicationContext(String packageName, Map<String,Object> beans) throws Exception {
         // 다른 맵에서 들어있는 객체를 이 컨테이너에 복사한다.
         if (beans != null) {
@@ -170,6 +174,7 @@ public class ApplicationContext {
     }
 }
 
+//ver 28 - default 생성자 추가
 //ver 24 - 타입으로 객체를 찾는 getBean() 메서드 추가
 //ver 23 - 클래스 정의
 
