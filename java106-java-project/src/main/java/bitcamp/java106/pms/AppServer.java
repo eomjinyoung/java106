@@ -4,17 +4,17 @@ package bitcamp.java106.pms;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.context.ApplicationContext;
-import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
-import bitcamp.java106.pms.util.Console;
 
 public class AppServer {
     
@@ -93,12 +93,34 @@ public class AppServer {
             
             // 클라이언트가 보낸 데이터에서 명령어와 데이터를 분리한다.
             // 수신 데이터 예) /board/add?title=aaa&content=bbb
-            String[] str = in.nextLine().split("\\?");
+            String[] arr = in.nextLine().split("\\?");
+            
+            String path = arr[0]; // 예) /board/add
+            
+            
+            
+            if (arr.length > 1) {
+                
+            }
             
             
         } catch (Exception e) {
             
         }
+    }
+    
+    private Map<String,String> toParamMap(String queryString) {
+        // 데이터는 key와 value로 분리하여 맵에 저장한다.
+        
+        // queryString 예) title=aaa&content=bbb
+        HashMap<String,String> paramMap = new HashMap<>();
+        String[] entryArr = queryString.split("&");
+        
+        for (String entry : entryArr) {
+            String[] keyValue = entry.split("=");
+            paramMap.put(keyValue[0], keyValue[1]);
+        }
+        return paramMap;
     }
 
     public static void main(String[] args) throws Exception {

@@ -7,9 +7,11 @@ public class Test {
         // 그 API를 적용하기 전에 간단한 예제를 만들어 동작을 확인하라!
         String str = "/board/add?title=aaaa&content=bbb";
         String[] arr = str.split("\\?");
-        for (String item : arr) {
-            System.out.println(item);
+        String[] entrySet = arr[1].split("&");
+        for (String entry : entrySet) {
+            System.out.println(entry);
         }
+        
 
     }
 
