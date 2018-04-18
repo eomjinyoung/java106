@@ -16,9 +16,8 @@ public class HTTPServer {
     }
     
     public void execute() throws Exception {
-        // 서버 소켓 준비
         ServerSocket serverSocket = new ServerSocket(this.port);
-        System.out.println("서버 실행 했음!");
+        System.out.println("서버가 시작됨!");
         
         while (true) {
             Socket socket = serverSocket.accept();
