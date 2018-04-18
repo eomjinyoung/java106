@@ -10,7 +10,7 @@ public class Task implements Serializable {
     public static final int WORKING = 1;
     public static final int COMPLETE = 9;
     
-    private static int count = 1;
+    public static int count = 1;
 
     private int no;
     private String title;

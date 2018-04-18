@@ -1,7 +1,7 @@
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller.task;
 
-import java.util.Scanner;
+import java.io.PrintWriter;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
@@ -26,41 +26,27 @@ public class TaskStateController implements Controller {
     @Override
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
-        if (option == null) {
-            System.out.println("팀명을 입력하시기 바랍니다.");
-            return; 
-        }
-        
-        Team team = teamDao.get(option);
+        String teamName = request.getParameter("teamName");
+        Team team = teamDao.get(teamName);
         if (team == null) {
-            System.out.printf("'%s' 팀은 존재하지 않습니다.", option);
+            out.printf("'%s' 팀은 존재하지 않습니다.\n", teamName);
             return;
         }
-        
-        System.out.println("[작업 진행 상태]");
-        System.out.print("상태를 변경할 작업의 번호? ");
-        int taskNo = Integer.parseInt(keyScan.nextLine());
-        
+        int taskNo = Integer.parseInt(request.getParameter("no"));
         Task task = taskDao.get(taskNo);
         if (task == null) {
-            System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
-                    team.getName(), taskNo);
+            out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
+                    teamName, taskNo);
             return;
         }
-        
-        System.out.printf("'%s' 작업의 상태: %s\n", 
-                task.getTitle(), getStateLabel(task.getState()));
-        
-        System.out.print("변경할 상태?(0:작업대기, 1:작업중, 9:작업완료) ");
-        int state = Integer.parseInt(keyScan.nextLine());
-        
+        int state = Integer.parseInt(request.getParameter("state"));
         if (state == Task.READY || state == Task.WORKING || 
                 state == Task.COMPLETE) {
             task.setState(state);
-            System.out.printf("작업 상태를 '%s'로 변경하였습니다.\n", 
+            out.printf("작업 상태를 '%s'로 변경하였습니다.\n", 
                     getStateLabel(state));
         } else {
-            System.out.println("올바르지 않은 값입니다. 이전 상태를 유지합니다!");
+            out.println("올바르지 않은 값입니다. 이전 상태를 유지합니다!");
         }
     }
     

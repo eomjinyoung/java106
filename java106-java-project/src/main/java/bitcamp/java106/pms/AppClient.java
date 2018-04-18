@@ -60,6 +60,7 @@ public class AppClient {
             }
         } catch (Exception e) {
             System.out.println("서버 요청 중 오류 발생!");
+            e.printStackTrace();
         }
     }
 }

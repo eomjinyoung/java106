@@ -6,7 +6,7 @@ import java.sql.Date;
 public class Classroom implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private static int count;
+    public static int count;
     
     private int no;
     private String title;

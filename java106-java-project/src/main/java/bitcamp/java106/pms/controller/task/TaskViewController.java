@@ -1,7 +1,7 @@
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller.task;
 
-import java.util.Scanner;
+import java.io.PrintWriter;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
@@ -26,33 +26,26 @@ public class TaskViewController implements Controller {
     @Override
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
-        if (option == null) {
-            System.out.println("팀명을 입력하시기 바랍니다.");
-            return; 
-        }
-        
-        Team team = teamDao.get(option);
+        String teamName = request.getParameter("teamName");
+        Team team = teamDao.get(teamName);
         if (team == null) {
-            System.out.printf("'%s' 팀은 존재하지 않습니다.", option);
+            out.printf("'%s' 팀은 존재하지 않습니다.\n", teamName);
             return;
         }
-        System.out.println("[작업 정보]");
-        System.out.print("작업 번호? ");
-        int taskNo = Integer.parseInt(keyScan.nextLine());
-        
+        int taskNo = Integer.parseInt(request.getParameter("no"));
         Task task = taskDao.get(taskNo);
         if (task == null) {
-            System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
-                    team.getName(), taskNo);
+            out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
+                    teamName, taskNo);
             return;
         }
         
-        System.out.printf("작업명: %s\n", task.getTitle());
-        System.out.printf("시작일: %s\n", task.getStartDate());
-        System.out.printf("종료일: %s\n", task.getEndDate());
-        System.out.printf("작업자: %s\n", 
+        out.printf("작업명: %s\n", task.getTitle());
+        out.printf("시작일: %s\n", task.getStartDate());
+        out.printf("종료일: %s\n", task.getEndDate());
+        out.printf("작업자: %s\n", 
                 (task.getWorker() == null) ? "-" : task.getWorker().getId());
-        System.out.printf("작업상태: %s\n", getStateLabel(task.getState()));
+        out.printf("작업상태: %s\n", getStateLabel(task.getState()));
     }
 
     public static String getStateLabel(int state) {

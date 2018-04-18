@@ -1,8 +1,8 @@
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller.task;
 
+import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
@@ -14,7 +14,6 @@ import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.server.ServerRequest;
 import bitcamp.java106.pms.server.ServerResponse;
-import bitcamp.java106.pms.util.Console;
 
 @Component("/task/update")
 public class TaskUpdateController implements Controller {
@@ -36,85 +35,29 @@ public class TaskUpdateController implements Controller {
     @Override
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
-        if (option == null) {
-            System.out.println("팀명을 입력하시기 바랍니다.");
-            return; 
-        }
-        
-        Team team = teamDao.get(option);
+        String teamName = request.getParameter("teamName");
+        Team team = teamDao.get(teamName);
         if (team == null) {
-            System.out.printf("'%s' 팀은 존재하지 않습니다.", option);
+            out.printf("'%s' 팀은 존재하지 않습니다.\n", teamName);
             return;
         }
-        
-        System.out.println("[팀 작업 변경]");
-        System.out.print("변경할 작업의 번호? ");
-        int taskNo = Integer.parseInt(keyScan.nextLine());
-        
+        int taskNo = Integer.parseInt(request.getParameter("no"));
         Task originTask = taskDao.get(taskNo);
         if (originTask == null) {
-            System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
-                    team.getName(), taskNo);
+            out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
+                    teamName, taskNo);
             return;
         }
-        
         Task task = new Task(team);
-        task.setNo(originTask.getNo());
+        task.setNo(taskNo);
+        task.setTitle(request.getParameter("title"));
+        task.setStartDate(Date.valueOf(request.getParameter("startDate")));
+        task.setEndDate(Date.valueOf(request.getParameter("endDate")));
+        task.setWorker(this.memberDao.get(request.getParameter("memberId")));
         
-        System.out.printf("작업명(%s)? ", originTask.getTitle());
-        String str = keyScan.nextLine();
-        if (str.length() == 0) {
-            task.setTitle(originTask.getTitle());
-        } else {
-            task.setTitle(str);
-        }
-        
-        System.out.printf("시작일(%s)? ", originTask.getStartDate());
-        str = keyScan.nextLine();
-        if (str.length() == 0) {
-            task.setStartDate(originTask.getStartDate());
-        } else {
-            Date date = Date.valueOf(str);
-            if (date.getTime() < team.getStartDate().getTime()) {
-                task.setStartDate(team.getStartDate());
-            } else {
-                task.setStartDate(date);
-            }
-        }
-        System.out.printf("종료일(%s)? ", originTask.getEndDate());
-        str = keyScan.nextLine();
-        if (str.length() == 0) {
-            task.setEndDate(originTask.getEndDate());
-        } else {
-            Date date = Date.valueOf(str);
-            if (date.getTime() > team.getEndDate().getTime()) {
-                task.setEndDate(team.getEndDate());
-            } else {
-                task.setEndDate(date);
-            }
-        }
-        
-        System.out.printf("작업자 아이디(%s)? ", 
-                (originTask.getWorker() == null) ? 
-                        "-" : originTask.getWorker().getId());
-        String memberId = keyScan.nextLine();
-        if (memberId.length() == 0) {
-            task.setWorker(originTask.getWorker());
-        } else {
-            if (!teamMemberDao.isExist(team.getName(), memberId)) {
-                System.out.printf("'%s'는 이 팀의 회원이 아닙니다. 작업자는 비워두겠습니다.", memberId);
-            } else {
-                task.setWorker(this.memberDao.get(memberId));
-            }
-        }
-        
-        if (Console.confirm("변경하시겠습니까?")) {
-            int index = taskDao.indexOf(task.getNo());
-            taskDao.update(index, task);
-            System.out.println("변경하였습니다.");
-        } else {
-            System.out.println("취소하였습니다.");
-        }
+        int index = taskDao.indexOf(task.getNo());
+        taskDao.update(index, task);
+        out.println("변경하였습니다.");
     }
 
 }

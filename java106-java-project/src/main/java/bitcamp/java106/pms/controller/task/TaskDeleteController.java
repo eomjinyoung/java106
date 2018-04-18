@@ -1,7 +1,7 @@
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller.task;
 
-import java.util.Scanner;
+import java.io.PrintWriter;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
@@ -11,7 +11,6 @@ import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.server.ServerRequest;
 import bitcamp.java106.pms.server.ServerResponse;
-import bitcamp.java106.pms.util.Console;
 
 @Component("/task/delete")
 public class TaskDeleteController implements Controller {
@@ -27,34 +26,21 @@ public class TaskDeleteController implements Controller {
     @Override
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
-        if (option == null) {
-            System.out.println("팀명을 입력하시기 바랍니다.");
-            return; 
-        }
-        
-        Team team = teamDao.get(option);
+        String teamName = request.getParameter("teamName");
+        Team team = teamDao.get(teamName);
         if (team == null) {
-            System.out.printf("'%s' 팀은 존재하지 않습니다.", option);
+            out.printf("'%s' 팀은 존재하지 않습니다.\n", teamName);
             return;
         }
-        
-        System.out.println("[팀 작업 삭제]");
-        System.out.print("삭제할 작업의 번호? ");
-        int taskNo = Integer.parseInt(keyScan.nextLine());
-        
+        int taskNo = Integer.parseInt(request.getParameter("no"));
         Task task = taskDao.get(taskNo);
         if (task == null) {
-            System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
-                    team.getName(), taskNo);
+            out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
+                    teamName, taskNo);
             return;
         }
-        
-        if (Console.confirm("삭제하시겠습니까?")) {
-            taskDao.delete(task.getNo());
-            System.out.println("삭제하였습니다.");
-        } else {
-            System.out.println("취소하였습니다.");
-        }
+        taskDao.delete(taskNo);
+        out.println("삭제하였습니다.");
     }
 }
 

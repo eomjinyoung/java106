@@ -38,7 +38,7 @@ public class TaskAddController implements Controller {
         
         Team team = teamDao.get(teamName);
         if (team == null) {
-            out.printf("'%s' 팀은 존재하지 않습니다.", teamName);
+            out.printf("'%s' 팀은 존재하지 않습니다.\n", teamName);
             return;
         }
         
