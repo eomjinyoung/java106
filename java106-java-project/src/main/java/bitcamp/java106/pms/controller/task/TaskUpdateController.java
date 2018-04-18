@@ -12,27 +12,30 @@ import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.server.ServerRequest;
+import bitcamp.java106.pms.server.ServerResponse;
 import bitcamp.java106.pms.util.Console;
 
-@Component("task/update")
+@Component("/task/update")
 public class TaskUpdateController implements Controller {
     
-    Scanner keyScan;
     TeamDao teamDao;
     TaskDao taskDao;
     MemberDao memberDao;
     TeamMemberDao teamMemberDao;
     
-    public TaskUpdateController(Scanner scanner, TeamDao teamDao, 
-            TaskDao taskDao, TeamMemberDao teamMemberDao, MemberDao memberDao) {
-        this.keyScan = scanner;
+    public TaskUpdateController(
+            TeamDao teamDao, TaskDao taskDao, 
+            TeamMemberDao teamMemberDao, MemberDao memberDao) {
         this.teamDao = teamDao;
         this.taskDao = taskDao;
         this.teamMemberDao = teamMemberDao;
         this.memberDao = memberDao;
     }
     
-    public void service(String menu, String option) {
+    @Override
+    public void service(ServerRequest request, ServerResponse response) {
+        PrintWriter out = response.getWriter();
         if (option == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 
@@ -116,6 +119,7 @@ public class TaskUpdateController implements Controller {
 
 }
 
+//ver 28 - 네트워크 버전으로 변경
 //ver 26 - TaskController에서 update() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 22 - TaskDao 변경 사항에 맞춰 이 클래스를 변경한다.

@@ -9,23 +9,23 @@ import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.server.ServerRequest;
+import bitcamp.java106.pms.server.ServerResponse;
 
-@Component("task/view")
+@Component("/task/view")
 public class TaskViewController implements Controller {
     
-    Scanner keyScan;
     TeamDao teamDao;
     TaskDao taskDao;
     
-    public TaskViewController(Scanner scanner, 
-            TeamDao teamDao, 
-            TaskDao taskDao) {
-        this.keyScan = scanner;
+    public TaskViewController(TeamDao teamDao, TaskDao taskDao) {
         this.teamDao = teamDao;
         this.taskDao = taskDao;
     }
     
-    public void service(String menu, String option) {
+    @Override
+    public void service(ServerRequest request, ServerResponse response) {
+        PrintWriter out = response.getWriter();
         if (option == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 

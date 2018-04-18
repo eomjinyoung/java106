@@ -9,23 +9,23 @@ import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.server.ServerRequest;
+import bitcamp.java106.pms.server.ServerResponse;
 
-@Component("task/state")
+@Component("/task/state")
 public class TaskStateController implements Controller {
     
-    Scanner keyScan;
     TeamDao teamDao;
     TaskDao taskDao;
     
-    public TaskStateController(Scanner scanner, 
-            TeamDao teamDao, 
-            TaskDao taskDao) {
-        this.keyScan = scanner;
+    public TaskStateController(TeamDao teamDao, TaskDao taskDao) {
         this.teamDao = teamDao;
         this.taskDao = taskDao;
     }
     
-    public void service(String menu, String option) {
+    @Override
+    public void service(ServerRequest request, ServerResponse response) {
+        PrintWriter out = response.getWriter();
         if (option == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 
@@ -77,6 +77,7 @@ public class TaskStateController implements Controller {
     }
 }
 
+//ver 28 - 네트워크 버전으로 변경
 //ver 26 - TaskController에서 state() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 22 - TaskDao 변경 사항에 맞춰 이 클래스를 변경한다.
