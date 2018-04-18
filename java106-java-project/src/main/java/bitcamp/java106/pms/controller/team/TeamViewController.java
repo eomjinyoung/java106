@@ -1,46 +1,45 @@
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller.team;
 
-import java.util.Scanner;
+import java.io.PrintWriter;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.server.ServerRequest;
+import bitcamp.java106.pms.server.ServerResponse;
 
-@Component("team/view")
+@Component("/team/view")
 public class TeamViewController implements Controller {
 
-    Scanner keyScan;
     TeamDao teamDao;
     
-    public TeamViewController(Scanner scanner, TeamDao teamDao) {
-        this.keyScan = scanner;
+    public TeamViewController(TeamDao teamDao) {
         this.teamDao = teamDao;
     }
 
-    public void service(String menu, String option) {
-        System.out.println("[팀 정보 조회]");
-        if (option == null) {
-            System.out.println("팀명을 입력하시기 바랍니다.");
-            return; // 값을 리턴하면 안되기 때문에 return 명령만 작성한다.
-                    // 의미? 즉시 메서드 실행을 멈추고 이전 위치로 돌아간다.
-        }
+    @Override
+    public void service(ServerRequest request, ServerResponse response) {
+        PrintWriter out = response.getWriter();
         
-        Team team = teamDao.get(option);
+        String name = request.getParameter("name");
+        
+        Team team = teamDao.get(name);
 
         if (team == null) {
-            System.out.println("해당 이름의 팀이 없습니다.");
+            out.println("해당 이름의 팀이 없습니다.");
         } else {
-            System.out.printf("팀명: %s\n", team.getName());
-            System.out.printf("설명: %s\n", team.getDescription());
-            System.out.printf("최대인원: %d\n", team.getMaxQty());
-            System.out.printf("기간: %s ~ %s\n", 
+            out.printf("팀명: %s\n", team.getName());
+            out.printf("설명: %s\n", team.getDescription());
+            out.printf("최대인원: %d\n", team.getMaxQty());
+            out.printf("기간: %s ~ %s\n", 
                 team.getStartDate(), team.getEndDate());
         }
     }
 }
 
+//ver 28 - 네트워크 버전으로 변경
 //ver 26 - TeamController에서 view() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 22 - TaskDao 변경 사항에 맞춰 이 클래스를 변경한다.

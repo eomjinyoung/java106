@@ -1,49 +1,43 @@
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller.team;
 
+import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.server.ServerRequest;
+import bitcamp.java106.pms.server.ServerResponse;
 
-@Component("team/add")
+@Component("/team/add")
 public class TeamAddController implements Controller {
 
-    Scanner keyScan;
     TeamDao teamDao;
     
-    public TeamAddController(Scanner scanner, TeamDao teamDao) {
-        this.keyScan = scanner;
+    public TeamAddController(TeamDao teamDao) {
         this.teamDao = teamDao;
     }
 
-    public void service(String menu, String option) {
-        System.out.println("[팀 정보 입력]");
+    @Override
+    public void service(ServerRequest request, ServerResponse response) {
+        PrintWriter out = response.getWriter();
+
         Team team = new Team();
-
-        System.out.print("팀명? ");
-        team.setName(this.keyScan.nextLine());
-
-        System.out.print("설명? ");
-        team.setDescription(this.keyScan.nextLine());
-
-        System.out.print("최대인원? ");
-        team.setMaxQty(this.keyScan.nextInt());
-        this.keyScan.nextLine(); 
-
-        System.out.print("시작일? ");
-        team.setStartDate(Date.valueOf(this.keyScan.nextLine()));
-
-        System.out.print("종료일? ");
-        team.setEndDate(Date.valueOf(this.keyScan.nextLine()));
+        team.setName(request.getParameter("name"));
+        team.setDescription(request.getParameter("description"));
+        team.setMaxQty(Integer.parseInt(request.getParameter("maxQty")));
+        team.setStartDate(Date.valueOf(request.getParameter("startDate")));
+        team.setEndDate(Date.valueOf(request.getParameter("endDate")));
 
         teamDao.insert(team);
+        
+        out.println("등록 성공!");
     }
 }
 
+//ver 28 - 네트워크 버전으로 변경
 //ver 26 - TeamController에서 add() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 22 - TaskDao 변경 사항에 맞춰 이 클래스를 변경한다.

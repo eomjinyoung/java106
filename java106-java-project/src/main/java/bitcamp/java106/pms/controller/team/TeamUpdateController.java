@@ -1,57 +1,52 @@
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller.team;
 
+import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.server.ServerRequest;
+import bitcamp.java106.pms.server.ServerResponse;
 
-@Component("team/update")
+@Component("/team/update")
 public class TeamUpdateController implements Controller {
 
-    Scanner keyScan;
     TeamDao teamDao;
     
-    public TeamUpdateController(Scanner scanner, TeamDao teamDao) {
-        this.keyScan = scanner;
+    public TeamUpdateController(TeamDao teamDao) {
         this.teamDao = teamDao;
     }
 
-    public void service(String menu, String option) {
-        System.out.println("[팀 정보 변경]");
-        if (option == null) {
-            System.out.println("팀명을 입력하시기 바랍니다.");
-            return;
-        }
+    @Override
+    public void service(ServerRequest request, ServerResponse response) {
+        PrintWriter out = response.getWriter();
         
-        Team team = teamDao.get(option);
+        String name = request.getParameter("name");
+        
+        Team team = teamDao.get(name);
 
         if (team == null) {
-            System.out.println("해당 이름의 팀이 없습니다.");
+            out.println("해당 이름의 팀이 없습니다.");
         } else {
             Team updateTeam = new Team();
-            System.out.printf("팀명 : %s\n", team.getName());
-            updateTeam.setName(team.getName());
-            System.out.printf("설명(%s)? ", team.getDescription());
-            updateTeam.setDescription(this.keyScan.nextLine());
-            System.out.printf("최대인원(%d)? ", team.getMaxQty());
-            updateTeam.setMaxQty(this.keyScan.nextInt());
-            this.keyScan.nextLine();
-            System.out.printf("시작일(%s)? ", team.getStartDate());
-            updateTeam.setStartDate(Date.valueOf(this.keyScan.nextLine()));
-            System.out.printf("종료일(%s)? ", team.getEndDate());
-            updateTeam.setEndDate(Date.valueOf(this.keyScan.nextLine()));
+            updateTeam.setName(name);
+            updateTeam.setDescription(request.getParameter("description"));
+            updateTeam.setMaxQty(Integer.parseInt(request.getParameter("maxQty")));
+            updateTeam.setStartDate(Date.valueOf(request.getParameter("startDate")));
+            updateTeam.setEndDate(Date.valueOf(request.getParameter("endDate")));
             
-            int index = teamDao.indexOf(updateTeam.getName());
+            int index = teamDao.indexOf(name);
             teamDao.update(index, updateTeam);
-            System.out.println("변경하였습니다.");
+            
+            out.println("변경하였습니다.");
         }
     }
 }
 
+//ver 28 - 네트워크 버전으로 변경
 //ver 26 - TeamController에서 update() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 22 - TaskDao 변경 사항에 맞춰 이 클래스를 변경한다.

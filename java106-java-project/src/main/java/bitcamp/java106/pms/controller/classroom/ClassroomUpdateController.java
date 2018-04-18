@@ -1,82 +1,50 @@
 // Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller.classroom;
 
+import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
-import bitcamp.java106.pms.util.Console;
+import bitcamp.java106.pms.server.ServerRequest;
+import bitcamp.java106.pms.server.ServerResponse;
 
-//@Component("classroom/update")
+@Component("/classroom/update")
 public class ClassroomUpdateController implements Controller {
-    Scanner keyScan;
     ClassroomDao classroomDao;
     
-    public ClassroomUpdateController(Scanner scanner, ClassroomDao classroomDao) {
-        this.keyScan = scanner;
+    public ClassroomUpdateController(ClassroomDao classroomDao) {
         this.classroomDao = classroomDao;
     }
     
-    public void service(String menu, String option) {
-        System.out.println("[수업 정보 변경]");
+    @Override
+    public void service(ServerRequest request, ServerResponse response) {
+        PrintWriter out = response.getWriter();
+        int no = Integer.parseInt(request.getParameter("no"));
         
-        System.out.print("변경할 수업 번호? ");
-        String str = keyScan.nextLine();
-        if (str.length() == 0) {
-            System.out.println("번호를 입력하시기 바랍니다.");
-            return;
-        }
-        
-        Classroom classroom = classroomDao.get(Integer.parseInt(str));
+        Classroom classroom = classroomDao.get(no);
         
         if (classroom == null) {
-            System.out.println("유효하지 않은 수업 번호입니다.");
+            out.println("유효하지 않은 수업 번호입니다.");
             return;
         } 
         
         Classroom updateClassroom = new Classroom();
-        updateClassroom.setNo(classroom.getNo());
+        updateClassroom.setNo(no);
+        updateClassroom.setTitle(request.getParameter("title"));
+        updateClassroom.setStartDate(Date.valueOf(request.getParameter("startDate")));
+        updateClassroom.setEndDate(Date.valueOf(request.getParameter("endDate")));
+        updateClassroom.setRoom(request.getParameter("room"));
         
-        System.out.printf("수업명(%s)? ", classroom.getTitle());
-        str = this.keyScan.nextLine();
-        if (str.length() == 0)
-            updateClassroom.setTitle(classroom.getTitle());
-        else 
-            updateClassroom.setTitle(str);
+        int index = classroomDao.indexOf(no);
+        classroomDao.update(index, updateClassroom);
         
-        System.out.printf("시작일(%s)? ", classroom.getStartDate());
-        str = this.keyScan.nextLine();
-        if (str.length() == 0)
-            updateClassroom.setStartDate(classroom.getStartDate());
-        else 
-            updateClassroom.setStartDate(Date.valueOf(str));
-        
-        System.out.printf("종료일(%s)? ", classroom.getEndDate());
-        str = this.keyScan.nextLine();
-        if (str.length() == 0)
-            updateClassroom.setEndDate(classroom.getEndDate());
-        else 
-            updateClassroom.setEndDate(Date.valueOf(str));
-        
-        System.out.printf("교실명(%s)? ", classroom.getRoom());
-        str = this.keyScan.nextLine();
-        if (str.length() == 0)
-            updateClassroom.setRoom(classroom.getRoom());
-        else 
-            updateClassroom.setRoom(str);
-        
-        if (Console.confirm("변경하시겠습니까?")) {
-            int index = classroomDao.indexOf(classroom.getNo());
-            classroomDao.update(index, updateClassroom);
-            System.out.println("변경하였습니다.");
-        } else {
-            System.out.println("취소하였습니다.");
-        }
+        out.println("변경하였습니다.");
     }
 
 }
 
+//ver 28 - 네트워크 버전으로 변경
 //ver 26 - ClassroomController에서 update() 메서드를 추출하여 클래스로 정의.
