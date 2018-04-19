@@ -25,6 +25,10 @@ public class BoardAddController implements Controller {
         board.setCreatedDate(new Date(System.currentTimeMillis()));
         boardDao.insert(board);
         
+        for (int i = 0; i < 1000000000; i++) {
+            Math.random(); // 0 <= x(double) < 1
+        }
+        
         PrintWriter out = response.getWriter();
         out.println("등록 성공!");
     }
