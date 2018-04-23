@@ -1,4 +1,4 @@
-// JDBC 프로그래밍 개요 - JDBC 드라이버 타입과 준비
+// JDBC 프로그래밍 개요 - JDBC 드라이버 준비
 package step25.ex1;
 
 import java.sql.DriverManager;
