@@ -44,6 +44,7 @@ public class Exam03_2 {
         
         // 자원해제
         // => 파일과 마찬가지로 DBMS에 연결한 후 더이상 사용하지 않으면 연결을 해제해야 한다.
+        rs.close();
         stmt.close();
         con.close();
     }
