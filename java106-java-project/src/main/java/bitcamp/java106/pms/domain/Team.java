@@ -12,12 +12,6 @@ public class Team implements Serializable {
     private Date startDate;
     private Date endDate;
 
-    public Team() {}
-    
-    public Team(String name) {
-        this.name = name;
-    }
-    
     public String getName() {
         return name;
     }
@@ -64,6 +58,7 @@ public class Team implements Serializable {
     }
 }
 
+//ver 31 - 생성자 제거.
 //ver 27 - java.io.Serializable 인터페이스 구현
 //ver 24 - 생성자 추가
 //ver 17 - toString() 오버라이딩.

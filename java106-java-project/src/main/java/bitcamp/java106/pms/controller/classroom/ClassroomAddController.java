@@ -26,12 +26,18 @@ public class ClassroomAddController implements Controller {
         classroom.setStartDate(Date.valueOf(request.getParameter("startDate")));
         classroom.setEndDate(Date.valueOf(request.getParameter("endDate")));
         classroom.setRoom(request.getParameter("room"));
-        classroomDao.insert(classroom);
         
         PrintWriter out = response.getWriter();
-        out.println("등록 성공!");
+        try {
+            classroomDao.insert(classroom);
+            out.println("등록 성공!");
+        } catch (Exception e) {
+            out.println("등록 실패!");
+            e.printStackTrace(out);
+        }
     }
 }
 
+//ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - ClassroomController에서 add() 메서드를 추출하여 클래스로 정의.

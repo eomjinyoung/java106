@@ -73,6 +73,44 @@ create table pms_team (
 alter table pms_team
     add constraint pms_team_pk primary key (name);
 ```
+- Team.java 변경
+- TeamDao.java 변경
+- TeamXxxController.java 변경
+- pms_task 테이블 생성
+```
+drop table pms_task;
+
+create table pms_task (
+    tano int not null,
+    titl varchar(255) not null,
+    sdt datetime not null,
+    edt datetime not null,
+    stat int default 0,
+    mid varchar(20) not null,
+    tnm varchar(100) not null
+);
+
+alter table pms_task
+    add constraint pms_task_pk primary key (tano);
+
+alter table pms_task
+    modify column tano int not null auto_increment;
+```
+- Task.java 변경
+- TaskDao.java 변경
+- TaskXxxController.java 변경
+- pms_team_member 테이블 생성
+```
+drop table pms_team_member;
+
+create table pms_team_member (
+    tnm varchar(100) not null,
+    mid varchar(20) not null
+);
+
+alter table pms_team_member
+    add constraint pms_team_member_pk primary key (tnm, mid);
+```
 
 
 
