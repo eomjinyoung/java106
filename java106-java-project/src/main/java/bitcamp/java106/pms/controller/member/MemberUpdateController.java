@@ -22,26 +22,28 @@ public class MemberUpdateController implements Controller {
     @Override
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
-        String id = request.getParameter("id");
         
-        Member member = memberDao.get(id);
-
-        if (member == null) {
-            out.println("해당 아이디의 회원이 없습니다.");
-        } else {
-            Member updateMember = new Member();
-            updateMember.setId(id);
-            updateMember.setEmail(request.getParameter("email"));
-            updateMember.setPassword(request.getParameter("password"));
-            
-            int index = memberDao.indexOf(id);
-            memberDao.update(index, updateMember);
-            out.println("변경하였습니다.");
-        }
+        Member member = new Member();
+        member.setId(request.getParameter("id"));
+        member.setEmail(request.getParameter("email"));
+        member.setPassword(request.getParameter("password"));
+        
+        try {
+            int count = memberDao.update(member);
+            if (count == 0) {
+                out.println("해당 아이디의 회원을 찾을 수 없습니다.");
+            } else {
+                out.println("변경하였습니다.");
+            }
+        } catch (Exception e) {
+            out.println("변경 실패!");
+            e.printStackTrace(out);
+        }  
     }
 
 }
 
+//ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - MemberController에서 update() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.

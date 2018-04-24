@@ -26,14 +26,19 @@ public class MemberAddController implements Controller {
         member.setEmail(request.getParameter("email"));
         member.setPassword(request.getParameter("password"));
 
-        memberDao.insert(member);
-        
         PrintWriter out = response.getWriter();
-        out.println("등록 성공!");
+        try {
+            memberDao.insert(member);
+            out.println("등록 성공!");
+        } catch (Exception e) {
+            out.println("등록 실패!");
+            e.printStackTrace(out);
+        }
     }
 
 }
 
+//ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - MemberController에서 add() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.
