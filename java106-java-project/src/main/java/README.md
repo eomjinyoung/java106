@@ -3,10 +3,12 @@
 - eclipse 설정 파일 갱신
 - pms_board 테이블 생성
 ```
+drop table pms_board;
+
 create table pms_board (
     bno int not null,
     titl varchar(255) not null,
-    content text,
+    cont text,
     cdt datetime not null
 );
 
