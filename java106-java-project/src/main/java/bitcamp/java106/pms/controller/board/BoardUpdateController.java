@@ -22,23 +22,26 @@ public class BoardUpdateController implements Controller {
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
         
-        Board updateBoard = new Board();
-        updateBoard.setNo(Integer.parseInt(request.getParameter("no")));
-        updateBoard.setTitle(request.getParameter("title"));
-        updateBoard.setContent(request.getParameter("content"));
-        updateBoard.setCreatedDate(new Date(System.currentTimeMillis()));
+        Board board = new Board();
+        board.setNo(Integer.parseInt(request.getParameter("no")));
+        board.setTitle(request.getParameter("title"));
+        board.setContent(request.getParameter("content"));
+        board.setCreatedDate(new Date(System.currentTimeMillis()));
         
-        Board board = boardDao.get(updateBoard.getNo());
-        
-        if (board == null) {
-            out.println("유효하지 않은 게시물 번호입니다.");
-        } else {
-            int index = boardDao.indexOf(updateBoard.getNo());
-            boardDao.update(index, updateBoard);
-            out.println("변경하였습니다.");
+        try {
+            int count = boardDao.update(board);
+            if (count == 0) {
+                out.println("해당 게시물이 존재하지 않습니다.");
+            } else {
+                out.println("변경하였습니다.");
+            }
+        } catch (Exception e) {
+            out.println("변경 실패!");
+            e.printStackTrace(out);
         }
     }
 }
 
+//ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - BoardController에서 update() 메서드를 추출하여 클래스로 정의.

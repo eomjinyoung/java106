@@ -1,17 +1,10 @@
 package bitcamp.java106.pms.dao;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import bitcamp.java106.pms.annotation.Component;
@@ -26,21 +19,21 @@ public class BoardDao {
                 "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
                 "java106", "1111");
             PreparedStatement stmt = con.prepareStatement(
-                "delete from ex_board where bno=?");) {
+                "delete from pms_board where bno=?");) {
             
             stmt.setInt(1, no);
             return stmt.executeUpdate();
         } 
     }
     
-    public List<Board> list() throws Exception {
+    public List<Board> selectList() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (
             Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
                 "java106", "1111");
             PreparedStatement stmt = con.prepareStatement(
-                "select bno,titl,rdt from ex_board");
+                "select bno,titl,cdt from pms_board");
             ResultSet rs = stmt.executeQuery();) {
             
             ArrayList<Board> arr = new ArrayList<>();
@@ -62,7 +55,7 @@ public class BoardDao {
                 "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
                 "java106", "1111");
             PreparedStatement stmt = con.prepareStatement(
-                "insert into ex_board(titl,cont,rdt) values(?,?,now())");) {
+                "insert into pms_board(titl,cont,cdt) values(?,?,now())");) {
             
             stmt.setString(1, board.getTitle());
             stmt.setString(2, board.getContent());
@@ -78,7 +71,7 @@ public class BoardDao {
                 "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
                 "java106", "1111");
             PreparedStatement stmt = con.prepareStatement(
-                "update ex_board set titl=?, cont=?, rdt=now() where bno=?");) {
+                "update pms_board set titl=?, cont=?, cdt=now() where bno=?");) {
             
             stmt.setString(1, board.getTitle());
             stmt.setString(2, board.getContent());
@@ -87,16 +80,16 @@ public class BoardDao {
         }
     }
 
-    public Board view(String no) throws Exception {
+    public Board selectOne(int no) throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (
             Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
                 "java106", "1111");
             PreparedStatement stmt = con.prepareStatement(
-                "select bno,titl,cont,rdt from ex_board where bno=?");) {
+                "select bno,titl,cont,cdt from pms_board where bno=?");) {
             
-            stmt.setString(1, no);
+            stmt.setInt(1, no);
             
             try (ResultSet rs = stmt.executeQuery();) {
                 if (!rs.next()) 
@@ -106,13 +99,14 @@ public class BoardDao {
                 board.setNo(rs.getInt("bno"));
                 board.setTitle(rs.getString("titl"));
                 board.setContent(rs.getString("cont"));
-                board.setRegisteredDate(rs.getDate("rdt"));
+                board.setCreatedDate(rs.getDate("cdt"));
                 return board;
             }
-        }    
+        }  
+    }
 }
 
-//ver 31 - 
+//ver 31 - JDBC API 적용
 //ver 24 - File I/O 적용
 //ver 23 - @Component 애노테이션을 붙인다.
 //ver 22 - 추상 클래스 AbstractDao를 상속 받는다.
