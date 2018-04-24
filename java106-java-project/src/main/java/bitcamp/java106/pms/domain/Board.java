@@ -45,6 +45,7 @@ public class Board implements Serializable {
     
 }
 
+//ver 31 - 생성자 제거 및 count 변수 제거
 //ver 27 - java.io.Serializable 인터페이스 구현
 //ver 24 - setNo() 변경
 //ver 18 - 게시물 객체의 고유 번호(no)를 static 변수(count)를 이용하여 자동 설정한다. 

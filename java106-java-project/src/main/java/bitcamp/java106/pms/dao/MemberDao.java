@@ -12,54 +12,7 @@ import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Member;
 
 @Component
-public class MemberDao extends AbstractDao<Member> {
-    public MemberDao() throws Exception {
-        load();
-    }
-    
-    public void load() throws Exception {
-        try (
-                ObjectInputStream in = new ObjectInputStream(
-                               new BufferedInputStream(
-                               new FileInputStream("data/member.data")));
-            ) {
-        
-            while (true) {
-                try {
-                    this.insert((Member) in.readObject());
-                } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
-                    //e.printStackTrace();
-                    break; // 반복문을 나간다.
-                }
-            }
-        }
-    }
-    
-    public void save() throws Exception {
-        try (
-                ObjectOutputStream out = new ObjectOutputStream(
-                                new BufferedOutputStream(
-                                new FileOutputStream("data/member.data")));
-            ) {
-            Iterator<Member> members = this.list();
-            
-            while (members.hasNext()) {
-                out.writeObject(members.next());
-            }
-        } 
-    }
-        
-    public int indexOf(Object key) {
-        String id = (String) key;
-        for (int i = 0; i < collection.size(); i++) {
-            Member originMember = collection.get(i);
-            if (originMember.getId().toLowerCase().equals(id.toLowerCase())) {
-                return i;
-            }
-        }
-        return -1;
-    }
-    
+public class MemberDao {
     
 }
 
