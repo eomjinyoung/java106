@@ -11,10 +11,7 @@ public class Exam01_delete {
         String no = keyScan.nextLine();
         
         try {
-            DataSource dataSource = new DataSource(
-                    "com.mysql.cj.jdbc.Driver",
-                    "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                    "java106", "1111");
+            DataSource dataSource = new DataSource();
             BoardDao boardDao = new BoardDao(dataSource);
             int count = boardDao.delete(Integer.parseInt(no));
             System.out.printf("%d 개 삭제 성공!", count);

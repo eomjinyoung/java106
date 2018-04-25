@@ -6,10 +6,7 @@ import java.util.List;
 public class Exam01_list {
 
     public static void main(String[] args) throws Exception {
-        DataSource dataSource = new DataSource(
-                "com.mysql.cj.jdbc.Driver",
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", "1111");
+        DataSource dataSource = new DataSource();
         BoardDao boardDao = new BoardDao(dataSource);
         
         try {

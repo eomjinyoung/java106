@@ -11,10 +11,7 @@ public class Exam01_view {
         String no = keyScan.nextLine();
         
         try {
-            DataSource dataSource = new DataSource(
-                    "com.mysql.cj.jdbc.Driver",
-                    "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                    "java106", "1111");
+            DataSource dataSource = new DataSource();
             BoardDao boardDao = new BoardDao(dataSource);
             Board board = boardDao.view(no);
             if (board == null) {

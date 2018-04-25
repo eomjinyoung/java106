@@ -18,10 +18,7 @@ public class Exam01_insert {
         board.setContent(keyScan.nextLine());
         
         try {
-            DataSource dataSource = new DataSource(
-                    "com.mysql.cj.jdbc.Driver",
-                    "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                    "java106", "1111");
+            DataSource dataSource = new DataSource();
             BoardDao boardDao = new BoardDao(dataSource);
             int count = boardDao.insert(board);
             System.out.printf("%d 개 입력 성공!", count);

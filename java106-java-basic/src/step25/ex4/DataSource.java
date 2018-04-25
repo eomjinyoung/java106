@@ -2,9 +2,11 @@
 // => 빌려주는 역할을 수행한다.
 package step25.ex4;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class DataSource {
     String driver;
@@ -13,6 +15,18 @@ public class DataSource {
     String password;
     
     ArrayList<Connection> conPool = new ArrayList<>();
+    
+    // 생성자를 호출할 때 DB 관련 정보를 주지 않는다면,
+    // JVM 프로퍼티에서 찾는다.
+    public DataSource() throws Exception {
+        Properties props = new Properties();
+        props.load(new FileInputStream("jdbc.properties"));
+        this.driver = props.getProperty("jdbc.driver");
+        this.jdbcUrl = props.getProperty("jdbc.url");
+        this.user = props.getProperty("jdbc.username");
+        this.password = props.getProperty("jdbc.password");
+    }
+    
     
     public DataSource(String driver, String jdbcUrl, 
             String user, String password) throws Exception {
