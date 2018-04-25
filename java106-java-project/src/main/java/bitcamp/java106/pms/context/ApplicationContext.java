@@ -79,7 +79,7 @@ public class ApplicationContext {
         
         if (!isComponent(clazz))
             return null;
-        
+        System.out.println(clazz.getName());
         try {
             // 파라미터가 없는 기본 생성자를 찾는다.
             clazz.getConstructor();
@@ -91,6 +91,7 @@ public class ApplicationContext {
                 if (obj != null)
                     return obj;
             }
+            System.out.println(clazz.getName() + "의 생성자를 호출하여 객체 생성 오류!");
             return null;
         }
     }
@@ -104,6 +105,8 @@ public class ApplicationContext {
     }
     
     private Object callConstructor(Constructor<?> constructor) throws Exception {
+        System.out.println(constructor.getName() + " 호출");
+        
         if (containsDefaultType(constructor))
             return null;
         
@@ -122,6 +125,7 @@ public class ApplicationContext {
     }
     
     private Object findObject(Class<?> clazz) throws Exception {
+        System.out.println(clazz.getName() + " 객체 찾기");
         Object obj = objPool.get(clazz.getName());
         if (obj != null) { // 그 클래스 타입과 일치하는 객체가 있다면 그 객체를 리턴,
             return obj;
@@ -132,14 +136,26 @@ public class ApplicationContext {
         Collection<?> objs = objPool.values();
         for (Object obj2 : objs) {
             if (clazz.isInstance(obj2)) {
+                System.out.println(clazz.getName() + "객체 찾았음!");
                 return obj2;
             }
         }
         
         // 만약 objPool에 그런 타입의 객체가 없다면 새로 만들어 리턴,
-        obj = clazz.newInstance();
-        objPool.put(clazz.getName(), obj);
-        return obj;
+        try {
+            obj = clazz.newInstance();
+            objPool.put(clazz.getName(), obj);
+            return obj;
+        } catch (Exception e) {
+            Constructor<?>[] constructors = clazz.getConstructors();
+            for (Constructor<?> constructor : constructors) {
+                Object obj2 = callConstructor(constructor);
+                if (obj2 != null)
+                    return obj2;
+            }
+            System.out.println(clazz.getName() + "의 생성자를 호출하여 객체 생성 오류!");
+            return null;
+        }
     }
     
     private boolean containsDefaultType(Constructor<?> constructor) {
