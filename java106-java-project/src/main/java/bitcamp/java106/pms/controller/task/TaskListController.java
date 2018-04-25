@@ -2,7 +2,7 @@
 package bitcamp.java106.pms.controller.task;
 
 import java.io.PrintWriter;
-import java.util.Iterator;
+import java.util.List;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
@@ -29,27 +29,30 @@ public class TaskListController implements Controller {
         PrintWriter out = response.getWriter();
         String teamName = request.getParameter("teamName");
         
-        Team team = teamDao.get(teamName);
-        if (team == null) {
-            out.printf("'%s' 팀은 존재하지 않습니다.\n", teamName);
-            return;
+        try {
+            Team team = teamDao.selectOne(teamName);
+            if (team == null) {
+                out.printf("'%s' 팀은 존재하지 않습니다.\n", teamName);
+                return;
+            }
+            
+            List<Task> list = taskDao.selectList(team.getName());
+            for (Task task : list) {
+                out.printf("%d,%s,%s,%s,%s\n", 
+                        task.getNo(), task.getTitle(), 
+                        task.getStartDate(), task.getEndDate(),
+                        (task.getWorker() == null) ? 
+                                "-" : task.getWorker().getId());
+            }
+        } catch (Exception e) {
+            out.println("목록 가져오기 실패!");
+            e.printStackTrace(out);
         }
-        
-        Iterator<Task> iterator = taskDao.list(team.getName());
-        
-        while (iterator.hasNext()) {
-            Task task = iterator.next();
-            out.printf("%d,%s,%s,%s,%s\n", 
-                    task.getNo(), task.getTitle(), 
-                    task.getStartDate(), task.getEndDate(),
-                    (task.getWorker() == null) ? 
-                            "-" : task.getWorker().getId());
-        }
-        
     }
 
 }
 
+//ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - TaskController에서 list() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.

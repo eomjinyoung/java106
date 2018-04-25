@@ -27,30 +27,36 @@ public class TaskDao {
             
             stmt.setInt(1, no);
             return stmt.executeUpdate();
-        } 
+        } catch (Exception e) {
+            //System.out.println("오류!");
+            // 로그 파일에 기록을 남긴다.
+            throw e;
+        }
     }
     
-    public List<Task> selectList() throws Exception {
+    public List<Task> selectList(String teamName) throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (
             Connection con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
                 "java106", "1111");
             PreparedStatement stmt = con.prepareStatement(
-                "select tano,titl,sdt,edt,stat from pms_task");
-            ResultSet rs = stmt.executeQuery();) {
+                "select tano,titl,sdt,edt,stat from pms_task where tnm=?");) {
             
-            ArrayList<Task> arr = new ArrayList<>();
-            while (rs.next()) {
-                Task task = new Task();
-                task.setNo(rs.getInt("tano"));
-                task.setTitle(rs.getString("titl"));
-                task.setStartDate(rs.getDate("sdt"));
-                task.setEndDate(rs.getDate("edt"));
-                task.setState(rs.getInt("stat"));
-                arr.add(task);
+            stmt.setString(1, teamName);    
+            try (ResultSet rs = stmt.executeQuery()) {
+                ArrayList<Task> arr = new ArrayList<>();
+                while (rs.next()) {
+                    Task task = new Task();
+                    task.setNo(rs.getInt("tano"));
+                    task.setTitle(rs.getString("titl"));
+                    task.setStartDate(rs.getDate("sdt"));
+                    task.setEndDate(rs.getDate("edt"));
+                    task.setState(rs.getInt("stat"));
+                    arr.add(task);
+                }
+                return arr;
             }
-            return arr;
         }
     }
 
