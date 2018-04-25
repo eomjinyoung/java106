@@ -6,7 +6,7 @@ import java.util.List;
 public class Exam01_list {
 
     public static void main(String[] args) throws Exception {
-        DataSource dataSource = new DataSource();
+        DataSource dataSource = new DefaultDataSource();
         BoardDao boardDao = new BoardDao(dataSource);
         
         try {
