@@ -6,7 +6,6 @@
 package step25.ex4;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -20,27 +19,19 @@ public class BoardDao {
     }
     
     public int delete(int no) throws Exception {
-        Connection con = null;
-        PreparedStatement stmt = null;
-        try {
-            con = dataSource.getConnection();
-            stmt = con.prepareStatement(
-                "delete from ex_board where bno=?");
+        try (
+            Connection con = dataSource.getConnection();
+            PreparedStatement stmt = con.prepareStatement(
+                "delete from ex_board where bno=?");) {
             
             stmt.setInt(1, no);
             return stmt.executeUpdate();
-        } finally {
-            stmt.close();
-            dataSource.returnConnection(con);
         }
     }
     
     public List<Board> list() throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", "1111");
+            Connection con = dataSource.getConnection();
             PreparedStatement stmt = con.prepareStatement(
                 "select bno,titl,rdt from ex_board");
             ResultSet rs = stmt.executeQuery();) {
@@ -58,11 +49,8 @@ public class BoardDao {
     }
 
     public int insert(Board board) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", "1111");
+            Connection con = dataSource.getConnection();
             PreparedStatement stmt = con.prepareStatement(
                 "insert into ex_board(titl,cont,rdt) values(?,?,now())");) {
             
@@ -74,11 +62,8 @@ public class BoardDao {
     }
 
     public int update(Board board) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", "1111");
+            Connection con = dataSource.getConnection();
             PreparedStatement stmt = con.prepareStatement(
                 "update ex_board set titl=?, cont=?, rdt=now() where bno=?");) {
             
@@ -90,11 +75,8 @@ public class BoardDao {
     }
 
     public Board view(String no) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", "1111");
+            Connection con = dataSource.getConnection();
             PreparedStatement stmt = con.prepareStatement(
                 "select bno,titl,cont,rdt from ex_board where bno=?");) {
             

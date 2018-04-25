@@ -1,4 +1,4 @@
-// 게시판 관리 - JDBC 코드를 별도의 클래스로 캡슐화시킴. DAO 적용.
+// 게시판 관리 - DB 커넥션 풀 적용
 package step25.ex4;
 
 import java.util.Scanner;
@@ -11,7 +11,11 @@ public class Exam01_view {
         String no = keyScan.nextLine();
         
         try {
-            BoardDao boardDao = new BoardDao();
+            DataSource dataSource = new DataSource(
+                    "com.mysql.cj.jdbc.Driver",
+                    "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                    "java106", "1111");
+            BoardDao boardDao = new BoardDao(dataSource);
             Board board = boardDao.view(no);
             if (board == null) {
                 System.out.println("해당 번호의 게시물이 없습니다!");

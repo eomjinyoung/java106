@@ -1,4 +1,4 @@
-// 게시물 관리 - JDBC 코드를 별도의 클래스로 캡슐화시킴. DAO 적용.
+// 게시판 관리 - DB 커넥션 풀 적용
 package step25.ex4;
 
 import java.util.List;
