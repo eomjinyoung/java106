@@ -16,40 +16,45 @@ public class Team implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public Team setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Team setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public int getMaxQty() {
         return maxQty;
     }
 
-    public void setMaxQty(int maxQty) {
+    public Team setMaxQty(int maxQty) {
         this.maxQty = maxQty;
+        return this;
     }
 
     public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public Team setStartDate(Date startDate) {
         this.startDate = startDate;
+        return this;
     }
 
     public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public Team setEndDate(Date endDate) {
         this.endDate = endDate;
+        return this;
     }
     
     @Override

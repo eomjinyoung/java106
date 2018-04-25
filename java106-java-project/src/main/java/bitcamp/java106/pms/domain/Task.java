@@ -10,8 +10,6 @@ public class Task implements Serializable {
     public static final int WORKING = 1;
     public static final int COMPLETE = 9;
     
-    public static int count = 1;
-
     private int no;
     private String title;
     private Date startDate;
@@ -20,27 +18,10 @@ public class Task implements Serializable {
     private Member worker;
     private Team team;
     
-    public Task(Team team) {
-        this.no = count++;
-        this.team = team;
-    }
-    
-    public Task(Team team, String title, Date startDate, Date endDate) {
-        this(team);
-        this.title = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.state = READY;
-    }
-    
     public int getNo() {
         return no;
     }
     public void setNo(int no) {
-        // 외부에서 입력 받은 번호가 count 보다 클 때는 count의 값을 증가시켜야 한다.
-        if (no >= count) {
-            count = no + 1;
-        }
         this.no = no;
     }
     public int getState() {
