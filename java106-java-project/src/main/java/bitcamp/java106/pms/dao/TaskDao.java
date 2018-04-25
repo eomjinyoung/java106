@@ -27,11 +27,7 @@ public class TaskDao {
             
             stmt.setInt(1, no);
             return stmt.executeUpdate();
-        } catch (Exception e) {
-            //System.out.println("오류!");
-            // 로그 파일에 기록을 남긴다.
-            throw e;
-        }
+        } 
     }
     
     public List<Task> selectList(String teamName) throws Exception {
