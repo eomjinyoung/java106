@@ -7,7 +7,6 @@ import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
-import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.server.ServerRequest;
 import bitcamp.java106.pms.server.ServerResponse;
 
@@ -25,17 +24,10 @@ public class TaskDeleteController implements Controller {
     @Override
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
-        String teamName = request.getParameter("teamName");
-        int taskNo = Integer.parseInt(request.getParameter("taskNo"));
         
         try {
-            Team team = teamDao.selectOne(teamName);
-            if (team == null) {
-                out.printf("'%s' 팀은 존재하지 않습니다.\n", teamName);
-                return;
-            }
-            
-            int count = taskDao.delete(taskNo);
+            int no = Integer.parseInt(request.getParameter("no"));
+            int count = taskDao.delete(no);
             if (count == 0) {
                 out.println("해당 작업이 존재하지 않습니다.");
             } else {

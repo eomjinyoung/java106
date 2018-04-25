@@ -41,7 +41,7 @@ public class TaskDao {
                 "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
                 "java106", "1111");
             PreparedStatement stmt = con.prepareStatement(
-                "select tano,titl,sdt,edt,stat from pms_task where tnm=?");) {
+                "select tano,titl,sdt,edt,stat,mid from pms_task where tnm=?");) {
             
             stmt.setString(1, teamName);    
             try (ResultSet rs = stmt.executeQuery()) {
@@ -53,6 +53,7 @@ public class TaskDao {
                     task.setStartDate(rs.getDate("sdt"));
                     task.setEndDate(rs.getDate("edt"));
                     task.setState(rs.getInt("stat"));
+                    task.setWorker(new Member().setId(rs.getString("mid")));
                     arr.add(task);
                 }
                 return arr;
@@ -123,6 +124,20 @@ public class TaskDao {
                 return task;
             }
         }  
+    }
+
+    public int updateState(int no, int state) throws Exception {
+        try (
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "java106", "1111");
+            PreparedStatement stmt = con.prepareStatement(
+                "update pms_task set stat=? where tano=?");) {
+            
+            stmt.setInt(1, state);
+            stmt.setInt(2, no);
+            return stmt.executeUpdate();
+        }
     }
 }
 
