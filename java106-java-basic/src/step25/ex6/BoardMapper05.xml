@@ -12,10 +12,10 @@
     <result column="rdt" property="registeredDate"/>
   </resultMap>
   
-  <!-- SQL 문에 값 삽입하기
-       => #{key이름}
-       => 값이 들어 있는 객체를 태그 속성에 지정한다.
-          parameterType="값이들어있는객체의타입명 또는 별명"
+  <!-- SQL 문에 SQL을 삽입하기
+       => ${key이름}
+       => 외부의 값을 이용하여 SQL 문장을 만들지 말라! 
+          SQL 삽입 공격에 취약하다!
    -->
   <select id="selectBoard" 
           resultMap="BoardMap" parameterType="map">
@@ -25,7 +25,7 @@
       cont, 
       rdt 
     from ex_board
-    limit #{startIndex}, #{pageSize}
+    ${limitSQL}
   </select>
   
 </mapper>
