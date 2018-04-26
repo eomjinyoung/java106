@@ -24,10 +24,50 @@
   <!-- select 태그
        id : SQL문을 찾을 때 사용할 식별자이다.
        resultType : 결과를 저장할 클래스이다. 
-       반드시 fully-qualified name을 사용하라! -->
+       반드시 fully-qualified name을 사용하라! 
+       값을 자바 객체에 넣는 규칙:
+       => 컬럼명과 일치하는 셋터를 호출한다.
+          컬럼명 ==> set컬럼명()
+       => 예) 
+          bno ==> setBno(값)
+          즉, 
+          Board board = new Board();
+          board.setBno(rs.getNo("bno"));
+          만약 컬럼 이름에 해당하는 셋터를 못 찾으면 호출하지 않는다.
+       -->
+  <!--  
   <select id="selectBoard" resultType="step25.ex5.Board">
-    
+    select bno,titl,cont,rdt from ex_board
   </select>
+  -->
+  <!-- 위의 SQL문을 mybatis 다음과 같은 코드로 실행한다.
+       ArrayList<Board> list = new ArrayList<>();
+       
+       while (rs.next()) {
+           Board board = new Board();
+           board.setBno(rs.getNo("bno")); // 이런 셋터가 없다.
+           board.setTitl(rs.getString("titl")); // 이런 셋터가 없다.
+           board.setCont(rs.getString("cont")); // 이런 셋터가 없다.
+           board.setRdt(rs.getDate("rdt")); // 이런 셋터가 없다.
+           list.add(board);
+       } 
+       return list;
+       
+       그러나 안타깝게도 Board 클래스에는 컬럼 이름과 일치하는 셋터가 없다.
+       그래서 객체에 값을 한 개도 저장할 수 없다.
+       객체에 값을 한 개도 저장할 수 없으면 List에 null을 저장한다.
+       해결책?
+       => 셋터의 이름과 같은 이름으로 컬럼의 별명을 설정하라! 
+  -->
+  <select id="selectBoard" resultType="step25.ex5.Board">
+    select 
+      bno as no,
+      titl as title,
+      cont as content,
+      rdt as registeredDate
+    from ex_board
+  </select>
+  
 </mapper>
 
 
