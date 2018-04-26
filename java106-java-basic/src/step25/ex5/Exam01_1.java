@@ -2,7 +2,6 @@
 package step25.ex5;
 
 import java.io.InputStream;
-import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 // Data Persistence Framework
+// => 데이터의 영속성(지속성; 등록,조회,변경,삭제)을 대신 처리해주는 프레임워크.
 // 1) SQL Mapper
 //    - 직접 SQL 문을 작성
 //    - 각각의 DBMS에 최적화된 SQL을 작성할 수 있다.
@@ -56,18 +56,7 @@ public class Exam01_1 {
         // SqlSession 공작 객체로부터 SqlSession 객체를 얻는다.
         SqlSession sqlSession = factory.openSession();
         
-        // SqlSession 객체를 이용하여 SQL 맵퍼 파일에 작성한 SQL 문을 실행한다.
-        // => SQL 문장 = 그룹명 + "." + SQL문장 아이디 
-        List<Board> list = 
-                sqlSession.selectList("step25.ex5.BoardDao.selectBoard");
-        
-        for (Board board : list) {
-            System.out.printf("%d, %s, %s, %s\n", 
-                    board.getNo(), 
-                    board.getTitle(), 
-                    board.getContent(),
-                    board.getRegisteredDate());
-        }
+        System.out.println("mybatis 준비 완료!");
         
         sqlSession.close();
     }
