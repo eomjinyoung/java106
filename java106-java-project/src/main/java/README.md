@@ -5,7 +5,9 @@
 - BoardMapper.xml 생성
 - DefaultApplicationContainer.java 변경
 - BoardDao.java 변경
-- BoardMapper.xml 변경 
+- BoardMapper.xml 변경
+- ClassroomDao.java 변경
+- ClassroomMapper.xml 작성
 
  
 

@@ -7,6 +7,7 @@
 
   <typeAliases>
     <typeAlias type="bitcamp.java106.pms.domain.Board" alias="Board"/>
+    <typeAlias type="bitcamp.java106.pms.domain.Classroom" alias="Classroom"/>
   </typeAliases>
 
   <environments default="development">
@@ -23,6 +24,7 @@
   
   <mappers>
     <mapper resource="bitcamp/java106/pms/sql/BoardMapper.xml"/>
+    <mapper resource="bitcamp/java106/pms/sql/ClassroomMapper.xml"/>
   </mappers>
 </configuration>
 
