@@ -26,7 +26,7 @@
   </insert>
   
   <select id="selectOne" parameterType="string" resultMap="TeamMap">
-    select dscrt, sdt, edt, max_qty 
+    select name, dscrt, sdt, edt, max_qty 
     from pms_team 
     where name=#{value}
   </select>

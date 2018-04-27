@@ -30,7 +30,7 @@ public class TaskDao {
     public List<Task> selectList(String teamName) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             return sqlSession.selectList(
-                    "bitcamp.java106.pms.dao.TaskDao.selectList");
+                    "bitcamp.java106.pms.dao.TaskDao.selectList", teamName);
         }
     }
 

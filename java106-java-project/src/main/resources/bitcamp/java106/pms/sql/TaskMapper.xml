@@ -41,9 +41,10 @@
   </resultMap>
   
   <select id="selectList" 
-          resultMap="TaskMap" parameterType="map">
+          resultMap="TaskMap" parameterType="string">
     select tano, titl, sdt, edt, stat, mid, tnm 
     from pms_task
+    where tnm=#{value} 
     <!--  limit #{startIndex}, #{pageSize} -->
   </select>
   
