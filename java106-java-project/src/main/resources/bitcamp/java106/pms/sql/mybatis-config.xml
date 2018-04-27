@@ -30,6 +30,7 @@
     <mapper resource="bitcamp/java106/pms/sql/ClassroomMapper.xml"/>
     <mapper resource="bitcamp/java106/pms/sql/MemberMapper.xml"/>
     <mapper resource="bitcamp/java106/pms/sql/TaskMapper.xml"/>
+    <mapper resource="bitcamp/java106/pms/sql/TeamMapper.xml"/>
   </mappers>
 </configuration>
 

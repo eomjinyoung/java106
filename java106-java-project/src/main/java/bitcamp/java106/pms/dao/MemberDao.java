@@ -45,7 +45,7 @@ public class MemberDao {
     public int update(Member member) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             int count = sqlSession.update(
-                    "bitcamp.java106.pms.dao.MemberDao.insert", member);
+                    "bitcamp.java106.pms.dao.MemberDao.update", member);
             sqlSession.commit();
             return count;
         }
