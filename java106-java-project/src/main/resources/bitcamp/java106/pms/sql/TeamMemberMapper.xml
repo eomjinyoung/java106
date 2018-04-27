@@ -23,25 +23,10 @@
     where tnm=#{teamName} and mid=#{memberId}
   </select>
   
-  <update id="update" parameterType="Team">
-    update pms_team set 
-      dscrt=#{description}, 
-      max_qty=#{maxQty}, 
-      sdt=#{startDate}, 
-      edt=#{endDate} 
-    where name=#{name}
-  </update>
-  
   <delete id="delete" parameterType="map">
     delete from pms_team_member 
     where tnm=#{teamName} and mid=#{memberId}
   </delete>
-  
-  <update id="updateState" parameterType="map">
-    update pms_team set 
-      stat=#{state} 
-    where tano=#{no}
-  </update>
 </mapper>
 
 
