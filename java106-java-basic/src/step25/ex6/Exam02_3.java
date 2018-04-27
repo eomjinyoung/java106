@@ -24,8 +24,17 @@ public class Exam02_3 {
         board.setTitle("제목이래요!");
         board.setContent("내용이래요!");
         
+        System.out.printf("번호: %d\n", board.getNo());
+        System.out.printf("제목: %s\n", board.getTitle());
+        System.out.printf("내용: %s\n", board.getContent());
+        System.out.println("-------------------------------------");
+        
         int count = sqlSession.insert("BoardMapper.insertBoard", board);
         System.out.println(count);
+        
+        System.out.printf("번호: %d\n", board.getNo());
+        System.out.printf("제목: %s\n", board.getTitle());
+        System.out.printf("내용: %s\n", board.getContent());
         
         // mybatis에서는 autocommit이 기본으로 false이다.
         // autocommit?
