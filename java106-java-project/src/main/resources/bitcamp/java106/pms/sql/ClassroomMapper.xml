@@ -26,12 +26,6 @@
     values(#{title},#{startDate},#{endDate},#{room})
   </insert>
   
-  <select id="selectOne" parameterType="int" resultMap="ClassroomMap">
-    select crno,titl,sdt,edt,room 
-    from pms_classroom 
-    where crno=#{value}
-  </select>
-  
   <update id="update" parameterType="Classroom">
     update pms_classroom set 
       titl=#{title}, 

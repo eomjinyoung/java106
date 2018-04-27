@@ -51,12 +51,6 @@ public class ClassroomDao {
         }
     }
 
-    public Classroom selectOne(int no) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            return sqlSession.selectOne(
-                    "bitcamp.java106.pms.dao.ClassroomDao.selectOne", no);
-        }
-    }
 }
 
 //ver 33 - Mybatis 적용
