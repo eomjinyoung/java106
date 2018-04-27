@@ -3,8 +3,10 @@ package bitcamp.java106.pms.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Board;
@@ -13,10 +15,12 @@ import bitcamp.java106.pms.jdbc.DataSource;
 @Component
 public class BoardDao {
     
+    SqlSessionFactory sqlSessionFactory;
     DataSource dataSource;
     
-    public BoardDao(DataSource dataSource) {
+    public BoardDao(DataSource dataSource, SqlSessionFactory sqlSessionFactory) {
         this.dataSource = dataSource;
+        this.sqlSessionFactory = sqlSessionFactory;
     }
     
     public int delete(int no) throws Exception {
@@ -31,34 +35,18 @@ public class BoardDao {
     }
     
     public List<Board> selectList() throws Exception {
-        try (
-            Connection con = dataSource.getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                "select bno,titl,cdt from pms_board");
-            ResultSet rs = stmt.executeQuery();) {
-            
-            ArrayList<Board> arr = new ArrayList<>();
-            while (rs.next()) {
-                Board board = new Board();
-                board.setNo(rs.getInt("bno"));
-                board.setTitle(rs.getString("titl"));
-                board.setCreatedDate(rs.getDate("cdt"));
-                arr.add(board);
-            }
-            return arr;
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            return sqlSession.selectList(
+                    "bitcamp.java106.pms.dao.BoardDao.selectList");
         }
     }
 
     public int insert(Board board) throws Exception {
-        try (
-            Connection con = dataSource.getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                "insert into pms_board(titl,cont,cdt) values(?,?,now())");) {
-            
-            stmt.setString(1, board.getTitle());
-            stmt.setString(2, board.getContent());
-        
-            return stmt.executeUpdate();
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            int count = sqlSession.insert(
+                    "bitcamp.java106.pms.dao.BoardDao.insert", board);
+            sqlSession.commit();
+            return count;
         }
     }
 

@@ -19,6 +19,10 @@ repositories {
 dependencies {
     // MySQL JDBC Driver 라이브러리
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+    
+    // Mybatis 라이브러리
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
+    
 }
 
 
