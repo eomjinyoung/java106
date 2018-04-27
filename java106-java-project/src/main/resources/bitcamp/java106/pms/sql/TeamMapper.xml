@@ -19,6 +19,17 @@
     from pms_team
     <!--  limit #{startIndex}, #{pageSize} -->
   </select>
+  <!-- 
+    ArrayList<Task> list = new new ArrayList<>();
+    while (rs.next()) {
+       Task task = new Task();
+       task.setName(rs.getString("name"));
+       task.setStartDate(rs.getDate("sdt"));
+       task.setEndDate(rs.getDate("edt"));
+       task.setMaxQty(rs.getInt("max_qty"));
+       list.add(task);
+    }
+  -->
   
   <insert id="insert" parameterType="Team">
     insert into pms_team(name,dscrt,max_qty,sdt,edt) 
