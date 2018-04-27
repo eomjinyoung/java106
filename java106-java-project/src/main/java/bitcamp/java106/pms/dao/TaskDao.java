@@ -36,7 +36,7 @@ public class TaskDao {
 
     public int insert(Task task) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            int count = sqlSession.delete(
+            int count = sqlSession.insert(
                     "bitcamp.java106.pms.dao.TaskDao.insert", task);
             sqlSession.commit();
             return count;
@@ -45,7 +45,7 @@ public class TaskDao {
 
     public int update(Task task) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            int count = sqlSession.delete(
+            int count = sqlSession.update(
                     "bitcamp.java106.pms.dao.TaskDao.update", task);
             sqlSession.commit();
             return count;
@@ -65,7 +65,7 @@ public class TaskDao {
             paramMap.put("no", no);
             paramMap.put("state", state);
 
-            int count = sqlSession.delete(
+            int count = sqlSession.update(
                     "bitcamp.java106.pms.dao.TaskDao.updateState", paramMap);
             sqlSession.commit();
             return count;
