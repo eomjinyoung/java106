@@ -36,6 +36,27 @@
     insert into pms_board(titl,cont,cdt) 
     values(#{title},#{content},now())
   </insert>
+  
+  <!-- 파라미터의 타입이 primitive type이나 wrapper 클래스, String 클래스인 경우
+       값을 꺼낼 때 프로퍼티 이름을 마음대로 해도 된다.
+  -->
+  <select id="selectOne" parameterType="int" resultMap="BoardMap">
+    select bno,titl,cont,cdt 
+    from pms_board 
+    where bno=#{value}
+  </select>
+  
+  <update id="update" parameterType="Board">
+    update pms_board set 
+        titl=#{title}, 
+        cont=#{content}, 
+        cdt=now()
+    where bno=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pms_board where bno=#{value}
+  </delete>
 </mapper>
 
 
