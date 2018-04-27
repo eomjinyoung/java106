@@ -12,7 +12,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import bitcamp.java106.pms.context.ApplicationContext;
 import bitcamp.java106.pms.controller.Controller;
-import bitcamp.java106.pms.jdbc.DefaultDataSource;
 import bitcamp.java106.pms.server.ServerRequest;
 import bitcamp.java106.pms.server.ServerResponse;
 
@@ -23,7 +22,6 @@ public class DefaultApplicationContainer implements ApplicationContainer {
     public DefaultApplicationContainer() throws Exception {
         // IoC 컨테이너에서 자동으로 생성되지 않는 객체를 미리 준비한다. 
         HashMap<String,Object> objMap = new HashMap<>();
-        objMap.put("datasource", new DefaultDataSource("jdbc.properties"));
         
         // Mybatis의 SqlSessionFactory 객체 생성 및 IoC 컨테이너에 등록
         InputStream inputStream = Resources.getResourceAsStream(

@@ -8,6 +8,14 @@
 - BoardMapper.xml 변경
 - ClassroomDao.java 변경
 - ClassroomMapper.xml 작성
+- MemberDao.java 변경
+- MemberMapper.xml 작성
+- TaskDao.java 변경
+- TaskMapper.xml 작성
+- TeamDao.java 변경
+- TeamMapper.xml 작성
+- TeamMemberDao.java 변경
+- TeamMemberMapper.xml 작성
 
  
 
