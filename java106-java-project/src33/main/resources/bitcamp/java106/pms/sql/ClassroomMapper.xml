@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bitcamp.java106.pms.dao.ClassroomDao">
+
+  <resultMap type="Classroom" id="ClassroomMap">
+    <id column="crno" property="no"/>
+    <result column="titl" property="title"/>
+    <result column="sdt" property="startDate"/>
+    <result column="edt" property="endDate"/>
+    <result column="room" property="room"/>
+  </resultMap>
+  
+  <select id="selectList" 
+          resultMap="ClassroomMap" parameterType="map">
+    select crno,titl,sdt,edt,room 
+    from pms_classroom
+    <!--  limit #{startIndex}, #{pageSize} -->
+  </select>
+  
+  <insert id="insert" parameterType="Classroom"
+          useGeneratedKeys="true" keyColumn="crno" keyProperty="no">
+    insert into pms_classroom(titl,sdt,edt,room) 
+    values(#{title},#{startDate},#{endDate},#{room})
+  </insert>
+  
+  <update id="update" parameterType="Classroom">
+    update pms_classroom set 
+      titl=#{title}, 
+      sdt=#{startDate}, 
+      edt=#{endDate}, 
+      room=#{room} 
+    where crno=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pms_classroom where crno=#{value}
+  </delete>
+</mapper>
+
+
+
+
+
+
+
