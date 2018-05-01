@@ -53,20 +53,22 @@ public class DefaultDataSource implements DataSource {
                     DriverManager.getConnection(jdbcUrl, user, password));
         }
         
-        Connection con = conPool.remove(0);
-        if (con.isClosed() || // 보관소에서 꺼낸 커넥션 객체가 닫혀있거나,
-            !con.isValid(1)) { // 그 연결이 유효하지 않다면, 
-            System.out.println("새 연결 객체를 만든다.");
-            return new ConnectionProxy(
-                    this,
-                    DriverManager.getConnection(jdbcUrl, user, password));
-            // isValid(초)
-            // 그 연결이 유효한지 검사하기 위해 DBMS에 간단한 메시지를 보낸다.
-            // DBMS 서버에서 1초 이내에 응답이 온다면 유효한 것으로 판단한다.
+        // 기존 커넥션을 꺼낸다. 
+        while (conPool.size() > 0) {
+            Connection con = conPool.remove(0);
+            
+            if (!con.isClosed() && // 보관소에서 꺼낸 커넥션 객체가 닫혀있지 않고,
+                    con.isValid(1)) { // 그 연결이 유효하다면,
+                // 유효한 커네션이 있다면 리턴한다.
+                return con;
+            }
         }
         
-        System.out.println("기존 연결 객체를 사용한다.");
-        return con;
+        // 없으면 새로 만든다.
+        System.out.println("새 연결 객체를 만든다.");
+        return new ConnectionProxy(
+                this,
+                DriverManager.getConnection(jdbcUrl, user, password));
     }
     
     public void returnConnection(Connection con) {
