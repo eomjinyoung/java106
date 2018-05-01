@@ -1,5 +1,13 @@
 # 자바 프로젝트
 
+## src35 - Spring 프레임워크의 IoC 컨테이너 적용
+학습목표
+    - Spring IoC 컨테이너를 설정할 수 있다.
+    - Spring IoC 컨테이너를 사용하여 객체를 관리할 수 있다.
+작업내용
+    - Spring IoC 컨테이너 관련 라이브러리 추가 
+    - 기존의 ApplicationContext를 Spring IoC 컨테이너로 대체한다.
+
 ## src34 - 테이블에 Foreign Key 적용하기
 학습목표
     - FK의 용도를 이해한다.

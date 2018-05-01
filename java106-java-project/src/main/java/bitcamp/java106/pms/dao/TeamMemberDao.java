@@ -5,8 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-
-import bitcamp.java106.pms.annotation.Component;
+import org.springframework.stereotype.Component;
 
 @Component
 public class TeamMemberDao {

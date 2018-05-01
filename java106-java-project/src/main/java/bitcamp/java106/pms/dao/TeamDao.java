@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Component;
 
-import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Team;
 
 @Component

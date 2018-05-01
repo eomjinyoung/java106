@@ -3,7 +3,8 @@ package bitcamp.java106.pms.controller.team;
 
 import java.io.PrintWriter;
 
-import bitcamp.java106.pms.annotation.Component;
+import org.springframework.stereotype.Component;
+
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.server.ServerRequest;

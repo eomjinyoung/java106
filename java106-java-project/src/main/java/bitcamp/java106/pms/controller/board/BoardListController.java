@@ -3,7 +3,8 @@ package bitcamp.java106.pms.controller.board;
 import java.io.PrintWriter;
 import java.util.List;
 
-import bitcamp.java106.pms.annotation.Component;
+import org.springframework.stereotype.Component;
+
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.domain.Board;

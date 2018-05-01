@@ -1,16 +1,12 @@
 // ApplicationContainer 구현체
 package bitcamp.java106.pms;
 
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.HashMap;
 
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import bitcamp.java106.pms.context.ApplicationContext;
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.server.ServerRequest;
 import bitcamp.java106.pms.server.ServerResponse;
@@ -20,19 +16,9 @@ public class DefaultApplicationContainer implements ApplicationContainer {
     ApplicationContext iocContainer;
     
     public DefaultApplicationContainer() throws Exception {
-        // IoC 컨테이너에서 자동으로 생성되지 않는 객체를 미리 준비한다. 
-        HashMap<String,Object> objMap = new HashMap<>();
-        
-        // Mybatis의 SqlSessionFactory 객체 생성 및 IoC 컨테이너에 등록
-        InputStream inputStream = Resources.getResourceAsStream(
-                "bitcamp/java106/pms/sql/mybatis-config.xml");
-        SqlSessionFactory factory = 
-                new SqlSessionFactoryBuilder().build(inputStream);
-        objMap.put("SqlSessionFactory", factory);
-        
-        //=> 컨트롤러, DAO 등 클라이언트 요청을 처리하는 객체를 자동 생성한다.
-        //=> 또한 이전에 미리 준비한 객체를 컨테이너에 포함시킨다.
-        iocContainer = new ApplicationContext("bitcamp.java106.pms", objMap);
+        // 스프링 IoC 컨테이너 객체 생성
+        // => 파라미터로 넘기는 값은 스프링 IoC 컨테이너 관련 설정작업을 수행하는 클래스 정보이다.
+        iocContainer = new AnnotationConfigApplicationContext(AppConfig.class);
     }
     
     @Override

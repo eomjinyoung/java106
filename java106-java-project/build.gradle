@@ -23,6 +23,9 @@ dependencies {
     // Mybatis 라이브러리
     compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
     
+    // Spring IoC 컨테이너 라이브러리
+    compile group: 'org.springframework', name: 'spring-context', version: '5.0.5.RELEASE'
+    
 }
 
 

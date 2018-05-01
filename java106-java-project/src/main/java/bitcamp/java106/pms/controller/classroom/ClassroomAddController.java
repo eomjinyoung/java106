@@ -4,7 +4,8 @@ package bitcamp.java106.pms.controller.classroom;
 import java.io.PrintWriter;
 import java.sql.Date;
 
-import bitcamp.java106.pms.annotation.Component;
+import org.springframework.stereotype.Component;
+
 import bitcamp.java106.pms.controller.Controller;
 import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
