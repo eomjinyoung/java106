@@ -16,18 +16,18 @@
   <select id="selectList" 
           resultMap="ClassroomMap" parameterType="map">
     select crno,titl,sdt,edt,room 
-    from pms_classroom
+    from pms2_classroom
     <!--  limit #{startIndex}, #{pageSize} -->
   </select>
   
   <insert id="insert" parameterType="Classroom"
           useGeneratedKeys="true" keyColumn="crno" keyProperty="no">
-    insert into pms_classroom(titl,sdt,edt,room) 
+    insert into pms2_classroom(titl,sdt,edt,room) 
     values(#{title},#{startDate},#{endDate},#{room})
   </insert>
   
   <update id="update" parameterType="Classroom">
-    update pms_classroom set 
+    update pms2_classroom set 
       titl=#{title}, 
       sdt=#{startDate}, 
       edt=#{endDate}, 
@@ -36,7 +36,7 @@
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from pms_classroom where crno=#{value}
+    delete from pms2_classroom where crno=#{value}
   </delete>
 </mapper>
 

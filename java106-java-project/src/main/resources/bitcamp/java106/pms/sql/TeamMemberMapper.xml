@@ -7,24 +7,24 @@
   
   <select id="selectList" 
           resultType="string" parameterType="string">
-    select mid from pms_team_member 
+    select mid from pms2_team_member 
     where tnm=#{value}
     <!--  limit #{startIndex}, #{pageSize} -->
   </select>
   
   <insert id="insert" parameterType="map">
-    insert into pms_team_member(tnm,mid) 
+    insert into pms2_team_member(tnm,mid) 
     values(#{teamName},#{memberId})
   </insert>
   
   <select id="isExist" parameterType="map" resultType="int">
     select count(*) 
-    from pms_team_member 
+    from pms2_team_member 
     where tnm=#{teamName} and mid=#{memberId}
   </select>
   
   <delete id="delete" parameterType="map">
-    delete from pms_team_member 
+    delete from pms2_team_member 
     where tnm=#{teamName} and mid=#{memberId}
   </delete>
 </mapper>

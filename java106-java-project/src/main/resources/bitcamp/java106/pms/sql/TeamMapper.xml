@@ -16,7 +16,7 @@
   <select id="selectList" 
           resultMap="TeamMap" parameterType="map">
     select name, sdt, edt, max_qty 
-    from pms_team
+    from pms2_team
     <!--  limit #{startIndex}, #{pageSize} -->
   </select>
   <!-- 
@@ -32,18 +32,18 @@
   -->
   
   <insert id="insert" parameterType="Team">
-    insert into pms_team(name,dscrt,max_qty,sdt,edt) 
+    insert into pms2_team(name,dscrt,max_qty,sdt,edt) 
     values(#{name},#{description},#{maxQty},#{startDate},#{endDate})
   </insert>
   
   <select id="selectOne" parameterType="string" resultMap="TeamMap">
     select name, dscrt, sdt, edt, max_qty 
-    from pms_team 
+    from pms2_team 
     where name=#{value}
   </select>
   
   <update id="update" parameterType="Team">
-    update pms_team set 
+    update pms2_team set 
       dscrt=#{description}, 
       max_qty=#{maxQty}, 
       sdt=#{startDate}, 
@@ -52,12 +52,12 @@
   </update>
   
   <delete id="delete" parameterType="string">
-    delete from pms_team 
+    delete from pms2_team 
     where name=#{value}
   </delete>
   
   <update id="updateState" parameterType="map">
-    update pms_team set 
+    update pms2_team set 
       stat=#{state} 
     where tano=#{no}
   </update>

@@ -43,25 +43,25 @@
   <select id="selectList" 
           resultMap="TaskMap" parameterType="string">
     select tano, titl, sdt, edt, stat, mid, tnm 
-    from pms_task
+    from pms2_task
     where tnm=#{value} 
     <!--  limit #{startIndex}, #{pageSize} -->
   </select>
   
   <insert id="insert" parameterType="Task"
           useGeneratedKeys="true" keyColumn="tano" keyProperty="no">
-    insert into pms_task(titl,sdt,edt,mid,tnm) 
+    insert into pms2_task(titl,sdt,edt,mid,tnm) 
     values(#{title},#{startDate},#{endDate},#{worker.id},#{team.name})
   </insert>
   
   <select id="selectOne" parameterType="int" resultMap="TaskMap">
     select titl,sdt,edt,stat,mid,tnm 
-    from pms_task 
+    from pms2_task 
     where tano=#{value}
   </select>
   
   <update id="update" parameterType="Task">
-    update pms_task set 
+    update pms2_task set 
       titl=#{title},
       sdt=#{startDate},
       edt=#{endDate},
@@ -71,12 +71,12 @@
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from pms_task 
+    delete from pms2_task 
     where tano=#{value}
   </delete>
   
   <update id="updateState" parameterType="map">
-    update pms_task set 
+    update pms2_task set 
       stat=#{state} 
     where tano=#{no}
   </update>
