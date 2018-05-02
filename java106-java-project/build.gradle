@@ -9,9 +9,18 @@ apply plugin: 'eclipse'
 // => 자바 관련 작업을 수행할 명령어가 들어 있는 플러그인
 apply plugin: 'java'
 
+// => web archive 파일을 다루는 명령어가 들어 있는 플러그인
+apply plugin: 'war'
+
 compileJava {
     // 컴파일 할 때 소스 파일의 인코딩 옵션을 추가할 것이다.
     options.encoding = 'UTF-8'
+}
+
+war {
+    // war 파일을 생성할 때 사용할 파일명 설정하기
+    // => 파일명을 설정하지 않으면 프로젝트 이름으로 생성된다.
+    archiveName = "pms.war"
 }
 
 // 프로젝트에서 사용하는 의존 라이브러리를 외부의 디렉토리로 복사하는 명령 추가
