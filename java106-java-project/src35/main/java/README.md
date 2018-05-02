@@ -9,7 +9,8 @@
     - 스프링 설정 작업을 수행하는 클래스 작성
     - 이 클래스에서 SqlSessionFactory 객체를 만든다. 
 - DefaultApplicationContainer.java 변경
-
+- ServerRequest.java 변경
+    - 파라미터 값을 저장할 때 URL Decoding 수행
 
 
 
