@@ -1,15 +1,17 @@
 # 변경 내역
-- 기존의 annotation 패키지 및 Component.java 제거
-- 기존의 context 패키지 및 ApplicationContext.java 제거
 - build.gradle 변경
-    - spring-context 라이브러리 추가
+    - servlet 라이브러리 추가
     - "gradle eclipse" 실행 및 프로젝트 갱신
-- DAO 및 컨트롤러에서 사용한 Component 애노테이션을 스프링 라이브러리에 있는 것으로 교체한다. 
-- AppConfig.java 추가
-    - 스프링 설정 작업을 수행하는 클래스 작성
-    - 이 클래스에서 SqlSessionFactory 객체를 만든다. 
-- DefaultApplicationContainer.java 변경
-
+- DispatcherServlet.java 추가 
+    - DefaultApplicationContainer.java의 역할을 수행할 클래스를 서블릿 규칙에 따라 만든다.
+- ServerRequestAdapter.java 추가
+    - 새 클래스인 HttpServletRequest를 이전 클래스에 맞추기 위함.
+- ServerResponseAdapter.java 추가
+    - 새 클래스인 HttpServletResponse를 이전 클래스에 맞추기 위함.
+- ApplicationContainer.java 제거
+- DefaultApplicationContainer.java 제거
+- AppServer.java 제거 
+- HttpServer.java 제거
 
 
 
