@@ -25,7 +25,8 @@
        그 메서드를 자동생성할 때 사용할 수 있다.
   -->
   <select id="selectList" 
-          resultMap="BoardMap" parameterType="map">
+          resultMap="BoardMap" 
+          parameterType="map">
     select bno, titl, cdt 
     from pms2_board
     <!--  limit #{startIndex}, #{pageSize} -->
