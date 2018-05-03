@@ -4,6 +4,14 @@ plugins {
     id 'eclipse'
 }
 
+// 소스 파일에서 사용하는 문자표(characterset)를 지정한다.
+// 지정하지 않으면 기본으로 ISO-8859-1 이라 간주된다.
+//compileJava.options.encoding = "UTF-8"
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+
 // run 작업에서 실행할 자바 클래스명 지정
 mainClassName = 'App'
 
