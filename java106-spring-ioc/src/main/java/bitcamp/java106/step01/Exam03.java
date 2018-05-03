@@ -2,9 +2,10 @@
 package bitcamp.java106.step01;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-public class Exam01 {
+public class Exam03 {
 
     public static void main(String[] args) {
         // 스프링 IoC 컨테이너는 ApplicationContext를 구현한다.
@@ -19,21 +20,14 @@ public class Exam01 {
         // 
         
         
-        // ClassPathXmlApplicationContext 사용
-        // => 자바 classpath에서 해당 경로의 XML 파일을 찾는다.
-        // => 물론 XML 파일은 스프링 규칙에 따라 태그가 작성되어 있다.
-        // => 설정 파일에 지정된 객체를 자동으로 생성하고 의존 객체를 주입하여 보관한다.
-        iocContainer = new ClassPathXmlApplicationContext(
-                "bitcamp/java106/step01/application-context.xml");
+        // AnnotationConfigApplicationContext 사용
+        // => 스프링 설정정보를 담고 있는 클래스 정보를 넘긴다.
+        iocContainer = new AnnotationConfigApplicationContext(AppConfig.class); 
         
         // IoC 컨테이너에 보관된 객체를 꺼내기
         Car car = (Car) iocContainer.getBean("c1");
         System.out.println(car);
         
-        // 존재하지 않는 자바 객체를 꺼내려 한다면?
-        // => 예외 발생!
-        car = (Car) iocContainer.getBean("c2");
-
     }
 
 }
