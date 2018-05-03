@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'eclipse'
+}
+
+// run 작업에서 실행할 자바 클래스명 지정
+mainClassName = 'App'
+
+// 다운로드 서버에서 받을 라이브러리를 지정한다.
+dependencies {
+    // Spring IoC 컨테이너 라이브러리
+    compile group: 'org.springframework', name: 'spring-context', version: '5.0.5.RELEASE'
+
+    compile 'com.google.guava:guava:23.0'
+    testCompile 'junit:junit:4.12'
+}
+
+// 의존 라이브러리를 다운로드 받을 서버의 정보를 설정한다.
+repositories {
+    jcenter()
+}
