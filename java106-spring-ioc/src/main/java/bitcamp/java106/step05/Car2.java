@@ -1,23 +1,24 @@
 package bitcamp.java106.step05;
 
 import java.util.Arrays;
+import java.util.List;
 
-public class Car {
+public class Car2 {
     String model;
     String maker;
     int cc;
     Engine engine;
-    Tire[] tires;
+    List<Tire> tires;
     
     @Override
     public String toString() {
-        return "Car [model=" + model + ", maker=" + maker + ", cc=" + cc + ", engine=" + engine + ", tires="
-                + Arrays.toString(tires) + "]";
+        return "Car2 [model=" + model + ", maker=" + maker + ", cc=" + cc + ", engine=" + engine + ", tires=" + tires
+                + "]";
     }
-    public Tire[] getTires() {
+    public List<Tire> getTires() {
         return tires;
     }
-    public void setTires(Tire[] tires) {
+    public void setTires(List<Tire> tires) {
         this.tires = tires;
     }
     public Engine getEngine() {

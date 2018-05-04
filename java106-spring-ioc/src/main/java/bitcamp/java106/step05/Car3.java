@@ -1,30 +1,22 @@
 package bitcamp.java106.step05;
 
-import java.util.Arrays;
+import java.util.Map;
 
-public class Car {
+public class Car3 {
     String model;
     String maker;
     int cc;
-    Engine engine;
-    Tire[] tires;
+    Map<String,Object> options;
     
     @Override
     public String toString() {
-        return "Car [model=" + model + ", maker=" + maker + ", cc=" + cc + ", engine=" + engine + ", tires="
-                + Arrays.toString(tires) + "]";
+        return "Car3 [model=" + model + ", maker=" + maker + ", cc=" + cc + ", options=" + options + "]";
     }
-    public Tire[] getTires() {
-        return tires;
+    public Map<String, Object> getOptions() {
+        return options;
     }
-    public void setTires(Tire[] tires) {
-        this.tires = tires;
-    }
-    public Engine getEngine() {
-        return engine;
-    }
-    public void setEngine(Engine engine) {
-        this.engine = engine;
+    public void setOptions(Map<String, Object> options) {
+        this.options = options;
     }
     public String getModel() {
         return model;
