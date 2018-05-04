@@ -1,30 +1,22 @@
 package bitcamp.java106.step05;
 
-import java.util.List;
+import java.util.Properties;
 
-public class Car2 {
+public class Car4 {
     String model;
     String maker;
     int cc;
-    Engine engine;
-    List<Tire> tires;
+    Properties options;
     
     @Override
     public String toString() {
-        return "Car2 [model=" + model + ", maker=" + maker + ", cc=" + cc + ", engine=" + engine + ", tires=" + tires
-                + "]";
+        return "Car4 [model=" + model + ", maker=" + maker + ", cc=" + cc + ", options=" + options + "]";
     }
-    public List<Tire> getTires() {
-        return tires;
+    public Properties getOptions() {
+        return options;
     }
-    public void setTires(List<Tire> tires) {
-        this.tires = tires;
-    }
-    public Engine getEngine() {
-        return engine;
-    }
-    public void setEngine(Engine engine) {
-        this.engine = engine;
+    public void setOptions(Properties options) {
+        this.options = options;
     }
     public String getModel() {
         return model;

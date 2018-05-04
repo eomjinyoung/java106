@@ -8,7 +8,7 @@
     <!-- 컬렉션 타입의 프로퍼티 값 설정하기 -->
     
     <bean id="c1" class="bitcamp.java106.step05.Car3">
-        <!-- List 프로퍼티 값 설정하기 : 배열과 똑같다.  -->
+        <!-- Map 프로퍼티 값 설정하기 : 배열과 똑같다.  -->
         <property name="options">
             <map>
                 <entry>
