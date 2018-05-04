@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 호출할 생성자 지정하기 II -->
+    
+    <!-- 생성자의 파라미터 값을 지정하는 간단한 방법 -->
+    <bean id="c2" class="bitcamp.java106.step03.Car">
+        <constructor-arg type="java.lang.String" value="티코"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+

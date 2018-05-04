@@ -32,6 +32,7 @@ public class Exam02 {
         BeanUtils.printBeanAliases(iocContainer, "c6");
         BeanUtils.printBeanAliases(iocContainer, "c7");
         BeanUtils.printBeanAliases(iocContainer, "c8");
+        BeanUtils.printBeanAliases(iocContainer, "c91");
     }
 
 }

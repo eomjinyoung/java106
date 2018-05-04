@@ -24,6 +24,9 @@
          사용할 수 있다. 그 외에는 불가하다! -->
     <bean id="c8" name="c81:c82:c83" class="bitcamp.java106.step02.Car"/>  
 
+    <!-- id 없이 name에 여러 개의 별명을 지정할 때는 그 중에서 첫 번째 별명이 
+         id로 사용된다. -->
+    <bean name="c91 c92 c93" class="bitcamp.java106.step02.Car"/>
 </beans>
 
 
