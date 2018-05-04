@@ -4,6 +4,7 @@ public class Car {
     String model;
     String maker;
     int cc;
+    Engine engine;
     
     public Car() {
         System.out.println("Car() 생성자 호출됨!");
@@ -11,9 +12,15 @@ public class Car {
     
     @Override
     public String toString() {
-        return "Car [model=" + model + ", maker=" + maker + ", cc=" + cc + "]";
+        return "Car [model=" + model + ", maker=" + maker + ", cc=" + cc + ", engine=" + engine + "]";
     }
-    
+    public Engine getEngine() {
+        return engine;
+    }
+    public void setEngine(Engine engine) {
+        System.out.println("setEngine() 호출됨!");
+        this.engine = engine;
+    }
     public String getModel() {
         return model;
     }
