@@ -7,6 +7,7 @@ import java.sql.Date;
 public class CustomEngineEditor extends PropertyEditorSupport {
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
+        System.out.println("CustomEngineEditor.setAsText()");
         String[] values = text.split(",");
         
         Engine engine = new Engine();
