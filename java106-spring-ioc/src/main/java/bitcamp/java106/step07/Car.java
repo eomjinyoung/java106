@@ -8,15 +8,24 @@ public class Car {
     int cc;
     boolean auto;
     Date createdDate;
+    Engine engine;
     
     public Car() {
         System.out.println("Car()");
     }
     
+    
     @Override
     public String toString() {
         return "Car [model=" + model + ", maker=" + maker + ", cc=" + cc + ", auto=" + auto + ", createdDate="
-                + createdDate + "]";
+                + createdDate + ", engine=" + engine + "]";
+    }
+    public Engine getEngine() {
+        return engine;
+    }
+    public void setEngine(Engine engine) {
+        System.out.println("Car.setEngine()");
+        this.engine = engine;
     }
     public boolean isAuto() {
         return auto;
