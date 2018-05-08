@@ -14,7 +14,7 @@
         <context:include-filter type="regex" 
             expression="bitcamp.java106.step09.b.B2"/>
 
-        <!-- 특정 패키지의 특정 클래스를 객체 생성 대상에서 제외하기 -->
+        <!-- 특정 패키지의 특정 클래스를 객체 생성 대상에서 제외하기  -->
         <context:exclude-filter type="regex" 
             expression="bitcamp.java106.step09.b.B"/>
             
