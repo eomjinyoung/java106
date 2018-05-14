@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>/step04/exam01</title>
+</head>
+<body>
+<h1>GET 요청</h1>
+<p>
+a 태그의 링크를 클릭하면 GET 요청을 한다.<br>
+http://localhost:8888/java106-web01/step04/exam01?name=aaa&age=20<br>
+<a href="http://localhost:8888/java106-web01/step04/exam01?name=aaa&age=20">GET요청</a>
+</p>
+
+<p>
+URL에서 '/'는 웹서버 루트를 의미한다.<br>
+/java106-web01/step04/exam01?name=aaa&age=20<br>
+<a href="/java106-web01/step04/exam01?name=aaa&age=20">GET요청</a>
+</p>
+
+<p>
+실무에서는 URL을 지정할 때 주로 상대 경로(/ 없이)를 지정한다. 
+즉 현재 경로를 기준으로 요청 경로를 지정한다.<br>
+exam01?name=aaa&age=20<br>
+<a href="exam01?name=aaa&age=20">GET요청</a>
+</p>
+
+<p>
+form 태그의 URL을 지정할 때도 상대 경로를 사용하는 것이 유지보수에 좋다.<br>
+<form action="exam01" method="get">
+이름: <input type="text" name="name"><br>
+나이: <input type="text" name="age"><br>
+<button>전송</button>
+</form>
+</p>
+
+<p>
+form 태그의 method 속성을 지정하지 않으면 기본이 get 이다.<br>
+<form action="exam01">
+이름: <input type="text" name="name"><br>
+나이: <input type="text" name="age"><br>
+<button>전송</button>
+</form>
+</p>
+
+<h1>POST 요청</h1>
+<p>
+form 태그의 method 속성 값을 post로 지정한다.<br>
+<form action="exam01" method="post">
+이름: <input type="text" name="name"><br>
+나이: <input type="text" name="age"><br>
+<button>전송</button>
+</form>
+</p>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
