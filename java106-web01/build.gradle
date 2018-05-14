@@ -10,10 +10,22 @@ plugins {
 }
 
 dependencies {
+    // [providedCompile 라이브러리]
+    // - 개발하고 실행할 때 사용된다. 
+    // - 배치에는 포함되지 않는다. 
     // 서블릿 프로그래밍 할 때 필요한 의존 라이브러리
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
 
+    // [compile 라이브러리]
+    // - 개발하고 실행할 때 사용된다.
+    // - 또한 배치할 때도 함께 복사된다. 
+    // 멀티파트 데이터 추출하는 의존 라이브러리
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.3'
     compile 'com.google.guava:guava:23.0'
+
+    // [testCompile]
+    // - 개발하고 단위 테스트할 때만 사용한다.
+    // - 배치에는 포함하지 않는다.
     testCompile 'junit:junit:4.12'
 }
 
