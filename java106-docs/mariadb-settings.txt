@@ -19,7 +19,6 @@ scoop 패키지 관리자를 이용하여 mariadb 설치
 > net stop mariadb
 > mysql.server stop    (Linux/Mac)
 
-
 ```
 
 ## mysql 서버에 접속하기
@@ -51,13 +50,14 @@ scoop 패키지 관리자를 이용하여 mariadb 설치
 > select user from mysql.user;
 
 ## MySQL 데이터베이스 생성
+mariadb에서는 default 키워드를 사용하지 않는다.
 > CREATE DATABASE 데이터베이스명
-  DEFAULT CHARACTER SET utf8
-  DEFAULT COLLATE utf8_general_ci;
+  CHARACTER SET utf8
+  COLLATE utf8_general_ci;
 
 > CREATE DATABASE studydb
-  DEFAULT CHARACTER SET utf8
-  DEFAULT COLLATE utf8_general_ci;
+  CHARACTER SET utf8
+  COLLATE utf8_general_ci;
   
 ## MySQL 사용자에게 데이터베이스 사용 권한 부여
 > GRANT ALL ON 데이터베이스명.* TO '사용자아이디'@'서버주소';
