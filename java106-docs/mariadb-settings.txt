@@ -2,6 +2,7 @@
 
 ## mariadb 설치
 ```
+[windows OS]
 scoop 패키지 관리자를 이용하여 mariadb 설치
 > scoop install mariadb
 
@@ -12,13 +13,22 @@ scoop 패키지 관리자를 이용하여 mariadb 설치
 서비스 시작 
     net start 서비스명
 > net start mariadb    (windows)
-> mysql.server start   (Linux/Mac)
 
 서비스 종료
     net stop 서비스명
 > net stop mariadb
-> mysql.server stop    (Linux/Mac)
 
+[mac]
+mariadb 설치
+> brew install mariadb
+
+mariadb 실행
+> brew services start mariadb
+> brew services stop mariadb
+또는
+> mysql.server start
+> mysql.server stop
+ 
 ```
 
 ## mysql 서버에 접속하기
