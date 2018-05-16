@@ -70,7 +70,7 @@ public class BoardViewServlet extends HttpServlet {
         out.println("<p>");
         out.println("<a href='list'>목록</a>");
         out.println("<button>변경</button>");
-        out.printf("<a href='delete?no=%d'>변경</a>\n", no);
+        out.printf("<a href='delete?no=%d'>삭제</a>\n", no);
         out.println("</p>");
         out.println("</form>");
         out.println("</body>");
