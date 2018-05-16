@@ -43,7 +43,7 @@ public class BoardViewServlet extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         out.println("<h1>게시물 보기</h1>");
-        
+        out.println("<form action='update' method='post'>");
         try {
             Board board = boardDao.selectOne(no);
             if (board == null) {
@@ -51,13 +51,13 @@ public class BoardViewServlet extends HttpServlet {
             }
             out.println("<table border='1'>");
             out.println("<tr><th>번호</th><td>");
-            out.printf("    <input type='text' value='%d'></td></tr>\n", 
+            out.printf("    <input type='text' name='no' value='%d' readonly></td></tr>\n", 
                     board.getNo());
             out.println("<tr><th>제목</th>");
-            out.printf("    <td><input type='text' value='%s'></td></tr>\n",
+            out.printf("    <td><input type='text' name='title' value='%s'></td></tr>\n",
                     board.getTitle());
             out.println("<tr><th>내용</th>");
-            out.printf("    <td><textarea rows='10' cols='60'>%s</textarea></td></tr>\n",
+            out.printf("    <td><textarea name='content' rows='10' cols='60'>%s</textarea></td></tr>\n",
                     board.getContent());
             out.printf("<tr><th>등록일</th><td>%s</td></tr>\n", 
                     board.getCreatedDate());
@@ -67,7 +67,12 @@ public class BoardViewServlet extends HttpServlet {
             out.printf("<p>%s</p>\n", e.getMessage());
             e.printStackTrace(out);
         }
-        out.println("<p><a href='list'>목록</a></p>");
+        out.println("<p>"
+                + "<a href='list'>목록</a>"
+                + "<button>변경</button>"
+                + "</p>");
+        
+        out.println("</form>");
         out.println("</body>");
         out.println("</html>");
     }
