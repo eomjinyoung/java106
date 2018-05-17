@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+  version="4.0"
+  metadata-complete="false">
+    <!-- matadata-complete 값이 true이면 web.xml 파일에 등록된 정보만 유효하다.
+         @WebServlet, @WebFilter 처럼 애노테이션으로도 지정할 수 있으려면,
+         false 값으로 설정해야 한다. -->
+    
+    <!-- 선택 항목 -->
+    <description>
+      웹 애플리케이션에 대한 설명을 적는 태그이다.
+    </description>
+    
+    <!-- 선택 항목 -->
+    <display-name>
+      서버 관리자 화면에서 출력될 웹 애플리케이션 이름을 적는 태그이다.
+    </display-name>
+
+    <!--  
+    <request-character-encoding>UTF-8</request-character-encoding>
+    -->
+    
+    <!-- 클라이언트가 요청한 자원을 찾을 수 없을 때 
+         서블릿 컨테이너는 URL로 지정된 폴더를 찾는다. 
+         그리고 다음에 나열된 파일을 순서대로 찾는다.
+         있다면 그 파일을 클라이언트에게 보낸다. -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>
