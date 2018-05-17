@@ -44,6 +44,7 @@ public class MemberViewServlet extends HttpServlet {
         out.println("<body>");
         out.println("<h1>멤버 보기</h1>");
         out.println("<form action='update' method='post'>");
+        
         try {
             Member member = memberDao.selectOne(id);
     

@@ -30,6 +30,7 @@ public class TeamListServlet extends HttpServlet {
     protected void doGet(
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
@@ -37,10 +38,10 @@ public class TeamListServlet extends HttpServlet {
         out.println("<html>");
         out.println("<head>");
         out.println("<meta charset='UTF-8'>");
-        out.println("<title>멤버 목록</title>");
+        out.println("<title>팀 목록</title>");
         out.println("</head>");
         out.println("<body>");
-        out.println("<h1>멤버 목록</h1>");
+        out.println("<h1>팀 목록</h1>");
         
         try {
             List<Team> list = teamDao.selectList();
