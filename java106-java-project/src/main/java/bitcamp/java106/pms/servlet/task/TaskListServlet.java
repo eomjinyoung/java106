@@ -47,7 +47,7 @@ public class TaskListServlet extends HttpServlet {
         out.println("<title>작업 목록</title>");
         out.println("</head>");
         out.println("<body>");
-        out.println("<h1>작업 목록</h1>");
+        out.printf("<h1>'%s'의 작업 목록</h1>\n", teamName);
         
         try {
             Team team = teamDao.selectOne(teamName);
@@ -56,7 +56,7 @@ public class TaskListServlet extends HttpServlet {
             }
             List<Task> list = taskDao.selectList(team.getName());
             
-            out.println("<p><a href='form.html'>새작업</a></p>");
+            out.printf("<p><a href='add?teamName=%s'>새작업</a></p>\n", teamName);
             out.println("<table border='1'>");
             out.println("<tr>");
             out.println("    <th>번호</th><th>작업명</th><th>기간</th><th>작업자</th>");
