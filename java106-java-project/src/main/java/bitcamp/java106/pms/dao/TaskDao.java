@@ -27,6 +27,15 @@ public class TaskDao {
         } 
     }
     
+    public int deleteByTeam(String teamName) throws Exception {
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            int count = sqlSession.delete(
+                    "bitcamp.java106.pms.dao.TaskDao.deleteByTeam", teamName);
+            sqlSession.commit();
+            return count;
+        } 
+    }
+    
     public List<Task> selectList(String teamName) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             return sqlSession.selectList(

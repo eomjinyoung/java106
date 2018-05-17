@@ -61,9 +61,13 @@ public class TaskViewServlet extends HttpServlet {
                     task.getTeam().getName());
             
             out.println("<form action='update' method='post'>");
-            out.printf("<input type='hidden' name='teamName' value='%s'>\n", 
-                    task.getTeam().getName());
+            out.printf("<input type='hidden' name='no' value='%d'>\n", no);
             out.println("<table border='1'>");
+            out.println("<tr>");
+            out.printf("    <th>팀명</th>"
+                    + "<td><input type='text' name='teamName' value='%s' readOnly></td>\n",
+                    task.getTeam().getName());
+            out.println("</tr>");
             out.println("<tr>");
             out.printf("    <th>작업명</th>"
                     + "<td><input type='text' name='title' value='%s'></td>\n",
@@ -85,27 +89,29 @@ public class TaskViewServlet extends HttpServlet {
             out.println("        <select name='memberId'>");
             out.println("            <option value=''>--선택 안함--</option>");
             
-            String worker = null;
-            if (task.getWorker() != null) {
-                worker = task.getWorker().getId();
-            }
             for (Member member : members) {
                 out.printf("            <option %s>%s</option>\n",
-                        (member.getId().equals(worker)) ? "selected" : "",
+                        (member.equals(task.getWorker())) ? "selected" : "",
                         member.getId());
             }
+            
             out.println("        </select>");
             out.println("    </td>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("    <th>작업상태</th><td><select name='state'>");
-            out.println("        <option value='0'>작업대기</option>");
-            out.println("        <option value='1'>작업중</option>");
-            out.println("        <option value='9'>작업완료</option>");
+            out.printf("        <option value='0' %s>작업대기</option>\n",
+                    (task.getState() == 0) ? "selected" : "");
+            out.printf("        <option value='1' %s>작업중</option>\n",
+                    (task.getState() == 1) ? "selected" : "");
+            out.printf("        <option value='9' %s>작업완료</option>\n",
+                    (task.getState() == 9) ? "selected" : "");
             out.println("    </select></td>");
             out.println("</tr>");
             out.println("</table>");
-            out.println("<button>변경</button>");
+            out.println("<button>변경</button> ");
+            out.printf("<a href='delete?no=%d&teamName=%s'>삭제</a>\n", 
+                    no, task.getTeam().getName());
             out.println("</form>");
 
         } catch (Exception e) {
@@ -117,6 +123,7 @@ public class TaskViewServlet extends HttpServlet {
     }
 }
 
+//ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - TaskController에서 view() 메서드를 추출하여 클래스로 정의.
