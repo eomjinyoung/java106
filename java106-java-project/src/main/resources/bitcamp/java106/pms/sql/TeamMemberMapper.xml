@@ -5,10 +5,23 @@
 
 <mapper namespace="bitcamp.java106.pms.dao.TeamMemberDao">
   
+  <resultMap type="member" id="memberMap">
+    <id column="mid" property="id"/>
+    <result column="email" property="email"/>
+  </resultMap>
+  
   <select id="selectList" 
           resultType="string" parameterType="string">
     select mid from pms2_team_member 
     where tnm=#{value}
+    <!--  limit #{startIndex}, #{pageSize} -->
+  </select>
+  
+  <select id="selectListWithEmail" 
+          resultMap="memberMap" parameterType="string">
+    select tm.mid, m.email 
+    from pms2_team_member tm inner join pms2_member m on tm.mid=m.mid
+    where tm.tnm=#{value}
     <!--  limit #{startIndex}, #{pageSize} -->
   </select>
   
