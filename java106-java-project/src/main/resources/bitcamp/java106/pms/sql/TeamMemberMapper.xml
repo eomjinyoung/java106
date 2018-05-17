@@ -38,7 +38,10 @@
   
   <delete id="delete" parameterType="map">
     delete from pms2_team_member 
-    where tnm=#{teamName} and mid=#{memberId}
+    where tnm=#{teamName}
+    <if test="memberId != null"> 
+          and mid=#{memberId}
+    </if>
   </delete>
 </mapper>
 

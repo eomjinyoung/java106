@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bitcamp.java106.pms.dao.TeamDao;
+import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.servlet.InitServlet;
 
 @SuppressWarnings("serial")
@@ -17,10 +18,12 @@ import bitcamp.java106.pms.servlet.InitServlet;
 public class TeamDeleteServlet extends HttpServlet {
 
     TeamDao teamDao;
+    TeamMemberDao teamMemberDao;
     
     @Override
     public void init() throws ServletException {
         teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
+        teamMemberDao = InitServlet.getApplicationContext().getBean(TeamMemberDao.class);
     }
 
     @Override
@@ -44,6 +47,7 @@ public class TeamDeleteServlet extends HttpServlet {
         out.println("<body>");
         out.println("<h1>팀 삭제 결과</h1>");
         try {
+            teamMemberDao.delete(name);
             int count = teamDao.delete(name);
     
             if (count == 0) {
