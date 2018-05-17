@@ -94,7 +94,7 @@ CREATE TABLE pms2_task (
     sdt  DATETIME     NOT NULL COMMENT '시작일', -- 시작일
     edt  DATETIME     NOT NULL COMMENT '종료일', -- 종료일
     stat INT          NULL     COMMENT '상태', -- 상태
-    mid  VARCHAR(20)  NOT NULL COMMENT '작업자', -- 작업자
+    mid  VARCHAR(20)  NULL     COMMENT '작업자', -- 작업자
     tnm  VARCHAR(100) NOT NULL COMMENT '팀명' -- 팀명
 )
 COMMENT '작업';
