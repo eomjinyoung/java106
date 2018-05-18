@@ -2,7 +2,6 @@ package bitcamp.java106.pms.servlet.board;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,46 +32,39 @@ public class BoardAddServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        // 클라이언트가 보낸 데이터가 어떤 문자표를 사용해서 작성한지 알아야만 
-        // String 객체(UTF-16)로 값을 꺼낼 수 있다. 
         request.setCharacterEncoding("UTF-8");
         
-        Board board = new Board();
-        board.setTitle(request.getParameter("title"));
-        board.setContent(request.getParameter("content"));
-        board.setCreatedDate(new Date(System.currentTimeMillis()));
-        
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<meta charset='UTF-8'>");
-        
-        // 지정된 시간이 경과하면 특정 서블릿을 요청하도록 태그를 삽입!
-        // => 웹브라우저는 meta 태그의 내용대로 동작한다.
-        //    content='경과시간(초);url=요청할URL'
-        //
-        out.println("<meta http-equiv='Refresh' content='1;url=list'>");
-        
-        out.println("<title>게시물 등록</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>게시물 등록 결과</h1>");
         try {
+            Board board = new Board();
+            board.setTitle(request.getParameter("title"));
+            board.setContent(request.getParameter("content"));
+
             boardDao.insert(board);
-            out.println("<p>등록 성공!</p>");
+            response.sendRedirect("list");
+            
         } catch (Exception e) {
-            out.println("<p>등록 실패!</p>");
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<meta charset='UTF-8'>");
+            out.println("<meta http-equiv='Refresh' content='5;url=list'>");
+            out.println("<title>게시물 등록</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>게시물 등록 실패</h1>");
+            out.println("<pre>");
             e.printStackTrace(out);
+            out.println("</pre>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        out.println("</body>");
-        out.println("</html>");
     }
 
 }
 
+//ver 38 - redirect 적용
 //ver 37 - BoardAddController 클래스를 서블릿으로 변경
 //         출력 결과를 HTML로 변경
 //         자동 Refresh 태그 추가
