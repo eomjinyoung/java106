@@ -20,6 +20,13 @@
     <!--  limit #{startIndex}, #{pageSize} -->
   </select>
   
+  <select id="selectOne" 
+          resultMap="ClassroomMap" parameterType="int">
+    select crno,titl,sdt,edt,room 
+    from pms2_classroom
+    where crno=#{value}
+  </select>
+  
   <insert id="insert" parameterType="Classroom"
           useGeneratedKeys="true" keyColumn="crno" keyProperty="no">
     insert into pms2_classroom(titl,sdt,edt,room) 
