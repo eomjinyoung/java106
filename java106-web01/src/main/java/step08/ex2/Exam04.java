@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("/step08/ex2/exam02")
-public class Exam02 extends HttpServlet {
+@WebServlet("/step08/ex2/exam04")
+public class Exam04 extends HttpServlet {
     @Override
     protected void doGet(
             HttpServletRequest request, 
@@ -21,10 +21,10 @@ public class Exam02 extends HttpServlet {
         
         String op = request.getParameter("op");
         
-        if (!op.equals("-")) {
+        if (!op.equals("/")) {
             // + 연산자가 아니라면 다음 서블릿에게 실행을 위임한다.
             RequestDispatcher 요청배달자 = request.getRequestDispatcher(
-                    "/step08/ex2/exam03");
+                    "/step08/ex2/exam05");
             요청배달자.forward(request, response);
             return;
         }
@@ -42,7 +42,7 @@ public class Exam02 extends HttpServlet {
         out.println("  <title>계산결과</title>");
         out.println("</head>");
         out.println("<body>");
-        out.printf("<p>%d - %d = %d</p>\n", a, b, (a - b));
+        out.printf("<p>%d / %d = %d</p>\n", a, b, (a / b));
         out.println("</body>");
         out.println("</html>");
     }
