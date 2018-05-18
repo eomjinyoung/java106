@@ -37,39 +37,39 @@ public class TeamDeleteServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String name = request.getParameter("name");
         
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<meta charset='UTF-8'>");
-        out.println("<meta http-equiv='Refresh' content='1;url=list'>");
-        out.println("<title>팀 삭제</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>팀 삭제 결과</h1>");
         
         try {
             teamMemberDao.delete(name);
             taskDao.deleteByTeam(name);
             int count = teamDao.delete(name);
-    
             if (count == 0) {
-                out.println("<p>해당 팀이 없습니다.</p>");
-            } else {
-                out.println("<p>삭제하였습니다.</p>");
+                throw new Exception ("해당 팀이 없습니다.");
             }
+            response.sendRedirect("list");
+            
         } catch (Exception e) {
-            out.println("<p>삭제 실패!</p>");
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<meta charset='UTF-8'>");
+            out.println("<meta http-equiv='Refresh' content='5;url=list'>");
+            out.println("<title>팀 삭제</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>팀 삭제 실패!</h1>");
+            out.println("<pre>");
             e.printStackTrace(out);
+            out.println("</pre>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        out.println("</body>");
-        out.println("</html>");
     }
-    
 }
 
+//ver 38 - redirect 적용
 //ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경

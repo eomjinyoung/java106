@@ -47,7 +47,8 @@ public class TaskListServlet extends HttpServlet {
         out.println("<title>작업 목록</title>");
         out.println("</head>");
         out.println("<body>");
-        out.printf("<h1>'%s'의 작업 목록</h1>\n", teamName);
+        out.printf("<h1><a href='../team/view?name=%s'>%s</a>의 작업 목록</h1>\n", 
+                teamName, teamName);
         
         try {
             Team team = teamDao.selectOne(teamName);
