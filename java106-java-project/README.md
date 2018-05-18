@@ -1,5 +1,12 @@
 # 자바 프로젝트
 
+## src39 - forward, include 기술 적용 
+학습목표
+    - forward와 include의 용도를 이해하고 적용할 수 있다.
+작업내용
+    - 오류 처리 코드를 별도의 서블릿으로 분리하여 forward 한다.
+    - 팀 상세보기 화면을 여러 서블릿으로 분리하여 include 한다.
+
 ## src38 - refresh, redirect 기술 적용
 학습목표
     - refresh와 redirect의 동작을 이해하고 사용할 수 있다.

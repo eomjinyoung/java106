@@ -1,10 +1,10 @@
 package bitcamp.java106.pms.servlet.task;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -63,28 +63,16 @@ public class TaskUpdateServlet extends HttpServlet {
             // 위와 같이 개발자가 직접 URL 인코딩 해야 한다.
             
         } catch (Exception e) {
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<meta charset='UTF-8'>");
-            out.printf("<meta http-equiv='Refresh' content='5;url=list?teamName=%s'>\n",
-                    teamName);
-            out.println("<title>작업 변경</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.printf("<h1>'%s' 팀의 작업 변경</h1>\n", teamName);
-            out.println("<pre>");
-            e.printStackTrace(out);
-            out.println("</pre>");
-            out.println("</body>");
-            out.println("</html>");
+            RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
+            request.setAttribute("error", e);
+            request.setAttribute("title", "작업 변경 실패!");
+            요청배달자.forward(request, response);
         }
     }
+    
 }
 
+//ver 39 - forward 적용
 //ver 38 - redirect 적용
 //ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API가 적용된 DAO 사용

@@ -3,8 +3,8 @@ public class StudentSelector {
 
     public static void main(String[] args) throws Exception {
         String[] students = {
-                "강동현", "김가람", "김범수", "정준기","오현주"
-            };
+                "서도경", "정준기", "경명수", "박현기","김관희"
+        };
         /*
         String[] students = {
             "강동현", "경명수", "김가람", "김관희", "김기남", "김범수", "김복진",

@@ -5,10 +5,7 @@ public class StudentSelector2 {
 
     public static void main(String[] args) throws Exception {
         String[] students = {
-                "1", "3", "5", "5",
-                "2", "2", "4", "4",
-                "5", "1", "3", "1",
-                "2", "1", "3", "4", "2"
+                "1", "2", "2", "1"
             };
         /*
         String[] students = {
@@ -29,7 +26,7 @@ public class StudentSelector2 {
         while (list.size() > 0) {
             for (int i = 0; i < 10; i++) {
                 System.out.print(".");
-                Thread.currentThread().sleep(200);
+                Thread.currentThread().sleep(500);
             }
             selectedNo = (int)(Math.random() * list.size());
             System.out.println(list.remove(selectedNo));
