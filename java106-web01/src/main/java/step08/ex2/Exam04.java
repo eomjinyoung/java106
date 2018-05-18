@@ -42,6 +42,7 @@ public class Exam04 extends HttpServlet {
         out.println("  <title>계산결과</title>");
         out.println("</head>");
         out.println("<body>");
+        out.println("<h1>exam04</h1>");
         out.printf("<p>%d / %d = %d</p>\n", a, b, (a / b));
         out.println("</body>");
         out.println("</html>");

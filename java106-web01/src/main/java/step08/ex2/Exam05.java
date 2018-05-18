@@ -28,6 +28,7 @@ public class Exam05 extends HttpServlet {
         out.println("  <title>계산결과</title>");
         out.println("</head>");
         out.println("<body>");
+        out.println("<h1>exam05</h1>");
         out.println("<p>해당 연산자를 사용할 수 없습니다.</p>");
         out.println("</body>");
         out.println("</html>");

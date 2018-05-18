@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("/step08/ex2/exam01")
+@WebServlet("/step08/ex2/calculator")
 public class Exam01 extends HttpServlet {
     @Override
     protected void doGet(
@@ -29,6 +29,15 @@ public class Exam01 extends HttpServlet {
             return;
         }
         
+        // 주의!
+        // => + 문자를 다음과 같이 URL에 파라미터 값으로 보내면 
+        //    서버에서는 공백 문자로 간주한다.
+        //    예) http://localhost:8888/java106-web01/step08/ex2/exam01?op=+&a=20&b=15
+        // => 즉 URL에서 '+' 문자는 공백을 표시할 때 사용하는 특수 기호이다.
+        // => URL 파라미터 값으로 '+' 문자를 서버에 보내고 싶다면 URL 인코딩 값을 보내라 
+        //    '+' ===> %2B (%2b)
+        //
+        
         int a = Integer.parseInt(request.getParameter("a"));
         int b = Integer.parseInt(request.getParameter("b"));
         
@@ -42,6 +51,7 @@ public class Exam01 extends HttpServlet {
         out.println("  <title>계산결과</title>");
         out.println("</head>");
         out.println("<body>");
+        out.println("<h1>exam01</h1>");
         out.printf("<p>%d + %d = %d</p>\n", a, b, (a + b));
         out.println("</body>");
         out.println("</html>");
