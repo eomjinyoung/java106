@@ -23,6 +23,23 @@
     <request-character-encoding>UTF-8</request-character-encoding>
     -->
     
+    <!-- 필터 배치하기 -->
+    <!-- 필터 등록 -->
+    <!--  
+    <filter>
+        <filter-name>filter1</filter-name>
+        <filter-class>step09.ex1.Filter1</filter-class>
+    </filter>
+    -->
+    
+    <!-- 필터를 적용할 URL 지정 -->
+    <!--  
+    <filter-mapping>
+        <filter-name>filter1</filter-name>
+        <url-pattern>/step09/ex1/*</url-pattern>
+    </filter-mapping>
+    -->
+    
     <!-- 개발자가 만든 서블릿 클래스의 정보를 등록 -->
     <servlet>
       <!-- 서블릿 클래스의 별명: 보통 유지보수 하기 쉽게 클래스명을 사용한다. -->
