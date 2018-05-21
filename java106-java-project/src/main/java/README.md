@@ -1,6 +1,5 @@
 # 변경 내역
-- TeamViewServlet 변경
-- TeamMemberListServlet 추가
+- 모든 서블릿 변경
 
 
 

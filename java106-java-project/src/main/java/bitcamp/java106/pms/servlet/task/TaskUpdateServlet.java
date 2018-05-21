@@ -39,7 +39,6 @@ public class TaskUpdateServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
         
         try {
@@ -72,6 +71,8 @@ public class TaskUpdateServlet extends HttpServlet {
     
 }
 
+//ver 40 - CharacterEncodingFilter 필터 적용.
+//         request.setCharacterEncoding("UTF-8") 제거
 //ver 39 - forward 적용
 //ver 38 - redirect 적용
 //ver 37 - 컨트롤러를 서블릿으로 변경
