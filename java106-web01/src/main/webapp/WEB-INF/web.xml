@@ -25,20 +25,26 @@
     
     <!-- 필터 배치하기 -->
     <!-- 필터 등록 -->
-    <!--  
     <filter>
-        <filter-name>filter1</filter-name>
-        <filter-class>step09.ex1.Filter1</filter-class>
+        <filter-name>filter3</filter-name>
+        <filter-class>step09.ex1.Filter3</filter-class>
+        <!-- 필터에 전달할 값이 있다면 init-param 태그를 사용하여 설정하라!
+             서블릿에서도 init-param 태그를 사용할 수 있다. -->
+        <init-param>
+            <param-name>v1</param-name>
+            <param-value>aaa</param-value>
+        </init-param>
+        <init-param>
+            <param-name>v2</param-name>
+            <param-value>bbb</param-value>
+        </init-param>
     </filter>
-    -->
     
     <!-- 필터를 적용할 URL 지정 -->
-    <!--  
     <filter-mapping>
-        <filter-name>filter1</filter-name>
-        <url-pattern>/step09/ex1/*</url-pattern>
+        <filter-name>filter3</filter-name>
+        <url-pattern>/step09/ex1/exam03</url-pattern>
     </filter-mapping>
-    -->
     
     <!-- 개발자가 만든 서블릿 클래스의 정보를 등록 -->
     <servlet>
@@ -57,6 +63,26 @@
         <url-pattern>/step02/exam02</url-pattern>
         <url-pattern>/step02/exam02.html</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Exam03</servlet-name>
+        <servlet-class>step09.ex1.Exam03</servlet-class>
+        <!-- 서블릿에서 고정적으로 사용할 값이 있다면 init-param 태그에 설정한다. -->
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>홍길동</param-value>
+        </init-param>
+        <init-param>
+            <param-name>age</param-name>
+            <param-value>20</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Exam03</servlet-name>
+        <url-pattern>/step09/ex1/exam03</url-pattern>
+    </servlet-mapping>
+    
+    
     
     <!-- 클라이언트가 요청한 자원을 찾을 수 없을 때 
          서블릿 컨테이너는 URL로 지정된 폴더를 찾는다. 

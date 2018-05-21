@@ -19,6 +19,19 @@
       서버 관리자 화면에서 출력될 웹 애플리케이션 이름을 적는 태그이다.
     </display-name>
 
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>bitcamp.java106.pms.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!--  
     <request-character-encoding>UTF-8</request-character-encoding>
     -->
