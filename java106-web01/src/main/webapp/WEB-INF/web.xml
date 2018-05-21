@@ -23,6 +23,14 @@
     <request-character-encoding>UTF-8</request-character-encoding>
     -->
     
+    <!-- 리스너 배치 -->
+    <!--  
+    <listener>
+        <listener-class>step09.ex2.Listener1</listener-class>
+    </listener>
+    -->
+    
+    
     <!-- 필터 배치하기 -->
     <!-- 필터 등록 -->
     <filter>
