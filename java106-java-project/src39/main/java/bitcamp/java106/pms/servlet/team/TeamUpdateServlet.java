@@ -1,7 +1,7 @@
-package bitcamp.java106.pms.servlet.teammember;
+package bitcamp.java106.pms.servlet.team;
 
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,46 +11,45 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bitcamp.java106.pms.dao.TeamDao;
-import bitcamp.java106.pms.dao.TeamMemberDao;
+import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.servlet.InitServlet;
 
 @SuppressWarnings("serial")
-@WebServlet("/team/member/delete")
-public class TeamMemberDeleteServlet extends HttpServlet {
-    
+@WebServlet("/team/update")
+public class TeamUpdateServlet extends HttpServlet {
+
     TeamDao teamDao;
-    TeamMemberDao teamMemberDao;
     
     @Override
     public void init() throws ServletException {
         teamDao = InitServlet.getApplicationContext().getBean(TeamDao.class);
-        teamMemberDao = InitServlet.getApplicationContext().getBean(TeamMemberDao.class);
     }
-    
+
     @Override
-    protected void doGet(
+    protected void doPost(
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
-        String teamName = request.getParameter("teamName");
-        String memberId = request.getParameter("memberId");
-        
         
         try {
-            int count = teamMemberDao.delete(teamName, memberId);
+            Team team = new Team();
+            team.setName(request.getParameter("name"));
+            team.setDescription(request.getParameter("description"));
+            team.setMaxQty(Integer.parseInt(request.getParameter("maxQty")));
+            team.setStartDate(Date.valueOf(request.getParameter("startDate")));
+            team.setEndDate(Date.valueOf(request.getParameter("endDate")));
+            
+            int count = teamDao.update(team);
             if (count == 0) {
-                throw new Exception("<p>해당 팀원이 존재하지 않습니다.</p>");
+                throw new Exception("<p>해당 팀이 존재하지 않습니다.</p>");
             }
-            response.sendRedirect("../view?name=" + 
-                    URLEncoder.encode(teamName, "UTF-8"));
-            // 개발자가 요청이나 응답헤더를 직접 작성하여 값을 주고 받으로 한다면,
-            // URL 인코딩과 URL 디코딩을 손수 해 줘야 한다.
+            response.sendRedirect("list");
             
         } catch (Exception e) {
             RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
             request.setAttribute("error", e);
-            request.setAttribute("title", "팀 회원 삭제 실패!");
+            request.setAttribute("title", "팀 변경 실패!");
             요청배달자.forward(request, response);
         }
     }
@@ -62,11 +61,11 @@ public class TeamMemberDeleteServlet extends HttpServlet {
 //ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
-//ver 26 - TeamMemberController에서 delete() 메서드를 추출하여 클래스로 정의.
+//ver 26 - TeamController에서 update() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.
-//ver 18 - ArrayList가 적용된 TeamMemberDao를 사용한다.
-//ver 17 - TeamMemberDao 클래스를 사용하여 팀 멤버의 아이디를 관리한다.
+//ver 22 - TaskDao 변경 사항에 맞춰 이 클래스를 변경한다.
+//ver 18 - ArrayList가 적용된 TeamDao를 사용한다.
 //ver 16 - 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.
-// ver 15 - 팀 멤버를 등록, 조회, 삭제할 수 있는 기능 추가. 
+// ver 15 - TeamDao를 생성자에서 주입 받도록 변경.
 // ver 14 - TeamDao를 사용하여 팀 데이터를 관리한다.
 // ver 13 - 시작일, 종료일을 문자열로 입력 받아 Date 객체로 변환하여 저장.
