@@ -6,8 +6,10 @@
     - FilterConfig 객체를 사용하여 web.xml에 있는 init-param 값을 사용할 수 있다.
     - 리스너의 구동 원리를 이해하고 적용할 수 있다.
 작업내용
-    - 서블릿들이 공통으로 수행하는 작업(예: 클라이언트 데이터 인코딩 지정)을 필터로 옮긴다.
-    - 모든 클라이언트들이 사용할 도구(스프링 IoC 컨테이너) 준비
+    - Filter에서 클라이언트 데이터 인코딩 지정을 수행한다.
+      (CharacterEncodingFilter)
+    - ServletContextListener 구현체에서 스프링 IoC 컨테이너 준비
+      (ContextLoaderListener, WebApplicationContextUtils)
 
 ## src39 - forward, include 기술 적용 
 학습목표
