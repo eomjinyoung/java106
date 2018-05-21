@@ -4,7 +4,6 @@ package step09.ex1;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,9 +18,6 @@ public class Exam01 extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        request.setCharacterEncoding("UTF-8");
-        String name = request.getParameter("name");
-        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
@@ -29,24 +25,16 @@ public class Exam01 extends HttpServlet {
         out.println("<html>");
         out.println("<head>");
         out.println("  <meta charset='UTF-8'>");
-        out.println("  <title>include</title>");
-        
-        RequestDispatcher 요청배달자 = request.getRequestDispatcher("/step08/ex3/common");
-        요청배달자.include(request, response);
-        
+        out.println("  <title>exam01</title>");
         out.println("</head>");
         out.println("<body>");
-        
-        요청배달자 = request.getRequestDispatcher("/step08/ex3/header");
-        요청배달자.include(request, response);
-        
-        out.printf("<h1>%s 님 반갑습니다.</h1>\n", name);
-        
-        요청배달자 = request.getRequestDispatcher("/step08/ex3/footer");
-        요청배달자.include(request, response);
-        
+        out.println("<h1>exam01 실행!</h1>");
         out.println("</body>");
         out.println("</html>");
+        
+        // 콘솔 창에 서블릿이 실행되었음을 표시하기 위해 출력한다.
+        // => 필터의 실행과 서블릿의 실행 순서를 확인하기 위함이다.
+        System.out.println("/step09/ex1/exam01 실행!");
     }
 }
 
