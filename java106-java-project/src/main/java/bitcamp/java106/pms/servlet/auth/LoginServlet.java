@@ -4,6 +4,7 @@ package bitcamp.java106.pms.servlet.auth;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -11,9 +12,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+
+import bitcamp.java106.pms.dao.MemberDao;
+import bitcamp.java106.pms.domain.Member;
+import bitcamp.java106.pms.support.WebApplicationContextUtils;
+
 @SuppressWarnings("serial")
 @WebServlet("/auth/login")
 public class LoginServlet extends HttpServlet {
+    
+    MemberDao memberDao;
+    
+    @Override
+    public void init() throws ServletException {
+        ApplicationContext iocContainer = 
+                WebApplicationContextUtils.getWebApplicationContext(
+                        this.getServletContext()); 
+        memberDao = iocContainer.getBean(MemberDao.class);
+    }
+    
     @Override
     protected void doGet(
             HttpServletRequest request, 
@@ -78,7 +96,39 @@ public class LoginServlet extends HttpServlet {
         }
         response.addCookie(cookie);
         
-        response.sendRedirect(request.getContextPath()); // => "/java106-java-project"
+        try {
+            Member member = memberDao.selectOneWithPassword(id, password);
+            
+            if (member != null) { // 로그인 성공!
+                response.sendRedirect(request.getContextPath()); // => "/java106-java-project"
+                
+            } else { // 로그인 실패!
+                response.setContentType("text/html;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<meta charset='UTF-8'>");
+                String refererUrl = request.getHeader("Referer");
+                if (refererUrl != null) {
+                    out.printf("<meta http-equiv='Refresh' content='1;url=%s'>", 
+                            request.getContextPath() + "/auth/login"); 
+                }
+                out.println("<title>로그인</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>로그인 실패!</h1>");
+                out.println("<p>아이디 또는 암호가 맞지 않습니다.</p>");
+                out.println("</body>");
+                out.println("</html>");
+            }
+        } catch (Exception e) {
+            RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
+            request.setAttribute("error", e);
+            request.setAttribute("title", "로그인 실패!");
+            요청배달자.forward(request, response);
+        }
     }
 }
 
@@ -91,7 +141,7 @@ public class LoginServlet extends HttpServlet {
 //                                                       <=== 응답: index.html
 // 메인화면 출력!
 
-
+//ver 41 - 클래스 추가
 
 
 
