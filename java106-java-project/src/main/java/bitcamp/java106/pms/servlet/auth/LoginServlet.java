@@ -11,6 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 
@@ -99,10 +100,15 @@ public class LoginServlet extends HttpServlet {
         try {
             Member member = memberDao.selectOneWithPassword(id, password);
             
+            HttpSession session = request.getSession();
+            
             if (member != null) { // 로그인 성공!
                 response.sendRedirect(request.getContextPath()); // => "/java106-java-project"
+                session.setAttribute("loginUser", member);
                 
             } else { // 로그인 실패!
+                session.invalidate();
+                
                 response.setContentType("text/html;charset=UTF-8");
                 PrintWriter out = response.getWriter();
                 
