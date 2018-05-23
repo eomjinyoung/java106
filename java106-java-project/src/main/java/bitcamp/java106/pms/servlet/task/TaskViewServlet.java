@@ -53,6 +53,7 @@ public class TaskViewServlet extends HttpServlet {
         out.println("<title>작업 보기</title>");
         out.println("</head>");
         out.println("<body>");
+        request.getRequestDispatcher("/header").include(request, response);
         out.println("<h1>작업 보기</h1>");
         
         try {

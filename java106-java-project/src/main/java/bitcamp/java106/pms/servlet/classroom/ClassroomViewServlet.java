@@ -47,6 +47,7 @@ public class ClassroomViewServlet extends HttpServlet {
         out.println("<title>강의 보기</title>");
         out.println("</head>");
         out.println("<body>");
+        request.getRequestDispatcher("/header").include(request, response);
         out.println("<h1>강의 보기</h1>");
         
         try {
