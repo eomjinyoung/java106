@@ -35,6 +35,17 @@ public class Exam01 extends HttpServlet {
         out.println("세션을 만들고 세션에 값을 저장했습니다.");
         out.println("그리고 세션의 아이디를 쿠키로 보냈습니다.");
         
+// 세션 생성: getSession() 호출 
+// - 우선 웹브라우저가 보낸 쿠키 중에서 세션 아이디가 있는지 확인한다.
+// - 만약 없다면 새 세션 객체(HttpSession)를 생성한 후 그 세션 객체를 리턴한다.
+// - 응답할 때 새로 생성한 세션 객체의 아이디를 웹브라우저로 쿠키에 담아 전달한다.
+//
+// HTTP 응답 프로토콜 예:
+//        HTTP/1.1 200
+//        Set-Cookie: JSESSIONID=9E54650476E354D9F0C408DBAC75E093; Path=/java106-web01; HttpOnly
+//        Content-Type: text/plain;charset=UTF-8
+//        Content-Length: 117
+//        Date: Wed, 23 May 2018 05:22:51 GMT        
     }
 }
 
