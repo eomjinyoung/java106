@@ -19,6 +19,18 @@
       서버 관리자 화면에서 출력될 웹 애플리케이션 이름을 적는 태그이다.
     </display-name>
 
+<!-- 컨텍스트 파라미터
+     => 리스너, 필터, 서블릿에서 공통으로 사용할 수 있는 값을 저장할 때 사용한다. 
+-->
+    <context-param>
+        <param-name>p1</param-name>
+        <param-value>홍길동</param-value>
+    </context-param>
+    <context-param>
+        <param-name>p2</param-name>
+        <param-value>20</param-value>
+    </context-param>
+
     <!--  
     <request-character-encoding>UTF-8</request-character-encoding>
     -->
