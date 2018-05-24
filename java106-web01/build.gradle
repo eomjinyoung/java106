@@ -28,6 +28,9 @@ dependencies {
     compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.3'
     compile 'com.google.guava:guava:23.0'
 
+    // JSP 확장 태그인 JSTL 라이브러리 
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    
     // [testCompile]
     // - 개발하고 단위 테스트할 때만 사용한다.
     // - 배치에는 포함하지 않는다.
