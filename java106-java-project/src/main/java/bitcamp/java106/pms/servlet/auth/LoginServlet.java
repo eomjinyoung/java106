@@ -38,6 +38,12 @@ public class LoginServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
+        HttpSession session = request.getSession();
+        
+        // 이 서블릿을 요청하기 전 페이지의 URL을 세션에 보관한다.
+        // => 이 URL은 로그인을 처리한 후에 refresh 할 때 사용할 것이다.
+        session.setAttribute("refererUrl", request.getHeader("Referer"));
+        
         // 웹브라우저가 "id"라는 쿠키를 보냈으면 입력폼을 출력할 때 사용한다.
         String id = "";
         Cookie[] cookies = request.getCookies();
@@ -103,8 +109,19 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             
             if (member != null) { // 로그인 성공!
-                response.sendRedirect(request.getContextPath()); // => "/java106-java-project"
                 session.setAttribute("loginUser", member);
+
+                // 로그인 하기 전의 페이지로 이동한다.
+                String refererUrl = (String)session.getAttribute("refererUrl");
+                
+                if (refererUrl == null) { 
+                    // 이전 페이지가 없다면 메인 화면으로 이동시킨다.
+                    response.sendRedirect(request.getContextPath()); // => "/java106-java-project"
+                } else { 
+                    // 이전 페이지가 있다면 그 페이지로 이동시킨다.
+                    response.sendRedirect(refererUrl);
+                }
+                return;
                 
             } else { // 로그인 실패!
                 session.invalidate();
