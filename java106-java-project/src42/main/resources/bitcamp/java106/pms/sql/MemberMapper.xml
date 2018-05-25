@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bitcamp.java106.pms.dao.MemberDao">
+
+  <resultMap type="Member" id="MemberMap">
+    <id column="mid" property="id"/>
+    <result column="email" property="email"/>
+    <result column="pwd" property="password"/>
+  </resultMap>
+  
+  <select id="selectList" 
+          resultMap="MemberMap" parameterType="map">
+    select mid, email, pwd 
+    from pms2_member
+    <!--  limit #{startIndex}, #{pageSize} -->
+  </select>
+  
+  <insert id="insert" parameterType="Member">
+    insert into pms2_member(mid,email,pwd) 
+    values(#{id},#{email},sha2(#{password},224))
+  </insert>
+  
+  <select id="selectOne" parameterType="String" resultMap="MemberMap">
+    select mid, email 
+    from pms2_member 
+    where mid=#{value}
+  </select>
+  
+  <select id="selectOneWithPassword" parameterType="map" resultMap="MemberMap">
+    select mid, email 
+    from pms2_member 
+    where mid=#{id} and pwd=sha2(#{password},224)
+  </select>
+  
+  <update id="update" parameterType="Member">
+    update pms2_member set 
+        email=#{email}, 
+        pwd=sha2(#{password},224) 
+    where mid=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="String">
+    delete from pms2_member where mid=#{value}
+  </delete>
+</mapper>
+
+
+
+
+
+
+
