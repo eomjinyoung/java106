@@ -5,6 +5,7 @@
     - JSP 전용 태그(JSP action tag)를 사용할 수 있다.
 작업내용
     - include, forward를 JSP 전용 태그로 처리한다.
+    - ServletRequest 에서 값을 꺼내는 부분을 JSP 전용 태그로 처리한다. 
     
 ## src42 - JSP 적용
 학습목표
