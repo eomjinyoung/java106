@@ -41,7 +41,7 @@ if (member == null) {
 <jsp:useBean id="member2" class="jsp.Member" scope="request"></jsp:useBean>
 <%-- 자바 코드: 
 jsp.Member member2 = (jsp.Member)request.getAttribute("member2");
-if (member == null) {
+if (member2 == null) {
     member2 = new jsp.Member();
     request.setAttribute("member2", member2);
 }
