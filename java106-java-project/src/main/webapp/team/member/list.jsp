@@ -5,7 +5,8 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-List<Member> members = (List<Member>)request.getAttribute("members");
+Team team = (Team)request.getAttribute("team");
+List<Member> members = team.getMembers();
 %>
 <h2>회원 목록</h2>
 <form action='member/add' method='post'>

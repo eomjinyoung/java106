@@ -3,7 +3,6 @@ package bitcamp.java106.pms.servlet.team;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +14,8 @@ import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
 @SuppressWarnings("serial")
-@WebServlet("/team/view")
-public class TeamViewServlet extends HttpServlet {
+//@WebServlet("/team/view")
+public class TeamViewServlet01 extends HttpServlet {
 
     TeamDao teamDao;
     
@@ -36,7 +35,7 @@ public class TeamViewServlet extends HttpServlet {
         String name = request.getParameter("name");
         
         try {
-            Team team = teamDao.selectOneWithMembers(name);
+            Team team = teamDao.selectOne(name);
             if (team == null) {
                 throw new Exception("유효하지 않은 팀입니다.");
             }

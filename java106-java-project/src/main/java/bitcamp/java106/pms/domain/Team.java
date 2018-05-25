@@ -2,6 +2,7 @@ package bitcamp.java106.pms.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 public class Team implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -11,6 +12,15 @@ public class Team implements Serializable {
     private int maxQty;
     private Date startDate;
     private Date endDate;
+    private List<Member> members;
+
+    public List<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Member> members) {
+        this.members = members;
+    }
 
     public String getName() {
         return name;

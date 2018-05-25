@@ -52,7 +52,7 @@ Team team = (Team)request.getAttribute("team");
 
 <%
 out.flush();
-request.getRequestDispatcher("/team/member/list.jsp").include(request, response);%>
+request.getRequestDispatcher("/team/member/list").include(request, response);%>
 
 </body>
 </html>

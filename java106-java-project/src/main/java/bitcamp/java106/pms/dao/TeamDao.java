@@ -56,9 +56,18 @@ public class TeamDao {
             return sqlSession.selectOne(
                     "bitcamp.java106.pms.dao.TeamDao.selectOne", name);
         }
-    }    
+    }
+    
+    public Team selectOneWithMembers(String name) throws Exception {
+        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
+            return sqlSession.selectOne(
+                    "bitcamp.java106.pms.dao.TeamDao.selectOneWithMembers", name);
+        }
+    }
 }
 
+//ver 42 - JSP 적용에 따라 Team 정보를 가져올 때 그 팀의 Member 정보도 함께 가져온다.
+//         selectOneWithMembers() 추가
 //ver 33 - Mybatis 적용 
 //ver 32 - DB 커넥션 풀 적용
 //ver 31 - JDBC API 적용
