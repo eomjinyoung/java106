@@ -11,11 +11,7 @@
 <title>작업 보기</title>
 </head>
 <body>
-
-<%
-out.flush();
-request.getRequestDispatcher("/header.jsp").include(request, response);%>
-
+<jsp:include page="/header.jsp"/>
 <h1>작업 보기(MVC)</h1>
 <%
 Task task = (Task)request.getAttribute("task");

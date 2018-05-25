@@ -11,11 +11,7 @@
 <title>작업 목록</title>
 </head>
 <body>
-
-<%
-out.flush();
-request.getRequestDispatcher("/header.jsp").include(request, response);%>
-
+<jsp:include page="/header.jsp"/>
 <h1><a href='../team/view?name=<%=request.getParameter("teamName")%>'>team2</a>의 작업 목록(MVC)</h1>
 <p><a href='add?teamName=<%=request.getParameter("teamName")%>'>새작업</a></p>
 <table border='1'>

@@ -11,9 +11,7 @@
 </head>
 <body>
 
-<%
-out.flush();
-request.getRequestDispatcher("/header.jsp").include(request, response);%>
+<jsp:include page="/header.jsp"/>
 
 <h1>게시물 목록(MVC)</h1>
 <p><a href='form.html'>새 글</a></p>

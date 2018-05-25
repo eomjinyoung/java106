@@ -9,11 +9,7 @@
 <title>게시물 보기</title>
 </head>
 <body>
-
-<%
-out.flush();
-request.getRequestDispatcher("/header.jsp").include(request, response);%>
-
+<jsp:include page="/header.jsp"/>
 <h1>게시물 보기(MVC)</h1>
 <%
 Board board = (Board)request.getAttribute("board");

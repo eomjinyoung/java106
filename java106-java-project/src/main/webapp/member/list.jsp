@@ -10,11 +10,7 @@
 <title>멤버 목록</title>
 </head>
 <body>
-
-<%
-out.flush();
-request.getRequestDispatcher("/header.jsp").include(request, response);%>
-
+<jsp:include page="/header.jsp"/>
 <h1>멤버 목록(MVC)</h1>
 <p><a href='form.html'>새회원</a></p>
 <table border='1'>

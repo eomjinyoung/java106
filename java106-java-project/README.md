@@ -1,5 +1,11 @@
 # 자바 프로젝트
 
+## src43 - JSP 전용 태그 적용 
+학습목표
+    - JSP 전용 태그(JSP action tag)를 사용할 수 있다.
+작업내용
+    - include, forward를 JSP 전용 태그로 처리한다.
+    
 ## src42 - JSP 적용
 학습목표
     - JSP를 적용하여 MVC 아키텍처를 완성한다.
