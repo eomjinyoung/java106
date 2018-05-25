@@ -9,8 +9,9 @@
 <title>게시물 보기</title>
 </head>
 <body>
-<div id='header'>
-<a href='/java106-java-project/auth/login'>로그인</a></div>
+
+<%request.getRequestDispatcher("/header.jsp").include(request, response);%>
+
 <h1>게시물 보기(MVC)</h1>
 <%
 Board board = (Board)request.getAttribute("board");
