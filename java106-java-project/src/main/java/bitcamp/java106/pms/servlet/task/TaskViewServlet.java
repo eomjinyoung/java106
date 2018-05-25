@@ -1,7 +1,6 @@
 package bitcamp.java106.pms.servlet.task;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -42,19 +41,6 @@ public class TaskViewServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<meta charset='UTF-8'>");
-        out.println("<title>작업 보기</title>");
-        out.println("</head>");
-        out.println("<body>");
-        request.getRequestDispatcher("/header").include(request, response);
-        out.println("<h1>작업 보기</h1>");
-        
         try {
             int no = Integer.parseInt(request.getParameter("no"));
             
@@ -66,67 +52,17 @@ public class TaskViewServlet extends HttpServlet {
             List<Member> members = teamMemberDao.selectListWithEmail(
                     task.getTeam().getName());
             
-            out.println("<form action='update' method='post'>");
-            out.printf("<input type='hidden' name='no' value='%d'>\n", no);
-            out.println("<table border='1'>");
-            out.println("<tr>");
-            out.printf("    <th>팀명</th>"
-                    + "<td><input type='text' name='teamName' value='%s' readOnly></td>\n",
-                    task.getTeam().getName());
-            out.println("</tr>");
-            out.println("<tr>");
-            out.printf("    <th>작업명</th>"
-                    + "<td><input type='text' name='title' value='%s'></td>\n",
-                    task.getTitle());
-            out.println("</tr>");
-            out.println("<tr>");
-            out.printf("    <th>시작일</th>"
-                    + "<td><input type='date' name='startDate' value='%s'></td>",
-                    task.getStartDate());
-            out.println("</tr>");
-            out.println("<tr>");
-            out.printf("    <th>종료일</th>"
-                    + "<td><input type='date' name='endDate' value='%s'></td>",
-                    task.getEndDate());
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("    <th>작업자</th>");
-            out.println("    <td>");
-            out.println("        <select name='memberId'>");
-            out.println("            <option value=''>--선택 안함--</option>");
+            request.setAttribute("task", task);
+            request.setAttribute("members", members);
             
-            for (Member member : members) {
-                out.printf("            <option %s>%s</option>\n",
-                        (member.equals(task.getWorker())) ? "selected" : "",
-                        member.getId());
-            }
-            
-            out.println("        </select>");
-            out.println("    </td>");
-            out.println("</tr>");
-            out.println("<tr>");
-            out.println("    <th>작업상태</th><td><select name='state'>");
-            out.printf("        <option value='0' %s>작업대기</option>\n",
-                    (task.getState() == 0) ? "selected" : "");
-            out.printf("        <option value='1' %s>작업중</option>\n",
-                    (task.getState() == 1) ? "selected" : "");
-            out.printf("        <option value='9' %s>작업완료</option>\n",
-                    (task.getState() == 9) ? "selected" : "");
-            out.println("    </select></td>");
-            out.println("</tr>");
-            out.println("</table>");
-            out.println("<button>변경</button> ");
-            out.printf("<a href='delete?no=%d&teamName=%s'>삭제</a>\n", 
-                    no, task.getTeam().getName());
-            out.println("</form>");
+            response.setContentType("text/html;charset=UTF-8");
+            request.getRequestDispatcher("/task/view.jsp").forward(request, response);
 
         } catch (Exception e) {
             request.setAttribute("error", e);
             request.setAttribute("title", "작업 상세조회 실패!");
             request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
-        out.println("</body>");
-        out.println("</html>");
     }
 }
 

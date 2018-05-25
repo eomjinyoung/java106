@@ -20,8 +20,8 @@ for (Member member : members) {%>
 <tr>
   <td><%=member.getId()%></td>
   <td><%=member.getEmail()%></td>
-  <td><a href='member/delete?teamName=<%=request.getParameter("name")%>
-  &memberId=<%=member.getId()%>'>삭제</a></td>
+  <td><a href='member/delete?teamName=<%=request.getParameter("name")
+  %>&memberId=<%=member.getId()%>'>삭제</a></td>
 </tr>
 <%}%>
 </table>
