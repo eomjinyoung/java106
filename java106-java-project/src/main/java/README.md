@@ -4,8 +4,9 @@
 - /auth/form.jsp, /auth/fail.jsp 추가
 - /header.jsp 추가
 - HeaderServlet 제거
-- BoardListServlet, BoardViewServlet 변경
-- /board/list.jsp, /board/view.jsp 추가
+- ErrorServlet 제거
+- 서블릿에서 출력 부분을 JSP 파일에 맡긴다.
+- 서블릿 클래스 변경한다.
 
 
 

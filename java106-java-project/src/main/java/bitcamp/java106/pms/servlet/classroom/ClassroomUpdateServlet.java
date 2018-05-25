@@ -3,7 +3,6 @@ package bitcamp.java106.pms.servlet.classroom;
 import java.io.IOException;
 import java.sql.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,15 +48,15 @@ public class ClassroomUpdateServlet extends HttpServlet {
             response.sendRedirect("list");
             
         } catch (Exception e) {
-            RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
             request.setAttribute("error", e);
             request.setAttribute("title", "강의 변경 실패!");
-            요청배달자.forward(request, response);
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
     
 }
 
+//ver 42 - JSP 적용
 //ver 40 - 필터 적용
 //ver 39 - forward 적용
 //ver 38 - redirect 적용

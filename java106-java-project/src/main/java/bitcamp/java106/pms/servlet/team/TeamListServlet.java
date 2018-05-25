@@ -1,10 +1,8 @@
 package bitcamp.java106.pms.servlet.team;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,52 +35,22 @@ public class TeamListServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<meta charset='UTF-8'>");
-        out.println("<title>팀 목록</title>");
-        out.println("</head>");
-        out.println("<body>");
-        request.getRequestDispatcher("/header").include(request, response);
-        out.println("<h1>팀 목록</h1>");
-        
         try {
             List<Team> list = teamDao.selectList();
+            request.setAttribute("list", list);
             
-            out.println("<p><a href='form.html'>새 팀</a></p>");
-            out.println("<table border='1'>");
-            out.println("<tr>");
-            out.println("    <th>팀명</th><th>최대인원</th><th>기간</th>");
-            out.println("</tr>");
+            response.setContentType("text/html;charset=UTF-8");
+            request.getRequestDispatcher("/team/list.jsp").include(request, response);
             
-            for (Team team : list) {
-                out.println("<tr>");
-                out.printf("    <td><a href='view?name=%s'>%s</a></td><td>%d</td><td>%s~%s</td>\n",
-                        team.getName(),
-                        team.getName(),
-                        team.getMaxQty(), 
-                        team.getStartDate(), 
-                        team.getEndDate());
-                out.println("</tr>");
-            }
-            out.println("</table>");
         } catch (Exception e) {
-            RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
             request.setAttribute("error", e);
             request.setAttribute("title", "팀 목록조회 실패!");
-            // 다른 서블릿으로 실행을 위임할 때,
-            // 이전까지 버퍼로 출력한 데이터는 버린다.
-            요청배달자.forward(request, response);
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
-        out.println("</body>");
-        out.println("</html>");
     }
 }
 
+//ver 42 - JSP 적용
 //ver 39 - forward 적용
 //ver 37 - 컨트롤러를 서블릿으로 변경
 //ver 31 - JDBC API가 적용된 DAO 사용

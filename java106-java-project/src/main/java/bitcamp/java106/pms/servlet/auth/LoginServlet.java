@@ -3,7 +3,6 @@ package bitcamp.java106.pms.servlet.auth;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -79,10 +78,9 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("/auth/fail.jsp").include(request, response);
             }
         } catch (Exception e) {
-            RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
             request.setAttribute("error", e);
             request.setAttribute("title", "로그인 실패!");
-            요청배달자.forward(request, response);
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
 }

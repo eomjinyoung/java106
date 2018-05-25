@@ -3,7 +3,6 @@ package bitcamp.java106.pms.servlet.board;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,10 +48,9 @@ public class BoardListServlet extends HttpServlet {
             request.getRequestDispatcher("/board/list.jsp").include(request, response);
             
         } catch (Exception e) {
-            RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
             request.setAttribute("error", e);
             request.setAttribute("title", "게시물 목록조회 실패!");
-            요청배달자.forward(request, response);
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
 }

@@ -2,7 +2,6 @@ package bitcamp.java106.pms.servlet.member;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,15 +42,15 @@ public class MemberDeleteServlet extends HttpServlet {
             response.sendRedirect("list");
             
         } catch (Exception e) {
-            RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
             request.setAttribute("error", e);
             request.setAttribute("title", "회원 삭제 실패!");
-            요청배달자.forward(request, response);
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
     
 }
 
+//ver 42 - JSP 적용
 //ver 39 - forward 적용
 //ver 38 - redirect 적용
 //ver 31 - JDBC API가 적용된 DAO 사용
