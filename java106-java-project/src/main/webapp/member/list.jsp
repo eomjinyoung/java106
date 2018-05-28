@@ -11,7 +11,7 @@
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
-<h1>멤버 목록(MVC + JSP 전용 태그)</h1>
+<h1>멤버 목록(MVC + JSP 전용 태그 + EL)</h1>
 <p><a href='form.html'>새회원</a></p>
 <table border='1'>
 <tr>
@@ -23,10 +23,11 @@
             scope="request"/>
 <%
 for (Member member : list) {
+    pageContext.setAttribute("member", member);
 %>
 <tr>
-    <td><a href='view?id=<%=member.getId()%>'><%=member.getId()%></a></td>
-    <td><%=member.getEmail()%></td>
+    <td><a href='view?id=${member.id}'>${member.id}</a></td>
+    <td>${member.email}</td>
 </tr>
 <%} %>
 </table>
