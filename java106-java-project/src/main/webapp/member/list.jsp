@@ -1,8 +1,7 @@
-<%@page import="bitcamp.java106.pms.domain.Member"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,25 +10,18 @@
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
-<h1>멤버 목록(MVC + JSP 전용 태그 + EL)</h1>
+<h1>멤버 목록(MVC + JSP 전용 태그 + EL + JSTL)</h1>
 <p><a href='form.html'>새회원</a></p>
 <table border='1'>
 <tr>
     <th>아이디</th><th>이메일</th>
 </tr>
-<jsp:useBean id="list"
-            type="java.util.List<Member>"
-            class="java.util.ArrayList"
-            scope="request"/>
-<%
-for (Member member : list) {
-    pageContext.setAttribute("member", member);
-%>
+<c:forEach items="${list}" var="member">
 <tr>
     <td><a href='view?id=${member.id}'>${member.id}</a></td>
     <td>${member.email}</td>
 </tr>
-<%} %>
+</c:forEach>
 </table>
 </body>
 </html>

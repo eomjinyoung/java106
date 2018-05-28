@@ -46,6 +46,10 @@ dependencies {
     // Spring IoC 컨테이너 라이브러리
     compile group: 'org.springframework', name: 'spring-context', version: '5.0.5.RELEASE'
     
+    // JSP 확장 태그인 JSTL 라이브러리
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    
+    
     // 서블릿 라이브러리
     // => 어느 버전의 서블릿 규칙에 따라 만든 서버인지에 따라 
     //    그 버전의 라이브러리를 다운로드 받아야 한다.
