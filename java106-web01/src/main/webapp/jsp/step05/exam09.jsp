@@ -66,6 +66,11 @@ ${pageScope.name.key}==>${pageScope.name.value},
 </c:forEach>
 </p>
 
+<h2>CSV 반복하기</h2>
+<c:set var="names" value="홍길동,임꺽정,유관순,안중근,윤봉길"/>
+<c:forEach items="${names}" var="name">
+${pageScope.name} - 
+</c:forEach>
 
 </body>
 </html>
