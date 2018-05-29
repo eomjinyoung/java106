@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bitcamp.java106.pms.dao.TeamMemberDao">
+  
+  <resultMap type="member" id="memberMap">
+    <id column="mid" property="id"/>
+    <result column="email" property="email"/>
+  </resultMap>
+  
+  <select id="selectList" 
+          resultType="string" parameterType="string">
+    select mid from pms2_team_member 
+    where tnm=#{value}
+    <!--  limit #{startIndex}, #{pageSize} -->
+  </select>
+  
+  <select id="selectListWithEmail" 
+          resultMap="memberMap" parameterType="string">
+    select tm.mid, m.email 
+    from pms2_team_member tm 
+        inner join pms2_member m on tm.mid=m.mid
+    where tm.tnm=#{value}
+    <!--  limit #{startIndex}, #{pageSize} -->
+  </select>
+  
+  <insert id="insert" parameterType="map">
+    insert into pms2_team_member(tnm,mid) 
+    values(#{teamName},#{memberId})
+  </insert>
+  
+  <select id="isExist" parameterType="map" resultType="int">
+    select count(*) 
+    from pms2_team_member 
+    where tnm=#{teamName} and mid=#{memberId}
+  </select>
+  
+  <delete id="delete" parameterType="map">
+    delete from pms2_team_member 
+    where tnm=#{teamName}
+    <if test="memberId != null"> 
+          and mid=#{memberId}
+    </if>
+  </delete>
+</mapper>
+
+
+
+
+
+
+
