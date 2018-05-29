@@ -41,6 +41,22 @@
     <request-character-encoding>UTF-8</request-character-encoding>
     -->
     
+    <!-- 프론트 컨트롤러 서블릿 등록 및 정보 설정 -->
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>bitcamp.java106.pms.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>config/dispatcher-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    
+    
     <!-- 서블릿 실행 도중 특정 예외가 발생하면 실행될 JSP를 지정한다. -->
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>

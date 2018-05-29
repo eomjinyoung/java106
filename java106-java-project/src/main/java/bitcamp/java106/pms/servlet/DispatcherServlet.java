@@ -5,14 +5,40 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import bitcamp.java106.pms.support.WebApplicationContextUtils;
+
 @SuppressWarnings("serial")
-@WebServlet("*.do")
 public class DispatcherServlet extends HttpServlet {
+    
+    ApplicationContext iocContainer;
+    
+    @Override
+    public void init() throws ServletException {
+        // 이 서블릿을 생성할 때 이 서블릿이 사용할 Spring IoC 컨테이너를 준비한다.
+        String configClassName = 
+                this.getServletConfig().getInitParameter("contextConfigLocation");
+        
+        try {
+            iocContainer = new AnnotationConfigApplicationContext(
+                            Class.forName(configClassName));
+            
+            // 다른 서블릿에서 스프링 IoC 컨테이너를 꺼내 쓸 수 있도록,
+            // WebApplicationContextUtils에 보관한다.
+            WebApplicationContextUtils.containers.put(
+                    this.getServletContext(), iocContainer);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     @Override
     protected void service(
             HttpServletRequest request, 
@@ -40,6 +66,10 @@ public class DispatcherServlet extends HttpServlet {
     }
 }
 
+//ver 46 - POJO 페이지 컨트롤러를 사용하여 클라이언트 요청 처리
+//         이 프론트 컨트롤러가 사용할 페이지 컨트롤러는 
+//         이 클래스에서 Spring IoC 컨테이너를 사용하여 관리할 것이다.
+//         ContextLoaderListener의 스프링 IoC 컨테이너 생성 업무를 이 클래스로 이관한다. 
 //ver 45 - 클래스 추가
 
 
