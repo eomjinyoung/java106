@@ -43,7 +43,7 @@ public class TeamAddServlet extends HttpServlet {
             team.setEndDate(Date.valueOf(request.getParameter("endDate")));
             
             teamDao.insert(team);
-            response.sendRedirect("list");
+            request.setAttribute("viewUrl", "redirect:list.do");
             
         } catch (Exception e) {
             request.setAttribute("error", e);
@@ -54,6 +54,7 @@ public class TeamAddServlet extends HttpServlet {
     
 }
 
+//ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 40 - CharacterEncodingFilter 필터 적용.
 //         request.setCharacterEncoding("UTF-8") 제거

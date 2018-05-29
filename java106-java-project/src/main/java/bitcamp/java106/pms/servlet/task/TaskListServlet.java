@@ -47,9 +47,7 @@ public class TaskListServlet extends HttpServlet {
             }
             List<Task> list = taskDao.selectList(team.getName());
             request.setAttribute("list", list);
-            
-            response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("/task/list.jsp").include(request, response);
+            request.setAttribute("viewUrl", "/task/list.jsp");
             
         } catch (Exception e) {
             request.setAttribute("error", e);
@@ -60,6 +58,7 @@ public class TaskListServlet extends HttpServlet {
 
 }
 
+//ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 40 - CharacterEncodingFilter 필터 적용.
 //         request.setCharacterEncoding("UTF-8") 제거

@@ -37,9 +37,7 @@ public class MemberListServlet extends HttpServlet {
         try {
             List<Member> list = memberDao.selectList();
             request.setAttribute("list", list);
-            
-            response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("/member/list.jsp").include(request, response);
+            request.setAttribute("viewUrl", "/member/list.jsp");
             
         } catch (Exception e) {
             request.setAttribute("error", e);
@@ -49,6 +47,7 @@ public class MemberListServlet extends HttpServlet {
     }
 }
 
+//ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 39 - forward 적용
 //ver 37 - 컨트롤러를 서블릿으로 변경

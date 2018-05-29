@@ -44,7 +44,8 @@ public class TaskDeleteServlet extends HttpServlet {
             if (count == 0) {
                 throw new Exception("해당 작업이 존재하지 않습니다.");
             }
-            response.sendRedirect("list?teamName=" + 
+            request.setAttribute("viewUrl", 
+                    "redirect:list.do?teamName=" + 
                    URLEncoder.encode(teamName, "UTF-8"));
             // 응답 헤더의 값으로 한글을 포함할 때는 
             // 서블릿 컨테이너가 자동으로 URL 인코딩 하지 않는다.
@@ -60,6 +61,7 @@ public class TaskDeleteServlet extends HttpServlet {
     
 }
 
+//ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 40 - CharacterEncodingFilter 필터 적용.
 //         request.setCharacterEncoding("UTF-8") 제거

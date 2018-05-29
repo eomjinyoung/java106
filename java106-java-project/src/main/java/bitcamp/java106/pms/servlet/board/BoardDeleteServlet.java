@@ -38,7 +38,7 @@ public class BoardDeleteServlet extends HttpServlet {
             if (count == 0) {
                 throw new Exception("해당 게시물이 없습니다.");
             }
-            response.sendRedirect("list");
+            request.setAttribute("viewUrl", "redirect:list.do");
             
         } catch (Exception e) {
             request.setAttribute("error", e);
@@ -49,6 +49,7 @@ public class BoardDeleteServlet extends HttpServlet {
     
 }
 
+//ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 39 - forward 적용
 //ver 38 - redirect 적용

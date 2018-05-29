@@ -45,7 +45,7 @@ public class TeamMemberDeleteServlet extends HttpServlet {
             if (count == 0) {
                 throw new Exception("<p>해당 팀원이 존재하지 않습니다.</p>");
             }
-            response.sendRedirect("../view?name=" + 
+            request.setAttribute("viewUrl", "redirect:../view.do?name=" + 
                     URLEncoder.encode(teamName, "UTF-8"));
             // 개발자가 요청이나 응답헤더를 직접 작성하여 값을 주고 받으로 한다면,
             // URL 인코딩과 URL 디코딩을 손수 해 줘야 한다.
@@ -59,6 +59,7 @@ public class TeamMemberDeleteServlet extends HttpServlet {
     
 }
 
+//ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 40 - CharacterEncodingFilter 필터 적용.
 //         request.setCharacterEncoding("UTF-8") 제거

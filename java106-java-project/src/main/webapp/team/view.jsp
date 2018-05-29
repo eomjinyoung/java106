@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <h1>팀 보기(MVC + JSP 전용 태그 + EL)</h1>
-<form action='update' method='post'>
+<form action='update.do' method='post'>
 <table border='1'>
 <tr>
     <th>팀명</th>
@@ -35,10 +35,10 @@
 </tr>
 </table>
 <p>
-<a href='list'>목록</a>
+<a href='list.do'>목록</a>
 <button>변경</button>
-<a href='delete?name=${team.name}'>삭제</a>
-<a href='../task/list?teamName=${team.name}'>작업목록</a>
+<a href='delete.do?name=${team.name}'>삭제</a>
+<a href='../task/list.do?teamName=${team.name}'>작업목록</a>
 </p>
 </form>
 <jsp:include page="/team/member/list.jsp"/>

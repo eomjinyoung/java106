@@ -53,7 +53,7 @@ public class BoardAddServlet extends HttpServlet {
             board.setContent(request.getParameter("content"));
 
             boardDao.insert(board);
-            response.sendRedirect("list");
+            request.setAttribute("viewUrl", "redirect:list.do");
             
         } catch (Exception e) {
             request.setAttribute("error", e);
@@ -64,6 +64,7 @@ public class BoardAddServlet extends HttpServlet {
 
 }
 
+//ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 40 - 필터 적용
 //ver 39 - forward 적용

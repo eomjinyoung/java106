@@ -41,9 +41,7 @@ public class TeamViewServlet extends HttpServlet {
                 throw new Exception("유효하지 않은 팀입니다.");
             }
             request.setAttribute("team", team);
-            
-            response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("/team/view.jsp").include(request, response);
+            request.setAttribute("viewUrl", "/team/view.jsp");
                
         } catch (Exception e) {
             request.setAttribute("error", e);
@@ -53,6 +51,7 @@ public class TeamViewServlet extends HttpServlet {
     }
 }
 
+//ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 40 - CharacterEncodingFilter 필터 적용.
 //         request.setCharacterEncoding("UTF-8") 제거

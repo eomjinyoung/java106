@@ -40,9 +40,7 @@ public class BoardViewServlet extends HttpServlet {
                 throw new Exception("유효하지 않은 게시물 번호입니다.");
             }
             request.setAttribute("board", board);
-
-            response.setContentType("text/html;charset=UTF-8");
-            request.getRequestDispatcher("/board/view.jsp").include(request, response);
+            request.setAttribute("viewUrl", "/board/view.jsp");
             
         } catch (Exception e) {
             request.setAttribute("error", e);
@@ -52,6 +50,7 @@ public class BoardViewServlet extends HttpServlet {
     }
 }
 
+//ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 39 - forward 적용
 //ver 37 - BoardViewController를 서블릿으로 변경
