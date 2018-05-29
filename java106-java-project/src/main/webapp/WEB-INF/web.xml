@@ -19,11 +19,13 @@
       서버 관리자 화면에서 출력될 웹 애플리케이션 이름을 적는 태그이다.
     </display-name>
 
+    <!--  
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>bitcamp.java106.pms.AppConfig</param-value>
     </context-param>
-
+    -->
+    
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>bitcamp.java106.pms.filter.CharacterEncodingFilter</filter-class>
