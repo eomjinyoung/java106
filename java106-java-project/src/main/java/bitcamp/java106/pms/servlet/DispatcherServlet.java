@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
@@ -22,17 +22,21 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         // 이 서블릿을 생성할 때 이 서블릿이 사용할 Spring IoC 컨테이너를 준비한다.
-        String configClassName = 
-                this.getServletConfig().getInitParameter("contextConfigLocation");
-        
         try {
-            iocContainer = new AnnotationConfigApplicationContext(
-                            Class.forName(configClassName));
+            iocContainer = new ClassPathXmlApplicationContext(
+                this.getServletConfig().getInitParameter("contextConfigLocation"));
             
             // 다른 서블릿에서 스프링 IoC 컨테이너를 꺼내 쓸 수 있도록,
             // WebApplicationContextUtils에 보관한다.
             WebApplicationContextUtils.containers.put(
                     this.getServletContext(), iocContainer);
+            
+            String[] beanNames = iocContainer.getBeanDefinitionNames();
+            System.out.println("-----------------------------");
+            for (String name : beanNames) {
+                System.out.println(name);
+            }
+            System.out.println("-----------------------------");
             
         } catch (Exception e) {
             e.printStackTrace();
