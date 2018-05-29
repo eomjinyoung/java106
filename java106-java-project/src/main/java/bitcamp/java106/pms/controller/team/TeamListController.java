@@ -1,51 +1,37 @@
-package bitcamp.java106.pms.servlet.team;
+package bitcamp.java106.pms.controller.team;
 
-import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
+import bitcamp.java106.pms.controller.PageController;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
-@SuppressWarnings("serial")
-@WebServlet("/team/list")
-public class TeamListServlet extends HttpServlet {
+@Component("/team/list")
+public class TeamListController implements PageController {
 
     TeamDao teamDao;
     
-    @Override
-    public void init() throws ServletException {
-        ApplicationContext iocContainer = 
-                WebApplicationContextUtils.getWebApplicationContext(
-                        this.getServletContext()); 
-        teamDao = iocContainer.getBean(TeamDao.class);
+    public TeamListController(TeamDao teamDao) {
+        this.teamDao = teamDao;
     }
-
-
+    
     @Override
-    protected void doGet(
+    public String service(
             HttpServletRequest request, 
-            HttpServletResponse response) throws ServletException, IOException {
+            HttpServletResponse response) throws Exception {
         
-        try {
-            List<Team> list = teamDao.selectList();
-            request.setAttribute("list", list);
-            request.setAttribute("viewUrl", "/team/list.jsp");
-            
-        } catch (Exception e) {
-            throw new ServletException(e); 
-        }
+        List<Team> list = teamDao.selectList();
+        request.setAttribute("list", list);
+        return "/team/list.jsp";
     }
 }
 
+//ver 46 - 페이지 컨트롤러를 POJO를 변경
 //ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 39 - forward 적용

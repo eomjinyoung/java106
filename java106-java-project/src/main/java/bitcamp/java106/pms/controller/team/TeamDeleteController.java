@@ -1,62 +1,49 @@
-package bitcamp.java106.pms.servlet.team;
+package bitcamp.java106.pms.controller.team;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
+import bitcamp.java106.pms.controller.PageController;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
-import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
-@SuppressWarnings("serial")
-@WebServlet("/team/delete")
-public class TeamDeleteServlet extends HttpServlet {
+@Component("/team/delete")
+public class TeamDeleteController implements PageController {
 
     TeamDao teamDao;
     TeamMemberDao teamMemberDao;
     TaskDao taskDao;
     
-    @Override
-    public void init() throws ServletException {
-        ApplicationContext iocContainer = 
-                WebApplicationContextUtils.getWebApplicationContext(
-                        this.getServletContext()); 
-        teamDao = iocContainer.getBean(TeamDao.class);
-        teamMemberDao = iocContainer.getBean(TeamMemberDao.class);
-        taskDao = iocContainer.getBean(TaskDao.class);
+    public TeamDeleteController(TeamDao teamDao, 
+            TeamMemberDao teamMemberDao,
+            TaskDao taskDao) {
+        this.teamDao = teamDao;
+        this.teamMemberDao = teamMemberDao;
+        this.taskDao = taskDao;
     }
-
+    
     @Override
-    protected void doGet(
+    public String service(
             HttpServletRequest request, 
-            HttpServletResponse response) throws ServletException, IOException {
+            HttpServletResponse response) throws Exception {
         
         String name = request.getParameter("name");
         
-        
-        try {
-            teamMemberDao.delete(name);
-            taskDao.deleteByTeam(name);
-            int count = teamDao.delete(name);
-            if (count == 0) {
-                throw new Exception ("해당 팀이 없습니다.");
-            }
-            request.setAttribute("viewUrl", "redirect:list.do");
-            
-        } catch (Exception e) {
-            throw new ServletException(e); 
+        teamMemberDao.delete(name);
+        taskDao.deleteByTeam(name);
+        int count = teamDao.delete(name);
+        if (count == 0) {
+            throw new Exception ("해당 팀이 없습니다.");
         }
+        return "redirect:list.do";
     }
     
 }
 
+//ver 46 - 페이지 컨트롤러를 POJO를 변경
 //ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 40 - CharacterEncodingFilter 필터 적용.

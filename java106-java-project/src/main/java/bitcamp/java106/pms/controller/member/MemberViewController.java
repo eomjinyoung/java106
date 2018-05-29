@@ -1,54 +1,40 @@
-package bitcamp.java106.pms.servlet.member;
+package bitcamp.java106.pms.controller.member;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
+import bitcamp.java106.pms.controller.PageController;
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.domain.Member;
-import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
-@SuppressWarnings("serial")
-@WebServlet("/member/view")
-public class MemberViewServlet extends HttpServlet {
+@Component("/member/view")
+public class MemberViewController implements PageController {
 
     MemberDao memberDao;
     
-    @Override
-    public void init() throws ServletException {
-        ApplicationContext iocContainer = 
-                WebApplicationContextUtils.getWebApplicationContext(
-                        this.getServletContext()); 
-        memberDao = iocContainer.getBean(MemberDao.class);
+    public MemberViewController(MemberDao memberDao) {
+        this.memberDao = memberDao;
     }
-
+    
     @Override
-    protected void doGet(
+    public String service(
             HttpServletRequest request, 
-            HttpServletResponse response) throws ServletException, IOException {
+            HttpServletResponse response) throws Exception {
 
         String id = request.getParameter("id");
         
-        try {
-            Member member = memberDao.selectOne(id);
-            if (member == null) {
-                throw new Exception("유효하지 않은 멤버 아이디입니다.");
-            }
-            request.setAttribute("member", member);
-            request.setAttribute("viewUrl", "/member/view.jsp");
-               
-        } catch (Exception e) {
-            throw new ServletException(e); 
+        Member member = memberDao.selectOne(id);
+        if (member == null) {
+            throw new Exception("유효하지 않은 멤버 아이디입니다.");
         }
+        request.setAttribute("member", member);
+        return "/member/view.jsp";
     }
 }
 
+//ver 46 - 페이지 컨트롤러를 POJO를 변경
 //ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 40 - CharacterEncodingFilter 필터 적용.

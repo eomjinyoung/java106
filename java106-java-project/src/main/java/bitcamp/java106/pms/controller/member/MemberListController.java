@@ -1,50 +1,37 @@
-package bitcamp.java106.pms.servlet.member;
+package bitcamp.java106.pms.controller.member;
 
-import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
+import bitcamp.java106.pms.controller.PageController;
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.domain.Member;
-import bitcamp.java106.pms.support.WebApplicationContextUtils;
 
-@SuppressWarnings("serial")
-@WebServlet("/member/list")
-public class MemberListServlet extends HttpServlet {
+@Component("/member/list")
+public class MemberListController implements PageController {
 
     MemberDao memberDao;
     
-    @Override
-    public void init() throws ServletException {
-        ApplicationContext iocContainer = 
-                WebApplicationContextUtils.getWebApplicationContext(
-                        this.getServletContext()); 
-        memberDao = iocContainer.getBean(MemberDao.class);
+    public MemberListController(MemberDao memberDao) {
+        this.memberDao = memberDao;
     }
-
+    
     @Override
-    protected void doGet(
+    public String service(
             HttpServletRequest request, 
-            HttpServletResponse response) throws ServletException, IOException {
+            HttpServletResponse response) throws Exception {
         
-        try {
-            List<Member> list = memberDao.selectList();
-            request.setAttribute("list", list);
-            request.setAttribute("viewUrl", "/member/list.jsp");
-            
-        } catch (Exception e) {
-            throw new ServletException(e); 
-        }
+        List<Member> list = memberDao.selectList();
+        request.setAttribute("list", list);
+        return "/member/list.jsp";
     }
 }
 
+//ver 46 - 페이지 컨트롤러를 POJO를 변경
 //ver 45 - 프론트 컨트롤러 적용
 //ver 42 - JSP 적용
 //ver 39 - forward 적용
