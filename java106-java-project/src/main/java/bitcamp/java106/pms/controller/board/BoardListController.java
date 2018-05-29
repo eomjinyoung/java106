@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
-import bitcamp.java106.pms.controller.PageController;
 import bitcamp.java106.pms.dao.BoardDao;
 import bitcamp.java106.pms.domain.Board;
+import bitcamp.java106.pms.web.RequestMapping;
 
 @Component("/board/list")
-public class BoardListController implements PageController {
+public class BoardListController {
     
     BoardDao boardDao;
     
@@ -20,8 +20,8 @@ public class BoardListController implements PageController {
         this.boardDao = boardDao;
     }
     
-    @Override
-    public String service(
+    @RequestMapping
+    public String list(
             HttpServletRequest request, 
             HttpServletResponse response) throws Exception {        
             

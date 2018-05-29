@@ -5,11 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
-import bitcamp.java106.pms.controller.PageController;
 import bitcamp.java106.pms.dao.BoardDao;
+import bitcamp.java106.pms.web.RequestMapping;
 
 @Component("/board/delete")
-public class BoardDeleteController implements PageController {
+public class BoardDeleteController {
     
     BoardDao boardDao;
     
@@ -17,8 +17,8 @@ public class BoardDeleteController implements PageController {
         this.boardDao = boardDao;
     }
 
-    @Override
-    public String service(
+    @RequestMapping
+    public String delete(
             HttpServletRequest request, 
             HttpServletResponse response) throws Exception {
         
