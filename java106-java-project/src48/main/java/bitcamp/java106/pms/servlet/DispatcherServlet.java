@@ -3,11 +3,6 @@ package bitcamp.java106.pms.servlet;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +14,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import bitcamp.java106.pms.support.WebApplicationContextUtils;
 import bitcamp.java106.pms.web.RequestMapping;
-import bitcamp.java106.pms.web.RequestParam;
 
 @SuppressWarnings("serial")
 public class DispatcherServlet extends HttpServlet {
@@ -81,26 +75,9 @@ public class DispatcherServlet extends HttpServlet {
 
             if (requestHandler == null)
                 throw new ServletException("요청을 처리할 요청 핸들러가 없습니다.");
-
-            // 요청 핸들러가 리턴해 줄 값을 담을 바구니 준비
-            HashMap<String,Object> resultMap = new HashMap<>();
             
-            // 요청 핸들러의 파라미터 값을 준비한다.
-            Object[] paramValues = prepareParamValues(
-                             requestHandler, request, response, resultMap);
-            
-            // 준비한 파라미터 값을 가지고 요청 핸들러를 호출한다. 
             String viewUrl = (String)requestHandler.invoke(
-                                    pageController, paramValues);
-            
-            // 요청 핸들러를 실행한 후,
-            // 요청 핸들러 저장한 작업 결과가 담겨 있는 resultMap의 값들을 ServletRequest로 옮긴다.
-            // 왜? JSP가 꺼내 쓸 수 있도록 하기 위함.
-            Set<String> keySet = resultMap.keySet();
-            for (String key : keySet) {
-                request.setAttribute(key, resultMap.get(key));
-            }
-            
+                                    pageController, request, response);
             if (viewUrl.startsWith("redirect:")) {
                 response.sendRedirect(viewUrl.substring(9));
             } else {
@@ -109,71 +86,6 @@ public class DispatcherServlet extends HttpServlet {
         } catch (Exception e) {
             throw new ServletException("페이지 컨트롤러 실행 중 오류 발생!");
         }
-    }
-
-    private Object[] prepareParamValues(
-            Method requestHandler, 
-            HttpServletRequest request,
-            HttpServletResponse response, 
-            HashMap<String, Object> resultMap) {
-        
-        // 파라미터 값을 저장할 바구니 준비
-        ArrayList<Object> paramValues = new ArrayList<>();
-        
-        // 메서드의 파라미터 정보 알아내기
-        Parameter[] params = requestHandler.getParameters();
-        
-        for (Parameter p : params) {
-            if (p.getType() == Map.class) {
-                paramValues.add(resultMap);
-            } else if (p.getType() == HttpServletRequest.class) {
-                paramValues.add(request);
-            } else if (p.getType() == HttpServletResponse.class) {
-                paramValues.add(response);
-            } else if (isPrimitiveType(p.getType())) {
-                paramValues.add(getRequestParamValue(p, request));
-            }
-        }
-        
-        return paramValues.toArray();
-    }
-
-    private Object getRequestParamValue(Parameter p, HttpServletRequest request) {
-        // @RequestParam 애노테이션 정보를 추출한다.
-        RequestParam anno = p.getAnnotation(RequestParam.class);
-        
-        // 애노테이션의 설정된 파라미터 이름을 꺼낸다.
-        String paramName = anno.value();
-        
-        // 요청 파라미터 값을 꺼낸다.
-        String value = request.getParameter(paramName);
-        
-        if (value == null) return null;
-        
-        // 클라이언트로부터 받은 값을 메서드의 파라미터 타입으로 변환시킨다.
-        if (p.getType() == byte.class) return Byte.parseByte(value);
-        if (p.getType() == short.class) return Short.parseShort(value);
-        if (p.getType() == int.class) return Integer.parseInt(value);
-        if (p.getType() == long.class) return Long.parseLong(value);
-        if (p.getType() == float.class) return Float.parseFloat(value);
-        if (p.getType() == double.class) return Double.parseDouble(value);
-        if (p.getType() == char.class) return value.charAt(0);
-        if (p.getType() == boolean.class) return Boolean.parseBoolean(value);
-        
-        return value;
-    }
-    
-    private boolean isPrimitiveType(Class<?> type) {
-        if (type == byte.class ||
-            type == short.class ||
-            type == int.class ||
-            type == long.class ||
-            type == float.class ||
-            type == double.class ||
-            type == char.class ||
-            type == boolean.class)
-            return true;
-        return false;
     }
 
     private Method findRequestHandler(Object pageController, String handlerPath) throws Exception {

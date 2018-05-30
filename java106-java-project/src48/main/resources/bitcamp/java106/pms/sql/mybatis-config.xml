@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <properties resource="bitcamp/java106/pms/sql/jdbc.properties"></properties>
+
+  <typeAliases>
+    <typeAlias type="bitcamp.java106.pms.domain.Board" alias="Board"/>
+    <typeAlias type="bitcamp.java106.pms.domain.Classroom" alias="Classroom"/>
+    <typeAlias type="bitcamp.java106.pms.domain.Member" alias="Member"/>
+    <typeAlias type="bitcamp.java106.pms.domain.Task" alias="Task"/>
+    <typeAlias type="bitcamp.java106.pms.domain.Team" alias="Team"/>
+  </typeAliases>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <mappers>
+    <mapper resource="bitcamp/java106/pms/sql/BoardMapper.xml"/>
+    <mapper resource="bitcamp/java106/pms/sql/ClassroomMapper.xml"/>
+    <mapper resource="bitcamp/java106/pms/sql/MemberMapper.xml"/>
+    <mapper resource="bitcamp/java106/pms/sql/TaskMapper.xml"/>
+    <mapper resource="bitcamp/java106/pms/sql/TeamMapper.xml"/>
+    <mapper resource="bitcamp/java106/pms/sql/TeamMemberMapper.xml"/>
+  </mappers>
+</configuration>
+
+
+
+
+
+
+

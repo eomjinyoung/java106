@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bitcamp.java106.pms.dao.TaskDao">
+
+  <resultMap type="Task" id="TaskMap">
+    <!-- Task task = new Task(); -->
+    
+    <id column="tano" property="no"/>
+    <!-- task.setNo(rs.getInt("tano")); -->
+    
+    <result column="titl" property="title"/>
+    <!-- task.setTitle(rs.getString("titl")); -->
+    
+    <result column="sdt" property="startDate"/>
+    <!-- task.setStartDate(rs.getDate("sdt")); -->
+    
+    <result column="edt" property="endDate"/>
+    <!-- task.setEndDate(rs.getDate("edt")); -->
+    
+    <result column="stat" property="state"/>
+    <!-- task.setState(rs.getInt("stat")); -->
+    
+    <association property="worker" javaType="Member">
+      <id column="mid" property="id"/>
+    </association>
+    <!-- Member obj = new Member();
+         obj.setId(rs.getString("mid"));
+         task.setWorker(obj);
+    -->
+     
+    <association property="team" javaType="Team">
+      <id column="tnm" property="name"/>
+    </association>
+    <!-- Team obj = new Team();
+         obj.setName(rs.getString("tnm"));
+         task.setTeam(obj);
+    -->
+  </resultMap>
+  
+  <select id="selectList" 
+          resultMap="TaskMap" parameterType="string">
+    select tano, titl, sdt, edt, stat, mid, tnm 
+    from pms2_task
+    where tnm=#{value} 
+    <!--  limit #{startIndex}, #{pageSize} -->
+  </select>
+  
+  <insert id="insert" parameterType="Task"
+          useGeneratedKeys="true" keyColumn="tano" keyProperty="no">
+    <choose>
+	    <when test="worker.id != ''">
+		    insert into pms2_task(titl,sdt,edt,mid,tnm) 
+		    values(#{title},#{startDate},#{endDate},#{worker.id},#{team.name})
+	    </when>
+	    <otherwise>
+	       insert into pms2_task(titl,sdt,edt,tnm) 
+            values(#{title},#{startDate},#{endDate},#{team.name})
+	    </otherwise>
+    </choose>
+  </insert>
+  
+  <select id="selectOne" parameterType="int" resultMap="TaskMap">
+    select titl,sdt,edt,stat,mid,tnm 
+    from pms2_task 
+    where tano=#{value}
+  </select>
+  
+  <update id="update" parameterType="Task">
+    update pms2_task set 
+      titl=#{title},
+      sdt=#{startDate},
+      edt=#{endDate},
+      stat=#{state},
+      <choose>
+          <when test="worker.id != ''">
+            mid=#{worker.id},
+          </when>
+          <otherwise>
+            mid=null,
+          </otherwise>
+      </choose>
+      tnm=#{team.name} 
+    where tano=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pms2_task 
+    where tano=#{value}
+  </delete>
+  
+  <delete id="deleteByTeam" parameterType="string">
+    delete from pms2_task 
+    where tnm=#{value}
+  </delete>
+  
+  <update id="updateState" parameterType="map">
+    update pms2_task set 
+      stat=#{state} 
+    where tano=#{no}
+  </update>
+</mapper>
+
+
+
+
+
+
+
