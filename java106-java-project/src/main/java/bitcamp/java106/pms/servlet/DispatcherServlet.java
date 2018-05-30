@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -131,6 +133,8 @@ public class DispatcherServlet extends HttpServlet {
                 paramValues.add(request);
             } else if (p.getType() == HttpServletResponse.class) {
                 paramValues.add(response);
+            } else if (p.getType() == HttpSession.class) {
+                paramValues.add(request.getSession());
             } else if (isPrimitiveType(p.getType())) {
                 paramValues.add(getRequestParamValue(p, request));
             } else {
@@ -145,13 +149,14 @@ public class DispatcherServlet extends HttpServlet {
         Class<?> clazz = p.getType();
         
         try {
-            Constructor<?> defaultConstructor = clazz.getConstructor(null);
+            Constructor<?> defaultConstructor = clazz.getConstructor();
             Object valueObject = defaultConstructor.newInstance();
             
             Method[] methods = clazz.getMethods();
             
             for (Method m : methods) {
                 if (!m.getName().startsWith("set")) continue;
+                
                 String propName = getPropertyName(m.getName());
                 String propValue = request.getParameter(propName);
                 
@@ -159,9 +164,11 @@ public class DispatcherServlet extends HttpServlet {
                 if (propValue == null) continue;
                 
                 // 셋터에서 요구하는 파라미터 값의 타입이 String이나 primitive 타입이 아니면 건너 뛴다. 
-                if (!isPrimitiveType(m.getParameterTypes()[0])) continue;
+                Class<?> setterParamType = m.getParameterTypes()[0];
+                if (!isPrimitiveType(setterParamType)) continue;
                 
-                
+                // 셋터 메서드를 호출하여 클라이언트가 보낸 값을 저장한다.
+                m.invoke(valueObject, toPrimitiveValue(propValue, setterParamType));
             }
             
             return valueObject;
@@ -182,30 +189,34 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private Object getRequestParamValue(Parameter p, HttpServletRequest request) {
-        // @RequestParam 애노테이션 정보를 추출한다.
+        // 파라미터 정보로부터 @RequestParam 애노테이션 정보를 추출한다.
         RequestParam anno = p.getAnnotation(RequestParam.class);
         
-        // 애노테이션의 설정된 파라미터 이름을 꺼낸다.
+        // 애노테이션 정보로부터 파라미터 이름을 꺼낸다.
         String paramName = anno.value();
         
-        // 요청 파라미터 값을 꺼낸다.
+        // 파라미터 이름을 사용하여 클라이언트가 보낸 데이터의 값을 꺼낸다.
         String value = request.getParameter(paramName);
         
         if (value == null) return null;
         
-        // 클라이언트로부터 받은 값을 메서드의 파라미터 타입으로 변환시킨다.
-        if (p.getType() == byte.class) return Byte.parseByte(value);
-        if (p.getType() == short.class) return Short.parseShort(value);
-        if (p.getType() == int.class) return Integer.parseInt(value);
-        if (p.getType() == long.class) return Long.parseLong(value);
-        if (p.getType() == float.class) return Float.parseFloat(value);
-        if (p.getType() == double.class) return Double.parseDouble(value);
-        if (p.getType() == char.class) return value.charAt(0);
-        if (p.getType() == boolean.class) return Boolean.parseBoolean(value);
+        // 클라이언트가 보낸 값은 문자열인데 그 문자열을 파라미터의 primitive 타입으로 바꿔 리턴한다.
+        return toPrimitiveValue(value, p.getType());
+    }
+    
+    private Object toPrimitiveValue(String value, Class<?> type) {
+        if (type == byte.class) return Byte.parseByte(value);
+        if (type == short.class) return Short.parseShort(value);
+        if (type == int.class) return Integer.parseInt(value);
+        if (type == long.class) return Long.parseLong(value);
+        if (type == float.class) return Float.parseFloat(value);
+        if (type == double.class) return Double.parseDouble(value);
+        if (type == char.class) return value.charAt(0);
+        if (type == boolean.class) return Boolean.parseBoolean(value);
+        if (type == Date.class) return Date.valueOf(value);
         
         return value;
     }
-    
     
     
     private boolean isPrimitiveType(Class<?> type) {
@@ -217,7 +228,8 @@ public class DispatcherServlet extends HttpServlet {
             type == double.class ||
             type == char.class ||
             type == boolean.class ||
-            type == String.class)
+            type == String.class ||
+            type == Date.class)
             return true;
         return false;
     }

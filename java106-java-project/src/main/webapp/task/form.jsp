@@ -9,7 +9,7 @@
 <title>작업 등록</title>
 </head>
 <body>
-<h1>'${param.teamName}' 팀의 작업 등록</h1>
+<h1><a href='../team/view.do?name=${param.teamName}'>'${param.teamName}'</a> 팀의 작업 등록</h1>
 <form action='add.do' method='post'>
 <input type='hidden' name='teamName' value='${param.teamName}'>
 <table border='1'>

@@ -2,9 +2,7 @@ package bitcamp.java106.pms.web;
 
 import java.net.URLEncoder;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -13,7 +11,6 @@ import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.web.RequestMapping;
 
 @Component("/team/member")
 public class TeamMemberController {
@@ -32,11 +29,8 @@ public class TeamMemberController {
     
     @RequestMapping("/add")
     public String add(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
-        
-        String teamName = request.getParameter("teamName");
-        String memberId = request.getParameter("memberId");
+            @RequestParam("teamName") String teamName,
+            @RequestParam("memberId") String memberId) throws Exception {
         
         Team team = teamDao.selectOne(teamName);
         if (team == null) {
@@ -56,12 +50,9 @@ public class TeamMemberController {
     
     @RequestMapping("/delete")
     public String delete(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
+            @RequestParam("teamName") String teamName,
+            @RequestParam("memberId") String memberId) throws Exception {
          
-        String teamName = request.getParameter("teamName");
-        String memberId = request.getParameter("memberId");
-        
         int count = teamMemberDao.delete(teamName, memberId);
         if (count == 0) {
             throw new Exception("<p>해당 팀원이 존재하지 않습니다.</p>");
@@ -74,17 +65,16 @@ public class TeamMemberController {
     
     @RequestMapping("/list")
     public String list(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
+            @RequestParam("name") String teamName,
+            Map<String,Object> map) throws Exception {
        
-        String name = request.getParameter("name");
-
-        List<Member> members = teamMemberDao.selectListWithEmail(name);
-        request.setAttribute("members", members);
+        List<Member> members = teamMemberDao.selectListWithEmail(teamName);
+        map.put("members", members);
         return "/team/member/list.jsp";
     }
 }
 
+//ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기
 //ver 47 - 애노테이션을 적용하여 요청 핸들러 다루기
 //ver 46 - 페이지 컨트롤러를 POJO를 변경

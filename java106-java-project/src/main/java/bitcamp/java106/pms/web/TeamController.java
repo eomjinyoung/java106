@@ -1,10 +1,7 @@
 package bitcamp.java106.pms.web;
 
-import java.sql.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -12,7 +9,6 @@ import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Team;
-import bitcamp.java106.pms.web.RequestMapping;
 
 @Component("/team")
 public class TeamController {
@@ -31,27 +27,14 @@ public class TeamController {
     }
     
     @RequestMapping("/add")
-    public String add(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
-        
-        Team team = new Team();
-        team.setName(request.getParameter("name"));
-        team.setDescription(request.getParameter("description"));
-        team.setMaxQty(Integer.parseInt(request.getParameter("maxQty")));
-        team.setStartDate(Date.valueOf(request.getParameter("startDate")));
-        team.setEndDate(Date.valueOf(request.getParameter("endDate")));
+    public String add(Team team) throws Exception {
         
         teamDao.insert(team);
         return "redirect:list.do";
     }
     
     @RequestMapping("/delete")
-    public String delete(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
-        
-        String name = request.getParameter("name");
+    public String delete(@RequestParam("name") String name) throws Exception {
         
         teamMemberDao.delete(name);
         taskDao.deleteByTeam(name);
@@ -63,26 +46,15 @@ public class TeamController {
     }
     
     @RequestMapping("/list")
-    public String list(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
+    public String list(Map<String,Object> map) throws Exception {
         
         List<Team> list = teamDao.selectList();
-        request.setAttribute("list", list);
+        map.put("list", list);
         return "/team/list.jsp";
     }
     
     @RequestMapping("/update")
-    public String update(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
-        
-        Team team = new Team();
-        team.setName(request.getParameter("name"));
-        team.setDescription(request.getParameter("description"));
-        team.setMaxQty(Integer.parseInt(request.getParameter("maxQty")));
-        team.setStartDate(Date.valueOf(request.getParameter("startDate")));
-        team.setEndDate(Date.valueOf(request.getParameter("endDate")));
+    public String update(Team team) throws Exception {
         
         int count = teamDao.update(team);
         if (count == 0) {
@@ -93,20 +65,19 @@ public class TeamController {
     
     @RequestMapping("/view")
     public String view(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
-        
-        String name = request.getParameter("name");
+            @RequestParam("name") String name,
+            Map<String,Object> map) throws Exception {
         
         Team team = teamDao.selectOneWithMembers(name);
         if (team == null) {
             throw new Exception("유효하지 않은 팀입니다.");
         }
-        request.setAttribute("team", team);
+        map.put("team", team);
         return "/team/view.jsp";
     }
 }
 
+//ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기
 //ver 47 - 애노테이션을 적용하여 요청 핸들러 다루기
 //ver 46 - 페이지 컨트롤러를 POJO를 변경

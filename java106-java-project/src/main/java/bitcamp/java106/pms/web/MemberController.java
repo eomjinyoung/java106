@@ -1,15 +1,12 @@
 package bitcamp.java106.pms.web;
 
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.domain.Member;
-import bitcamp.java106.pms.web.RequestMapping;
 
 @Component("/member")
 public class MemberController {
@@ -21,26 +18,15 @@ public class MemberController {
     }
     
     @RequestMapping("/add")
-    public String add(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
+    public String add(Member member) throws Exception {
           
-        Member member = new Member();
-        member.setId(request.getParameter("id"));
-        member.setEmail(request.getParameter("email"));
-        member.setPassword(request.getParameter("password"));
-        
         memberDao.insert(member);
         return "redirect:list.do";
     }
     
     @RequestMapping("/delete")
-    public String delete(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
+    public String delete(@RequestParam("id") String id) throws Exception {
         
-        String id = request.getParameter("id");
-
         int count = memberDao.delete(id);
         if (count == 0) {
             throw new Exception("해당 회원이 없습니다.");
@@ -49,24 +35,15 @@ public class MemberController {
     }
     
     @RequestMapping("/list")
-    public String list(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
+    public String list(Map<String, Object> map) throws Exception {
         
         List<Member> list = memberDao.selectList();
-        request.setAttribute("list", list);
+        map.put("list", list);
         return "/member/list.jsp";
     }
     
     @RequestMapping("/update")
-    public String update(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
-        
-        Member member = new Member();
-        member.setId(request.getParameter("id"));
-        member.setEmail(request.getParameter("email"));
-        member.setPassword(request.getParameter("password"));
+    public String update(Member member) throws Exception {
         
         int count = memberDao.update(member);
         if (count == 0) {
@@ -77,20 +54,19 @@ public class MemberController {
     
     @RequestMapping("/view")
     public String view(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
+            @RequestParam("id") String id,
+            Map<String,Object> map) throws Exception {
 
-        String id = request.getParameter("id");
-        
         Member member = memberDao.selectOne(id);
         if (member == null) {
             throw new Exception("유효하지 않은 멤버 아이디입니다.");
         }
-        request.setAttribute("member", member);
+        map.put("member", member);
         return "/member/view.jsp";
     }
 }
 
+//ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기
 //ver 47 - 애노테이션을 적용하여 요청 핸들러 다루기
 //ver 46 - 페이지 컨트롤러를 POJO를 변경

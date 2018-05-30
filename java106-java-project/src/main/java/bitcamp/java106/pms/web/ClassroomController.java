@@ -1,16 +1,12 @@
 package bitcamp.java106.pms.web;
 
-import java.sql.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
 import bitcamp.java106.pms.dao.ClassroomDao;
 import bitcamp.java106.pms.domain.Classroom;
-import bitcamp.java106.pms.web.RequestMapping;
 
 @Component("/classroom")
 public class ClassroomController {
@@ -22,26 +18,15 @@ public class ClassroomController {
     }
     
     @RequestMapping("/add")
-    public String add(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
-        
-        Classroom classroom = new Classroom();
-        classroom.setTitle(request.getParameter("title"));
-        classroom.setStartDate(Date.valueOf(request.getParameter("startDate")));
-        classroom.setEndDate(Date.valueOf(request.getParameter("endDate")));
-        classroom.setRoom(request.getParameter("room"));
+    public String add(Classroom classroom) throws Exception {
         
         classroomDao.insert(classroom);
         return "redirect:list.do";
     }
     
     @RequestMapping("/delete")
-    public String delete(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
+    public String delete(@RequestParam("no") int no) throws Exception {
      
-        int no = Integer.parseInt(request.getParameter("no"));
         int count = classroomDao.delete(no);
         if (count == 0) {
             throw new Exception("<p>해당 강의가 없습니다.</p>");
@@ -50,27 +35,16 @@ public class ClassroomController {
     }
     
     @RequestMapping("/list")
-    public String list(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
+    public String list(Map<String,Object> map) throws Exception {
      
         List<Classroom> list = classroomDao.selectList();
-        request.setAttribute("list", list);
+        map.put("list", list);
         return "/classroom/list.jsp";
     }
     
     @RequestMapping("/update")
-    public String update(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
+    public String update(Classroom classroom) throws Exception {
      
-        Classroom classroom = new Classroom();
-        classroom.setNo(Integer.parseInt(request.getParameter("no")));
-        classroom.setTitle(request.getParameter("title"));
-        classroom.setStartDate(Date.valueOf(request.getParameter("startDate")));
-        classroom.setEndDate(Date.valueOf(request.getParameter("endDate")));
-        classroom.setRoom(request.getParameter("room"));
-        
         int count = classroomDao.update(classroom);
         if (count == 0) {
             throw new Exception("해당 강의가 존재하지 않습니다.");
@@ -80,20 +54,20 @@ public class ClassroomController {
     
     @RequestMapping("/view")
     public String view(
-            HttpServletRequest request, 
-            HttpServletResponse response) throws Exception {
+            @RequestParam("no") int no, 
+            Map<String,Object> map) throws Exception {
      
-        int no = Integer.parseInt(request.getParameter("no"));
         Classroom classroom = classroomDao.selectOne(no);
 
         if (classroom == null) {
             throw new Exception("유효하지 않은 강의입니다.");
         }
-        request.setAttribute("classroom", classroom);
+        map.put("classroom", classroom);
         return "/classroom/view.jsp";
     }
 }
 
+//ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기
 //ver 47 - 애노테이션을 적용하여 요청 핸들러 다루기
 //ver 46 - 페이지 컨트롤러를 POJO를 변경
