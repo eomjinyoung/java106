@@ -2,6 +2,7 @@
 package bitcamp.java106.pms.servlet;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
@@ -132,10 +133,52 @@ public class DispatcherServlet extends HttpServlet {
                 paramValues.add(response);
             } else if (isPrimitiveType(p.getType())) {
                 paramValues.add(getRequestParamValue(p, request));
+            } else {
+                paramValues.add(getValueObject(p, request));
             }
         }
         
         return paramValues.toArray();
+    }
+
+    private Object getValueObject(Parameter p, HttpServletRequest request) {
+        Class<?> clazz = p.getType();
+        
+        try {
+            Constructor<?> defaultConstructor = clazz.getConstructor(null);
+            Object valueObject = defaultConstructor.newInstance();
+            
+            Method[] methods = clazz.getMethods();
+            
+            for (Method m : methods) {
+                if (!m.getName().startsWith("set")) continue;
+                String propName = getPropertyName(m.getName());
+                String propValue = request.getParameter(propName);
+                
+                // 클라이언트가 그 프로퍼티 이름으로 보낸 값이 없으면 건너 뛴다.
+                if (propValue == null) continue;
+                
+                // 셋터에서 요구하는 파라미터 값의 타입이 String이나 primitive 타입이 아니면 건너 뛴다. 
+                if (!isPrimitiveType(m.getParameterTypes()[0])) continue;
+                
+                
+            }
+            
+            return valueObject;
+            
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    private String getPropertyName(String methodName) {
+        // setFirstName ==> FirstName 추출 
+        StringBuffer buf = new StringBuffer(methodName.substring(3));
+        
+        // 첫번째 알파벳을 소문자로 변경
+        buf.setCharAt(0, Character.toLowerCase(buf.charAt(0)));
+        
+        return buf.toString();
     }
 
     private Object getRequestParamValue(Parameter p, HttpServletRequest request) {
@@ -163,6 +206,8 @@ public class DispatcherServlet extends HttpServlet {
         return value;
     }
     
+    
+    
     private boolean isPrimitiveType(Class<?> type) {
         if (type == byte.class ||
             type == short.class ||
@@ -171,7 +216,8 @@ public class DispatcherServlet extends HttpServlet {
             type == float.class ||
             type == double.class ||
             type == char.class ||
-            type == boolean.class)
+            type == boolean.class ||
+            type == String.class)
             return true;
         return false;
     }
