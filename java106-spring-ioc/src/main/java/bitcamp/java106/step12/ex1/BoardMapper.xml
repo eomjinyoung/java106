@@ -12,18 +12,24 @@
     <result column="rdt" property="registeredDate"/>
   </resultMap>
   
-  <select id="selectList" resultMap="BoardMap">
+  <select id="selectList" resultMap="BoardMap" parameterType="map">
     select 
       bno, 
       titl, 
       cont, 
       rdt 
     from ex_board
+    order by bno desc
+    limit #{startIndex}, #{pageSize}
   </select>
   <insert id="insert" parameterType="Board">
     insert into ex_board(titl,cont,rdt) 
     values(#{title},#{content},now())
   </insert>
+  <delete id="delete" parameterType="int">
+    delete from ex_board 
+    where bno=#{value}
+  </delete>
 </mapper>
 
 
