@@ -32,16 +32,16 @@ desc ex_board;
 
 ## 데이터 입력 
 ```
-insert into ex_board(titl, cont, rdt) values('subject1', 'contents1', now());
-insert into ex_board(titl, cont, rdt) values('subject2', 'contents2', now());
-insert into ex_board(titl, cont, rdt) values('subject3', 'contents3', now());
-insert into ex_board(titl, cont, rdt) values('subject4', 'contents4', now());
-insert into ex_board(titl, cont, rdt) values('subject5', 'contents5', now());
-insert into ex_board(titl, cont, rdt) values('subject6', 'contents6', now());
-insert into ex_board(titl, cont, rdt) values('subject7', 'contents7', now());
-insert into ex_board(titl, cont, rdt) values('subject8', 'contents8', now());
-insert into ex_board(titl, cont, rdt) values('subject9', 'contents9', now());
-insert into ex_board(titl, cont, rdt) values('subject10', 'contents10', now());
+insert into ex_board(titl, cont, rdt) values('제목1', 'contents1', now());
+insert into ex_board(titl, cont, rdt) values('제목2', 'contents2', now());
+insert into ex_board(titl, cont, rdt) values('제목3', 'contents3', now());
+insert into ex_board(titl, cont, rdt) values('제목4', 'contents4', now());
+insert into ex_board(titl, cont, rdt) values('제목5', 'contents5', now());
+insert into ex_board(titl, cont, rdt) values('제목6', 'contents6', now());
+insert into ex_board(titl, cont, rdt) values('제목7', 'contents7', now());
+insert into ex_board(titl, cont, rdt) values('제목8', 'contents8', now());
+insert into ex_board(titl, cont, rdt) values('제목9', 'contents9', now());
+insert into ex_board(titl, cont, rdt) values('제목10', 'contents10', now());
 ```
 
 ## 데이터 조회
