@@ -20,7 +20,7 @@ import bitcamp.java106.pms.domain.Member;
 public class AuthController {
     
     MemberDao memberDao;
-    
+     
     public AuthController(MemberDao memberDao) {
         this.memberDao = memberDao;
     }
@@ -29,7 +29,7 @@ public class AuthController {
     public String login(
             @RequestParam("id") String id,
             @RequestParam("password") String password,
-            @RequestParam("saveId") String saveId,
+            @RequestParam(value="saveId",required=false) String saveId,
             HttpServletRequest request,
             HttpServletResponse response,
             HttpSession session) throws Exception {
