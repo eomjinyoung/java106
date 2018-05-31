@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.domain.Member;
 
-@Component("/auth")
+@Controller
+@RequestMapping("/auth")
 public class AuthController {
     
     MemberDao memberDao;
@@ -56,9 +59,11 @@ public class AuthController {
             // 로그인 하기 전의 페이지로 이동한다.
             String refererUrl = (String)session.getAttribute("refererUrl");
             
-            if (refererUrl == null) { 
+            if (refererUrl == null || 
+                refererUrl.contains("login.do") ||
+                refererUrl.endsWith("/auth/form.jsp")) { 
                 // 이전 페이지가 없다면 메인 화면으로 이동시킨다.
-                return "redirect:" + request.getContextPath(); // => "/java106-java-project"
+                return "redirect:/"; // => "/java106-java-project"
             } else { 
                 // 이전 페이지가 있다면 그 페이지로 이동시킨다.
                 return "redirect:" + refererUrl;

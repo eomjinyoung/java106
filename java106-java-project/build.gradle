@@ -47,7 +47,8 @@ dependencies {
     compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.3.2'
     
     // Spring IoC 컨테이너 라이브러리
-    compile group: 'org.springframework', name: 'spring-context', version: '5.0.6.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.6.RELEASE'
+    //compile group: 'org.springframework', name: 'spring-context', version: '5.0.6.RELEASE'
     compile group: 'org.springframework', name: 'spring-jdbc', version: '5.0.6.RELEASE'
     
     // DB 커넥션풀 라이브러리

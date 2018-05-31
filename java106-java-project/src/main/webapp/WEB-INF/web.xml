@@ -28,7 +28,7 @@
     
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
-        <filter-class>bitcamp.java106.pms.filter.CharacterEncodingFilter</filter-class>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
@@ -46,11 +46,7 @@
     <!-- 프론트 컨트롤러 서블릿 등록 및 정보 설정 -->
     <servlet>
         <servlet-name>dispatcher</servlet-name>
-        <servlet-class>bitcamp.java106.pms.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>config/dispatcher-servlet.xml</param-value>
-        </init-param>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>

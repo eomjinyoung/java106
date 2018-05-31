@@ -1,5 +1,14 @@
 # 자바 프로젝트
 
+## src51 - Spring WebMVC 적용
+학습목표
+    - Spring WebMVC를 사용하여 웹 애플리케이션을 만들 수 있다.
+    - Spring WebMVC의 구동 원리를 이해한다.
+작업내용
+    - 기존에 작성했던 프론트 컨트롤러인 DispatcherServlet을 Spring WebMVC 클래스로 대체한다.
+    - 기존에 작성했던 필터인 CharacterEncodingFilter를 Spring WebMVC 클래스로 대체한다.
+    - @RequestParam, @RequestMapping 애노테이션을 Spring WebMVC 애노테이션으로 대체한다.
+
 ## src50 - mybatis와 Spring IoC 컨테이너 연동하기
 학습목표 
     - mybatis를 Spring IoC 컨테이너와 연동할 수 있다.
