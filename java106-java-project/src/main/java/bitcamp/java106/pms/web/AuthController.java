@@ -84,7 +84,7 @@ public class AuthController {
         session.invalidate();
         
         // 웹 애플리케이션의 시작 페이지로 가라고 웹브라우저에게 얘기한다.
-        return "redirect:" + request.getContextPath(); // ==> "/java106-java-project"
+        return "redirect:/"; // ==> "/java106-java-project"
     }
 }
 
@@ -97,6 +97,7 @@ public class AuthController {
 //                                                       <=== 응답: index.html
 // 메인화면 출력!
 
+//ver 51 - redirect URL 변경
 //ver 50 - DAO 변경에 따른 메서드 호출 변경
 //ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기
