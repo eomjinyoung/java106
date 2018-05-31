@@ -1,5 +1,6 @@
 # 변경 내역
-- DispatcherServlet 변경
-- 페이지 컨트롤러의 요청 핸들러를 변경한다. 
- 
-
+- build.gradle 변경
+- jdbc.properties 변경
+- dispatcher-servlet.xml 변경
+- DAO 클래스를 인터페이스로 변경 변경
+- AuthController 변경

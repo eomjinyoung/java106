@@ -31,7 +31,7 @@
     values(#{teamName},#{memberId})
   </insert>
   
-  <select id="isExist" parameterType="map" resultType="int">
+  <select id="isExist" parameterType="map" resultType="boolean">
     select count(*) 
     from pms2_team_member 
     where tnm=#{teamName} and mid=#{memberId}

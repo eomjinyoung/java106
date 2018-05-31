@@ -2,70 +2,18 @@ package bitcamp.java106.pms.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.stereotype.Component;
-
 import bitcamp.java106.pms.domain.Team;
 
-@Component
-public class TeamDao {
-
-    SqlSessionFactory sqlSessionFactory;
-    
-    public TeamDao(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSessionFactory = sqlSessionFactory;
-    }
-    
-    public int delete(String name) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            int count = sqlSession.delete(
-                    "bitcamp.java106.pms.dao.TeamDao.delete", name);
-            sqlSession.commit();
-            return count;
-        } 
-    }
-    
-    public List<Team> selectList() throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            return sqlSession.selectList(
-                    "bitcamp.java106.pms.dao.TeamDao.selectList");
-        }
-    }
-
-    public int insert(Team team) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            int count = sqlSession.insert(
-                    "bitcamp.java106.pms.dao.TeamDao.insert", team);
-            sqlSession.commit();
-            return count;
-        }
-    }
-
-    public int update(Team team) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            int count = sqlSession.update(
-                    "bitcamp.java106.pms.dao.TeamDao.update", team);
-            sqlSession.commit();
-            return count;
-        }
-    }
-
-    public Team selectOne(String name) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            return sqlSession.selectOne(
-                    "bitcamp.java106.pms.dao.TeamDao.selectOne", name);
-        }
-    }
-    
-    public Team selectOneWithMembers(String name) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            return sqlSession.selectOne(
-                    "bitcamp.java106.pms.dao.TeamDao.selectOneWithMembers", name);
-        }
-    }
+public interface TeamDao {
+    int delete(String name);
+    List<Team> selectList();
+    int insert(Team team);
+    int update(Team team);
+    Team selectOne(String name);
+    Team selectOneWithMembers(String name);
 }
 
+//ver 50 - 클래스를 인터페이스로 전환
 //ver 42 - JSP 적용에 따라 Team 정보를 가져올 때 그 팀의 Member 정보도 함께 가져온다.
 //         selectOneWithMembers() 추가
 //ver 33 - Mybatis 적용 

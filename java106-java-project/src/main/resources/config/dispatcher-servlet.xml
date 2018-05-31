@@ -10,21 +10,30 @@
     
     <context:component-scan base-package="bitcamp.java106.pms"/>
     
-    <!-- Mybatis SqlSessionFactory 준비하기 -->
-    <bean id="mybatisConfigInputStream"
-          class="org.apache.ibatis.io.Resources"
-          factory-method="getResourceAsStream">
-      <constructor-arg value="bitcamp/java106/pms/sql/mybatis-config.xml"/>
+    <bean id="sqlSessionFactory"
+          class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource" />
+      <property name="mapperLocations" 
+                value="classpath*:bitcamp/java106/pms/sql/*Mapper.xml" />  
+      <property name="typeAliasesPackage" 
+                value="bitcamp.java106.pms.domain"/>   
     </bean>
     
-    <bean id="sqlSessionFactoryBuilder"
-          class="org.apache.ibatis.session.SqlSessionFactoryBuilder"/>
-          
-    <bean id="sqlSessionFactory"
-          factory-bean="sqlSessionFactoryBuilder"
-          factory-method="build">
-      <constructor-arg ref="mybatisConfigInputStream"/>
+    <bean id="dataSource" 
+          class="org.apache.commons.dbcp.BasicDataSource" 
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
     </bean>
+    
+    <context:property-placeholder 
+        location="bitcamp/java106/pms/sql/jdbc.properties"/> 
+        
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="bitcamp.java106.pms.dao" />
+    </bean>   
 </beans>
 
 

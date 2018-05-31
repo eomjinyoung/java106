@@ -1,6 +1,8 @@
 // 로그인 폼 출력과 사용자 인증처리 서블릿
 package bitcamp.java106.pms.web;
 
+import java.util.HashMap;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.domain.Member;
-import bitcamp.java106.pms.web.RequestMapping;
 
 @Component("/auth")
 public class AuthController {
@@ -43,7 +44,11 @@ public class AuthController {
         }
         response.addCookie(cookie);
         
-        Member member = memberDao.selectOneWithPassword(id, password);
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("id", id);
+        params.put("password", password);
+        
+        Member member = memberDao.selectOneWithPassword(params);
         
         if (member != null) { // 로그인 성공!
             session.setAttribute("loginUser", member);
@@ -87,6 +92,7 @@ public class AuthController {
 //                                                       <=== 응답: index.html
 // 메인화면 출력!
 
+//ver 50 - DAO 변경에 따른 메서드 호출 변경
 //ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기
 //ver 47 - 애노테이션을 적용하여 요청 핸들러 다루기

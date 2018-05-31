@@ -1,76 +1,20 @@
 package bitcamp.java106.pms.dao;
 
-import java.util.HashMap;
 import java.util.List;
-
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.stereotype.Component;
+import java.util.Map;
 
 import bitcamp.java106.pms.domain.Member;
 
-@Component
-public class MemberDao {
-
-    SqlSessionFactory sqlSessionFactory;
-    
-    public MemberDao(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSessionFactory = sqlSessionFactory;
-    }
-        
-    public int delete(String id) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            int count = sqlSession.delete(
-                    "bitcamp.java106.pms.dao.MemberDao.delete", id);
-            sqlSession.commit();
-            return count;
-        }
-    }
-    
-    public List<Member> selectList() throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            return sqlSession.selectList(
-                    "bitcamp.java106.pms.dao.MemberDao.selectList");
-        }
-    }
-
-    public int insert(Member member) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            int count = sqlSession.insert(
-                    "bitcamp.java106.pms.dao.MemberDao.insert", member);
-            sqlSession.commit();
-            return count;
-        }
-    }
-
-    public int update(Member member) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            int count = sqlSession.update(
-                    "bitcamp.java106.pms.dao.MemberDao.update", member);
-            sqlSession.commit();
-            return count;
-        }
-    }
-
-    public Member selectOne(String id) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            return sqlSession.selectOne(
-                    "bitcamp.java106.pms.dao.MemberDao.selectOne", id);
-        }   
-    }
-    
-    public Member selectOneWithPassword(String id, String password) throws Exception {
-        try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-            HashMap<String,String> params = new HashMap<>();
-            params.put("id", id);
-            params.put("password", password);
-            
-            return sqlSession.selectOne(
-                    "bitcamp.java106.pms.dao.MemberDao.selectOneWithPassword", params);
-        }   
-    }
+public interface MemberDao {
+    int delete(String id);
+    List<Member> selectList();
+    int insert(Member member);
+    int update(Member member);
+    Member selectOne(String id);
+    Member selectOneWithPassword(Map<String,Object> params);
 }
 
+//ver 50 - 클래스를 인터페이스로 변경
 //ver 41 - 로그인을 위한 selectOneWithPassword(id, password) 메서드 추가
 //ver 33 - Mybatis 적용
 //ver 32 - DB 커넥션 풀 적용

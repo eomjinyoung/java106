@@ -37,14 +37,21 @@ repositories {
 
 // => 다운로드할 의존 라이브러리를 지정한다.
 dependencies {
-    // MySQL JDBC Driver 라이브러리
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+    // Mariadb JDBC 라이브러리
+    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.2.5'
     
     // Mybatis 라이브러리
     compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
     
+    // mybatis를 spring과 연동시키는 라이브러리
+    compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.3.2'
+    
     // Spring IoC 컨테이너 라이브러리
-    compile group: 'org.springframework', name: 'spring-context', version: '5.0.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.0.6.RELEASE'
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.0.6.RELEASE'
+    
+    // DB 커넥션풀 라이브러리
+    compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
     
     // JSP 확장 태그인 JSTL 라이브러리
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
