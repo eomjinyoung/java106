@@ -20,6 +20,12 @@ dependencies {
     // Spring IoC 컨테이너 라이브러리
     compile group: 'org.springframework', name: 'spring-context', version: '5.0.5.RELEASE'
 
+    // Mybatis 라이브러리
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
+    
+    // Mariadb JDBC 라이브러리
+    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.2.5'
+    
     compile 'com.google.guava:guava:23.0'
     testCompile 'junit:junit:4.12'
 }
