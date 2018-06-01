@@ -11,7 +11,7 @@ compileJava {
 eclipse {
     wtp {
         facet {
-            facet name: 'jst.web', version: '4.0'
+            facet name: 'jst.web', version: '3.1'
         }
     }
 }
