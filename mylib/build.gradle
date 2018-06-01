@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    compile 'com.google.guava:guava:23.0'
+    testCompile 'junit:junit:4.12'
+}
+
+repositories {
+    jcenter()
+}
