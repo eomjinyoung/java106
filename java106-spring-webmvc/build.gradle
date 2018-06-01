@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'eclipse-wtp'
+    id 'war'
+}
+
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+eclipse {
+    wtp {
+        facet {
+            facet name: 'jst.web', version: '4.0'
+        }
+    }
+}
+
+dependencies {
+    // Spring IoC 컨테이너 라이브러리
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.6.RELEASE'
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    
+    compile 'com.google.guava:guava:23.0'
+    testCompile 'junit:junit:4.12'
+}
+
+repositories {
+    jcenter()
+}
