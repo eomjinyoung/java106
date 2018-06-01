@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
 public class MyWebApplicationInitializer implements WebApplicationInitializer{
@@ -25,10 +25,8 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer{
         
         // 여기에서 프론트 컨트롤러를 등록할 것이다.
         // 1) 프론트 컨트롤러가 사용할 Spring IoC 컨테이너를 만든다.
-        AnnotationConfigWebApplicationContext iocContainer = 
-                new AnnotationConfigWebApplicationContext();
-        iocContainer.register(AppConfig.class);
-        iocContainer.refresh();
+        XmlWebApplicationContext iocContainer = new XmlWebApplicationContext();
+        iocContainer.setConfigLocation("/WEB-INF/spring/mvc-servlet.xml");
         
         // 2) 프론트 컨트롤러를 만든다.
         DispatcherServlet mvcDispatcher = new DispatcherServlet(iocContainer);
