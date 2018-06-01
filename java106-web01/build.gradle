@@ -35,6 +35,9 @@ dependencies {
     // - 개발하고 단위 테스트할 때만 사용한다.
     // - 배치에는 포함하지 않는다.
     testCompile 'junit:junit:4.12'
+    
+    // 로컬 .jar 파일 등록
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 repositories {

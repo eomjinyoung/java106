@@ -19,6 +19,27 @@
         <param-value>/WEB-INF/spring/app-context.xml</param-value>
     </context-param>
 
+
+    <servlet>
+        <servlet-name>mvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 기본 경로가 아니면 다음과 같이 설정 파일의 위치를 지정해야 한다. -->
+        <init-param>
+	        <param-name>contextConfigLocation</param-name>
+	        <param-value>/WEB-INF/spring/mvc-servlet.xml</param-value>
+	        
+	        <!-- 만약 CLASSPATH에 설정파일이 있다면 경로 앞에 classpath: 접두어를 붙인다. -->
+	        <!--  
+	        <param-value>classpath:bitcamp/mvc/config/mvc-servlet.xml</param-value>
+	        -->
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mvc</servlet-name>
+        <url-pattern>/mvc/*</url-pattern>
+    </servlet-mapping>
+    
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.xhtml</welcome-file>

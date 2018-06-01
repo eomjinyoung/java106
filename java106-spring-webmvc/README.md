@@ -1,5 +1,17 @@
 # 버전 별 주제
 
+## src05 - 설정 클래스를 사용하여 프론트 컨트롤러 설정
+- web.xml 이 아닌 클래스를 통해 프론트 컨트롤러 설정
+- 작업 
+    - web.xml 에서 프론트 컨트롤러 지정하는 부분을 제거
+
+## src04 - 스프링 설정 파일의 경로 지정하기
+- 기본 경로(/WEB-INF)가 아닌 다른 경로에 있는 설정 파일 지정하기
+- 작업
+    - /WEB-INF/spring 폴더 생성
+    - 스프링 설정 파일을 spring 폴더로 이동
+    - web.xml 에 설정 파일의 위치를 지정
+
 ## src03 - ContextLoaderListener 사용
 - ContextLoaderListener 설정하기
 - 작업
