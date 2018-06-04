@@ -49,7 +49,7 @@ name=aaa&age=20&tel=1111-2222&postno=19876&addr=서울시강남구
     @ResponseBody  
     public String m3() {
         // 이 메서드는 실행한 결과를 PDF로 만들어 보내야 한다.
-        return "Exam04_2.m3()";
+        return "Exam04_4.m3()";
     }
 }
 
