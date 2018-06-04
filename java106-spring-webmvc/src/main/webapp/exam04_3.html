@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>main</title>
+</head>
+<body>
+<h1>서버에 요청하기</h1>
+<button id="btn1" onclick="click1()">text/plain 요청하기</button><br>
+<button id="btn2" onclick="click2()">text/html 요청하기</button><br>
+<button id="btn3" onclick="click3()">application/pdf 요청하기</button><br>
+
+<script>
+function click1() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'mvc/exam04_3/get', false);
+    xhr.setRequestHeader('Accept', 'text/plain');
+    xhr.send();
+    window.alert(xhr.responseText);
+}
+
+function click2() {
+	var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'mvc/exam04_3/get', false);
+    xhr.setRequestHeader('Accept', 'text/html');
+    xhr.send();
+    window.alert(xhr.responseText);
+}
+
+function click3() {
+	var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'mvc/exam04_3/get', false);
+    xhr.setRequestHeader('Accept', 'application/pdf');
+    xhr.send();
+    window.alert(xhr.responseText);
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
