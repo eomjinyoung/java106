@@ -8,12 +8,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
     
-    <context:component-scan base-package="bitcamp.mvc">
-        <!-- bitcamp.mvc.web  패키지에 있는 클래스는 이 IoC 컨테이너에서 만들지 말라! 
-             프론트 컨트롤러가 관리하는 객체는 제외한다.
-        -->
-        <context:exclude-filter type="regex" expression="bitcamp.mvc.web.*"/>
-    </context:component-scan>
+    <context:component-scan base-package="bitcamp.mvc.web"/>
     
 </beans>
 
