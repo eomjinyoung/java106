@@ -8,8 +8,9 @@
 <title>게시물 보기</title>
 </head>
 <body>
-<jsp:include page="/header.jsp"/>
-<h1>게시물 보기(MVC + JSP 전용 태그 + EL + JSTL)</h1>
+<jsp:include page="../header.jsp"/>
+
+<h1>게시물 보기</h1>
 
 <form action='update.do' method='post'>
 <table border='1'>

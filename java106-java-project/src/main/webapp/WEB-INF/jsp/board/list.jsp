@@ -10,10 +10,10 @@
 </head>
 <body>
 
-<jsp:include page="/header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
-<h1>게시물 목록(MVC + JSP 전용 태그 + EL + JSTL)</h1>
-<p><a href='form.html'>새 글</a></p>
+<h1>게시물 목록</h1>
+<p><a href='form.do'>새 글</a></p>
 <table border='1'>
 <tr>
     <th>번호</th><th>제목</th><th>등록일</th>

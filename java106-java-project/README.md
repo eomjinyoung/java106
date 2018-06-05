@@ -1,5 +1,12 @@
 # 자바 프로젝트
 
+## src52 - Spring WebMVC 기타 설정
+학습목표
+    - view resolver의 역할을 이해한다.
+    - view resolver를 설정할 수 있다.
+작업내용
+    - 프론트 컨트롤러의 스프링 설정에 뷰 리졸버 설정을 추가한다.
+
 ## src51 - Spring WebMVC 기본 적용
 학습목표
     - Spring WebMVC를 사용하여 웹 애플리케이션을 만들 수 있다.
