@@ -40,6 +40,12 @@
             <param-value>/WEB-INF/spring/mvc-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
+        <!-- 스프링 WebMVC의 MultipartResolver 대신에 
+             Servlet 3.0+ 서블릿 컨테이너에서 기본으로 제공하는 
+             멀티파트 처리기를 사용하고 싶다면 다음 태그를 추가해야 한다. -->
+        <multipart-config>
+            <max-file-size>5000000</max-file-size>
+        </multipart-config>
     </servlet>
     <servlet-mapping>
         <servlet-name>mvc</servlet-name>

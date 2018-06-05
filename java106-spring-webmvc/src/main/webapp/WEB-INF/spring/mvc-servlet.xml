@@ -14,11 +14,17 @@
          => 스프링의 CommonsMultipartResolver 클래스는 내부적으로 
             아파치의 commons-fileupload 라이브러리를 사용하기 때문에
             이 라이브러리도 추가로 등록해야 한다. 
+         만약 Servlet 3.0 에서 제공하는 멀티파트 데이터 처리 기능을 이용한다면,
+         다음의 MultipartResolver 빈을 등록할 필요가 없다.
+         대신에 web.xml에 선언된 프론트 컨트롤러 서블릿 설정 부분에 
+         <multipart-config> 태그를 추가하라! 
     -->
+    <!--  
     <bean id="multipartResolver"
 	      class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	    <property name="maxUploadSize" value="5000000"/>
 	</bean>
+	-->
 </beans>
 
 
