@@ -24,6 +24,9 @@ dependencies {
     // JSP 확장 태그인 JSTL 라이브러리
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     
+    // JSON 데이터 처리 라이브러리
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    
     compile 'com.google.guava:guava:23.0'
     testCompile 'junit:junit:4.12'
 }
