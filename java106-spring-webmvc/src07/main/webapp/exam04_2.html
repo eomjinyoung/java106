@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>main</title>
+</head>
+<body>
+<h1>임의의 헤더를 붙여서 서버에 요청하기</h1>
+<button id="btn1" onclick="click1()">name 헤더를 붙여 요청하기</button><br>
+<button id="btn2" onclick="click2()">age 헤더를 붙여 요청하기</button><br>
+<button id="btn3" onclick="click3()">name과 age 헤더를 붙여 요청하기</button><br>
+
+<script>
+function click1() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'mvc/exam04_2/get', false);
+    xhr.setRequestHeader('name', 'aaa');
+    xhr.send();
+    window.alert(xhr.responseText);
+}
+
+function click2() {
+	var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'mvc/exam04_2/get', false);
+    xhr.setRequestHeader('age', '20');
+    xhr.send();
+    window.alert(xhr.responseText);
+}
+
+function click3() {
+	var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'mvc/exam04_2/get', false);
+    xhr.setRequestHeader('name', 'aaa');
+    xhr.setRequestHeader('age', '20');
+    xhr.send();
+    window.alert(xhr.responseText);
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+

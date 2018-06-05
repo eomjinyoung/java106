@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>main</title>
+</head>
+<body>
+<h1>서버에 요청하기</h1>
+<button id="btn1" onclick="click1()">form 데이터 보내기</button><br>
+<button id="btn2" onclick="click2()">csv 데이터 보내기</button><br>
+<button id="btn3" onclick="click3()">json 데이터 보내기</button><br>
+
+<script>
+function click1() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'mvc/exam04_4/post', false);
+    // POST 방식으로 데이터를 보낼 때는 반드시 요청 헤더에 보내는 데이터의 형식을 지정해야 한다.
+    // 그래야 서버에서 구분하여 처리할 수 있다.
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("name=aaa&age=20&tel=1111-2222");
+    window.alert(xhr.responseText);
+}
+
+function click2() {
+	var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'mvc/exam04_4/post', false);
+    xhr.setRequestHeader("Content-Type", "text/csv");
+    xhr.send("aaa,20,1111-2222");
+    window.alert(xhr.responseText);
+}
+
+function click3() {
+	var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'mvc/exam04_4/post', false);
+    xhr.setRequestHeader("Content-Type", "application/json")
+    xhr.send('{"name":"aaa","age":20,"tel":"1111-2222"}');
+    window.alert(xhr.responseText);
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
