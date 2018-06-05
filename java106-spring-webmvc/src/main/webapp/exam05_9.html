@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>main</title>
+</head>
+<body>
+<h1>서버에 요청하기</h1>
+<button id="btn1" onclick="click1()">form 데이터 보내기</button><br>
+<button id="btn2" onclick="click2()">일반 텍스트 데이터 보내기</button><br>
+<button id="btn3" onclick="click3()">csv 데이터 보내기</button><br>
+<button id="btn4" onclick="click4()">json 데이터 보내기</button><br>
+
+<script>
+function click1() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'mvc/exam05_9/post', false);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("name=aaa&age=20&tel=1111-2222");
+    window.alert(xhr.responseText);
+}
+
+function click2() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'mvc/exam05_9/post', false);
+    xhr.setRequestHeader("Content-Type", "text/plain");
+    xhr.send("name=aaa&age=20&tel=1111-2222");
+    window.alert(xhr.responseText);
+}
+
+function click3() {
+	var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'mvc/exam05_9/post', false);
+    xhr.setRequestHeader("Content-Type", "text/csv");
+    xhr.send("aaa,20,1111-2222");
+    window.alert(xhr.responseText);
+}
+
+function click4() {
+	var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'mvc/exam05_9/post', false);
+    xhr.setRequestHeader("Content-Type", "application/json")
+    xhr.send('{"name":"aaa","age":20,"tel":"1111-2222"}');
+    window.alert(xhr.responseText);
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
