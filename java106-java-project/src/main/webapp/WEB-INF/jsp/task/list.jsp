@@ -10,7 +10,7 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<h1><a href='../team/view/${teamName}'>${param.teamName}</a>
+<h1><a href='../../team/view/${teamName}'>${teamName}</a>
 의 작업 목록</h1>
 <p><a href='../form/${teamName}'>새작업</a></p>
 <table border='1'>
@@ -20,7 +20,7 @@
 <c:forEach items="${list}" var="task">
 <tr>
     <td>${task.no}</td>    
-    <td><a href='../view/${task.no}'>${task.title}</a></td>    
+    <td><a href='../view/${teamName}/${task.no}'>${task.title}</a></td>    
     <td>${task.startDate} ~ ${task.endDate}</td>    
     <td>${task.worker == null ? "" : task.worker.id}</td>
 </tr>

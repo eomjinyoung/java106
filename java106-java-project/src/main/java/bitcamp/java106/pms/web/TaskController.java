@@ -127,8 +127,9 @@ public class TaskController {
             // 위와 같이 개발자가 직접 URL 인코딩 해야 한다.
     }
     
-    @RequestMapping("/view/{no}")
+    @RequestMapping("/view/{teamName}/{no}")
     public String view(
+            @PathVariable String teamName,
             @PathVariable int no,
             Map<String,Object> map) throws Exception {
         
@@ -142,6 +143,7 @@ public class TaskController {
         
         map.put("task", task);
         map.put("members", members);
+        map.put("teamName", teamName);
         return "task/view";
     }
     

@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="../header.jsp"/>
 <h1>작업 보기</h1>
-<form action='../update' method='post'>
+<form action='../../update' method='post'>
 <input type='hidden' name='no' value='${task.no}'>
 <table border='1'>
 <tr>
@@ -47,8 +47,9 @@
     </select></td>
 </tr>
 </table>
+<a href='../../list/${teamName}'>목록</a>
 <button>변경</button> 
-<a href='../delete?no=${task.no}&teamName=${task.team.name}'>삭제</a>
+<a href='../../delete?no=${task.no}&teamName=${task.team.name}'>삭제</a>
 </form>
 </body>
 </html>
