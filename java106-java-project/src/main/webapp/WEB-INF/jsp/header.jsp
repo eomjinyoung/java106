@@ -5,10 +5,10 @@
 <div id='header'>
 <c:choose>
     <c:when test="${empty sessionScope.loginUser}">
-        <a href='${pageContext.request.contextPath}/auth/form'>로그인</a>
+        <a href='${pageContext.request.contextPath}/app/auth/form'>로그인</a>
     </c:when>
     <c:otherwise>
-        ${loginUser.id} <a href='${pageContext.request.contextPath}/auth/logout'>로그아웃</a>
+        ${loginUser.id} <a href='${pageContext.request.contextPath}/app/auth/logout'>로그아웃</a>
     </c:otherwise>
 </c:choose>
 </div>

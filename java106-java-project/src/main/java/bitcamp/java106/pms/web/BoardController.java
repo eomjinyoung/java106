@@ -69,7 +69,7 @@ public class BoardController {
     }
     
     @RequestMapping("/view/{no}")
-    public void view(
+    public String view(
             @PathVariable int no, 
             Map<String,Object> map) throws Exception {
         
@@ -78,6 +78,7 @@ public class BoardController {
             throw new Exception("유효하지 않은 게시물 번호입니다.");
         }
         map.put("board", board);
+        return "board/view";
     }
 
 }

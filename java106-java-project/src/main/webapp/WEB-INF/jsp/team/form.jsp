@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="../header.jsp"/>
 <h1>팀 등록</h1>
-<form action="add.do" method="post">
+<form action="add" method="post">
 <table border='1'>
 <tr>
     <th>팀명</th><td><input type="text" name="name"></td>

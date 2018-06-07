@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -56,7 +57,7 @@ public class TaskController {
         }
         
         taskDao.insert(task);
-        return "redirect:list.do?teamName=" + URLEncoder.encode(teamName, "UTF-8");
+        return "redirect:list/" + URLEncoder.encode(teamName, "UTF-8");
         // 응답 헤더의 값으로 한글을 포함할 때는 
         // 서블릿 컨테이너가 자동으로 URL 인코딩 하지 않는다.
         // 위와 같이 개발자가 직접 URL 인코딩 해야 한다.
@@ -71,15 +72,15 @@ public class TaskController {
         if (count == 0) {
             throw new Exception("해당 작업이 존재하지 않습니다.");
         }
-        return "redirect:list.do?teamName=" + URLEncoder.encode(teamName, "UTF-8");
+        return "redirect:list/" + URLEncoder.encode(teamName, "UTF-8");
         // 응답 헤더의 값으로 한글을 포함할 때는 
         // 서블릿 컨테이너가 자동으로 URL 인코딩 하지 않는다.
         // 위와 같이 개발자가 직접 URL 인코딩 해야 한다.
     }
     
-    @RequestMapping("/form")
-    public void form(
-            @RequestParam("teamName") String teamName,
+    @RequestMapping("/form/{teamName}")
+    public String form(
+            @PathVariable String teamName,
             Map<String,Object> map) throws Exception {
         
         Team team = teamDao.selectOne(teamName);
@@ -88,11 +89,13 @@ public class TaskController {
         }
         List<Member> members = teamMemberDao.selectListWithEmail(teamName);
         map.put("members", members);
+        map.put("teamName", teamName);
+        return "task/form";
     }
     
-    @RequestMapping("/list")
-    public void list(
-            @RequestParam("teamName") String teamName,
+    @RequestMapping("/list/{teamName}")
+    public String list(
+            @PathVariable String teamName,
             Map<String,Object> map) throws Exception {
         
         Team team = teamDao.selectOne(teamName);
@@ -101,6 +104,8 @@ public class TaskController {
         }
         List<Task> list = taskDao.selectList(team.getName());
         map.put("list", list);
+        map.put("teamName", teamName);
+        return "task/list";
     }
     
     @RequestMapping("/update")
@@ -116,15 +121,15 @@ public class TaskController {
         if (count == 0) {
             throw new Exception("<p>해당 작업이 없습니다.</p>");
         }
-        return "redirect:list.do?teamName=" + URLEncoder.encode(teamName, "UTF-8");
+        return "redirect:list/" + URLEncoder.encode(teamName, "UTF-8");
             // 응답 헤더의 값으로 한글을 포함할 때는 
             // 서블릿 컨테이너가 자동으로 URL 인코딩 하지 않는다.
             // 위와 같이 개발자가 직접 URL 인코딩 해야 한다.
     }
     
-    @RequestMapping("/view")
-    public void view(
-            @RequestParam("no") int no,
+    @RequestMapping("/view/{no}")
+    public String view(
+            @PathVariable int no,
             Map<String,Object> map) throws Exception {
         
         Task task = taskDao.selectOne(no);
@@ -137,6 +142,7 @@ public class TaskController {
         
         map.put("task", task);
         map.put("members", members);
+        return "task/view";
     }
     
     // GlobalBindingInitializer 에 등록했기 때문에 이 클래스에서는 제외한다.
@@ -156,6 +162,7 @@ public class TaskController {
 }
 
 //ver 52 - InternalResourceViewResolver 적용
+//         *.do 대신 /app/* 을 기준으로 URL 변경
 //ver 51 - Spring WebMVC 적용
 //ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기

@@ -75,7 +75,7 @@ public class AuthController {
             
         } else { // 로그인 실패!
             session.invalidate();
-            return "/auth/fail.jsp";
+            return "auth/fail";
         }
     }
     

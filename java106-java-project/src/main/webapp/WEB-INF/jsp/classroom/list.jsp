@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="../header.jsp"/>
 <h1>강의 목록</h1>
-<p><a href='form.do'>새 강의</a></p>
+<p><a href='form'>새 강의</a></p>
 <table border='1'>
 <tr>
     <th>번호</th><th>강의명</th><th>기간</th><th>강의실</th>
@@ -19,7 +19,7 @@
 <c:forEach items="${list}" var="classroom">
 <tr>
     <td>${classroom.no}</td>
-    <td><a href='view.do?no=${classroom.no}'>${classroom.title}</a></td>
+    <td><a href='view/${classroom.no}'>${classroom.title}</a></td>
     <td>${classroom.startDate}~${classroom.endDate}</td>
     <td>${classroom.room}</td>
 </tr>

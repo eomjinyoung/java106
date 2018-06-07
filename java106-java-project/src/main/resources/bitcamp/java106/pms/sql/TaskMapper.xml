@@ -63,7 +63,7 @@
   </insert>
   
   <select id="selectOne" parameterType="int" resultMap="TaskMap">
-    select titl,sdt,edt,stat,mid,tnm 
+    select tano,titl,sdt,edt,stat,mid,tnm 
     from pms2_task 
     where tano=#{value}
   </select>

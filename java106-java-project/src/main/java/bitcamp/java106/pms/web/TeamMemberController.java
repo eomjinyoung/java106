@@ -44,7 +44,7 @@ public class TeamMemberController {
         Member member = memberDao.selectOne(memberId);
         if (member == null) {
             map.put("message", "해당 회원이 없습니다!");
-            return "/team/member/fail.jsp";
+            return "team/member/fail";
         }
         
         HashMap<String,Object> params = new HashMap<>();
@@ -53,10 +53,10 @@ public class TeamMemberController {
         
         if (teamMemberDao.isExist(params)) {
             map.put("message", "이미 등록된 회원입니다.");
-            return "/team/member/fail.jsp";
+            return "team/member/fail";
         }
         teamMemberDao.insert(params);
-        return "redirect:../view.do?name=" + 
+        return "redirect:../view/" + 
                 URLEncoder.encode(teamName, "UTF-8");
     }
     
@@ -73,9 +73,9 @@ public class TeamMemberController {
         int count = teamMemberDao.delete(params);
         if (count == 0) {
             map.put("message", "해당 회원이 없습니다!");
-            return "/team/member/fail.jsp";
+            return "team/member/fail";
         }
-        return "redirect:../view.do?name=" + 
+        return "redirect:../view/" + 
                 URLEncoder.encode(teamName, "UTF-8");
         // 개발자가 요청이나 응답헤더를 직접 작성하여 값을 주고 받으로 한다면,
         // URL 인코딩과 URL 디코딩을 손수 해 줘야 한다.
@@ -92,6 +92,7 @@ public class TeamMemberController {
 }
 
 //ver 52 - InternalResourceViewResolver 적용
+//         *.do 대신 /app/* 을 기준으로 URL 변경
 //ver 51 - Spring WebMVC 적용
 //ver 50 - DAO 변경에 맞춰 메서드 호출 변경
 //ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
