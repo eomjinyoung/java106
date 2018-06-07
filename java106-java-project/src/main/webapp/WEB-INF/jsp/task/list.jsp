@@ -10,9 +10,9 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<h1><a href='../../team/view/${teamName}'>${teamName}</a>
+<h1><a href='../../${teamName}'>${teamName}</a>
 의 작업 목록</h1>
-<p><a href='../form/${teamName}'>새작업</a></p>
+<p><a href='form'>새작업</a></p>
 <table border='1'>
 <tr>
     <th>번호</th><th>작업명</th><th>기간</th><th>작업자</th>

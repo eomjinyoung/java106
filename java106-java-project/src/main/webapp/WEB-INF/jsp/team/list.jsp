@@ -18,7 +18,7 @@
 </tr>
 <c:forEach items="${list}" var="team">
 <tr>
-    <td><a href='view/${team.name}'>${team.name}</a></td>
+    <td><a href='${team.name}'>${team.name}</a></td>
     <td>${team.maxQty}</td>
     <td>${team.startDate}~${team.endDate}</td>
 </tr>

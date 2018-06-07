@@ -11,7 +11,7 @@
 <jsp:include page="../header.jsp"/>
 <h1>멤버 보기</h1>
 
-<form action='../update' method='post'>
+<form action='update' method='post'>
 <table border='1'>
 <tr><th>아이디</th><td>
     <input type='text' name='id' value='${member.id}' readonly></td></tr>
@@ -22,9 +22,9 @@
 
 </table>
 <p>
-<a href='../list'>목록</a>
+<a href='list'>목록</a>
 <button>변경</button>
-<a href='../delete?id=${member.id}'>삭제</a>
+<a href='delete?id=${member.id}'>삭제</a>
 </p>
 </form>
 </body>

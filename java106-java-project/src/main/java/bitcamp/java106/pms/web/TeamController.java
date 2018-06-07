@@ -31,18 +31,18 @@ public class TeamController {
         this.taskDao = taskDao;
     }
     
-    @RequestMapping("/form")
+    @RequestMapping("form")
     public void form() {
     }
     
-    @RequestMapping("/add")
+    @RequestMapping("add")
     public String add(Team team) throws Exception {
         
         teamDao.insert(team);
         return "redirect:list";
     }
     
-    @RequestMapping("/delete")
+    @RequestMapping("delete")
     public String delete(@RequestParam("name") String name) throws Exception {
         
         HashMap<String,Object> params = new HashMap<>();
@@ -60,14 +60,14 @@ public class TeamController {
         return "redirect:list";
     }
     
-    @RequestMapping("/list")
+    @RequestMapping("list")
     public void list(Map<String,Object> map) throws Exception {
         
         List<Team> list = teamDao.selectList();
         map.put("list", list);
     }
     
-    @RequestMapping("/update")
+    @RequestMapping("update")
     public String update(Team team) throws Exception {
         
         int count = teamDao.update(team);
@@ -77,7 +77,7 @@ public class TeamController {
         return "redirect:list";
     }
     
-    @RequestMapping("/view/{name}")
+    @RequestMapping("{name}")
     public String view(
             @PathVariable String name,
             Map<String,Object> map) throws Exception {

@@ -31,7 +31,7 @@ public class TeamMemberController {
         this.teamMemberDao = teamMemberDao;
     }
     
-    @RequestMapping("/add")
+    @RequestMapping("add")
     public String add(
             @RequestParam("teamName") String teamName,
             @RequestParam("memberId") String memberId,
@@ -56,11 +56,11 @@ public class TeamMemberController {
             return "team/member/fail";
         }
         teamMemberDao.insert(params);
-        return "redirect:../view/" + 
+        return "redirect:../" + 
                 URLEncoder.encode(teamName, "UTF-8");
     }
     
-    @RequestMapping("/delete")
+    @RequestMapping("delete")
     public String delete(
             @RequestParam("teamName") String teamName,
             @RequestParam("memberId") String memberId,
@@ -75,13 +75,13 @@ public class TeamMemberController {
             map.put("message", "해당 회원이 없습니다!");
             return "team/member/fail";
         }
-        return "redirect:../view/" + 
+        return "redirect:../" + 
                 URLEncoder.encode(teamName, "UTF-8");
         // 개발자가 요청이나 응답헤더를 직접 작성하여 값을 주고 받으로 한다면,
         // URL 인코딩과 URL 디코딩을 손수 해 줘야 한다.
     }
     
-    @RequestMapping("/list")
+    @RequestMapping("list")
     public void list(
             @RequestParam("name") String teamName,
             Map<String,Object> map) throws Exception {

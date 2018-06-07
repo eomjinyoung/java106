@@ -12,7 +12,7 @@
 
 <h1>게시물 보기</h1>
 
-<form action='../update' method='post'>
+<form action='update' method='post'>
 <table border='1'>
 <tr><th>번호</th><td>
     <input type='text' name='no' value='${board.no}' readonly></td></tr>
@@ -23,9 +23,9 @@
 <tr><th>등록일</th><td>${board.createdDate}</td></tr>
 </table>
 <p>
-<a href='../list'>목록</a>
+<a href='list'>목록</a>
 <button>변경</button>
-<a href='../delete?no=${board.no}'>삭제</a>
+<a href='delete?no=${board.no}'>삭제</a>
 </p>
 </form>
 </body>

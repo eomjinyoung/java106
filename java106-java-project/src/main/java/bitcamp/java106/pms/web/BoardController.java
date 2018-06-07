@@ -68,7 +68,7 @@ public class BoardController {
         return "redirect:list";
     }
     
-    @RequestMapping("/view/{no}")
+    @RequestMapping("{no}")
     public String view(
             @PathVariable int no, 
             Map<String,Object> map) throws Exception {

@@ -21,18 +21,18 @@ public class MemberController {
         this.memberDao = memberDao;
     }
     
-    @RequestMapping("/form")
+    @RequestMapping("form")
     public void form() {
     }
     
-    @RequestMapping("/add")
+    @RequestMapping("add")
     public String add(Member member) throws Exception {
           
         memberDao.insert(member);
         return "redirect:list";
     }
     
-    @RequestMapping("/delete")
+    @RequestMapping("delete")
     public String delete(@RequestParam("id") String id) throws Exception {
         
         int count = memberDao.delete(id);
@@ -42,14 +42,14 @@ public class MemberController {
         return "redirect:list";
     }
     
-    @RequestMapping("/list")
+    @RequestMapping("list")
     public void list(Map<String, Object> map) throws Exception {
         
         List<Member> list = memberDao.selectList();
         map.put("list", list);
     }
     
-    @RequestMapping("/update")
+    @RequestMapping("update")
     public String update(Member member) throws Exception {
         
         int count = memberDao.update(member);
@@ -59,7 +59,7 @@ public class MemberController {
         return "redirect:list";
     }
     
-    @RequestMapping("/view/{id}")
+    @RequestMapping("{id}")
     public String view(
             @PathVariable String id,
             Map<String,Object> map) throws Exception {
