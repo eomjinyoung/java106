@@ -2,14 +2,22 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:p="http://www.springframework.org/schema/p"
     xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     
     <context:component-scan base-package="bitcamp.mvc.web"/>
-
+    
+    <!-- MVC 관련 애노테이션을 처리할 객체들을 자동 등록한다. 
+         matrix variable 기능을 사용하고 싶으면 다음과 같이 활성화시켜라!
+    -->
+    <mvc:annotation-driven enable-matrix-variables="true"/>
+    
     <!-- Spring WebMVC의 기본 뷰 리졸버를 교체한다.
          => JSP URL의 앞뒤 경로를 미리 설정해두면 페이지 컨트롤러에서 
             view URL을 지정하기 쉽다.  

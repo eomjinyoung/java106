@@ -1,4 +1,4 @@
-// 경로 변수 - URL에서 값을 추출하기
+// URL에서 값을 추출하기 - Path Variable(경로 변수) 
 package bitcamp.mvc.web;
 
 import org.springframework.stereotype.Controller;

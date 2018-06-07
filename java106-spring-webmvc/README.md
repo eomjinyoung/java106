@@ -4,6 +4,8 @@
 - Spring WebMVC에 설정된 뷰 리졸버 대신에 다른 종류의 뷰 리졸버로 대체할 수 있다.
 - 작업
    - 프론트 컨트롤러의 스프링 설정 파일 변경
+   - Path Variable 다루기
+   - Matrix Variable 다루기
 - 학습
    - 뷰 리졸버를 다루는 방법
 
