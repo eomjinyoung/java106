@@ -38,7 +38,7 @@ public class BoardController {
     public String add(Board board) throws Exception {
         
         boardDao.insert(board);
-        return "redirect:list.do";
+        return "redirect:list";
     }
     
     @RequestMapping("/delete")
@@ -48,7 +48,7 @@ public class BoardController {
         if (count == 0) {
             throw new Exception("해당 게시물이 없습니다.");
         }
-        return "redirect:list.do";
+        return "redirect:list";
     }
     
     @RequestMapping("/list")
@@ -65,7 +65,7 @@ public class BoardController {
         if (count == 0) {
             throw new Exception("해당 게시물이 존재하지 않습니다.");
         } 
-        return "redirect:list.do";
+        return "redirect:list";
     }
     
     @RequestMapping("/view/{no}")
@@ -83,6 +83,7 @@ public class BoardController {
 }
 
 //ver 52 - InternalResourceViewResolver 적용
+//         *.do 대신 /app/* 을 기준으로 URL 변경
 //ver 51 - Spring WebMVC 적용
 //ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기
