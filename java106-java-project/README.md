@@ -2,8 +2,8 @@
 
 ## src52 - Spring WebMVC 기타 설정
 학습목표
-    - view resolver의 역할을 이해한다.
-    - view resolver를 설정할 수 있다.
+    - view resolver의 역할을 이해하고 설정할 수 있다.
+    - Path Variable을 사용할 수 있다.
 작업내용
     - 프론트 컨트롤러의 스프링 설정에 뷰 리졸버 설정을 추가한다.
 

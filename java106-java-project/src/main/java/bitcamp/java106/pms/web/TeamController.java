@@ -30,6 +30,10 @@ public class TeamController {
         this.taskDao = taskDao;
     }
     
+    @RequestMapping("/form")
+    public void form() {
+    }
+    
     @RequestMapping("/add")
     public String add(Team team) throws Exception {
         
@@ -56,11 +60,10 @@ public class TeamController {
     }
     
     @RequestMapping("/list")
-    public String list(Map<String,Object> map) throws Exception {
+    public void list(Map<String,Object> map) throws Exception {
         
         List<Team> list = teamDao.selectList();
         map.put("list", list);
-        return "/team/list.jsp";
     }
     
     @RequestMapping("/update")
@@ -74,7 +77,7 @@ public class TeamController {
     }
     
     @RequestMapping("/view")
-    public String view(
+    public void view(
             @RequestParam("name") String name,
             Map<String,Object> map) throws Exception {
         
@@ -83,7 +86,6 @@ public class TeamController {
             throw new Exception("유효하지 않은 팀입니다.");
         }
         map.put("team", team);
-        return "/team/view.jsp";
     }
     
     // GlobalBindingInitializer 에 등록했기 때문에 이 클래스에서는 제외한다.
@@ -102,6 +104,7 @@ public class TeamController {
     */
 }
 
+//ver 52 - InternalResourceViewResolver 적용
 //ver 51 - Spring WebMVC 적용
 //ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기

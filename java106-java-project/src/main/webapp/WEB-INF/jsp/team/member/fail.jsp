@@ -9,7 +9,7 @@
 <title>팀 회원 관리</title>
 </head>
 <body>
-<jsp:include page="/header.jsp"/>
+<jsp:include page="../../header.jsp"/>
 <h1>실행 실패!</h1>
 <p>${message}</p>
 </body>

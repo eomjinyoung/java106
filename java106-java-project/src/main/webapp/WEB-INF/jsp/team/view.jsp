@@ -8,8 +8,8 @@
 <title>팀 보기</title>
 </head>
 <body>
-<jsp:include page="/header.jsp"/>
-<h1>팀 보기(MVC + JSP 전용 태그 + EL)</h1>
+<jsp:include page="../header.jsp"/>
+<h1>팀 보기</h1>
 <form action='update.do' method='post'>
 <table border='1'>
 <tr>
@@ -41,7 +41,7 @@
 <a href='../task/list.do?teamName=${team.name}'>작업목록</a>
 </p>
 </form>
-<jsp:include page="/team/member/list.jsp"/>
+<jsp:include page="member/list.jsp"/>
 </body>
 </html>
 

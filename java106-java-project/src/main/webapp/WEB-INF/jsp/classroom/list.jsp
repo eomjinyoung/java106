@@ -9,9 +9,9 @@
 <title>강의 목록</title>
 </head>
 <body>
-<jsp:include page="/header.jsp"/>
-<h1>강의 목록(MVC + JSP 전용 태그 + EL + JSTL)</h1>
-<p><a href='form.html'>새 강의</a></p>
+<jsp:include page="../header.jsp"/>
+<h1>강의 목록</h1>
+<p><a href='form.do'>새 강의</a></p>
 <table border='1'>
 <tr>
     <th>번호</th><th>강의명</th><th>기간</th><th>강의실</th>

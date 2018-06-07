@@ -9,9 +9,9 @@
 <title>팀 목록</title>
 </head>
 <body>
-<jsp:include page="/header.jsp"/>
-<h1>팀 목록(MVC + JSP 전용 태그 + EL + JSTL)</h1>
-<p><a href='form.html'>새 팀</a></p>
+<jsp:include page="../header.jsp"/>
+<h1>팀 목록</h1>
+<p><a href='form.do'>새 팀</a></p>
 <table border='1'>
 <tr>
     <th>팀명</th><th>최대인원</th><th>기간</th>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -67,9 +68,9 @@ public class BoardController {
         return "redirect:list.do";
     }
     
-    @RequestMapping("/view")
+    @RequestMapping("/view/{no}")
     public void view(
-            @RequestParam("no") int no, 
+            @PathVariable int no, 
             Map<String,Object> map) throws Exception {
         
         Board board = boardDao.selectOne(no);
