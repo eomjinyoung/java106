@@ -65,7 +65,7 @@ public class TaskController {
     @RequestMapping("delete")
     public String delete(
             @RequestParam("no") int no,
-            @RequestParam("teamName") String teamName) throws Exception {
+            @PathVariable String teamName) throws Exception {
         
         int count = taskDao.delete(no);
         if (count == 0) {
@@ -110,7 +110,7 @@ public class TaskController {
     @RequestMapping("update")
     public String update(
             Task task,
-            @RequestParam("teamName") String teamName,
+            @PathVariable String teamName,
             @RequestParam("memberId") String memberId) throws Exception {
         
         task.setTeam(new Team().setName(teamName));

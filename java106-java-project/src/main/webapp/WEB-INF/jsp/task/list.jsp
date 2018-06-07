@@ -20,7 +20,7 @@
 <c:forEach items="${list}" var="task">
 <tr>
     <td>${task.no}</td>    
-    <td><a href='../view/${teamName}/${task.no}'>${task.title}</a></td>    
+    <td><a href='${task.no}'>${task.title}</a></td>    
     <td>${task.startDate} ~ ${task.endDate}</td>    
     <td>${task.worker == null ? "" : task.worker.id}</td>
 </tr>
