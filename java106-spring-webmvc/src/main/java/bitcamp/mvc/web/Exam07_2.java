@@ -46,14 +46,38 @@ public class Exam07_2 {
         //           ...
         //       }
         //    2) XML 로 활성화시키기
-        //       <mvc:annotation-driven/> 
+        //       <mvc:annotation-driven enable-matrix-variables="true"/> 
         //
         //
         // 예) 클라이언트에서 URL에 다음과 같은 형식으로 데이터를 보낼 때,
         //        .../exam07_2/m2/name=aaa;age=20;tel=1111-2222
+        //     => value = "name=aaa;age=20;tel=1111-2222"
+        //     => name = "aaa"
+        //     => age = 20
+        //     => tel = "1111-2222"
+        //
+        // 예) 클라이언트에서 URL에 다음과 같은 형식으로 데이터를 보낼 때,
+        //        .../exam07_2/m2/test;name=aaa;age=20;tel=1111-2222
+        //     => value = "test"
+        //     => name = "aaa"
+        //     => age = 20
+        //     => tel = "1111-2222"
         return String.format("m2(): %s, %s, %d, %s", 
                 value, name, age, tel);
     }
+    
+    @RequestMapping(value="m3/{team}/{task}", 
+            produces="text/plain;charset=UTF-8")
+    @ResponseBody
+    public String m3( 
+            @MatrixVariable(name="name", pathVar="team") String name1,
+            @MatrixVariable(name="name", pathVar="task") String name2) {
+        
+        // 예) 클라이언트에서 URL에 다음과 같은 형식으로 데이터를 보낼 때,
+        //        .../exam07_2/m3/name=teamA;qty=3/name=task100;state=1
+        return String.format("m2(): 팀명=%s, 작업명=%s", 
+                name1, name2);
+    }    
     
     // ServletContext 얻기
     @Autowired ServletContext servletContext;

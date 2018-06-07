@@ -29,7 +29,8 @@
           parameterType="map">
     select bno, titl, cdt 
     from pms2_board
-    <!--  limit #{startIndex}, #{pageSize} -->
+    order by bno desc
+    limit #{startRowNo}, #{pageSize}
   </select>
   
   <insert id="insert" parameterType="Board"
