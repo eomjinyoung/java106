@@ -12,7 +12,7 @@
 <title>로그인</title>
 </head>
 <body>
-<h1>로그인(MVC + EL + JSTL)</h1>
+<h1>로그인</h1>
 <form action='login.do' method='post'>
 <table border='1'>
 <tr><th>아이디</th>
