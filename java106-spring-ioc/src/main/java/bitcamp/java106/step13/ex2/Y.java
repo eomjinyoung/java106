@@ -4,7 +4,10 @@ import org.springframework.stereotype.Component;
 
 @Component 
 public class Y {
-    public void m() {
-        System.out.println("Y.m()");
+    public Y() {
+        System.out.println("Y 객체 생성됨");
+    }
+    public void m2() {
+        System.out.println("Y.m2()");
     }
 }

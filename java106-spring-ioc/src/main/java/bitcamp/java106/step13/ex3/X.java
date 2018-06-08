@@ -1,4 +1,4 @@
-package bitcamp.java106.step13.ex2;
+package bitcamp.java106.step13.ex3;
 
 import org.springframework.stereotype.Component;
 
@@ -7,7 +7,10 @@ public class X {
     public X() {
         System.out.println("X 객체 생성됨");
     }
-    public void m1() {
+    public int m1(int a, int b) {
         System.out.println("X.m1()");
+        int result = a / b;
+        
+        return result; 
     }
 }

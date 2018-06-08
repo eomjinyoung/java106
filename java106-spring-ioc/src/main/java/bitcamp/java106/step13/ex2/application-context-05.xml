@@ -18,16 +18,20 @@
     
     <!-- AOP 적용 -->
     <aop:config>
-        <!-- 어느 pointcut에 어떤 advice를 끼워 넣을 지 설정한다. -->
+        <!-- 한 포인트컷에 여러 필터를 꼽을 때는 
+             포인터컷을 별도로 정의하여 재사용하는 것이 좋다  -->
+        <aop:pointcut id="pointcut1"
+                    expression="execution(* bitcamp.java106.step13.ex2.*.m2(..))" />
+
+        <!-- 포인트컷을 여러 aspect에서 재사용 할 수 있다. -->
         <aop:aspect id="aspect1" ref="myAdvice">
-            
-            <!-- 필터를 끼워 넣을 위치를 지정한다. -->
-            <aop:pointcut id="pointcut1"
-                expression="execution(* bitcamp.java106.step13.ex2.*.m2(..))"/>
-            
-            <!-- 해당 포인트컷을 실행하기 전에 필터의 어떤 메서드를 먼저 실행할 것인지 지정한다. -->
-            <aop:before pointcut-ref="pointcut1" method="advice2"/>
-            
+            <aop:before pointcut-ref="pointcut1" 
+                        method="advice1"/>
+        </aop:aspect>
+        
+        <aop:aspect id="aspect2" ref="myAdvice">
+            <aop:before pointcut-ref="pointcut1" 
+                        method="advice2"/>
         </aop:aspect>
     </aop:config>
 </beans>

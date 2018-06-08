@@ -34,6 +34,10 @@ dependencies {
     // DB 커넥션풀 라이브러리
     compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
     
+    // AOP 관련 라이브러리
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.1'
+    
+    
     compile 'com.google.guava:guava:23.0'
     testCompile 'junit:junit:4.12'
 }
