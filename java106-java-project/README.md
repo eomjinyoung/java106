@@ -6,7 +6,7 @@
     - Path Variable을 사용할 수 있다.
     - Matrix Variable을 사용할 수 있다.
     - 목록의 페이징을 다룰 수 있다.
-    - Interceptor를 다룰 수 있다. 
+    - Interceptor를 다룰 수 있다.
 작업내용
     - 프론트 컨트롤러의 스프링 설정에 뷰 리졸버 설정을 추가한다.
     - 프론트 컨트롤러의 URL 맵핑을 *.do 에서 /app/* 으로 변경한다.
