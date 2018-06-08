@@ -1,9 +1,11 @@
 package bitcamp.java106.pms.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,10 +44,17 @@ public class MemberController {
         return "redirect:list";
     }
     
-    @RequestMapping("list")
-    public void list(Map<String, Object> map) throws Exception {
+    @RequestMapping("list{page}")
+    public void list(
+            @MatrixVariable(defaultValue="1") int pageNo,
+            @MatrixVariable(defaultValue="3") int pageSize,
+            Map<String,Object> map) throws Exception {        
         
-        List<Member> list = memberDao.selectList();
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("startRowNo", (pageNo - 1) * pageSize);
+        params.put("pageSize", pageSize);
+        
+        List<Member> list = memberDao.selectList(params);
         map.put("list", list);
     }
     
@@ -75,6 +84,7 @@ public class MemberController {
 
 //ver 52 - InternalResourceViewResolver 적용
 //         *.do 대신 /app/* 을 기준으로 URL 변경
+//         페이지 관련 파라미터에 matrix variable 적용 
 //ver 51 - Spring WebMVC 적용
 //ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기

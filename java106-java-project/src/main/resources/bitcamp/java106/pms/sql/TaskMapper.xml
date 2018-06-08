@@ -41,11 +41,12 @@
   </resultMap>
   
   <select id="selectList" 
-          resultMap="TaskMap" parameterType="string">
+          resultMap="TaskMap" parameterType="map">
     select tano, titl, sdt, edt, stat, mid, tnm 
     from pms2_task
-    where tnm=#{value} 
-    <!--  limit #{startIndex}, #{pageSize} -->
+    where tnm=#{teamName} 
+    order by sdt asc
+    limit #{startRowNo}, #{pageSize}
   </select>
   
   <insert id="insert" parameterType="Task"

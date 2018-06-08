@@ -8,13 +8,14 @@ import bitcamp.java106.pms.domain.Task;
 public interface TaskDao {
     int delete(int no);
     int deleteByTeam(String teamName);
-    List<Task> selectList(String teamName);
+    List<Task> selectList(Map<String,Object> params);
     int insert(Task task);
     int update(Task task);
     Task selectOne(int no);
     int updateState(Map<String,Object> params);
 }
 
+//ver 52 - 페이지 단위로 데이터 가져오기
 //ver 50 - 클래스를 인터페이스로 전환
 //ver 33 - Mybatis 적용
 //ver 32 - DB 커넥션 풀 적용

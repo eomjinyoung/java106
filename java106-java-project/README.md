@@ -4,10 +4,14 @@
 학습목표
     - view resolver의 역할을 이해하고 설정할 수 있다.
     - Path Variable을 사용할 수 있다.
+    - Matrix Variable을 사용할 수 있다.
+    - 목록의 페이징을 다룰 수 있다.
 작업내용
     - 프론트 컨트롤러의 스프링 설정에 뷰 리졸버 설정을 추가한다.
     - 프론트 컨트롤러의 URL 맵핑을 *.do 에서 /app/* 으로 변경한다.
     - Path Variable을 처리할 객체를 등록한다.
+    - 페이지 파라미터에 Matrix Variable을 적용한다.
+    - 목록 데이터를 페이지 단위로 가져온다.
 
 ## src51 - Spring WebMVC 기본 적용
 학습목표

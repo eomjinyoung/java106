@@ -14,7 +14,7 @@
           resultType="string" parameterType="string">
     select mid from pms2_team_member 
     where tnm=#{value}
-    <!--  limit #{startIndex}, #{pageSize} -->
+    order by mid asc
   </select>
   
   <select id="selectListWithEmail" 
@@ -23,7 +23,7 @@
     from pms2_team_member tm 
         inner join pms2_member m on tm.mid=m.mid
     where tm.tnm=#{value}
-    <!--  limit #{startIndex}, #{pageSize} -->
+    order by mid asc
   </select>
   
   <insert id="insert" parameterType="map">

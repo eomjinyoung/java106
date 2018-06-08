@@ -15,7 +15,8 @@
           resultMap="MemberMap" parameterType="map">
     select mid, email, pwd 
     from pms2_member
-    <!--  limit #{startIndex}, #{pageSize} -->
+    order by mid asc
+    limit #{startRowNo}, #{pageSize}
   </select>
   
   <insert id="insert" parameterType="Member">
