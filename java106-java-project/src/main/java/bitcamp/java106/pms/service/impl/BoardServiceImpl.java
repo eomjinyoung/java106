@@ -49,7 +49,7 @@ public class BoardServiceImpl implements BoardService {
     }
 }
 
-
+//ver 53 - 클래스 추가
 
 
 

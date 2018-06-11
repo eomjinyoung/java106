@@ -1,7 +1,5 @@
 package bitcamp.java106.pms.web;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -10,26 +8,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import bitcamp.java106.pms.dao.TaskDao;
-import bitcamp.java106.pms.dao.TeamDao;
-import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.service.TeamService;
 
 @Controller
 @RequestMapping("/team")
 public class TeamController {
 
-    TeamDao teamDao;
-    TeamMemberDao teamMemberDao;
-    TaskDao taskDao;
+    TeamService teamService;
     
-    public TeamController(
-            TeamDao teamDao, 
-            TeamMemberDao teamMemberDao,
-            TaskDao taskDao) {
-        this.teamDao = teamDao;
-        this.teamMemberDao = teamMemberDao;
-        this.taskDao = taskDao;
+    public TeamController(TeamService teamService) {
+        this.teamService = teamService;
     }
     
     @RequestMapping("form")
@@ -38,23 +27,13 @@ public class TeamController {
     
     @RequestMapping("add")
     public String add(Team team) throws Exception {
-        
-        teamDao.insert(team);
+        teamService.add(team);
         return "redirect:list";
     }
     
     @RequestMapping("delete")
     public String delete(@RequestParam("name") String name) throws Exception {
-        
-        HashMap<String,Object> params = new HashMap<>();
-        params.put("teamName", name);
-        
-        teamMemberDao.delete(params);
-        
-        taskDao.deleteByTeam(name);
-        
-        int count = teamDao.delete(name);
-        
+        int count = teamService.delete(name);
         if (count == 0) {
             throw new Exception ("해당 팀이 없습니다.");
         }
@@ -64,20 +43,15 @@ public class TeamController {
     @RequestMapping("list{page}")
     public void list(@MatrixVariable(defaultValue="1") int pageNo,
             @MatrixVariable(defaultValue="3") int pageSize,
-            Map<String,Object> map) throws Exception {        
+            Map<String,Object> map) throws Exception { 
         
-        HashMap<String,Object> params = new HashMap<>();
-        params.put("startRowNo", (pageNo - 1) * pageSize);
-        params.put("pageSize", pageSize);
-        
-        List<Team> list = teamDao.selectList(params);
-        map.put("list", list);
+        map.put("list", teamService.list(pageNo, pageSize));
     }
     
     @RequestMapping("update")
     public String update(Team team) throws Exception {
         
-        int count = teamDao.update(team);
+        int count = teamService.update(team);
         if (count == 0) {
             throw new Exception("<p>해당 팀이 존재하지 않습니다.</p>");
         }
@@ -89,7 +63,7 @@ public class TeamController {
             @PathVariable String name,
             Map<String,Object> map) throws Exception {
         
-        Team team = teamDao.selectOneWithMembers(name);
+        Team team = teamService.getWithMembers(name);
         if (team == null) {
             throw new Exception("유효하지 않은 팀입니다.");
         }
@@ -113,6 +87,7 @@ public class TeamController {
     */
 }
 
+//ver 53 - DAO 대신 Service 객체 사용
 //ver 52 - InternalResourceViewResolver 적용
 //         *.do 대신 /app/* 을 기준으로 URL 변경
 //         페이지 관련 파라미터에 matrix variable 적용

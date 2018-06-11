@@ -15,7 +15,7 @@ public interface BoardService {
     int delete(int no);
 }
 
-
+//ver 53 - 인터페이스 추가
 
 
 
