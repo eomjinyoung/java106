@@ -57,7 +57,8 @@
          => 만약 트랜잭션 관리자 객체의 이름이 "transactionManager"라면
             transaction-manager 속성 생략할 수 있다. 
     -->
-    <tx:annotation-driven transaction-manager="txManager"/>  
+    <tx:annotation-driven transaction-manager="txManager"/> 
+    
 </beans>
 
 

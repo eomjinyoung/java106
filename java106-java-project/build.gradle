@@ -51,6 +51,9 @@ dependencies {
     //compile group: 'org.springframework', name: 'spring-context', version: '5.0.6.RELEASE'
     compile group: 'org.springframework', name: 'spring-jdbc', version: '5.0.6.RELEASE'
     
+    // AOP 관련 라이브러리
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.1'
+    
     // DB 커넥션풀 라이브러리
     compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
     
