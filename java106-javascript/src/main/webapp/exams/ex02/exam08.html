@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex02</title>
+</head>
+<body>
+<h1>변수 - window 객체와 변수 선언</h1>
+<script>
+"use strict"
+
+// 함수 밖에 선언되는 모든 변수는 window 객체에 소속된다.
+// 보통 "글로벌 변수(global variables)"라고 한다.
+// window 객체?
+// => 자바스크립트에 내장된(built-in) 객체이다.
+// => 자바스크립트에 선언되는 모든 글로벌 변수와 글로벌 함수는 이 객체에 자동으로 소속된다. 
+var v1;
+
+v1 = "홍길동";
+
+// window 객체에 소속된 변수나 함수를 사용할 때 window.을 생략할 수 있다.
+console.log(v1);
+
+// 물론 정확하게 적어도 된다.
+console.log(window.v1);
+
+window.v1 = window.v1 + " 입니다.";
+console.log(v1);
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
