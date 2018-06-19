@@ -7,6 +7,7 @@
 <body>
 <h1>객체 - 정의</h1>
 <script>
+"use strict"
 // 자바스크립트는 자바와 달리 설계를 가지고 객체를 생성하는 것이 아니라,
 // 기본 객체를 만든 다음에 프로퍼티(변수와 함수)를 추가하는 것이다.
 // 그래서 기본 객체를 바탕(prototype;원형객체)으로 만든다고 해서
@@ -37,6 +38,25 @@ console.log(obj3);
 //4) 위의 코드보다 더 간결한 방법.
 var obj4 = {};
 console.log(obj4);
+
+// 자바스크립트 객체 생성은 다음의 자바 코드와 유사하다.
+/*
+ 
+[자바스크립트 코드]
+  var obj3 = new Object()
+
+[자바 코드]
+  => new 명령으로 빈 객체를 생성하면 일종의 맵 객체를 생성한다. 
+  Map<String,Object> obj = new HashMap<>();
+
+  => Object() 를 호출하여 맵 객체에 기본 프로퍼티를 추가한다.
+  obj.put("__prototype__", ....);
+  obj.put("toString", .....);
+  obj.put("hasOwnProperty", ....);
+  ...
+
+ */
+
 
 </script>
 </body>
