@@ -40,7 +40,18 @@ var s = new Score("홍길동", 100, 100, 100);
 console.log(s.sum())
 console.log(s.aver())
 
-s.f();
+// f()는 prototype에 저장된 함수가 아니다. 
+// 따라서 객체를 통해 호출할 수 없다.
+//s.f(); // 실행 오류!
+
+// count와 f()는 생성자를 통해 직접 사용해야 한다.
+Score.count = 100;
+Score.f();
+
+// 자바의 경우를 생각하면 어떤 함수를 prototype에 넣고 
+// 어떤 함수를 생성자에 넣는지 알 수 있다.
+// 인스턴스 메서드 => prototype 에 저장하라!
+// 스태틱 메서드 => 생성자에 직접 저장하라!
 
 </script>
 </body>
