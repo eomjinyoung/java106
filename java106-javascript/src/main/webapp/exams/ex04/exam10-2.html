@@ -20,24 +20,24 @@ scores[0].sum = scores[0].kor + scores[0].eng + scores[0].math;
 scores[0].aver = scores[0].sum / 3;
 
 scores[1] = new Object();
-s2.name = "임꺽정";
-s2.kor = 90;
-s2.eng = 90;
-s2.math = 90;
-s2.sum = s2.kor + s2.eng + s2.math;
-s2.aver = s2.sum / 3;
+scores[1].name = "임꺽정";
+scores[1].kor = 90;
+scores[1].eng = 90;
+scores[1].math = 90;
+scores[1].sum = scores[1].kor + scores[1].eng + scores[1].math;
+scores[1].aver = scores[1].sum / 3;
 
-var s3 = new Object();
-s3.name = "임꺽정";
-s3.kor = 80;
-s3.eng = 80;
-s3.math = 80;
-s3.sum = s3.kor + s3.eng + s3.math;
-s3.aver = s3.sum / 3;
+scores[2] = new Object();
+scores[2].name = "임꺽정";
+scores[2].kor = 80;
+scores[2].eng = 80;
+scores[2].math = 80;
+scores[2].sum = scores[2].kor + scores[2].eng + scores[2].math;
+scores[2].aver = scores[2].sum / 3;
 
-console.log(s1.name, s1.kor, s1.eng, s1.math, s1.sum, s1.aver);
-console.log(s2.name, s2.kor, s2.eng, s2.math, s2.sum, s2.aver);
-console.log(s3.name, s3.kor, s3.eng, s3.math, s3.sum, s3.aver);
+for (var score of scores) {
+    console.log(score.name, score.kor, score.eng, score.math, score.sum, score.aver);
+}
 </script>
 </body>
 </html>
