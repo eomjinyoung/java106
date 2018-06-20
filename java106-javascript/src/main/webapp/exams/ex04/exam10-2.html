@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex04</title>
+</head>
+<body>
+<h1>객체 - 객체 생성과 초기화 II</h1>
+<script>
+"use strict"
+
+// 배열을 이용하여 여러 개의 객체를 다루기
+var scores = []; //new Array();
+scores[0] = new Object();
+scores[0].name = "홍길동";
+scores[0].kor = 100;
+scores[0].eng = 100;
+scores[0].math = 100;
+scores[0].sum = scores[0].kor + scores[0].eng + scores[0].math;
+scores[0].aver = scores[0].sum / 3;
+
+scores[1] = new Object();
+s2.name = "임꺽정";
+s2.kor = 90;
+s2.eng = 90;
+s2.math = 90;
+s2.sum = s2.kor + s2.eng + s2.math;
+s2.aver = s2.sum / 3;
+
+var s3 = new Object();
+s3.name = "임꺽정";
+s3.kor = 80;
+s3.eng = 80;
+s3.math = 80;
+s3.sum = s3.kor + s3.eng + s3.math;
+s3.aver = s3.sum / 3;
+
+console.log(s1.name, s1.kor, s1.eng, s1.math, s1.sum, s1.aver);
+console.log(s2.name, s2.kor, s2.eng, s2.math, s2.sum, s2.aver);
+console.log(s3.name, s3.kor, s3.eng, s3.math, s3.sum, s3.aver);
+</script>
+</body>
+</html>
+
+
+
+
+
