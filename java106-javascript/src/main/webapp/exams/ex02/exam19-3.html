@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex02</title>
+</head>
+<body>
+<h1>반복문 - for(... in ...)</h1>
+<script>
+"use strict"
+// 객체에 대해서도 이 반복문을 사용할 수 있다.
+
+var obj = {
+    name: "홍길동",
+    age: 20,
+    tel: "1111-1111",
+    working: true
+};
+
+var i;
+for (i in obj) { // i 변수에 저장되는 것은 객체에 저장된 값의 이름이다. 즉 프로퍼티명이다.
+	console.log(i, obj[i]);
+}
+console.log("---------------------");
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

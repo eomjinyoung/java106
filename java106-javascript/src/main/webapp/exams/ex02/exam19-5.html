@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex02</title>
+</head>
+<body>
+<h1>반복문 - for(... of ...)</h1>
+<script>
+"use strict"
+// 일반 객체는 이 반복문을 사용할 수 없다. 
+// iterable 프로토콜을 구현한 객체만이 이 반복문을 사용할 수 있다.
+// 예) Array, Map
+
+var obj = {
+    name: "홍길동",
+    age: 20,
+    tel: "1111-1111",
+    working: true
+};
+
+// 일반 객체는 for...of 반복문을 사용할 수 없다.
+/* 실행 오류 발생!
+for (var i of obj) { 
+	console.log(i);
+}
+*/
+console.log("---------------------");
+
+var obj2 = new Map(); // Map으로 초기화시킨 객체는 iterable 객체이다. 
+obj2.set("name", "홍길동");
+obj2.set("age", 20);
+obj2.set("tel", "1111-1111");
+obj2.set("working", true);
+
+for (var x of obj2) { // x는 key와 value를 저장한 배열이다. 
+    console.log(x);
+    console.log(x[0], "=", x[1]);
+}
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
