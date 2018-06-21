@@ -10,26 +10,35 @@
 <button id="btn1">실행</button>
 <script>
 "use strict"
-// 텍스트로 된 자바스크립트를 실행하는 함수
+// 객체를 생성하여 리턴 받기
 //
-// => "실행" 버튼을 누르면 textarea 상자에 입력한 자바스트립트를 실행시키기
+// => "실행" 버튼을 누르면 textarea 상자에 입력한 자바스트립트를 실행하여 
+//    객체를 리턴 받는다.
+// => 물론 입력 값은 자바스크립트 객체 생성 코드여야 한다.
 //  
 var ta = document.getElementById("ta");
 
 document.getElementById("btn1").onclick = () => {
-	// input, textarea, select 등 입력폼 항목의 값을 꺼낼 때는 
-	// innerHTML이 아니라 value 프로퍼티를 사용해야 한다.
 	var str = ta.value;
+    var obj = eval(str);
+	console.log(obj);
 	
-	// eval(자바스크립트코드)
-	// => 이 함수는 파라미터로 주어진 자바스크립트 코드를 실행한다.
-    eval(str);
-	
-	// eval()로 실행한 결과는 그래도 유지된다.
-	// 따라서 eval()에서 자바스크립트 코드를 실행할 때 
-	// window 객체에 name 값을 넣으면 
-	// eval() 실행이 끝난 다음에도 그래도 유지된다.
-	console.log("name=", window.name);
+	// 1) 단일 객체 생성
+	// => 주의! 괄호 () 안에 객체 생성 문법인 중괄호{} 를 넣어야 한다.
+	//    안 그러면 실행 오류이다!
+	/* 입력 값 예)
+	({
+	"name": "홍길동",
+	"age": 20,
+	"tel": "1111-1111"
+	})
+    */
+    
+    // 2) 배열 객체 생성
+    // => 배열 코드는 괄호 안에 넣을 필요가 없다. 
+    /* 입력 값 예)
+    ["홍길동", "임꺽정",100,true,null]
+    */
 };
 
 </script>
