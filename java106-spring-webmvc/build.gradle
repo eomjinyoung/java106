@@ -31,6 +31,9 @@ dependencies {
     // => Servlet 3.0에서 제공하는 멀티파트 처리기를 사용할 때는 이 라이브러리가 필요 없다.
     //compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.3'
     
+    // JSON 데이터를 다루는 라이브러리
+    //compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'
+    
     compile 'com.google.guava:guava:23.0'
     testCompile 'junit:junit:4.12'
 }
