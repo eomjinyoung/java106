@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex07</title>
+</head>
+<body>
+<h1>AJAX - readyState와 status II</h1>
+<form>
+a: <input id="ia" type="text"><br>
+b: <input id="ib" type="text"><br>
+<!-- 버튼의 타입을 지정하지 않으면 기본이 submit 버튼이다.
+     submit 버튼은 클릭하면 웹브라우저가 form 값을 가지고 서버에 자동으로 요청한다.
+     form의 action 속성을 지정하지 않으면 기본이 현재 페이지의 URL이다.
+ -->
+<button id="btn1" type="button">계산요청</button>
+<button id="btn2" type="reset">초기화</button><br>
+<textarea id="ta" cols="40" rows="5"></textarea>
+</form>
+
+<script>
+"use strict"
+// 서버가 응답한 콘텐트를 가지고 작업을 수행할 때,
+// 먼저 서버의 응답 상태를 검사하라!
+// 정상적인 응답(200)을 경우에 작업을 수행하라!
+//       
+//
+var ta = document.querySelector("#ta"),
+    btn2 = document.querySelector("#btn2"),
+    ia = document.querySelector("#ia"),
+    ib = document.querySelector("#ib");
+
+document.querySelector("#btn1").onclick = () => {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4) {
+            // 즉 다음과 같이 서버의 응답 상태를 검사한다.
+            if (xhr.status == 200) {
+                ta.value = xhr.responseText;
+            } else {
+                window.alert("서버 작업 실패!");
+                var e = new MouseEvent("click");
+                btn2.dispatchEvent(e);
+            }
+        }
+    };
+    
+    xhr.open("GET", "../../jsp/test4.jsp?a=" + ia.value + "&b=" + ib.value, true);
+    xhr.send();
+};
+
+</script>
+</body>
+</html>
+
+
+
+
+
