@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex03</title>
+</head>
+<body>
+<h1>함수 - 익명 함수와 호출</h1>
+<script>
+// 익명 함수를 정의하는 즉시 바로 호출할 수 있다. 
+//
+//1) 일반적인 방법
+//=> 함수를 정의한 후 변수에 저장한다. 
+//=> 그리고 그 변수 이름으로 호출한다.
+var f1 = function() {
+    console.log("방법1....");
+};
+
+f1(); // 함수 호출
+
+//2) 함수 정의 즉시 호출하기
+//=> (익명함수정의)(파라미터 값);
+(function() {
+    console.log("방법2....");
+})();
+
+</script>
+</body>
+</html>
+
+
+
+
+
