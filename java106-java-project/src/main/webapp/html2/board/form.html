@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시물 보기</title>
+</head>
+<body>
+<div id='header'></div>
+
+<h1 class="detail-view">게시물 보기</h1>
+<h1 class="input-view">새 게시글</h1>
+<form>
+<table border='1'>
+<tbody>
+<tr class="detail-view"><th>번호</th><td>
+    <input id="fNo" type='text' readonly></td></tr>
+<tr><th>제목</th>
+    <td><input id="fTitle" type='text'></td></tr>
+<tr><th>내용</th>
+    <td><textarea id='fContent' rows='10' cols='60'></textarea></td></tr>
+<tr class="detail-view"><th>등록일</th>
+    <td><input id="fCreatedDate" type='text' readonly></td></tr>
+</tbody>
+</table>
+<p>
+<a href='list.html'>목록</a>
+<button id="addBtn" type="button" class="input-view">등록</button>
+<button id="resetBtn" type="reset" class="input-view">초기화</button>
+<button id="updBtn" type="button" class="detail-view">변경</button>
+<button id="delBtn" type="button" class="detail-view">삭제</button>
+</p>
+</form>
+
+
+<script src="../header.js"></script>
+<script>
+
+// 태그에 id를 지정하면 window 객체에 자동 등록된다.
+// 따라서 다음과 같이 태그를 찾는 코드를 작성하지 않아도 된다.
+/*
+var fNo = document.querySelector("#fNo"),
+    fTitle = document.querySelector("#fTitle"),
+    fContent = document.querySelector("#fContent"),
+    fCreatedDate = document.querySelector("#fCreatedDate");
+*/
+
+if (location.href.split("?").length > 1) {
+	var tags = document.querySelectorAll(".input-view");
+    for (var tag of tags) {
+        tag.style.display = "none"; 
+    }
+    
+	var no = location.href.split("?")[1].split("=")[1];
+	
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = () => {
+	    if (xhr.readyState == 4) {
+	        if (xhr.status == 200) {
+	            var data = JSON.parse(xhr.responseText);
+	            fNo.value = data.no;
+	            fTitle.value = data.title;
+	            fContent.value = data.content;
+	            fCreatedDate.value = data.createdDate;
+	        }
+	    }
+	};
+	xhr.open("GET", "../../json/board/" + no, true);
+	xhr.send();
+	
+	document.querySelector("#updBtn").onclick = () => {
+		var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    location.href = "list.html";
+                } else {
+                    window.alert("변경 실패!")
+                }
+            }
+        };
+        xhr.open("POST", "../../json/board/update", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("title=" + encodeURIComponent(fTitle.value) + 
+                "&content=" + encodeURIComponent(fContent.value) + 
+                "&no=" + fNo.value);
+	};
+	
+    document.querySelector("#delBtn").onclick = () => {
+        if (window.confirm("삭제하시겠습니까?") == false) 
+        	return;
+        
+		var xhr = new XMLHttpRequest();
+	    xhr.onreadystatechange = () => {
+	        if (xhr.readyState == 4) {
+	            if (xhr.status == 200) {
+	                location.href = "list.html";
+	            } else {
+	            	window.alert("삭제 실패!")
+	            }
+	        }
+	    };
+	    xhr.open("GET", "../../json/board/delete?no=" + no, true);
+	    xhr.send();
+	};
+	
+} else { // 새 글 등록
+    var tags = document.querySelectorAll(".detail-view");
+    for (var tag of tags) {
+        tag.style.display = "none"; // <h1 style="display: none;">...</h1>
+    }
+    
+    document.querySelector("#addBtn").onclick = () => {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 201) {
+                    location.href = "list.html";
+                } else {
+                	window.alert("등록 실패!")
+                }
+            }
+        };
+        xhr.open("POST", "../../json/board/add", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //주의!
+        //=> 자바스크립트의 AJAX를 사용하여 직접 서버에 한글을 포함하는 데이터를 보낼 때는
+        //   개발자가 URL 인코딩 해서 보내야 한다.
+        xhr.send("title=" + encodeURIComponent(fTitle.value) + 
+        		"&content=" + encodeURIComponent(fContent.value));
+    };
+}
+
+</script>
+
+</body>
+</html>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
