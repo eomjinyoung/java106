@@ -11,7 +11,7 @@
 
 <h1 class="detail-view">게시물 보기</h1>
 <h1 class="input-view">새 게시글</h1>
-<form action='update' method='post'>
+<form>
 <table border='1'>
 <tbody>
 <tr class="detail-view"><th>번호</th><td>
@@ -25,9 +25,9 @@
 </tbody>
 </table>
 <p>
-<a href='list'>목록</a>
-<button type="button" class="input-view">등록</button>
-<button type="reset" class="input-view">초기화</button>
+<a href='list.html'>목록</a>
+<button id="addBtn" type="button" class="input-view">등록</button>
+<button id="resetBtn" type="reset" class="input-view">초기화</button>
 <button class="detail-view">변경</button>
 <a class="detail-view" href='delete?no=28'>삭제</a>
 </p>
@@ -67,6 +67,26 @@ if (location.href.split("?").length > 1) {
     for (var tag of tags) {
         tag.style.display = "none"; // <h1 style="display: none;">...</h1>
     }
+    
+    document.querySelector("#addBtn").onclick = () => {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 201) {
+                    location.href = "list.html";
+                } else {
+                	window.alert("등록 실패!")
+                }
+            }
+        };
+        xhr.open("POST", "../../json/board/add", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //주의!
+        //=> 자바스크립트의 AJAX를 사용하여 직접 서버에 한글을 포함하는 데이터를 보낼 때는
+        //   개발자가 URL 인코딩 해서 보내야 한다.
+        xhr.send("title=" + encodeURIComponent(fTitle.value) + 
+        		"&content=" + encodeURIComponent(fContent.value));
+    };
 }
 
 </script>
