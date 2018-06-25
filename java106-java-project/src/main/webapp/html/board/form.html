@@ -34,10 +34,15 @@
 </form>
 
 <script>
-var fId = document.querySelector("#fId"),
+
+// 태그에 id를 지정하면 window 객체에 자동 등록된다.
+// 따라서 다음과 같이 태그를 찾는 코드를 작성하지 않아도 된다.
+/*
+var fNo = document.querySelector("#fNo"),
     fTitle = document.querySelector("#fTitle"),
     fContent = document.querySelector("#fContent"),
     fCreatedDate = document.querySelector("#fCreatedDate");
+*/
 
 if (location.href.split("?").length > 1) {
 	var tags = document.querySelectorAll(".input-view");
@@ -80,7 +85,23 @@ if (location.href.split("?").length > 1) {
                 "&no=" + fNo.value);
 	};
 	
-	document.querySelector("#delBtn").onclick = () => {};
+    document.querySelector("#delBtn").onclick = () => {
+        if (window.confirm("삭제하시겠습니까?") == false) 
+        	return;
+        
+		var xhr = new XMLHttpRequest();
+	    xhr.onreadystatechange = () => {
+	        if (xhr.readyState == 4) {
+	            if (xhr.status == 200) {
+	                location.href = "list.html";
+	            } else {
+	            	window.alert("삭제 실패!")
+	            }
+	        }
+	    };
+	    xhr.open("GET", "../../json/board/delete?no=" + no, true);
+	    xhr.send();
+	};
 	
 } else { // 새 글 등록
     var tags = document.querySelectorAll(".detail-view");

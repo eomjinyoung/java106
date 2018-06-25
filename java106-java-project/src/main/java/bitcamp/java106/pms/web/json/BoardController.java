@@ -28,13 +28,9 @@ public class BoardController {
     }
     
     @RequestMapping("delete")
-    public String delete(@RequestParam("no") int no) throws Exception {
-        
-        int count = boardService.delete(no);
-        if (count == 0) {
-            throw new Exception("해당 게시물이 없습니다.");
-        }
-        return "redirect:list";
+    //@ResponseStatus(HttpStatus.OK) // 응답 상태 코드 값의 기본은 "200(OK)" 이다.
+    public void delete(@RequestParam("no") int no) throws Exception {
+        boardService.delete(no);
     }
     
     @RequestMapping("list{page}")
