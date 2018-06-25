@@ -9,7 +9,7 @@
         user01 <a href='/java106-java-project/app/auth/logout'>로그아웃</a>
 </div>
 <h1>게시물 목록</h1>
-<p><a href='form'>새 글</a></p>
+<p><a href='form.html'>새 글</a></p>
 <table border='1'>
 <thead>
     <tr><th>번호</th><th>제목</th><th>등록일</th></tr>
@@ -28,7 +28,7 @@ xhr.onreadystatechange = () => {
             for (var item of list) {
                 var tr = document.createElement("tr");
                 tr.innerHTML = "<td>" + item.no + "</td>" + 
-                    "<td><a href='view.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
+                    "<td><a href='form.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
                     "<td>" + item.createdDate + "</td>";
                 tbody.appendChild(tr);
             }
