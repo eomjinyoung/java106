@@ -12,38 +12,39 @@
 <thead>
     <tr><th>번호</th><th>제목</th><th>등록일</th></tr>
 </thead>
-<tbody></tbody>
+<tbody id="tableBody"></tbody>
 </table>
 
-<script src="../js/bitcamp.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- <script src="../js/bitcamp.js"></script> -->
 <!-- <script src="../header.js"></script> -->
 <script>
-var settings = new Object();
-settings.success = function(data) {
-    console.log(data);
-};
-
-bitcamp.ajax("../../json/board/list", settings);
+$.getJSON("../../json/board/list", (data) => {
+    for (var item of data) {
+        var tr = document.createElement("tr");
+        tr.innerHTML = "<td>" + item.no + "</td>" + 
+            "<td><a href='form.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
+            "<td>" + item.createdDate + "</td>";
+        tableBody.appendChild(tr);
+    }
+});
 
 /*
-
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = () => {
-    if (xhr.readyState == 4) {
-        if (xhr.status == 200) {
-            var list = JSON.parse(xhr.responseText);
-            for (var item of list) {
-                var tr = document.createElement("tr");
-                tr.innerHTML = "<td>" + item.no + "</td>" + 
-                    "<td><a href='form.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
-                    "<td>" + item.createdDate + "</td>";
-                tbody.appendChild(tr);
-            }
+$.ajax("../../json/board/list", {
+    dataType: "json",
+    success(data) {
+    	for (var item of data) {
+            var tr = document.createElement("tr");
+            tr.innerHTML = "<td>" + item.no + "</td>" + 
+                "<td><a href='form.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
+                "<td>" + item.createdDate + "</td>";
+            tableBody.appendChild(tr);
         }
+    },
+    error() {
+        window.alert("실행 오류!");
     }
-};
-xhr.open("GET", "../../json/board/list", true);
-xhr.send();
+});
 */
 </script>
 

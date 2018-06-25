@@ -46,3 +46,37 @@ bitcamp.ajax = (url, settings) => {
 		xhr.send();
 	}	
 };
+
+bitcamp.getJSON = (url, p1, p2) => {
+	// 호출 예:
+	if (p1 == undefined || typeof p1 != "function") {
+		// => getJSON("board/list");
+		// => getJSON("board/list", {pageNo:1,pageSize:5});
+		// => getJSON("board/list", {pageNo:1,pageSize:5}, function(data) {...});
+	    bitcamp.ajax(url, {
+	    	"data": p1,
+	    	"dataType": "json",
+	    	"success": p2
+	    });
+	} else if (typeof p1 == "function") {
+		// => getJSON("board/list", function() {});
+		bitcamp.ajax(url, {
+			"dataType": "json",
+	    	"success": p1
+	    });
+	}
+};
+
+var $ = bitcamp;
+
+
+
+
+
+
+
+
+
+
+
+
