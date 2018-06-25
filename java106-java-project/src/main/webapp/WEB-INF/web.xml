@@ -64,6 +64,23 @@
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>json</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/json-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+        <multipart-config>
+            <max-file-size>5000000</max-file-size>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>json</servlet-name>
+        <url-pattern>/json/*</url-pattern>
+    </servlet-mapping>
+    
     
     <!-- 서블릿 실행 도중 특정 예외가 발생하면 실행될 JSP를 지정한다. -->
     <error-page>

@@ -23,6 +23,14 @@ war {
     archiveName = "pms.war"
 }
 
+eclipse {
+    wtp {
+        facet {
+            facet name: 'jst.web', version: '3.1'
+        }
+    }
+}
+
 // 프로젝트에서 사용하는 의존 라이브러리를 외부의 디렉토리로 복사하는 명령 추가
 task copyJars(type: Copy) {
   from configurations.runtime
@@ -60,6 +68,30 @@ dependencies {
     // JSP 확장 태그인 JSTL 라이브러리
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     
+    // @Controller가 붙은 일반적인 페이지 컨트롤러의 요청 핸들러를 실행할 때 
+    // 요청 파라미터의 문자열을 int나 boolean 등으로 바꾸기 위해  
+    // 기본으로 장착된 변환기를 사용한다. 
+    // 그 변환기는 HttpMessageConverter 규칙에 따라 만든 변환기이다.
+    //  
+    // 그런데 @RestController 애노테이션이 붙은 페이지 컨트롤러의 요청 핸들러를 실행할 때 
+    // 스프링은 기본 데이터 변환기로서 MappingJackson2HttpMessageConverter를 사용한다.
+    // 이 컨버터는 JSON 데이터를 처리할 수 있다.
+    // 
+    // MappingJackson2HttpMessageConverter?
+    // => 요청 파라미터로 JSON 문자열을 받으면 요청 핸들러를 호출할 때 자바 객체로 변환시킨다. 
+    // => 요청 핸들러가 자바 객체를 리턴할 때 JSON 문자열로 변환한다.
+    // 
+    // 주의! 
+    // => MappingJackson2HttpMessageConverter를 사용하려면 이 객체가 의존하는 라이브러리를  
+    //    다음과 같이 추가해야 한다. 
+    //compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'
+    
+    // 그런데 JSON 데이터를 처리할 때 
+    // MappingJackson2HttpMessageConverter 대신 GsonHttpMessageConverter 를 사용할 수 있다. 
+    // 단 GsonHttpMessageConverter를 사용하려면 이 객체가 의존하는 라이브러리를 
+    // 다음과 같이 추가해야 한다.
+    // 즉, Jackson 또는 Gson 둘 중 한 개의 라이브러리만 추가하라!
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
     
     // 서블릿 라이브러리
     // => 어느 버전의 서블릿 규칙에 따라 만든 서버인지에 따라 

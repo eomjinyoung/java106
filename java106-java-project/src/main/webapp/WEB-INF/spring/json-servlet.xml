@@ -12,17 +12,14 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     
     <context:component-scan base-package="bitcamp.java106.pms.web">
-        <context:exclude-filter type="regex" expression="bitcamp.java106.pms.web.json.*"/>
+        <context:exclude-filter type="aspectj" 
+            expression="bitcamp.java106.pms.web.*Controller"/>
     </context:component-scan>
     
     <mvc:annotation-driven enable-matrix-variables="true"/>
     
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
     
+    <!-- 
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
@@ -30,6 +27,7 @@
             <bean class="bitcamp.java106.pms.web.interceptor.AuthCheckInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+    -->
 </beans>
 
 
