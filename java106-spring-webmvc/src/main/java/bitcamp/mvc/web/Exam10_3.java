@@ -1,4 +1,4 @@
-// JSON 데이터 출력하기 - 스프링 설정과 + 잭슨 라이브러리로 JSON 데이터 출력하기
+// JSON 데이터 출력하기 - 스프링에서 제공하는 기본 라이브러리로 JSON 데이터 출력하기
 package bitcamp.mvc.web;
 
 import java.util.List;

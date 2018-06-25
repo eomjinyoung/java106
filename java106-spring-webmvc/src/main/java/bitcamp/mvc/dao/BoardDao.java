@@ -16,15 +16,6 @@ public class BoardDao {
     
     public BoardDao() {
         System.out.println("====> BoardDao()");
-    }
-    
-    ArrayList<Board> list = new ArrayList<>();
-    
-    public void insert(Board board) {
-        list.add(board);
-    }
-    
-    public List<Board> selectList() {
         Member writer = new Member();
         writer.setId("hong");
         writer.setEmail("hong@test.com");
@@ -63,7 +54,15 @@ public class BoardDao {
         b1.setUser(writer);
         b1.setCreatedDate(Date.valueOf("2018-6-22"));
         list.add(b1);
-        
+    }
+    
+    ArrayList<Board> list = new ArrayList<>();
+    
+    public void insert(Board board) {
+        list.add(board);
+    }
+    
+    public List<Board> selectList() {
         return list;
     }
 }
