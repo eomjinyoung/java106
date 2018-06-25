@@ -45,13 +45,9 @@ public class BoardController {
     }
     
     @RequestMapping("update")
-    public String update(Board board) throws Exception {
-        
-        int count = boardService.update(board);
-        if (count == 0) {
-            throw new Exception("해당 게시물이 존재하지 않습니다.");
-        } 
-        return "redirect:list";
+    @ResponseStatus(HttpStatus.OK) // 기본 값이 OK 이다. 
+    public void update(Board board) throws Exception {
+        boardService.update(board);
     }
     
     @RequestMapping("{no}")

@@ -15,7 +15,7 @@
 <table border='1'>
 <tbody>
 <tr class="detail-view"><th>번호</th><td>
-    <input id="fId" type='text' readonly></td></tr>
+    <input id="fNo" type='text' readonly></td></tr>
 <tr><th>제목</th>
     <td><input id="fTitle" type='text'></td></tr>
 <tr><th>내용</th>
@@ -28,8 +28,8 @@
 <a href='list.html'>목록</a>
 <button id="addBtn" type="button" class="input-view">등록</button>
 <button id="resetBtn" type="reset" class="input-view">초기화</button>
-<button class="detail-view">변경</button>
-<a class="detail-view" href='delete?no=28'>삭제</a>
+<button id="updBtn" type="button" class="detail-view">변경</button>
+<button id="delBtn" type="button" class="detail-view">삭제</button>
 </p>
 </form>
 
@@ -52,7 +52,7 @@ if (location.href.split("?").length > 1) {
 	    if (xhr.readyState == 4) {
 	        if (xhr.status == 200) {
 	            var data = JSON.parse(xhr.responseText);
-	            fId.value = data.no;
+	            fNo.value = data.no;
 	            fTitle.value = data.title;
 	            fContent.value = data.content;
 	            fCreatedDate.value = data.createdDate;
@@ -61,6 +61,26 @@ if (location.href.split("?").length > 1) {
 	};
 	xhr.open("GET", "../../json/board/" + no, true);
 	xhr.send();
+	
+	document.querySelector("#updBtn").onclick = () => {
+		var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    location.href = "list.html";
+                } else {
+                    window.alert("변경 실패!")
+                }
+            }
+        };
+        xhr.open("POST", "../../json/board/update", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("title=" + encodeURIComponent(fTitle.value) + 
+                "&content=" + encodeURIComponent(fContent.value) + 
+                "&no=" + fNo.value);
+	};
+	
+	document.querySelector("#delBtn").onclick = () => {};
 	
 } else { // 새 글 등록
     var tags = document.querySelectorAll(".detail-view");
