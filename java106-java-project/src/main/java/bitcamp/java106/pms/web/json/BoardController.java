@@ -1,7 +1,5 @@
 package bitcamp.java106.pms.web.json;
 
-import java.util.Map;
-
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,16 +53,8 @@ public class BoardController {
     }
     
     @RequestMapping("{no}")
-    public String view(
-            @PathVariable int no, 
-            Map<String,Object> map) throws Exception {
-        
-        Board board = boardService.get(no);
-        if (board == null) {
-            throw new Exception("유효하지 않은 게시물 번호입니다.");
-        }
-        map.put("board", board);
-        return "board/view";
+    public Board view(@PathVariable int no) throws Exception {
+        return boardService.get(no);
     }
 
 }

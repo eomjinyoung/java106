@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시물 목록</title>
+</head>
+<body>
+<div id='header'>
+        user01 <a href='/java106-java-project/app/auth/logout'>로그아웃</a>
+</div>
+<h1>게시물 목록</h1>
+<p><a href='form'>새 글</a></p>
+<table border='1'>
+<thead>
+    <tr><th>번호</th><th>제목</th><th>등록일</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<script>
+var tbody = document.querySelector("tbody");
+
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = () => {
+    if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+            var list = JSON.parse(xhr.responseText);
+            for (var item of list) {
+                var tr = document.createElement("tr");
+                tr.innerHTML = "<td>" + item.no + "</td>" + 
+                    "<td><a href='view.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
+                    "<td>" + item.createdDate + "</td>";
+                tbody.appendChild(tr);
+            }
+        }
+    }
+};
+xhr.open("GET", "../../json/board/list", true);
+xhr.send();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
