@@ -51,6 +51,12 @@
 - webapp/html5/board/form.html 변경
 - webapp/html5/auth/login.html 변경
 
+## bootsrap 라이브러리 사용
+- package.json 변경
+- webapp/html6/board/list.html 변경
+- webapp/html6/board/form.html 변경
+- webapp/html6/auth/login.html 변경
+
 
 
 

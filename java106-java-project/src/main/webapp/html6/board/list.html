@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시물 목록</title>
+<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="container">
+
+<nav id="header" class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+
+<h1>게시물 목록</h1>
+<p><a href='form.html' class="btn btn-primary btn-sm">새 글</a></p>
+<table class="table table-hover">
+<thead>
+    <tr><th>번호</th><th>제목</th><th>등록일</th></tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+
+</div><!--.container-->
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../header.js"></script>
+<script>
+
+$.getJSON("../../json/board/list", (data) => {
+    for (var item of data) {
+        $("<tr>")
+            .html("<td>" + item.no + "</td>" + 
+	            "<td><a href='form.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
+	            "<td>" + item.createdDate + "</td>")
+            .appendTo(tableBody);
+    }
+});
+/*
+$.ajax("../../json/board/list", {
+    dataType: "json",
+    success(data) {
+    	for (var item of data) {
+            var tr = document.createElement("tr");
+            tr.innerHTML = "<td>" + item.no + "</td>" + 
+                "<td><a href='form.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
+                "<td>" + item.createdDate + "</td>";
+            tableBody.appendChild(tr);
+        }
+    },
+    error() {
+        window.alert("실행 오류!");
+    }
+});
+*/
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
