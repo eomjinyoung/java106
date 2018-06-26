@@ -59,23 +59,14 @@ if (location.href.split("?").length > 1) {
 		});
 	});
 	
-    document.querySelector("#delBtn").onclick = () => {
+    $("#delBtn").click(() => {
         if (window.confirm("삭제하시겠습니까?") == false) 
         	return;
         
-		var xhr = new XMLHttpRequest();
-	    xhr.onreadystatechange = () => {
-	        if (xhr.readyState == 4) {
-	            if (xhr.status == 200) {
-	                location.href = "list.html";
-	            } else {
-	            	window.alert("삭제 실패!")
-	            }
-	        }
-	    };
-	    xhr.open("GET", "../../json/board/delete?no=" + no, true);
-	    xhr.send();
-	};
+        $.get("../../json/board/delete", {"no": no}, () => {
+        	location.href = "list.html";
+        });
+	});
 	
 } else { // 새 글 등록
     var tags = document.querySelectorAll(".detail-view");
