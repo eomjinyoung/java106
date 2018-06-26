@@ -8,7 +8,18 @@ function loadLoginUser() {
 	$.getJSON("/java106-java-project/json/auth/loginUser", (data) => {
 		if (data == "") 
 			location.href = "/java106-java-project/html2/auth/login.html";
-		else 
+		else {
 			$("#username").text(data.id);
+			$("#logoutBtn").click((e) => {
+				e.preventDefault(); // 클릭했을 때 원래 하던 일이 있는데 그것을 하지 말라!
+				$.get("/java106-java-project/json/auth/logout", () => {
+					location.href = "/java106-java-project/html2/auth/login.html";
+				});
+			});
+		}
 	});
 }
+
+
+
+

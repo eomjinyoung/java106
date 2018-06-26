@@ -66,15 +66,9 @@ public class AuthController {
     }
     
     @RequestMapping("/logout")
-    public String logout(
-            HttpServletRequest request,
-            HttpSession session) throws Exception {
-        
+    public void logout(HttpSession session) throws Exception {
         // 세션을 꺼내 무효화시킨다.
         session.invalidate();
-        
-        // 웹 애플리케이션의 시작 페이지로 가라고 웹브라우저에게 얘기한다.
-        return "redirect:/"; // ==> "/java106-java-project"
     }
 }
 
