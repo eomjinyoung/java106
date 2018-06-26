@@ -9,16 +9,26 @@
 <form>
 <table border='1'>
 <tr><th>아이디</th>
-    <td><input type='text' id='id'></td></tr>
+    <td><input type='text' id='fId'></td></tr>
 <tr><th>암호</th>
-    <td><input type='password' id='password'></td></tr>
+    <td><input type='password' id='fPassword'></td></tr>
 </table>
-<p><input type='checkbox' id='saveId'> 아이디 저장</p>
+<p><input type='checkbox' id='fSaveId'> 아이디 저장</p>
 <button id="loginBtn" type="button">로그인</button>
 </form>
 
 <script src="../js/bitcamp.js"></script>
 <script>
+$("#loginBtn").click(() => {
+	console.log($("#fId").val());
+	console.log($("#fPassword").val());
+	console.log($("#fSaveId").val());
+});
+/*
+$.post("../../json/auth/login", {
+	id: 
+}, (data) => {}, "json");
+*/
 
 </script>
 
