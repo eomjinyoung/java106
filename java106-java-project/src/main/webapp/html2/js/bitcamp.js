@@ -1,11 +1,16 @@
 // 자바스크립트 함수를 모아 놓은 라이브러리
 var jQuery = function(param) {
 	var tags;
-    if (param.startsWith("<")) {
+	if (param instanceof HTMLElement) {
+		// 파라미터 값이 일반 태그라면 배열에 담고 도우미 함수를 붙여서 리턴한다. 
+		tags = [param];
+	} else if (param.startsWith("<")) {
         var tagName = param.substr(1, param.length - 2); // <pre> ==> 0, (5-2)
         tags = [document.createElement(tagName)];
     } else if (param.startsWith(".")) {
     	tags = document.querySelectorAll(param);
+    } else if (param.startsWith("#")) {
+    	tags = [document.querySelector(param)];
     }
     
     tags.html = function(value) {
@@ -31,7 +36,14 @@ var jQuery = function(param) {
     
     tags.val = function(value) {
     	for (var tag of tags) {
-    		tag.style[styleName] = value;
+    		tag.value = value;
+    	}
+    	return tags;
+    };
+    
+    tags.click = function(listener) {
+    	for (var tag of tags) {
+    		tag.addEventListener("click", listener);
     	}
     	return tags;
     };
@@ -103,6 +115,34 @@ jQuery.getJSON = (url, p1, p2) => {
 	    	"success": p1
 	    });
 	}
+};
+
+jQuery.post = (url, p1, p2, p3) => {
+	var settings = {
+		method: "POST"
+	};
+	if (arguments.length == 2) {
+		if (typeof p1 == "function") settings.success =  p1;
+		else if (typeof p1 == "string") settings.dataType= p1;
+		else settings.data = p1;
+	} else if (arguments.length == 3) {
+		if (typeof p2 == "function") {
+			// .post(url, data, function);
+			settings.data = p1;
+			settings.success = p2;
+		} else if (typeof p2 == "string") {
+			settings.dataType = p2;
+			if (typeof p1 == "function") settings.success = p1; // .post(url,function,dataType)
+			else settings.data = p1; // .post(url, data, dataType);
+		} 
+	} else if (arguments.length == 4) {
+		// .post(url, data, function, dataType);
+		settings.data = p1;
+		settings.success = p2;
+		settings.dataType = p3;
+	}
+	
+	jQuery.ajax(url, settings);
 };
 
 var $ = jQuery;

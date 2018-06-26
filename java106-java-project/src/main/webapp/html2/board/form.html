@@ -43,29 +43,21 @@ if (location.href.split("?").length > 1) {
 	var no = location.href.split("?")[1].split("=")[1];
 	
 	$.getJSON("../../json/board/" + no, function(data) {
-        fNo.value = data.no;
-        fTitle.value = data.title;
-        fContent.value = data.content;
-        fCreatedDate.value = data.createdDate;
+        $(fNo).val(data.no);
+        $(fTitle).val(data.title);
+        $(fContent).val(data.content);
+        $(fCreatedDate).val(data.createdDate);
 	});
 	
-	document.querySelector("#updBtn").onclick = () => {
-		var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
-                    location.href = "list.html";
-                } else {
-                    window.alert("변경 실패!")
-                }
-            }
-        };
-        xhr.open("POST", "../../json/board/update", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send("title=" + encodeURIComponent(fTitle.value) + 
-                "&content=" + encodeURIComponent(fContent.value) + 
-                "&no=" + fNo.value);
-	};
+	$("#updBtn").click(() => {
+		$.post("../../json/board/update", {
+			title: fTitle.value,
+			content: fContent.value,
+			no: fNo.value
+		}, () => {
+			location.href = "list.html";
+		}, "json");
+	});
 	
     document.querySelector("#delBtn").onclick = () => {
         if (window.confirm("삭제하시겠습니까?") == false) 
