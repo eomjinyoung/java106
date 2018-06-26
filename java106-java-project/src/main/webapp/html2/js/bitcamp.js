@@ -58,6 +58,13 @@ var jQuery = function(param) {
     	return tags;
     };
     
+    tags.is = function(selector) {
+    	if (tags[0].querySelectorAll(selector).length > 0) 
+    		return true;
+    	else 
+    		return false;
+    };
+    
     return tags;
 };
 
