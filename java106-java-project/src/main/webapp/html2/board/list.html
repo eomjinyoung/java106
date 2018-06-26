@@ -15,20 +15,20 @@
 <tbody id="tableBody"></tbody>
 </table>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- <script src="../js/bitcamp.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+<script src="../js/bitcamp.js"></script>
 <!-- <script src="../header.js"></script> -->
 <script>
+
 $.getJSON("../../json/board/list", (data) => {
     for (var item of data) {
-        var tr = document.createElement("tr");
-        tr.innerHTML = "<td>" + item.no + "</td>" + 
-            "<td><a href='form.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
-            "<td>" + item.createdDate + "</td>";
-        tableBody.appendChild(tr);
+        $("<tr>")
+            .html("<td>" + item.no + "</td>" + 
+	            "<td><a href='form.html?no=" + item.no + "'>" + item.title + "</a></td>" + 
+	            "<td>" + item.createdDate + "</td>")
+            .appendTo(tableBody);
     }
 });
-
 /*
 $.ajax("../../json/board/list", {
     dataType: "json",
