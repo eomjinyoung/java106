@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>로그인</title>
+</head>
+<body>
+<h1>로그인</h1>
+<form>
+<table border='1'>
+<tr><th>아이디</th>
+    <td><input type='text' id='fId'></td></tr>
+<tr><th>암호</th>
+    <td><input type='password' id='fPassword'></td></tr>
+</table>
+<p><input type='checkbox' id='fSaveId'> 아이디 저장</p>
+<button id="loginBtn" type="button">로그인</button>
+</form>
+
+<script src="../js/jquery.min.js"></script>
+<script>
+$("#loginBtn").click(() => {
+	var data = {
+		id : $("#fId").val(),
+		password: $("#fPassword").val()
+	};
+	if ($(document.body).is("#fSaveId:checked")) {
+		data.saveId = "true";
+	}
+	$.post("../../json/auth/login", data, (result) => {
+		if (result.state == "success")
+			location.href = "../board/list.html";
+		else 
+			window.alert("로그인 실패!");
+	}, "json");
+});
+
+</script>
+
+
+
+</body>
+</html>
+    
