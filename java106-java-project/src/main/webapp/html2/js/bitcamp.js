@@ -35,6 +35,9 @@ var jQuery = function(param) {
     };
     
     tags.val = function(value) {
+    	if (arguments.length == 0) {
+    		return tags[0].value;
+    	}
     	for (var tag of tags) {
     		tag.value = value;
     	}
@@ -51,7 +54,7 @@ var jQuery = function(param) {
     return tags;
 };
 
-jQuery.ajax = (url, settings) => {
+jQuery.ajax = function(url, settings) {
 	// AJAX 실행 정보를 초기화시킨다.
 	if (settings == undefined || settings == null) {
 		settings = {};
@@ -97,7 +100,7 @@ jQuery.ajax = (url, settings) => {
 	}	
 };
 
-jQuery.getJSON = (url, p1, p2) => {
+jQuery.getJSON = function(url, p1, p2) {
 	// 호출 예:
 	if (p1 == undefined || typeof p1 != "function") {
 		// => getJSON("board/list");
@@ -117,7 +120,7 @@ jQuery.getJSON = (url, p1, p2) => {
 	}
 };
 
-jQuery.post = (url, p1, p2, p3) => {
+jQuery.post = function(url, p1, p2, p3) {
 	var settings = {
 		method: "POST"
 	};

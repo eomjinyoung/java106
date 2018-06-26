@@ -51,12 +51,12 @@ if (location.href.split("?").length > 1) {
 	
 	$("#updBtn").click(() => {
 		$.post("../../json/board/update", {
-			title: fTitle.value,
-			content: fContent.value,
-			no: fNo.value
+			title: $(fTitle).val(),
+			content: $(fContent).val(),
+			no: $(fNo).val()
 		}, () => {
 			location.href = "list.html";
-		}, "json");
+		});
 	});
 	
     document.querySelector("#delBtn").onclick = () => {
