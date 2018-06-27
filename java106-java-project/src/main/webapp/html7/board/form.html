@@ -13,25 +13,39 @@
 <h1 class="detail-view">게시물 보기</h1>
 <h1 class="input-view">새 게시글</h1>
 <form>
-<table border='1'>
-<tbody>
-<tr class="detail-view"><th>번호</th><td>
-    <input id="fNo" type='text' readonly></td></tr>
-<tr><th>제목</th>
-    <td><input id="fTitle" type='text'></td></tr>
-<tr><th>내용</th>
-    <td><textarea id='fContent' rows='10' cols='60'></textarea></td></tr>
-<tr class="detail-view"><th>등록일</th>
-    <td><input id="fCreatedDate" type='text' readonly></td></tr>
-</tbody>
-</table>
-<p>
-<a href='list.html' class="btn btn-primary btn-sm">목록</a>
-<button id="addBtn" type="button" class="input-view btn btn-primary btn-sm">등록</button>
-<button id="resetBtn" type="reset" class="input-view btn btn-primary btn-sm">초기화</button>
-<button id="updBtn" type="button" class="detail-view btn btn-primary btn-sm">변경</button>
-<button id="delBtn" type="button" class="detail-view btn btn-primary btn-sm">삭제</button>
-</p>
+<div class="detail-view form-group row">
+  <label for="fNo" class="col-sm-2 col-form-label">번호</label>
+  <div class="col-sm-10">
+    <input type="text" readonly class="form-control-plaintext" id="fNo">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="fTitle" class="col-sm-2 col-form-label">제목</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="fTitle" placeholder="제목을 입력하세요.">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="fContent" class="col-sm-2 col-form-label">내용</label>
+  <div class="col-sm-10">
+    <textarea class="form-control" id="fContent" placeholder="내용을 입력하세요." rows="10"></textarea>
+  </div>
+</div>
+<div class="detail-view form-group row">
+  <label for="fCreatedDate" class="col-sm-2 col-form-label">등록일</label>
+  <div class="col-sm-10">
+    <input type="text" readonly class="form-control-plaintext" id="fCreatedDate">
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-sm-10">
+	<a href='list.html' class="btn btn-primary btn-sm">목록</a>
+	<button id="addBtn" type="button" class="input-view btn btn-primary btn-sm">등록</button>
+	<button id="resetBtn" type="reset" class="input-view btn btn-primary btn-sm">초기화</button>
+	<button id="updBtn" type="button" class="detail-view btn btn-primary btn-sm">변경</button>
+	<button id="delBtn" type="button" class="detail-view btn btn-primary btn-sm">삭제</button>
+  </div>
+</div>
 </form>
 </div><!--.container-->
 
