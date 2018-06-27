@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시물 보기</title>
+<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="container">
+<nav id="header" class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+
+<h1 class="detail-view">게시물 보기</h1>
+<h1 class="input-view">새 게시글</h1>
+<form>
+<table border='1'>
+<tbody>
+<tr class="detail-view"><th>번호</th><td>
+    <input id="fNo" type='text' readonly></td></tr>
+<tr><th>제목</th>
+    <td><input id="fTitle" type='text'></td></tr>
+<tr><th>내용</th>
+    <td><textarea id='fContent' rows='10' cols='60'></textarea></td></tr>
+<tr class="detail-view"><th>등록일</th>
+    <td><input id="fCreatedDate" type='text' readonly></td></tr>
+</tbody>
+</table>
+<p>
+<a href='list.html' class="btn btn-primary btn-sm">목록</a>
+<button id="addBtn" type="button" class="input-view btn btn-primary btn-sm">등록</button>
+<button id="resetBtn" type="reset" class="input-view btn btn-primary btn-sm">초기화</button>
+<button id="updBtn" type="button" class="detail-view btn btn-primary btn-sm">변경</button>
+<button id="delBtn" type="button" class="detail-view btn btn-primary btn-sm">삭제</button>
+</p>
+</form>
+</div><!--.container-->
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../header.js"></script>
+<script>
+
+if (location.href.split("?").length > 1) {
+	var tags = $(".input-view");
+    tags.css("display", "none");
+    
+	var no = location.href.split("?")[1].split("=")[1];
+	
+	$.getJSON("../../json/board/" + no, function(data) {
+        $(fNo).val(data.no);
+        $(fTitle).val(data.title);
+        $(fContent).val(data.content);
+        $(fCreatedDate).val(data.createdDate);
+	});
+	
+	$("#updBtn").click(() => {
+		$.post("../../json/board/update", {
+			title: $(fTitle).val(),
+			content: $(fContent).val(),
+			no: $(fNo).val()
+		}, () => {
+			location.href = "list.html";
+		});
+	});
+	
+    $("#delBtn").click(() => {
+        if (window.confirm("삭제하시겠습니까?") == false) 
+        	return;
+        
+        $.get("../../json/board/delete", {"no": no}, () => {
+        	location.href = "list.html";
+        });
+	});
+	
+} else { // 새 글 등록
+    var tags = $(".detail-view");
+    tags.css("display", "none");
+    
+    $("#addBtn").click(() => {
+    	$.post("../../json/board/add", {
+    		title: $(fTitle).val(),
+            content: $(fContent).val()
+    	}, () => {
+    		location.href = "list.html";
+    	});
+    });
+}
+
+</script>
+
+</body>
+</html>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

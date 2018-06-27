@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>게시물 목록</title>
+<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="container">
+
+<nav id="header" class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+
+<h1>게시물 목록</h1>
+<p><a href='form.html' class="btn btn-primary btn-sm">새 글</a></p>
+<table class="table table-hover">
+<thead>
+    <tr><th>번호</th><th>제목</th><th>등록일</th></tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+
+</div><!--.container-->
+
+<script id="tr-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+	<td>{{no}}</td>
+	<td><a href='form.html?no={{no}}'>{{title}}</a></td>
+	<td>{{createdDate}}</td>
+</tr>
+{{/each}}
+</script>
+
+<script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../header.js"></script>
+<script>
+
+// 템플릿 엔진이 사용할 템플릿 데이터 가져오기
+var trTemplateSrc = $("#tr-template").html();
+
+// 위에서 준비한 템플릿 데이터를 가지고 HTML을 생성할 템플릿 엔진 준비
+var templateFn = Handlebars.compile(trTemplateSrc);
+
+$.getJSON("../../json/board/list", (data) => {
+    //tableBody.innerHTML = templateFn({list:data});
+	$(tableBody).html(templateFn({list:data}))
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>로그인</title>
+<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="container">
+<h1>로그인</h1>
+<form>
+  <div class="form-group">
+    <label for="fId">아이디</label>
+    <input type="text" class="form-control" id="fId" aria-describedby="idHelp" placeholder="사용자 아이디를 입력하세요.">
+    <small id="idHelp" class="form-text text-muted">사용자 아이디는 중복될 수 없습니다.</small>
+  </div>
+  <div class="form-group">
+    <label for="fPassword">암호</label>
+    <input type="password" class="form-control" id="fPassword" placeholder="암호를 입력하세요.">
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="fSaveId">
+    <label class="form-check-label" for="fSaveId">아이디 저장</label>
+  </div>
+  <button id="loginBtn" type="button" class="btn btn-primary btn-sm">로그인</button>
+</form>
+
+</div><!--.container-->
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+$("#loginBtn").click(() => {
+	var data = {
+		id : $("#fId").val(),
+		password: $("#fPassword").val()
+	};
+	if ($(document.body).is("#fSaveId:checked")) {
+		data.saveId = "true";
+	}
+	$.post("../../json/auth/login", data, (result) => {
+		if (result.state == "success")
+			location.href = "../board/list.html";
+		else 
+			window.alert("로그인 실패!");
+	}, "json");
+});
+
+</script>
+
+
+
+</body>
+</html>
+    
