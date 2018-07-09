@@ -21,7 +21,7 @@
   
   <insert id="insert" parameterType="Member">
     insert into pms2_member(mid,email,pwd) 
-    values(#{id},#{email},sha2(#{password},224))
+    values(#{id},#{email},password(#{password}))
   </insert>
   
   <select id="selectOne" parameterType="String" resultMap="MemberMap">
@@ -33,19 +33,19 @@
   <select id="selectOneWithPassword" parameterType="map" resultMap="MemberMap">
     select mid, email 
     from pms2_member 
-    where mid=#{id} and pwd=sha2(#{password},224)
+    where mid=#{id} and pwd=password(#{password})
   </select>
   
   <select id="count" parameterType="map" resultType="int">
     select count(*) 
     from pms2_member 
-    where mid=#{id} and pwd=sha2(#{password},224)
+    where mid=#{id} and pwd=password(#{password})
   </select>
   
   <update id="update" parameterType="Member">
     update pms2_member set 
         email=#{email}, 
-        pwd=sha2(#{password},224) 
+        pwd=password(#{password}) 
     where mid=#{id}
   </update>
   

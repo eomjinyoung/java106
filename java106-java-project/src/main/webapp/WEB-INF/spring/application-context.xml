@@ -37,7 +37,8 @@
     </bean>
     
     <context:property-placeholder 
-        location="classpath:bitcamp/java106/pms/sql/jdbc.properties"/> 
+        location="classpath:jdbc.properties,
+                  classpath:aws.properties"/> 
         
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="bitcamp.java106.pms.dao" />
