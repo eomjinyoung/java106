@@ -10,8 +10,14 @@
 <h1>업로드 결과</h1>
 name: ${name}<br>
 age: ${age}<br>
-file0: ${file0New}(${file0Original})<br>
-file1: ${file1New}(${file1Original})<br>
+file0: <img src="../../files/${file0New}" width="200">${file0Original}<br>
+file1: <img src="../../files/${file1New}" width="200">${file1Original}<br>
 
 </body>
 </html>
+
+
+
+
+
+
