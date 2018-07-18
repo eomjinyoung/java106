@@ -18,7 +18,9 @@
    - form 태그와 submit 타입의 버튼은 필요 없다.
    - 대신 input 태그에 서버측 URL를 지정한다.
    - 여러 개를 선택하고 싶다면 multiple 속성을 추가한다.
-4) jquery.fileupload() 함수를 이용하여 서버에 비동기 요청하기
+4) jquery.fileupload() 함수
+   - 버튼을 클릭 했을 때 서버에 비동기 요청하도록 설정한다.
+   - 바로 파일을 업로드 하라는 의미가 아니다. 
    - 여러 개의 파일을 선택했을 때, 각 파일마다 따로 비동기 요청을 수행함. 
    - 각각의 파일에 대해 업로드가 완료되면 done() 함수가 호출된다.
 </pre>
@@ -41,7 +43,7 @@ $('#fileupload').fileupload({
       console.log('done()...');
       console.log(data.result); // 서버가 보낸 JSON 객체는 data.result 에 보관되어 있다.
       
-      $('#photoImg').attr("src", "../files/" + data.result.file0_new);
+      $('#photoImg').attr("src", "../files/" + data.result.filename);
       
       //var file = data.result.fileList[0];
       //$('<p/>').text(file.filename + " : " + file.filesize).appendTo(document.body);

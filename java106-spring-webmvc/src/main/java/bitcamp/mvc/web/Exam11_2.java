@@ -2,7 +2,9 @@
 package bitcamp.mvc.web;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -21,27 +23,50 @@ public class Exam11_2 {
     
     @PostMapping("upload01")
     public Object upload01(
-            MultipartFile[] files) {
+            MultipartFile files) {
         
         HashMap<String,Object> jsonData = new HashMap<>();
         
         String filesDir = sc.getRealPath("/files");
         
-        int i = 0;
-        for (MultipartFile file : files) {
+        String filename = UUID.randomUUID().toString();
+        jsonData.put("filename", filename);
+        jsonData.put("filesize", files.getSize());
+        jsonData.put("originname", files.getOriginalFilename());
+        try {
+            File path = new File(filesDir + "/" + filename);
+            System.out.println(path);
+            files.transferTo(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return jsonData;
+    }
+    
+    @PostMapping("upload02")
+    public Object upload02(
+            MultipartFile[] files) {
+        
+        String filesDir = sc.getRealPath("/files");
+
+        ArrayList<Map<String,Object>> jsonDataList = new ArrayList<>();
+        
+        for (int i = 0; i < files.length; i++) {
+            HashMap<String,Object> jsonData = new HashMap<>();
             String filename = UUID.randomUUID().toString();
-            jsonData.put("file" + i + "_original", file.getOriginalFilename());
-            jsonData.put("file" + i + "_new", filename);
-            i++;
+            jsonData.put("filename", filename);
+            jsonData.put("filesize", files[i].getSize());
+            jsonData.put("originname", files[i].getOriginalFilename());
             try {
                 File path = new File(filesDir + "/" + filename);
                 System.out.println(path);
-                file.transferTo(path);
+                files[i].transferTo(path);
+                jsonDataList.add(jsonData);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return jsonData;
+        return jsonDataList;
     }
 }
 
