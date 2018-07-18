@@ -68,6 +68,36 @@ public class Exam11_2 {
         }
         return jsonDataList;
     }
+    
+    @PostMapping("upload03")
+    public Object upload03(String name, int age, MultipartFile[] files) {
+        
+        String filesDir = sc.getRealPath("/files");
+        
+        HashMap<String,Object> returnData = new HashMap<>();
+        returnData.put("name", name);
+        returnData.put("age", age);
+        
+        ArrayList<Map<String,Object>> jsonDataList = new ArrayList<>();
+        returnData.put("files", jsonDataList);
+        
+        for (int i = 0; i < files.length; i++) {
+            HashMap<String,Object> jsonData = new HashMap<>();
+            String filename = UUID.randomUUID().toString();
+            jsonData.put("filename", filename);
+            jsonData.put("filesize", files[i].getSize());
+            jsonData.put("originname", files[i].getOriginalFilename());
+            try {
+                File path = new File(filesDir + "/" + filename);
+                System.out.println(path);
+                files[i].transferTo(path);
+                jsonDataList.add(jsonData);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return returnData;
+    }
 }
 
 
