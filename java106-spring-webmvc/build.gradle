@@ -53,6 +53,9 @@ dependencies {
     // 즉, Jackson 또는 Gson 둘 중 한 개의 라이브러리만 추가하라!
     //compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
     
+    // 썸네일 이미지 생성 라이브러리
+    compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
+    
     compile 'com.google.guava:guava:23.0'
     testCompile 'junit:junit:4.12'
 }

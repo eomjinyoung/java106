@@ -24,6 +24,8 @@
     <input id="fileupload" type="file" name="files" multiple>
 </span>
 
+<div id="imgBox"></div>
+
 <script src='node_modules/jquery/dist/jquery.js'></script>
 <script src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
@@ -31,16 +33,21 @@
 <script>
 "use strict"
 
+var imgBox = $('#imgBox');
+
 $('#fileupload').fileupload({
-    url: '/control/controller25/upload.do',        // 서버에 요청할 URL
+    url: '../mvc/exam11_2/upload04',        // 서버에 요청할 URL
     dataType: 'json', /* "서버가 보낸 데이터가 JSON 문자열이다. 자바스크립트 객체로 바꿔라." 라는 의미*/
     done: function (e, data) { // 서버에서 응답이 오면 호출된다. 각 파일 별로 호출된다.
       console.log('done()...');
       console.log(data.result);
-      var file = data.result.fileList[0];
-      $.each(data.result.fileList, function(index, file) {
-        $('<p/>').text(file.filename + " : " + file.filesize).appendTo(document.body);
-      });
+      
+      $('<img>')
+        .attr('src', '../files/' + data.result.filename)
+        .appendTo(imgBox);
+      $('<img>')
+        .attr('src', '../files/' + data.result.filename + '_50x50.jpg')
+        .appendTo(imgBox);
     }
 });
 
