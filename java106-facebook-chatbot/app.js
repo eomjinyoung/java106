@@ -114,13 +114,41 @@ app.get('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
   let response;
   
-  // Checks if the message contains text
-  if (received_message.text) {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
+  if (received_message.text == 'hello') {    
     response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+      "text": `나도 반가워요~~~ ㅋ`
     }
+  } else if (received_message.text = 'menu') {
+      response = {
+              "attachment": {
+                "type": "template",
+                "payload": {
+                  "template_type": "generic",
+                  "elements": [{
+                    "title": "어떤 메뉴을 원하시나요?",
+                    "subtitle": "아래에 원하는 메뉴를 선택해 주세요!",
+                    "buttons": [
+                      {
+                        "type": "postback",
+                        "title": "치맥",
+                        "payload": "menu01",
+                      },
+                      {
+                        "type": "postback",
+                        "title": "불소",
+                        "payload": "menu02",
+                      },
+                      {
+                          "type": "postback",
+                          "title": "부막",
+                          "payload": "menu03",
+                      }
+                    ],
+                  }]
+                }
+              }
+            }
+  
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
