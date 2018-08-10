@@ -1,13 +1,13 @@
 'use strict';
 
+console.log(process.env.PAGE_ACCESS_TOKEN);
+console.log(process.env.VERIFY_TOKEN);
+
 // Imports dependencies and set up http server
 const
   express = require('express'),
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
-
-//.env 파일의 내용을 로딩한다.
-require('dotenv').config({path: '/home/ec2-user/vars/.env'})
 
 //Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
