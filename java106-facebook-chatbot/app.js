@@ -24,21 +24,13 @@
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
 const 
-  https = require('https'),
-  fs = require('fs'),
   request = require('request'),
   express = require('express'),
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
-var options = {
-        key: fs.readFileSync('/home/ec2-user/vars/custom.key'),
-        cert: fs.readFileSync('/home/ec2-user/vars/www_ohora_xyz.crt'),
-};
-
 // Sets server port and logs message on success
-//app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
-https.createServer(options, app).listen(1337, () => console.log('webhook is listening'));
+app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {  
