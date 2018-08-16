@@ -1,0 +1,21 @@
+# 리눅스에 톰캣 설정
+
+## tomcat 관리자 아이디 등록하기
+- conf/tomcat-users.xml 파일에 role 및 user 추가
+```
+ <role rolename="tomcat"/>
+ <role rolename="manager-gui"/>
+ <user username="tomcat" password="1111" roles="tomcat,manager-gui"/>
+
+```
+
+- conf/Catalina/localhost 폴더에 manager.xml 파일 추가하고 다음과 같이 작성한다.
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<Context privileged="true" antiResourceLocking="false"
+         docBase="${catalina.home}/webapps/manager">
+  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="^.*$" />
+</Context>
+
+```
