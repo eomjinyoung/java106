@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax 파일 업로드</title>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="node_modules/blueimp-file-upload/css/jquery.fileupload.css">
+</head>
+<body>
+<h1>AJAX 멀티파트 전송 - 썸네일 파일 생성</h1>
+<pre>
+1) 썸네일 파일 생성 자바 라이브러리 추가
+   - mvnrepository.com에서 thumbnailator 검색
+   - build.gradle 파일에 의존라이브러리 정보 추가
+   - "gradle eclipse" 실행
+   - 프로젝트 리프래시  
+2) 페이지 컨트롤러에 썸네일 이미지 파일 생성 코드 추가
+   - Controller25.java 
+</pre>
+
+<span class="btn btn-success fileinput-button">
+    <i class="glyphicon glyphicon-plus"></i>
+    <span>파일 선택...</span>
+    <input id="fileupload" type="file" name="files" multiple>
+</span>
+
+<div id="imgBox"></div>
+
+<script src='node_modules/jquery/dist/jquery.js'></script>
+<script src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script>
+"use strict"
+
+var imgBox = $('#imgBox');
+
+$('#fileupload').fileupload({
+    url: '../mvc/exam11_2/upload04',        // 서버에 요청할 URL
+    dataType: 'json', /* "서버가 보낸 데이터가 JSON 문자열이다. 자바스크립트 객체로 바꿔라." 라는 의미*/
+    done: function (e, data) { // 서버에서 응답이 오면 호출된다. 각 파일 별로 호출된다.
+      console.log('done()...');
+      console.log(data.result);
+      
+      $('<img>')
+        .attr('src', '../files/' + data.result.filename)
+        .appendTo(imgBox);
+      $('<img>')
+        .attr('src', '../files/' + data.result.filename + '_50x50.jpg')
+        .appendTo(imgBox);
+    }
+});
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>list</title>
+</head>
+<body>
+<h1>AJAX로 목록 페이지 만들기</h1>
+<table border="1">
+<thead>
+  <tr><th>번호</th><th>제목</th><th>작성자</th><th>등록일</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<script>
+var tbody = document.querySelector("tbody");
+
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+            var list = JSON.parse(xhr.responseText);
+            for (var item of list) {
+                var tr = document.createElement("tr");
+                tr.innerHTML = "<td>" + item.no + "</td>" + 
+                   "<td>" + item.title + "</td>" +
+                   "<td>" + item.user.id + "</td>" +
+                   "<td>" + item.createdDate + "</td>";
+                tbody.appendChild(tr);
+            }
+        }
+    }
+};
+xhr.open("GET", "../mvc/exam10_3/list", true);
+xhr.send();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
