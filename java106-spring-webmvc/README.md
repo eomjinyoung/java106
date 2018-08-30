@@ -1,5 +1,9 @@
 # 버전 별 주제
 
+## src12 - Spring WebMVC 기타 컴포넌트
+- @SessionAttributes와 @ModelAttribute의 사용법
+- @ControllerAdvice와 @ExceptionHandler를 이용하여 페이지 컨트롤러에서 발생한 예외를 다루는 법
+
 ## src11 - 페이스북 로그인
 - 페이스북 로그인 API를 이용하여 페이스북 로그인 처리
 
